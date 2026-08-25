@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="display: flex; gap: 20px; justify-content: space-between;">
+    {% for target, s in stats.items() %}
+    <div style="flex: 1; text-align: center; border: 1px solid #dcdde1; padding: 15px; border-radius: 8px;">
+        <h3 style="margin-top:0;">LAY {{ target }}</h3>
+        <h1 class="{% if s.rate > 90 %}green{% else %}red{% endif %}" style="margin: 10px 0;">{{ s.rate }}%</h1>
+        <p style="margin:0; font-size: 14px; color: #7f8fa6;">Win Rate ({{ s.hits }}/{{ s.total }})</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="card">
+    <h3>Histórico de Jogos Finalizados</h3>
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>Liga</th>
+            <th>Jogo</th>
+            <th>Alvo (Lay)</th>
+            <th>Prob. Modelo</th>
+            <th>Placar Real</th>
+            <th>Resultado</th>
+        </tr>
+        {% for h in history %}
+        <tr>
+            <td>{{ h.date }}</td>
+            <td>{{ h.league }}</td>
+            <td>{{ h.match }}</td>
+            <td><strong>{{ h.target }}</strong></td>
+            <td>{{ h.prob }}</td>
+            <td>{{ h.real_score }}</td>
+            <td>
+                {% if h.is_hit %}
+                    <span class="green">GREEN ✅</span>
+                {% else %}
+                    <span class="red">RED ❌</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+        {% if page > 1 %}
+            <a href="?page={{ page - 1 }}">⬅️ Anterior</a>
+        {% endif %}
+        <span>Página {{ page }} de {{ total_pages }}</span>
+        {% if page < total_pages %}
+            <a href="?page={{ page + 1 }}">Próxima ➡️</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

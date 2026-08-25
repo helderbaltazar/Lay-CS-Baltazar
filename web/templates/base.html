@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lay CS Automation</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #f5f6fa; color: #2f3640; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .nav a { margin-left: 15px; text-decoration: none; color: #0097e6; font-weight: bold; }
+        .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #dcdde1; }
+        th { background: #f5f6fa; }
+        .green { color: #44bd32; font-weight: bold; }
+        .red { color: #e84118; font-weight: bold; }
+        .badge { background: #353b48; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>🏆 Lay CS Scanner</h2>
+            <div class="nav">
+                <a href="/">Jogos de Hoje</a>
+                <a href="/history">Dashboard Histórico</a>
+            </div>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
