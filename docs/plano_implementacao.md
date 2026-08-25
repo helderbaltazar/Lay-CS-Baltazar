@@ -177,6 +177,7 @@ Automação Lay CS/
 │   └── scheduler.log
 ├── cache/                      # Cache de stats de times
 │   └── team_stats.json
+├── setup_service.sh            # Script para configurar o launchd (macOS/background)
 ├── requirements.txt
 ├── .env                        # [NÃO COMITADO] Variáveis de ambiente (ex: chaves API)
 ├── .env.example                # Template vazio das variáveis necessárias
@@ -231,7 +232,8 @@ Classe `PoissonDixonColes`:
 #### [NEW] [data/cache.py](file:///Users/macgeint/Downloads/Automação%20Lay%20CS/data/cache.py)
 - Cache em arquivo JSON local (`cache/team_stats.json`)
 - **`get(key)`** — Retorna dados se existem e não expiraram
-- **`set(key, value, ttl_days=7)`** — Salva com timestamp
+- **`set(key, value, ttl_days=3)`** — Salva com timestamp (TTL reduzido para 3 dias)
+- **`invalidate(team_id)`** — Apaga o cache de um time específico
 - **`is_valid(key)`** — Verifica se cache está válido
 - Evita requests duplicados para o mesmo time (crucial com 100 req/dia)
 
@@ -241,7 +243,7 @@ Classe `PoissonDixonColes`:
 
 #### [NEW] [analysis/scanner.py](file:///Users/macgeint/Downloads/Automação%20Lay%20CS/analysis/scanner.py)
 
-- **`calculate_lambdas(home_stats, away_stats, league_avg)`** — Calcula λ_home e λ_away usando forças relativas de ataque/defesa
+- **`calculate_lambdas(home_stats, away_stats, league_avg)`** — Calcula λ_home e λ_away aplicando **Laplace Smoothing (+0.1)** nos gols para evitar λ=0 (times recém promovidos).
 - **`scan_match(fixture, model, targets)`** — Analisa um jogo, retorna probabilidades dos placares-alvo
 - **`scan_all(fixtures, model)`** — Analisa todos os jogos do dia
 - **`rank_by_target(results)`** — Gera 4 rankings separados (um por placar-alvo), ordenados por menor probabilidade
@@ -261,7 +263,7 @@ Duas tabelas relacionais usando `declarative_base`:
 1. **`Match`**
    - `id` (PK)
    - `fixture_id` (ID da API, unique)
-   - `date` (DateTime)
+   - `date` (DateTime) — *[Indexado para busca rápida]*
    - `league_name`, `home_team`, `away_team`
    - `status` (NS, FT, etc)
    - `real_score` (ex: "0-1" ou None se pendente)
@@ -269,7 +271,7 @@ Duas tabelas relacionais usando `declarative_base`:
 2. **`Prediction`**
    - `id` (PK)
    - `match_id` (FK -> Match.id)
-   - `target_score` (ex: '0-1')
+   - `target_score` (ex: '0-1') — *[Indexado]*
    - `probability` (Float)
    - `rank` (Integer)
    - `is_hit` (Boolean, default None) -> `True` se o placar alvo NÃO aconteceu (Green no Lay), `False` se aconteceu (Red).
@@ -279,6 +281,7 @@ Duas tabelas relacionais usando `declarative_base`:
 - Chama a API-Football `GET /fixtures?date={ontem}` (apenas 1 request).
 - Atualiza a tabela `Match` com o `real_score` e `status`.
 - Atualiza a tabela `Prediction` calculando o `is_hit`.
+- **Invalida o cache local** (`cache.invalidate(team_id)`) dos times que jogaram ontem, forçando a atualização das estatísticas na próxima rodada.
 
 ---
 
@@ -355,7 +358,7 @@ scheduler.start()
 - **Histórico e Win Rate:**
   - Placar 0x1: Acertou X de Y jogos (Z%)
   - Placar 0x2: Acertou X de Y jogos (Z%)
-- Tabela paginada com os jogos passados, mostrando a Previsão (probabilidade, odd estimada) x Resultado Real.
+- Tabela **paginada no servidor (server-side, 50 por pág)** para os jogos passados, garantindo performance. Mostrando a Previsão (probabilidade, odd estimada) x Resultado Real.
 - Jogos `Green` marcados em verde, `Red` em vermelho escuro.
 
 #### [NEW] [web/static/style.css](file:///Users/macgeint/Downloads/Automação%20Lay%20CS/web/static/style.css)
@@ -371,6 +374,10 @@ scheduler.start()
 ### 8. Script Principal
 
 #### [NEW] [main.py](file:///Users/macgeint/Downloads/Automação%20Lay%20CS/main.py)
+
+#### [NEW] [setup_service.sh](file:///Users/macgeint/Downloads/Automação%20Lay%20CS/setup_service.sh)
+- Gera um arquivo `com.laycs.scanner.plist` e carrega no `launchd` do macOS.
+- Garante que o sistema rode em background silencioso continuamente sem prender o terminal.
 
 #### [NEW] [requirements.txt](file:///Users/macgeint/Downloads/Automação%20Lay%20CS/requirements.txt)
 ```
