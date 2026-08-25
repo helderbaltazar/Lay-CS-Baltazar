@@ -1,0 +1,8 @@
+flask
+requests
+APScheduler
+pytz
+SQLAlchemy
+python-dotenv
+pytest
+pytest-cov
