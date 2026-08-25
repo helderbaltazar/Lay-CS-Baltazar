@@ -1,0 +1,21 @@
+# Segurança
+.env
+
+# Banco de dados local e cache
+data_store/*.sqlite3
+cache/
+logs/
+results/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+venv/
+env/
+
+# IDE e OS
+.vscode/
+.idea/
+.DS_Store
