@@ -36,7 +36,7 @@ def index():
                 })
                 
     for t in config.TARGET_SCORES:
-        rankings[t].sort(key=lambda x: x['rank'])
+        rankings[t].sort(key=lambda x: x['rank'] or 9999)
         
     db.close()
     return render_template("index.html", rankings=rankings, date_filter=date_obj.strftime("%Y-%m-%d"))
