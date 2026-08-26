@@ -84,16 +84,16 @@ def history():
 def analytics():
     db = SessionLocal()
     try:
-        from sqlalchemy import func
+        from sqlalchemy import func, case
         # Agrupa por liga para pegar total de jogos e win rate
         stats = db.query(
             Match.league_name,
             func.count(Match.id).label('total_games'),
             func.sum(
-                func.case((Prediction.is_hit == True, 1), else_=0)
+                case((Prediction.is_hit == True, 1), else_=0)
             ).label('hits'),
             func.sum(
-                func.case((Prediction.is_hit == False, 1), else_=0)
+                case((Prediction.is_hit == False, 1), else_=0)
             ).label('misses')
         ).join(Prediction).filter(
             Match.status.in_(['FT', 'AET', 'PEN']),
