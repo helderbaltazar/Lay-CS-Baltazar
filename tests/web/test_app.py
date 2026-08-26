@@ -1,13 +1,21 @@
 import pytest
 from web.app import app
-from database.db import Base, engine, SessionLocal
+from database.db import Base, SessionLocal
+import database.db
 from database.models_db import Match, Prediction
+from sqlalchemy import create_engine
 import datetime
 
 @pytest.fixture(autouse=True)
 def setup_db():
-    Base.metadata.create_all(bind=engine)
+    # Isola o banco de dados dos testes criando um banco em memoria
+    test_engine = create_engine("sqlite:///:memory:")
+    database.db.engine = test_engine
+    database.db.SessionLocal.configure(bind=test_engine)
+    
+    Base.metadata.create_all(bind=test_engine)
     yield
+    Base.metadata.drop_all(bind=test_engine)
 
 @pytest.fixture
 def client():
@@ -22,10 +30,11 @@ def test_index_route(client):
 
 def test_history_route(client):
     db = SessionLocal()
+    # Adicionamos rank=1 para nao quebrar a ordenacao caso apareca na tela inicial do teste
     m = Match(fixture_id=999, date=datetime.datetime.now(), league_name="PL", home_team="A", away_team="B", status="FT", real_score="2-0")
     db.add(m)
     db.commit()
-    p = Prediction(match_id=m.id, target_score="0-1", probability=0.05, is_hit=True)
+    p = Prediction(match_id=m.id, target_score="0-1", probability=0.05, rank=1, is_hit=True)
     db.add(p)
     db.commit()
     db.close()

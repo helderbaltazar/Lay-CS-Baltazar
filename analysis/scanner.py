@@ -6,12 +6,12 @@ from models.poisson import PoissonDixonColes
 def calculate_lambdas(home_stats, away_stats, league_avg):
     avg_home, avg_away = league_avg
     
-    h_scored = float(home_stats['fixtures']['goals']['for']['total']['home'] or 0) + 0.1
-    h_conceded = float(home_stats['fixtures']['goals']['against']['total']['home'] or 0) + 0.1
+    h_scored = float(home_stats['goals']['for']['total']['home'] or 0) + 0.1
+    h_conceded = float(home_stats['goals']['against']['total']['home'] or 0) + 0.1
     h_games = float(home_stats['fixtures']['played']['home'] or 0) + 0.1
 
-    a_scored = float(away_stats['fixtures']['goals']['for']['total']['away'] or 0) + 0.1
-    a_conceded = float(away_stats['fixtures']['goals']['against']['total']['away'] or 0) + 0.1
+    a_scored = float(away_stats['goals']['for']['total']['away'] or 0) + 0.1
+    a_conceded = float(away_stats['goals']['against']['total']['away'] or 0) + 0.1
     a_games = float(away_stats['fixtures']['played']['away'] or 0) + 0.1
 
     h_attack = (h_scored / h_games) / avg_home
