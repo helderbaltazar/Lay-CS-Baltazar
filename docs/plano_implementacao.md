@@ -786,3 +786,45 @@ Cada módulo é implementado junto com seus testes, nesta ordem:
 - Validar com resultados reais após os jogos finalizarem
 - Verificar que a execução agendada gera log em `logs/scheduler.log`
 - Confirmar que a página web exibe dados atualizados automaticamente após a execução do cron
+
+---
+
+## 🚀 FASE 2: Expansão de Inteligência e Resiliência
+
+Esta fase foca em tornar o sistema não apenas um scanner de probabilidades, mas um verdadeiro **Assistente Autônomo de Trading Esportivo**, agregando inteligência de filtragem, gestão de banca e segurança de dados em nuvem.
+
+### Etapa 11: Integração com Bot do Telegram & Notificações
+*   **O que será feito:** 
+    *   Criação de um Bot (via BotFather).
+    *   **Alertas Matinais (08:00):** O bot envia automaticamente o "Top 3 Jogos mais seguros para Lay" do dia diretamente no seu celular.
+    *   **Alertas Noturnos:** Resumo de fechamento de caixa (quantos Greens e Reds o sistema computou no dia).
+    *   **Monitoramento:** Notificação imediata se a API-Football falhar ou se você bater o limite da cota grátis.
+
+### Etapa 12: Backup em Nuvem Automático (Via Telegram)
+*   **O que será feito:**
+    *   Criação do script `database/backup.py`.
+    *   Adição de um Job no `scheduler.py` para rodar o backup semanalmente (ex: Domingo às 03:00 da manhã).
+    *   O sistema vai gerar uma cópia segura do `database.sqlite3` e enviá-la como um arquivo/documento para o seu chat privado no Telegram. Nuvem eterna com custo R$ 0,00.
+
+### Etapa 13: Dashboard de Analytics e Desempenho por Liga
+*   **O que será feito:**
+    *   Nova rota na interface Web (`/analytics`).
+    *   Processamento SQL do histórico agrupando todos os jogos por liga (`league_name`).
+    *   Exibição do Total de Jogos, Greens, Reds e o **Win Rate (%) exato por liga**. 
+    *   *Por que isso é útil?* Com o passar das semanas, os dados vão te mostrar se a *Premier League* dá muito mais dinheiro que a *Série B*, por exemplo.
+
+### Etapa 14: Calculadora de Stake (Gestão de Banca) e Coleta de Odds Reais
+*   **O que será feito:**
+    *   Consulta extra na API-Football (endpoint de `/odds`) **exclusiva para os Top 3 jogos do dia** (para poupar as requisições da conta grátis).
+    *   Você definirá sua Banca (ex: R$ 1.000) e sua Responsabilidade (ex: 2%) no `.env`.
+    *   A mensagem matinal do Telegram ficará inteligente: *"Lay 0-1 em Cruzeiro x Atlético. Odd do mercado: 15.0. Entrada sugerida: Stake R$ 1,42"*.
+
+### Etapa 15: Smart Blacklist (Filtro Automático de Proteção)
+*   **O que será feito:**
+    *   O sistema vai consumir o Analytics (da Etapa 13) por conta própria.
+    *   Se uma liga registrar um Win Rate ruim (ex: abaixo de 60%) ao longo de 10 jogos, o sistema **coloca a liga em Blacklist automática**.
+    *   Times dessa liga param de ser recomendados nos alertas do Telegram, criando um ecossistema de *"Auto-Cura"*: o robô descobre onde ele erra e para de atuar naqueles campeonatos.
+
+### Etapa 16: Exportação de Dados (CSV/Excel)
+*   **O que será feito:**
+    *   Adição do botão "Exportar Banco de Dados" na tela de histórico da Web, gerando um download instantâneo em `.csv` com o DRE completo das apostas para que você possa criar seus próprios gráficos no Excel.

@@ -14,8 +14,8 @@ def test_calculate_lambdas_with_smoothing():
 def test_rank_by_target():
     from analysis.scanner import rank_by_target
     results = [
-        {'fixture_id': 1, 'target_probabilities': {'0-1': 0.10}},
-        {'fixture_id': 2, 'target_probabilities': {'0-1': 0.05}}
+        {'fixture_id': 1, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'A', 'away': 'B', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.10}},
+        {'fixture_id': 2, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'C', 'away': 'D', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.05}}
     ]
     rankings = rank_by_target(results)
     assert rankings['0-1'][0]['fixture_id'] == 2 # menor risco primeiro

@@ -12,3 +12,8 @@ MAX_GOALS = 7
 
 PORT = int(os.getenv("PORT", 5000))
 SCHEDULER_TIMEZONE = "America/Sao_Paulo"
+
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '')
+BANKROLL = float(os.getenv('BANKROLL', '1000.0'))
+MAX_LIABILITY = float(os.getenv('MAX_LIABILITY', '2.0')) # Em %

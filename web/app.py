@@ -79,3 +79,74 @@ def history():
         
     db.close()
     return render_template("history.html", stats=stats, history=history_data, page=page, total_pages=total_pages)
+
+@app.route("/analytics")
+def analytics():
+    db = SessionLocal()
+    try:
+        from sqlalchemy import func
+        # Agrupa por liga para pegar total de jogos e win rate
+        stats = db.query(
+            Match.league_name,
+            func.count(Match.id).label('total_games'),
+            func.sum(
+                func.case((Prediction.is_hit == True, 1), else_=0)
+            ).label('hits'),
+            func.sum(
+                func.case((Prediction.is_hit == False, 1), else_=0)
+            ).label('misses')
+        ).join(Prediction).filter(
+            Match.status.in_(['FT', 'AET', 'PEN']),
+            Prediction.is_hit != None
+        ).group_by(Match.league_name).all()
+        
+        analytics_data = []
+        for s in stats:
+            total = s.hits + s.misses
+            win_rate = (s.hits / total * 100) if total > 0 else 0
+            analytics_data.append({
+                'league': s.league_name,
+                'total': total,
+                'hits': s.hits,
+                'misses': s.misses,
+                'win_rate': round(win_rate, 2)
+            })
+            
+        # Ordena pelo melhor win rate
+        analytics_data.sort(key=lambda x: x['win_rate'], reverse=True)
+        return render_template("analytics.html", stats=analytics_data)
+    finally:
+        db.close()
+
+@app.route("/export")
+def export_csv():
+    import csv
+    from io import StringIO
+    from flask import Response
+    
+    db = SessionLocal()
+    try:
+        matches = db.query(Match).join(Prediction).filter(
+            Match.status.in_(['FT', 'AET', 'PEN'])
+        ).order_by(Match.date.desc()).all()
+        
+        si = StringIO()
+        cw = csv.writer(si)
+        cw.writerow(['Data', 'Liga', 'Casa', 'Visitante', 'Placar Real', 'Estrategia', 'Odd', 'Resultado'])
+        
+        for m in matches:
+            for p in m.predictions:
+                resultado = "GREEN" if p.is_hit else "RED" if p.is_hit == False else "PENDENTE"
+                cw.writerow([
+                    m.date.strftime("%Y-%m-%d"), m.league_name, m.home_team, m.away_team, 
+                    m.real_score, p.target_score, "N/A", resultado
+                ])
+                
+        output = si.getvalue()
+        return Response(
+            output,
+            mimetype="text/csv",
+            headers={"Content-Disposition": "attachment;filename=historico_apostas.csv"}
+        )
+    finally:
+        db.close()

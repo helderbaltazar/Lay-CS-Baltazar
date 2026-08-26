@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Analytics de Desempenho por Liga</h2>
+<div class="card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Campeonato</th>
+                <th>Total de Entradas</th>
+                <th>Greens ✅</th>
+                <th>Reds ❌</th>
+                <th>Win Rate (%)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in stats %}
+            <tr>
+                <td>{{ s.league }}</td>
+                <td>{{ s.total }}</td>
+                <td class="green">{{ s.hits }}</td>
+                <td class="red">{{ s.misses }}</td>
+                <td><strong>{{ s.win_rate }}%</strong></td>
+                <td>
+                    {% if s.total >= 10 and s.win_rate < 60.0 %}
+                        <span class="badge" style="background:#e74c3c;">Blacklist</span>
+                    {% elif s.total >= 10 and s.win_rate >= 80.0 %}
+                        <span class="badge" style="background:#2ecc71;">Excelente</span>
+                    {% else %}
+                        <span class="badge" style="background:#95a5a6;">Análise</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6">Nenhum dado consolidado ainda.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

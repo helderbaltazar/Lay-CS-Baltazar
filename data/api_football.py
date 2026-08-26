@@ -63,3 +63,26 @@ def get_team_stats(team_id, competition_id):
             continue
             
     return None
+
+def get_odds(fixture_id, target_score):
+    url = f"{config.BASE_URL}/odds?fixture={fixture_id}&bookmaker=8" # 8 = Bet365
+    try:
+        response = requests.get(url, headers=get_headers())
+        data = response.json()
+        if not data.get('response'):
+            return None
+            
+        bookmakers = data['response'][0].get('bookmakers', [])
+        if not bookmakers:
+            return None
+            
+        markets = bookmakers[0].get('bets', [])
+        for m in markets:
+            if m['name'] == 'Exact Score' or m['id'] == 10:
+                for val in m['values']:
+                    if val['value'] == target_score:
+                        return float(val['odd'])
+        return None
+    except Exception as e:
+        print(f"Erro ao buscar odds para fixture {fixture_id}: {e}")
+        return None

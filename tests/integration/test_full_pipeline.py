@@ -8,8 +8,14 @@ import config
 
 @pytest.fixture(autouse=True)
 def setup_db():
-    Base.metadata.create_all(bind=engine)
+    from sqlalchemy import create_engine
+    import database.db
+    test_engine = create_engine("sqlite:///:memory:")
+    database.db.engine = test_engine
+    database.db.SessionLocal.configure(bind=test_engine)
+    Base.metadata.create_all(bind=test_engine)
     yield
+    Base.metadata.drop_all(bind=test_engine)
 
 @patch('analysis.scanner.get_team_stats')
 def test_pipeline_fixtures_to_db(mock_get_stats):
