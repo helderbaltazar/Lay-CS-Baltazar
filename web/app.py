@@ -10,7 +10,8 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     db = SessionLocal()
-    today = datetime.datetime.now().strftime("%Y-%m-%d")
+    import pytz
+    today = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE)).strftime("%Y-%m-%d")
     date_filter = request.args.get('date', today)
     
     try:

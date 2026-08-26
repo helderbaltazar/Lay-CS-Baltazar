@@ -99,9 +99,14 @@ def save_to_db(db, rankings):
             if fix_id not in match_cache:
                 match = db.query(Match).filter(Match.fixture_id == fix_id).first()
                 if not match:
+                    dt = parse(rec['date'])
+                    import pytz, config
+                    if dt.tzinfo:
+                        dt = dt.astimezone(pytz.timezone(config.SCHEDULER_TIMEZONE))
+                    dt = dt.replace(tzinfo=None)
                     match = Match(
                         fixture_id=fix_id,
-                        date=parse(rec['date']),
+                        date=dt,
                         league_name=rec['league'],
                         home_team=rec['home'],
                         away_team=rec['away'],
