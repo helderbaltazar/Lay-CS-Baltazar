@@ -23,3 +23,15 @@ def test_get_fixtures(mock_get):
     assert len(fixtures) == 1
     assert fixtures[0]["league"]["id"] == 39
     mock_get.assert_called_once()
+
+
+import config
+from unittest.mock import patch
+def test_api_timezone_param():
+    from data.api_football import get_fixtures
+    with patch('data.api_football.requests.get') as mock_get:
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = {'response': []}
+        get_fixtures('2026-08-25')
+        called_url = mock_get.call_args[0][0]
+        assert f"timezone={config.SCHEDULER_TIMEZONE}" in called_url

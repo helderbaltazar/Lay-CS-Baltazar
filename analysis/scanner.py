@@ -45,10 +45,17 @@ def scan_match(fixture, model, targets):
     
     probs = model.get_probabilities(lam_home, lam_away, targets)
 
+    real_score = None
+    if fixture_info['status']['short'] in ['FT', 'AET', 'PEN']:
+        goals = fixture.get('goals', {})
+        if goals.get('home') is not None and goals.get('away') is not None:
+            real_score = f"{goals['home']}-{goals['away']}"
+
     return {
         'fixture_id': fixture_info['id'],
         'date': fixture_info['date'],
         'status': fixture_info['status']['short'],
+        'real_score': real_score,
         'league': league_info['name'],
         'home': home_team['name'],
         'away': away_team['name'],
@@ -77,6 +84,7 @@ def rank_by_target(results):
                 'fixture_id': res['fixture_id'],
                 'date': res['date'],
                 'status': res['status'],
+                'real_score': res.get('real_score'),
                 'league': res['league'],
                 'home': res['home'],
                 'away': res['away'],
@@ -110,12 +118,14 @@ def save_to_db(db, rankings):
                         league_name=rec['league'],
                         home_team=rec['home'],
                         away_team=rec['away'],
-                        status=rec['status']
+                        status=rec['status'],
+                        real_score=rec.get('real_score')
                     )
                     db.add(match)
                     db.flush()
                 else:
                     match.status = rec['status']
+                    match.real_score = rec.get('real_score')
                 match_cache[fix_id] = match
 
             match = match_cache[fix_id]
