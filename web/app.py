@@ -41,7 +41,10 @@ def index():
         rankings[t].sort(key=lambda x: x['rank'] or 9999)
         
     db.close()
-    return render_template("index.html", rankings=rankings, date_filter=date_obj.strftime("%Y-%m-%d"))
+    now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+    today_str = now_br.strftime("%Y-%m-%d")
+    tomorrow_str = (now_br + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+    return render_template("index.html", rankings=rankings, date_filter=date_obj.strftime("%Y-%m-%d"), today_str=today_str, tomorrow_str=tomorrow_str)
 
 @app.route("/history")
 def history():

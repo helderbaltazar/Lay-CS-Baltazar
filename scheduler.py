@@ -9,21 +9,27 @@ from analysis.resolver import resolve_pending_matches
 from database.db import SessionLocal
 
 def run_daily_scan():
-    print(f"[{datetime.datetime.now()}] Iniciando scan diario...")
-    today = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE)).strftime("%Y-%m-%d")
-    fixtures = get_fixtures(today)
-    if not fixtures:
-        print("Nenhum jogo encontrado para hoje ou cota de API excedida.")
-        return
-        
-    model = PoissonDixonColes()
-    results = scan_all(fixtures, model)
-    rankings = rank_by_target(results)
+    print(f"[{datetime.datetime.now()}] Iniciando scan (Hoje e Amanha)...")
+    now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+    today = now_br.strftime("%Y-%m-%d")
+    tomorrow = (now_br + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
     
+    dates_to_scan = [today, tomorrow]
+    model = PoissonDixonColes()
     db = SessionLocal()
+    
     try:
-        save_to_db(db, rankings)
-        print(f"[{datetime.datetime.now()}] Scan salvo com sucesso.")
+        for d in dates_to_scan:
+            print(f"Buscando jogos para a data: {d}")
+            fixtures = get_fixtures(d)
+            if not fixtures:
+                print(f"Nenhum jogo importante encontrado para {d}.")
+                continue
+                
+            results = scan_all(fixtures, model)
+            rankings = rank_by_target(results)
+            save_to_db(db, rankings)
+        print(f"[{datetime.datetime.now()}] Scan (Hoje e Amanha) concluido e salvo com sucesso.")
     finally:
         db.close()
 

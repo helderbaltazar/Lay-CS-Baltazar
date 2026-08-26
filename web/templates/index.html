@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="card">
-    <form method="GET" action="/">
+<div class="card" style="display: flex; gap: 15px; align-items: center;">
+    <form method="GET" action="/" style="margin: 0;">
         <label>Data: </label>
         <input type="date" name="date" value="{{ date_filter }}">
         <button type="submit">Buscar</button>
     </form>
+    <a href="/?date={{ today_str }}" class="badge" style="text-decoration: none; background: #0097e6; padding: 6px 12px;">Hoje</a>
+    <a href="/?date={{ tomorrow_str }}" class="badge" style="text-decoration: none; background: #9c88ff; padding: 6px 12px;">Amanhã</a>
 </div>
 
 {% for target, matches in rankings.items() %}
