@@ -28,7 +28,13 @@
             <td>{{ "%.1f"|format(m.probability * 100) }}%</td>
             <td>
                 {% if m.status == 'FT' %}
-                    {{ m.real_score }}
+                    {% if m.is_hit == True %}
+                        <span class="green">{{ m.real_score }} ✅ GREEN</span>
+                    {% elif m.is_hit == False %}
+                        <span class="red">{{ m.real_score }} ❌ RED</span>
+                    {% else %}
+                        {{ m.real_score }}
+                    {% endif %}
                 {% else %}
                     {{ m.status }}
                 {% endif %}

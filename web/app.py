@@ -33,7 +33,8 @@ def index():
                     'league': m.league_name,
                     'status': m.status,
                     'real_score': m.real_score,
-                    'probability': p.probability
+                    'probability': p.probability,
+                    'is_hit': p.is_hit
                 })
                 
     for t in config.TARGET_SCORES:

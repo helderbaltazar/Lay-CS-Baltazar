@@ -141,5 +141,8 @@ def save_to_db(db, rankings):
                 
             pred.probability = rec['probability']
             pred.rank = rec['rank']
+            
+            if match.status in ['FT', 'AET', 'PEN'] and match.real_score:
+                pred.is_hit = (match.real_score != target)
 
     db.commit()
