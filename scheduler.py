@@ -81,8 +81,7 @@ def send_morning_alert(db, date_str):
     top_3 = top_picks[:3]
     
     if not top_3:
-        send_message("Bom dia! 🏆
-Hoje não temos nenhum jogo seguro fora da Blacklist para o método Lay 0-1.")
+        send_message("Bom dia! 🏆\nHoje não temos nenhum jogo seguro fora da Blacklist para o método Lay 0-1.")
         return
         
     msg = f"🏆 *Bom dia! Top 3 Jogos Lay 0-1 de Hoje* ({date_str})\n\n"
