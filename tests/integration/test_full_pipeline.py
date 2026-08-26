@@ -14,10 +14,8 @@ def setup_db():
 @patch('analysis.scanner.get_team_stats')
 def test_pipeline_fixtures_to_db(mock_get_stats):
     mock_get_stats.return_value = {
-        'fixtures': {
-            'goals': {'for': {'total': {'home': 10, 'away': 10}}, 'against': {'total': {'home': 5, 'away': 5}}},
-            'played': {'home': 10, 'away': 10}
-        }
+        'goals': {'for': {'total': {'home': 10, 'away': 10}}, 'against': {'total': {'home': 5, 'away': 5}}},
+        'fixtures': {'played': {'home': 10, 'away': 10}}
     }
     
     fixtures = [{
