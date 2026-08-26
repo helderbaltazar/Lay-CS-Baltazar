@@ -10,7 +10,6 @@ import config
 def setup_db():
     Base.metadata.create_all(bind=engine)
     yield
-    Base.metadata.drop_all(bind=engine)
 
 @patch('analysis.scanner.get_team_stats')
 def test_pipeline_fixtures_to_db(mock_get_stats):

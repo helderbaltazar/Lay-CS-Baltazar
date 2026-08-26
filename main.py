@@ -2,6 +2,7 @@ import argparse
 from web.app import app
 from scheduler import start_scheduler
 import config
+from database.db import init_db
 
 __version__ = "1.0.0"
 
@@ -10,6 +11,9 @@ if __name__ == "__main__":
     parser.add_argument("--scan-only", action="store_true", help="Rodar scanner de hoje")
     parser.add_argument("--resolve-only", action="store_true", help="Rodar resolver de ontem")
     args = parser.parse_args()
+    
+    # Garante que as tabelas existem antes de rodar qualquer coisa
+    init_db()
     
     if args.scan_only:
         from scheduler import run_daily_scan
