@@ -17,3 +17,6 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '')
 BANKROLL = float(os.getenv('BANKROLL', '1000.0'))
 MAX_LIABILITY = float(os.getenv('MAX_LIABILITY', '2.0')) # Em %
+
+LAYBACK_EMAIL = os.getenv('LAYBACK_EMAIL', '')
+LAYBACK_PASSWORD = os.getenv('LAYBACK_PASSWORD', '')
