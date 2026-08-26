@@ -10,7 +10,7 @@ def get_headers():
     }
 
 def get_fixtures(date_str):
-    url = f"{config.BASE_URL}/fixtures?date={date_str}"
+    url = f"{config.BASE_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
     try:
         response = requests.get(url, headers=get_headers())
         response.raise_for_status()
