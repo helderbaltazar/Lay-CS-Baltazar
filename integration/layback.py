@@ -80,9 +80,15 @@ def update_layback_bots(best_picks):
         try:
             # 1. Login
             page.goto("https://bot-betfair.layback.trade/login", timeout=30000)
-            page.fill('input[type="email"], input[name="email"]', config.LAYBACK_EMAIL)
-            page.fill('input[type="password"], input[name="password"]', config.LAYBACK_PASSWORD)
-            page.click('button[type="submit"]')
+            
+            # Clica em Continuar com Betfair e aguarda redirecionamento
+            with page.expect_navigation():
+                page.click("text='Continuar com Betfair'")
+                
+            page.wait_for_selector("#username", timeout=15000)
+            page.fill('#username', config.LAYBACK_EMAIL)
+            page.fill('#password', config.LAYBACK_PASSWORD)
+            page.click('#login')
             
             page.wait_for_load_state("networkidle")
             
