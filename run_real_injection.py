@@ -47,12 +47,10 @@ def ensure_data_in_db():
     else:
         print("⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...")
         today_str = now_br.strftime("%Y-%m-%d")
-        tomorrow_str = (now_br + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
         all_fixtures = []
-        for d in [today_str, tomorrow_str]:
-            f = get_fixtures(d)
-            if f:
-                all_fixtures.extend(f)
+        f = get_fixtures(today_str)
+        if f:
+            all_fixtures.extend(f)
                 
         if all_fixtures:
             model = PoissonDixonColes()
