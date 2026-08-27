@@ -36,6 +36,7 @@ jobs:
       - name: Install Playwright Browsers
         run: |
           playwright install chromium
+          playwright install-deps
 
       - name: Run Injection Script
         env:
