@@ -19,11 +19,11 @@ def _save_cache(data):
     with open(CACHE_FILE, 'w') as f:
         json.dump(data, f)
 
-def get(key):
+def get(key, ttl_seconds=TTL_SECONDS):
     data = _load_cache()
     if key in data:
         item = data[key]
-        if time.time() - item['timestamp'] < TTL_SECONDS:
+        if time.time() - item['timestamp'] < ttl_seconds:
             return item['value']
     return None
 

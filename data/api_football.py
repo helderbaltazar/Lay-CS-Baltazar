@@ -46,7 +46,7 @@ def get_team_stats(team_id, competition_id):
     league_id = get_team_domestic_league(team_id, competition_id)
     cache_key = f"stats_{team_id}_{league_id}"
     
-    cached = cache.get(cache_key)
+    cached = cache.get(cache_key, ttl_seconds=43200)
     if cached:
         return cached
 
@@ -68,7 +68,7 @@ def get_team_stats(team_id, competition_id):
 
 def get_raw_odds(fixture_id):
     cache_key = f"raw_odds_{fixture_id}"
-    cached = cache.get(cache_key)
+    cached = cache.get(cache_key, ttl_seconds=43200)
     if cached is not None:
         return cached
 
