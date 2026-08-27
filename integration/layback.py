@@ -141,56 +141,8 @@ def get_betfair_id(team_name, layback_teams):
     return None
 
 def update_layback_bots():
-    import datetime
-    import pytz
-    from analysis.scanner import scan_all, rank_by_target
-    from models.poisson import PoissonDixonColes
-    from data.api_football import get_fixtures
-    
-    logger.info("Iniciando extração e injeção real (Hoje e Amanhã)...")
-    now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
-    dates_to_scan = [now_br.strftime("%Y-%m-%d"), (now_br + datetime.timedelta(days=1)).strftime("%Y-%m-%d")]
-    
-    model = PoissonDixonColes()
-    all_fixtures = []
-    for d in dates_to_scan:
-        f = get_fixtures(d)
-        if f: all_fixtures.extend(f)
-            
-    if not all_fixtures:
-        logger.warning("Nenhum jogo encontrado nas ligas configuradas.")
-        return
-        
-    results = scan_all(all_fixtures, model)
-    rankings = rank_by_target(results)
-    
-    with open("logs/teams_api.json", "r") as f:
-        layback_teams = json.load(f)["data"]["teams"]
-        
-    rank1_01 = [r for r in rankings.get("0-1", []) if r["rank"] == 1]
-    rank1_02 = [r for r in rankings.get("0-2", []) if r["rank"] == 1]
-    rank1_03 = [r for r in rankings.get("0-3", []) if r["rank"] == 1]
-    
-    bots_targets = [
-        (LAY_0_1_BOT_ID, "bot_lay_0_1", rank1_01, "0-1"),
-        (LAY_0_2_BOT_ID, "bot_lay_0_2", rank1_02, "0-2"),
-        (LAY_0_3_BOT_ID, "bot_lay_0_3", rank1_03, "0-3"),
-    ]
-    
-    for bot_id, bot_name, rank_list, target in bots_targets:
-        if not rank_list:
-            continue
-            
-        game = rank_list[0]
-        home_bf = get_betfair_id(game['home'], layback_teams)
-        away_bf = get_betfair_id(game['away'], layback_teams)
-        
-        teams_data = []
-        if home_bf: teams_data.append(home_bf)
-        if away_bf: teams_data.append(away_bf)
-            
-        if not teams_data:
-            continue
-            
-        json_file = generate_layback_json(teams_data, bot_name)
-        inject_teams_ui(bot_id, json_file)
+    from run_real_injection import ensure_data_in_db, inject_from_db
+    logger.info("Iniciando rotina de extração e injeção do Layback...")
+    ensure_data_in_db()
+    inject_from_db()
+    logger.info("Rotina de injeção concluída com sucesso.")
