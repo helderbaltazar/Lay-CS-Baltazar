@@ -10,3 +10,4 @@ playwright
 python-dotenv
 psycopg2-binary
 Flask-HTTPAuth
+gunicorn==21.2.0
