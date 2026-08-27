@@ -61,9 +61,6 @@ def ensure_data_in_db():
         else:
             print("❌ Nenhum jogo configurado nas ligas para hoje/amanhã retornado pela API.")
     
-    final_report = "\n".join(report_lines)
-    from notifications.telegram import send_message
-    send_message(final_report)
     db.close()
 
 def inject_from_db():
