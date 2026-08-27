@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 LAY_0_1_BOT_ID = 4626
 LAY_0_2_BOT_ID = 4753
 LAY_0_3_BOT_ID = 27251
+LAY_1_3_BOT_ID = 29778
 
 def generate_layback_json(teams_data: list, bot_name: str) -> str:
     """
@@ -39,6 +40,11 @@ def generate_layback_json(teams_data: list, bot_name: str) -> str:
     return filename
 
 def inject_teams_ui(bot_id: int, json_path: str):
+
+    # MOCK MODE se rodar localmente (sem a flag do GitHub)
+    if not os.getenv("GITHUB_ACTIONS"):
+        logger.info(f"[MOCK] Simulando injeção no bot {bot_id} (Arquivo: {json_path})")
+        return True
     """
     Injeta o JSON no bot navegando pela interface web.
     """
@@ -89,6 +95,16 @@ def inject_teams_ui(bot_id: int, json_path: str):
             aba_times.last.click()
             time.sleep(2)
             
+
+            # Limpar (deselecionar) times antigos
+            deselect = page.locator("text='Deselecionar todas'")
+            if deselect.count() > 0:
+                deselect.first.click()
+                time.sleep(1)
+                logger.info(f"[{bot_id}] Times antigos deselecionados.")
+            else:
+                logger.warning(f"[{bot_id}] Botão 'Deselecionar todas' não encontrado.")
+                
             importar = page.locator("button:has-text('Importar')")
             if importar.count() > 0:
                 importar.first.click()

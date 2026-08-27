@@ -8,7 +8,7 @@ from models.poisson import PoissonDixonColes
 from data.api_football import get_fixtures
 import json
 import difflib
-from integration.layback import generate_layback_json, inject_teams_ui, LAY_0_1_BOT_ID, LAY_0_2_BOT_ID, LAY_0_3_BOT_ID
+from integration.layback import generate_layback_json, inject_teams_ui, LAY_0_1_BOT_ID, LAY_0_2_BOT_ID, LAY_0_3_BOT_ID, LAY_1_3_BOT_ID
 
 def get_betfair_id(team_name, layback_teams):
     names = [t["name"] for t in layback_teams]
@@ -74,6 +74,7 @@ def inject_from_db():
         (LAY_0_1_BOT_ID, "bot_lay_0_1", "0-1"),
         (LAY_0_2_BOT_ID, "bot_lay_0_2", "0-2"),
         (LAY_0_3_BOT_ID, "bot_lay_0_3", "0-3"),
+        (LAY_1_3_BOT_ID, "bot_lay_1_3", "1-3"),
     ]
     
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
