@@ -156,7 +156,9 @@ def index():
                     'status': m.status,
                     'real_score': m.real_score,
                     'probability': p.probability,
-                    'is_hit': p.is_hit
+                    'is_hit': p.is_hit,
+                    'match_odd': p.match_odd,
+                    'profit_loss': p.profit_loss
                 })
                 
     for t in config.TARGET_SCORES:
@@ -218,7 +220,8 @@ def analytics():
             ).label('hits'),
             func.sum(
                 case((Prediction.is_hit == False, 1), else_=0)
-            ).label('misses')
+            ).label('misses'),
+            func.sum(Prediction.profit_loss).label('profit')
         ).join(Prediction).filter(
             Match.status.in_(['FT', 'AET', 'PEN']),
             Prediction.is_hit != None
@@ -228,12 +231,16 @@ def analytics():
         for s in stats:
             total = s.hits + s.misses
             win_rate = (s.hits / total * 100) if total > 0 else 0
+            profit = float(s.profit) if s.profit is not None else 0.0
+            roi = (profit / total * 100) if total > 0 else 0.0
             analytics_data.append({
                 'league': s.league_name,
                 'total': total,
                 'hits': s.hits,
                 'misses': s.misses,
-                'win_rate': round(win_rate, 2)
+                'win_rate': round(win_rate, 2),
+                'profit': round(profit, 2),
+                'roi': round(roi, 2)
             })
             
         # Ordena pelo melhor win rate

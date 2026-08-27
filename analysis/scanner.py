@@ -69,7 +69,8 @@ def scan_match(fixture, model, targets):
         'away': away_team['name'],
         'lambda_home': lam_home,
         'lambda_away': lam_away,
-        'probabilities': probs
+        'probabilities': probs,
+        'match_odd': home_odd
     }
 
 def scan_all(fixtures, model):
@@ -149,8 +150,15 @@ def save_to_db(db, rankings):
                 
             pred.probability = rec['probability']
             pred.rank = rec['rank']
+            pred.match_odd = rec.get('match_odd')
             
             if match.status in ['FT', 'AET', 'PEN'] and match.real_score:
                 pred.is_hit = (match.real_score != target)
-
+                # Cálculo de lucro/perda (Simulação base 1 unidade stake)
+                # Assumindo odds médias de Lay CS para o mercado: ~11.0 (Liability 10 unidades)
+                if pred.is_hit:
+                    pred.profit_loss = 0.935  # Ganho de 1 unidade descontando ~6.5% comissão
+                else:
+                    pred.profit_loss = -10.0  # Perda da responsabilidade (liability)
+                    
     db.commit()

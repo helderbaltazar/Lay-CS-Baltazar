@@ -26,5 +26,7 @@ class Prediction(Base):
     probability = Column(Float)
     rank = Column(Integer)
     is_hit = Column(Boolean, nullable=True)
+    match_odd = Column(Float, nullable=True)
+    profit_loss = Column(Float, nullable=True)
 
     match = relationship("Match", back_populates="predictions")

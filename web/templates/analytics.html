@@ -10,6 +10,8 @@
                 <th>Greens ✅</th>
                 <th>Reds ❌</th>
                 <th>Win Rate (%)</th>
+                <th>Lucro (U)</th>
+                <th>ROI (%)</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -21,10 +23,12 @@
                 <td class="green">{{ s.hits }}</td>
                 <td class="red">{{ s.misses }}</td>
                 <td><strong>{{ s.win_rate }}%</strong></td>
+                <td class="{% if s.profit > 0 %}green{% elif s.profit < 0 %}red{% endif %}">{{ s.profit }} U</td>
+                <td class="{% if s.roi > 0 %}green{% elif s.roi < 0 %}red{% endif %}">{{ s.roi }}%</td>
                 <td>
-                    {% if s.total >= 10 and s.win_rate < 60.0 %}
+                    {% if s.total >= 10 and s.roi < 0 %}
                         <span class="badge" style="background:#e74c3c;">Blacklist</span>
-                    {% elif s.total >= 10 and s.win_rate >= 80.0 %}
+                    {% elif s.total >= 10 and s.roi >= 10.0 %}
                         <span class="badge" style="background:#2ecc71;">Excelente</span>
                     {% else %}
                         <span class="badge" style="background:#95a5a6;">Análise</span>
@@ -32,7 +36,7 @@
                 </td>
             </tr>
             {% else %}
-            <tr><td colspan="6">Nenhum dado consolidado ainda.</td></tr>
+            <tr><td colspan="8">Nenhum dado consolidado ainda.</td></tr>
             {% endfor %}
         </tbody>
     </table>
