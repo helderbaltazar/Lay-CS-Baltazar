@@ -6,3 +6,7 @@ SQLAlchemy
 python-dotenv
 pytest
 pytest-cov
+playwright
+python-dotenv
+psycopg2-binary
+Flask-HTTPAuth

@@ -45,6 +45,14 @@ def test_scan_match_real_score():
     import data.api_football
     import data.league_config
     
+    # Mock the odds function to pass the new filter
+    if hasattr(analysis.scanner, 'get_match_winner_odds'):
+        original_get_odds = analysis.scanner.get_match_winner_odds
+        analysis.scanner.get_match_winner_odds = lambda f: 1.50
+        if hasattr(analysis.scanner, 'get_over25_odds'):
+            original_get_over25 = analysis.scanner.get_over25_odds
+            analysis.scanner.get_over25_odds = lambda f: 1.70
+
     # Mock the stats function
     original_get_team_stats = data.api_football.get_team_stats
     data.api_football.get_team_stats = lambda t, l: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}}
@@ -56,5 +64,9 @@ def test_scan_match_real_score():
     assert res['real_score'] == '2-1'
     
     # Restore
+    if hasattr(analysis.scanner, 'get_match_winner_odds'):
+        analysis.scanner.get_match_winner_odds = original_get_odds
+    if hasattr(analysis.scanner, 'get_over25_odds'):
+        analysis.scanner.get_over25_odds = original_get_over25
     data.api_football.get_team_stats = original_get_team_stats
     data.league_config.get_league_avg = original_get_league_avg

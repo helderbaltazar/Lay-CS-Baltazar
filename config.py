@@ -1,4 +1,5 @@
 import os
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,3 +21,8 @@ MAX_LIABILITY = float(os.getenv('MAX_LIABILITY', '2.0')) # Em %
 
 LAYBACK_EMAIL = os.getenv('LAYBACK_EMAIL', '')
 LAYBACK_PASSWORD = os.getenv('LAYBACK_PASSWORD', '')
+
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///data_store/database.sqlite3')
+
+DASHBOARD_USERNAME = os.getenv("DASHBOARD_USERNAME", "admin")
+DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD", "laycs2026")

@@ -17,8 +17,12 @@ def setup_db():
     yield
     Base.metadata.drop_all(bind=test_engine)
 
+@patch('analysis.scanner.get_match_winner_odds')
+@patch('analysis.scanner.get_over25_odds')
 @patch('analysis.scanner.get_team_stats')
-def test_pipeline_fixtures_to_db(mock_get_stats):
+def test_pipeline_fixtures_to_db(mock_get_stats, mock_get_over25, mock_get_odds):
+    mock_get_odds.return_value = 1.50
+    mock_get_over25.return_value = 1.70
     mock_get_stats.return_value = {
         'goals': {'for': {'total': {'home': 10, 'away': 10}}, 'against': {'total': {'home': 5, 'away': 5}}},
         'fixtures': {'played': {'home': 10, 'away': 10}}

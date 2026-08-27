@@ -1,11 +1,135 @@
-from flask import Flask, render_template, request
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from database.db import SessionLocal
 from database.models_db import Match, Prediction
 import datetime
 import config
+import threading
 from sqlalchemy import desc, func
 
+
 app = Flask(__name__)
+app.secret_key = 'laycs-secret-key-2026'
+
+auth = HTTPBasicAuth()
+
+users = {
+    config.DASHBOARD_USERNAME: generate_password_hash(config.DASHBOARD_PASSWORD)
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and check_password_hash(users.get(username), password):
+        return username
+    return None
+
+
+# Variavel global para status da execucao
+_task_status = {'running': False, 'message': '', 'last_run': None}
+
+@app.route("/force-scan", methods=["POST"])
+@auth.login_required
+def force_scan():
+    """Forca a execucao do scan completo + injecao nos bots Layback."""
+    global _task_status
+    if _task_status['running']:
+        flash("⏳ Já existe uma tarefa em execução. Aguarde finalizar.", "warning")
+        return redirect(url_for('index'))
+    
+    def _run_pipeline():
+        global _task_status
+        _task_status['running'] = True
+        _task_status['message'] = 'Executando scan de jogos...'
+        try:
+            from scheduler import run_daily_scan
+            run_daily_scan()
+            
+            _task_status['message'] = 'Injetando times nos bots Layback...'
+            _inject_teams_into_bots()
+            
+            import pytz
+            now = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+            _task_status['message'] = f'✅ Concluído com sucesso às {now.strftime("%H:%M:%S")}!'
+            _task_status['last_run'] = now.strftime("%d/%m/%Y %H:%M:%S")
+        except Exception as e:
+            _task_status['message'] = f'❌ Erro: {str(e)}'
+        finally:
+            _task_status['running'] = False
+    
+    thread = threading.Thread(target=_run_pipeline, daemon=True)
+    thread.start()
+    flash("🚀 Scan + Injeção nos Bots iniciado! Acompanhe o status abaixo.", "success")
+    return redirect(url_for('index'))
+
+@app.route("/force-inject", methods=["POST"])
+def force_inject():
+    """Forca apenas a injecao dos times nos bots Layback (sem re-scan)."""
+    global _task_status
+    if _task_status['running']:
+        flash("⏳ Já existe uma tarefa em execução. Aguarde finalizar.", "warning")
+        return redirect(url_for('index'))
+    
+    def _run_inject():
+        global _task_status
+        _task_status['running'] = True
+        _task_status['message'] = 'Injetando times nos bots Layback...'
+        try:
+            _inject_teams_into_bots()
+            import pytz
+            now = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+            _task_status['message'] = f'✅ Injeção concluída com sucesso às {now.strftime("%H:%M:%S")}!'
+            _task_status['last_run'] = now.strftime("%d/%m/%Y %H:%M:%S")
+        except Exception as e:
+            _task_status['message'] = f'❌ Erro: {str(e)}'
+        finally:
+            _task_status['running'] = False
+    
+    thread = threading.Thread(target=_run_inject, daemon=True)
+    thread.start()
+    flash("🤖 Injeção nos Bots Layback iniciada!", "success")
+    return redirect(url_for('index'))
+
+@app.route("/task-status")
+def task_status():
+    """Retorna o status da tarefa em execucao (para polling AJAX)."""
+    return jsonify(_task_status)
+
+def _inject_teams_into_bots():
+    """Busca os melhores jogos do banco e injeta nos bots Layback via API."""
+    import pytz
+    from integration.layback import update_layback_bots
+    
+    db = SessionLocal()
+    try:
+        now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+        today = now_br.strftime("%Y-%m-%d")
+        tomorrow = (now_br + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+        
+        # Busca os melhores jogos (rank 1) para cada target score
+        best_picks = {}
+        for target in config.TARGET_SCORES:
+            match = db.query(Match).join(Prediction).filter(
+                Prediction.target_score == target,
+                Prediction.rank == 1,
+                func.date(Match.date).in_([today, tomorrow]),
+                Match.status == 'NS'
+            ).first()
+            
+            if match:
+                best_picks[target] = match
+                print(f"[Inject] Melhor jogo para Lay {target}: {match.home_team} x {match.away_team}")
+            else:
+                print(f"[Inject] Nenhum jogo encontrado para Lay {target}")
+        
+        if best_picks:
+            update_layback_bots(best_picks)
+        else:
+            print("[Inject] Nenhum jogo para injetar nos bots.")
+            from notifications.telegram import send_message
+            send_message("⚠️ Nenhum jogo encontrado no scan de hoje/amanhã para injetar nos bots Layback.")
+    finally:
+        db.close()
 
 @app.route("/")
 def index():

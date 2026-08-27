@@ -12,6 +12,7 @@ from models.poisson import PoissonDixonColes
 from analysis.scanner import scan_all, rank_by_target, save_to_db
 from analysis.resolver import resolve_pending_matches
 from database.db import SessionLocal
+from integration.layback import update_layback_bots
 
 def run_daily_scan():
     print(f"[{datetime.datetime.now()}] Iniciando scan (Hoje e Amanha)...")
@@ -34,6 +35,13 @@ def run_daily_scan():
             results = scan_all(fixtures, model)
             rankings = rank_by_target(results)
             save_to_db(db, rankings)
+
+            # Enviar para a UI do Layback
+            try:
+                update_layback_bots()
+            except Exception as e:
+                print(f"Erro ao injetar bots no Layback: {e}")
+
         print(f"[{datetime.datetime.now()}] Scan (Hoje e Amanha) concluido e salvo com sucesso.")
     finally:
         db.close()

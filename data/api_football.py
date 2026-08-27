@@ -64,7 +64,55 @@ def get_team_stats(team_id, competition_id):
             
     return None
 
+
+
+def get_raw_odds(fixture_id):
+    cache_key = f"raw_odds_{fixture_id}"
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+
+    url = f"{config.BASE_URL}/odds?fixture={fixture_id}&bookmaker=8"
+    try:
+        response = requests.get(url, headers=get_headers())
+        data = response.json()
+        if not data.get('response'):
+            cache.set(cache_key, [])
+            return []
+            
+        bookmakers = data['response'][0].get('bookmakers', [])
+        cache.set(cache_key, bookmakers)
+        return bookmakers
+    except Exception as e:
+        print(f"Erro ao buscar odds brutas para fixture {fixture_id}: {e}")
+        return []
+
+def get_match_winner_odds(fixture_id):
+    bookmakers = get_raw_odds(fixture_id)
+    if not bookmakers:
+        return None
+    markets = bookmakers[0].get('bets', [])
+    for m in markets:
+        if m['name'] == 'Match Winner' or m['id'] == 1:
+            for val in m['values']:
+                if val['value'] == 'Home':
+                    return float(val['odd'])
+    return None
+
+def get_over25_odds(fixture_id):
+    bookmakers = get_raw_odds(fixture_id)
+    if not bookmakers:
+        return None
+    markets = bookmakers[0].get('bets', [])
+    for m in markets:
+        if m['name'] == 'Goals Over/Under' or m['id'] == 5:
+            for val in m['values']:
+                if val['value'] == 'Over 2.5':
+                    return float(val['odd'])
+    return None
+
 def get_odds(fixture_id, target_score):
+
     url = f"{config.BASE_URL}/odds?fixture={fixture_id}&bookmaker=8" # 8 = Bet365
     try:
         response = requests.get(url, headers=get_headers())

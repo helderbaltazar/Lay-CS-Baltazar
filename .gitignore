@@ -19,3 +19,23 @@ env/
 .vscode/
 .idea/
 .DS_Store
+
+# Arquivos temporários e scripts de patch
+*.pyc
+__pycache__/
+venv/
+.env
+cache/
+logs/
+data_store/
+
+# Scripts de debug criados automaticamente
+patch_*.py
+test_*.py
+inspect_*.py
+click_*.py
+debug_*.py
+force_*.py
+parse_*.py
+upload_*.py
+capture_*.py

@@ -1,5 +1,15 @@
 import pytest
 from web.app import app
+
+import base64
+import config
+
+def get_auth_headers():
+    username = config.DASHBOARD_USERNAME
+    password = config.DASHBOARD_PASSWORD
+    token = base64.b64encode(f"{username}:{password}".encode('utf-8')).decode('utf-8')
+    return {'Authorization': f'Basic {token}'}
+
 from database.db import Base, SessionLocal
 import database.db
 from database.models_db import Match, Prediction
@@ -24,7 +34,7 @@ def client():
         yield client
 
 def test_index_route(client):
-    response = client.get('/')
+    response = client.get('/', headers=get_auth_headers())
     assert response.status_code == 200
     assert b"Lay CS Scanner" in response.data
 
@@ -39,7 +49,7 @@ def test_history_route(client):
     db.commit()
     db.close()
     
-    response = client.get('/history')
+    response = client.get('/history', headers=get_auth_headers())
     assert response.status_code == 200
     assert b"Win Rate" in response.data
     assert b"GREEN" in response.data
