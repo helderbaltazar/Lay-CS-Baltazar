@@ -113,9 +113,9 @@ def main():
         layback_teams = json.load(f)["data"]["teams"]
         
     # Extrair Rank 1 de cada placar
-    rank1_01 = [r for r in rankings["0-1"] if r["rank"] == 1]
-    rank1_02 = [r for r in rankings["0-2"] if r["rank"] == 1]
-    rank1_03 = [r for r in rankings["0-3"] if r["rank"] == 1]
+    rank1_01 = [r for r in rankings["0-1"] if r["rank"] <= 2]
+    rank1_02 = [r for r in rankings["0-2"] if r["rank"] <= 2]
+    rank1_03 = [r for r in rankings["0-3"] if r["rank"] <= 2]
     
     bots_targets = [
         (LAY_0_1_BOT_ID, "bot_lay_0_1", rank1_01, "0-1"),
@@ -129,18 +129,18 @@ def main():
             print(f"[{target}] Nenhum jogo qualificado.")
             continue
             
-        game = rank_list[0]
-        print(f"[{target}] Rank 1: {game['home']} x {game['away']} (Probabilidade: {game['probability']:.2%})")
-        
-        # Mapear IDs
-        home_bf = get_betfair_id(game['home'], layback_teams)
-        away_bf = get_betfair_id(game['away'], layback_teams)
-        
         teams_data = []
-        if home_bf:
-            teams_data.append(home_bf)
-        if away_bf:
-            teams_data.append(away_bf)
+        for game in rank_list:
+            print(f"[{target}] Rank {game['rank']}: {game['home']} x {game['away']} (Prob: {game['probability']:.2%})")
+            
+            # Mapear IDs
+            home_bf = get_betfair_id(game['home'], layback_teams)
+            away_bf = get_betfair_id(game['away'], layback_teams)
+            
+            if home_bf:
+                teams_data.append(home_bf)
+            if away_bf:
+                teams_data.append(away_bf)
             
         if not teams_data:
             print(f"ERRO: Não foi possível mapear nenhum dos times para a Betfair!")

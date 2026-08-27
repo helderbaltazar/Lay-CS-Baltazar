@@ -3,7 +3,7 @@
 
 # Banco de dados local e cache
 data_store/*.sqlite3
-cache/
+
 logs/
 results/
 
@@ -11,7 +11,7 @@ results/
 __pycache__/
 *.pyc
 *.pyo
-.pytest_cache/
+.pytest_
 venv/
 env/
 
@@ -25,7 +25,7 @@ env/
 __pycache__/
 venv/
 .env
-cache/
+
 logs/
 data_store/
 
