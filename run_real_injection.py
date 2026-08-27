@@ -1,12 +1,14 @@
-import json
-import difflib
-from integration.layback import generate_layback_json, inject_teams_ui, LAY_0_1_BOT_ID, LAY_0_2_BOT_ID, LAY_0_3_BOT_ID
-from database.db import SessionLocal
-from database.models_db import Match, Prediction
-from sqlalchemy import desc
 import datetime
 import pytz
 import config
+from database.db import SessionLocal
+from database.models_db import Match, Prediction
+from analysis.scanner import scan_all, rank_by_target, save_to_db
+from models.poisson import PoissonDixonColes
+from data.api_football import get_fixtures
+import json
+import difflib
+from integration.layback import generate_layback_json, inject_teams_ui, LAY_0_1_BOT_ID, LAY_0_2_BOT_ID, LAY_0_3_BOT_ID
 
 def get_betfair_id(team_name, layback_teams):
     names = [t["name"] for t in layback_teams]
@@ -32,8 +34,39 @@ def get_betfair_id(team_name, layback_teams):
         
     return None
 
-def main():
-    print("Forçando teste de injeção a partir do Banco de Dados...")
+def ensure_data_in_db():
+    db = SessionLocal()
+    now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+    today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    print(f"[{now_br}] Verificando se os jogos de hoje já estão no Supabase...")
+    matches_today = db.query(Match).filter(Match.date >= today_start).first()
+    
+    if matches_today:
+        print("✅ Jogos do dia já existem no banco de dados. Pulando a extração da API...")
+    else:
+        print("⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...")
+        today_str = now_br.strftime("%Y-%m-%d")
+        tomorrow_str = (now_br + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+        all_fixtures = []
+        for d in [today_str, tomorrow_str]:
+            f = get_fixtures(d)
+            if f:
+                all_fixtures.extend(f)
+                
+        if all_fixtures:
+            model = PoissonDixonColes()
+            results = scan_all(all_fixtures, model)
+            rankings = rank_by_target(results)
+            save_to_db(db, rankings)
+            print("✅ Novos jogos calculados e salvos no banco de dados com sucesso.")
+        else:
+            print("❌ Nenhum jogo configurado nas ligas para hoje/amanhã retornado pela API.")
+    
+    db.close()
+
+def inject_from_db():
+    print("\\n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---")
     db = SessionLocal()
     
     with open("logs/teams_api.json", "r") as f:
@@ -49,14 +82,14 @@ def main():
     today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
     
     for bot_id, bot_name, target in targets:
-        # Puxa os 2 primeiros (rank 1 e 2) do banco para este placar filtrando por jogos a partir de hoje
         preds = db.query(Prediction).join(Match).filter(
             Prediction.target_score == target,
             Prediction.rank <= 2,
             Match.date >= today_start
         ).order_by(Prediction.rank).limit(2).all()
+        
         if not preds:
-            print(f"[{target}] Nenhum jogo no banco.")
+            print(f"[{target}] Nenhum jogo no banco para hoje/amanhã.")
             continue
             
         teams_data = []
@@ -72,9 +105,7 @@ def main():
             print(f"ERRO: Não mapeou nenhum time!")
             continue
             
-        print(f"[{target}] Times a injetar: {[t['name'] for t in teams_data]}")
         json_file = generate_layback_json(teams_data, bot_name)
-        
         print(f"[{target}] Injetando no bot {bot_id} via Playwright...")
         success = inject_teams_ui(bot_id, json_file)
         if success:
@@ -85,4 +116,5 @@ def main():
     db.close()
 
 if __name__ == "__main__":
-    main()
+    ensure_data_in_db()
+    inject_from_db()
