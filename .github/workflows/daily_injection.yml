@@ -50,3 +50,10 @@ jobs:
           # O script lerá do environment (os.getenv) se estiver configurado
         run: |
           python run_real_injection.py
+
+      - name: Upload Debug Screenshot
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-screenshot
+          path: logs/login_error.png

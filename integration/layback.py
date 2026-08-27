@@ -49,7 +49,11 @@ def inject_teams_ui(bot_id: int, json_path: str):
         logger.info(f"[{bot_id}] Fazendo login...")
         page.goto("https://bot-betfair.layback.trade/login")
         page.click("text='Continuar com Betfair'")
-        page.wait_for_selector("#username", timeout=15000)
+        try:
+            page.wait_for_selector("#username", timeout=15000)
+        except Exception as e:
+            page.screenshot(path="logs/login_error.png")
+            raise e
         page.fill('#username', config.LAYBACK_EMAIL)
         page.fill('#password', config.LAYBACK_PASSWORD)
         page.click('#login')
