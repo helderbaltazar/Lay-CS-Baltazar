@@ -31,35 +31,32 @@ _task_status = {'running': False, 'message': '', 'last_run': None}
 @app.route("/force-scan", methods=["POST"])
 @auth.login_required
 def force_scan():
-    """Forca a execucao do scan completo + injecao nos bots Layback."""
+    """Forca a execucao do scan completo remotamente via GitHub Actions."""
     global _task_status
-    if _task_status['running']:
-        flash("⏳ Já existe uma tarefa em execução. Aguarde finalizar.", "warning")
+    if not config.GITHUB_TOKEN:
+        flash("❌ GITHUB_TOKEN não configurado. Não é possível disparar a Action.", "danger")
         return redirect(url_for('index'))
+        
+    import requests
     
-    def _run_pipeline():
-        global _task_status
-        _task_status['running'] = True
-        _task_status['message'] = 'Executando scan de jogos...'
-        try:
-            from scheduler import run_daily_scan
-            run_daily_scan()
-            
-            _task_status['message'] = 'Injetando times nos bots Layback...'
-            _inject_teams_into_bots()
-            
-            import pytz
-            now = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
-            _task_status['message'] = f'✅ Concluído com sucesso às {now.strftime("%H:%M:%S")}!'
-            _task_status['last_run'] = now.strftime("%d/%m/%Y %H:%M:%S")
-        except Exception as e:
-            _task_status['message'] = f'❌ Erro: {str(e)}'
-        finally:
-            _task_status['running'] = False
+    repo = "helderbaltazar/Lay-CS-Baltazar"
+    url = f"https://api.github.com/repos/{repo}/actions/workflows/daily_injection.yml/dispatches"
     
-    thread = threading.Thread(target=_run_pipeline, daemon=True)
-    thread.start()
-    flash("🚀 Scan + Injeção nos Bots iniciado! Acompanhe o status abaixo.", "success")
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "Authorization": f"token {config.GITHUB_TOKEN}"
+    }
+    data = {"ref": "main"}
+    
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        if response.status_code == 204:
+            flash("🚀 Robô acionado no GitHub com sucesso! Acompanhe o Telegram.", "success")
+        else:
+            flash(f"❌ Erro ao acionar robô: {response.status_code} - {response.text}", "danger")
+    except Exception as e:
+        flash(f"❌ Erro de conexão: {str(e)}", "danger")
+        
     return redirect(url_for('index'))
 
 @app.route("/force-inject", methods=["POST"])

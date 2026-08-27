@@ -26,3 +26,6 @@ DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///data_store/database.sqlite3'
 
 DASHBOARD_USERNAME = os.getenv("DASHBOARD_USERNAME", "admin")
 DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD", "laycs2026")
+
+# GitHub API Token (para acionar workflow)
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")

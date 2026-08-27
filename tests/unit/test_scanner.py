@@ -22,8 +22,12 @@ def test_rank_by_target():
     assert rankings['0-1'][0]['rank'] == 1
 
 
+
 def test_scan_match_real_score():
     from analysis.scanner import scan_match
+    import data.api_football
+    import data.league_config
+    import analysis.scanner
     
     # Mock fixture that is finished
     fixture = {
@@ -41,32 +45,14 @@ def test_scan_match_real_score():
         def get_probabilities(self, h, a, t):
             return {'0-1': 0.1}
             
-    import analysis.scanner
-    import data.api_football
-    import data.league_config
-    
-    # Mock the odds function to pass the new filter
-    if hasattr(analysis.scanner, 'get_match_winner_odds'):
-        original_get_odds = analysis.scanner.get_match_winner_odds
-        analysis.scanner.get_match_winner_odds = lambda f: 1.50
-        if hasattr(analysis.scanner, 'get_over25_odds'):
-            original_get_over25 = analysis.scanner.get_over25_odds
-            analysis.scanner.get_over25_odds = lambda f: 1.70
-
-    # Mock the stats function
-    original_get_team_stats = data.api_football.get_team_stats
-    data.api_football.get_team_stats = lambda t, l: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}}
-    original_get_league_avg = data.league_config.get_league_avg
-    data.league_config.get_league_avg = lambda l: (1.5, 1.2)
-    
-    res = scan_match(fixture, DummyModel(), ['0-1'])
-    
-    assert res['real_score'] == '2-1'
-    
-    # Restore
-    if hasattr(analysis.scanner, 'get_match_winner_odds'):
-        analysis.scanner.get_match_winner_odds = original_get_odds
-    if hasattr(analysis.scanner, 'get_over25_odds'):
-        analysis.scanner.get_over25_odds = original_get_over25
-    data.api_football.get_team_stats = original_get_team_stats
-    data.league_config.get_league_avg = original_get_league_avg
+    with pytest.MonkeyPatch().context() as m:
+        m.setattr(analysis.scanner, 'get_match_winner_odds', lambda x: 1.5)
+        m.setattr(analysis.scanner, 'get_over25_odds', lambda x: 1.5)
+        m.setattr(data.api_football, 'get_team_stats', lambda t, l: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}})
+        m.setattr(analysis.scanner, 'get_team_stats', lambda t, l: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}})
+        m.setattr(data.league_config, 'get_league_avg', lambda x: (1.5, 1.2))
+        m.setattr(analysis.scanner, 'get_league_avg', lambda x: (1.5, 1.2))
+        
+        res = scan_match(fixture, DummyModel(), ['0-1'])
+        assert res is not None
+        assert res['real_score'] == '2-1'

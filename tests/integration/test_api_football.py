@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import patch
 from data import api_football
+import config
 
 def test_filter_main_leagues():
     fixtures = [
@@ -11,8 +12,10 @@ def test_filter_main_leagues():
     assert len(filtered) == 1
     assert filtered[0]["league"]["id"] == 39
 
+@patch("data.api_football.cache.get")
 @patch("requests.get")
-def test_get_fixtures(mock_get):
+def test_get_fixtures(mock_get, mock_cache):
+    mock_cache.return_value = None
     class MockResponse:
         def raise_for_status(self): pass
         def json(self):
@@ -24,14 +27,12 @@ def test_get_fixtures(mock_get):
     assert fixtures[0]["league"]["id"] == 39
     mock_get.assert_called_once()
 
-
-import config
-from unittest.mock import patch
-def test_api_timezone_param():
-    from data.api_football import get_fixtures
-    with patch('data.api_football.requests.get') as mock_get:
-        mock_get.return_value.status_code = 200
-        mock_get.return_value.json.return_value = {'response': []}
-        get_fixtures('2026-08-25')
-        called_url = mock_get.call_args[0][0]
-        assert f"timezone={config.SCHEDULER_TIMEZONE}" in called_url
+@patch('data.api_football.cache.get')
+@patch('data.api_football.requests.get')
+def test_api_timezone_param(mock_get, mock_cache):
+    mock_cache.return_value = None
+    mock_get.return_value.status_code = 200
+    mock_get.return_value.json.return_value = {'response': []}
+    api_football.get_fixtures('2026-08-25')
+    called_url = mock_get.call_args[0][0]
+    assert f"timezone={config.SCHEDULER_TIMEZONE}" in called_url
