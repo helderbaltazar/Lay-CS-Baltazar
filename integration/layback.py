@@ -43,7 +43,24 @@ def inject_teams_ui(bot_id: int, json_path: str):
     Injeta o JSON no bot navegando pela interface web.
     """
     with sync_playwright() as play:
-        browser = play.chromium.launch(headless=True)
+        
+        proxy_server = os.getenv("PROXY_SERVER")
+        proxy_username = os.getenv("PROXY_USERNAME")
+        proxy_password = os.getenv("PROXY_PASSWORD")
+        
+        launch_args = {"headless": True}
+        
+        if proxy_server and proxy_username and proxy_password:
+            logger.info(f"[{bot_id}] 🛡️ Iniciando navegador com Proxy Camuflado...")
+            launch_args["proxy"] = {
+                "server": f"http://{proxy_server}",
+                "username": proxy_username,
+                "password": proxy_password
+            }
+        else:
+            logger.info(f"[{bot_id}] ⚠️ Nenhum proxy configurado. Rodando com o IP padrão da nuvem.")
+            
+        browser = play.chromium.launch(**launch_args)
         page = browser.new_page(viewport={'width': 1280, 'height': 3000})
         
         logger.info(f"[{bot_id}] Fazendo login...")
