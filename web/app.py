@@ -132,6 +132,7 @@ def _inject_teams_into_bots():
         db.close()
 
 @app.route("/")
+@auth.login_required
 def index():
     db = SessionLocal()
     import pytz
@@ -171,6 +172,7 @@ def index():
     return render_template("index.html", rankings=rankings, date_filter=date_obj.strftime("%Y-%m-%d"), today_str=today_str, tomorrow_str=tomorrow_str)
 
 @app.route("/history")
+@auth.login_required
 def history():
     db = SessionLocal()
     page = request.args.get('page', 1, type=int)
@@ -205,6 +207,7 @@ def history():
     return render_template("history.html", stats=stats, history=history_data, page=page, total_pages=total_pages)
 
 @app.route("/analytics")
+@auth.login_required
 def analytics():
     db = SessionLocal()
     try:
@@ -243,6 +246,7 @@ def analytics():
         db.close()
 
 @app.route("/export")
+@auth.login_required
 def export_csv():
     import csv
     from io import StringIO
