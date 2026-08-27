@@ -10,12 +10,27 @@ def get_headers():
     }
 
 def get_fixtures(date_str):
+    cache_key = f"fixtures_{date_str}"
+    cached = cache.get(cache_key, ttl_seconds=86400) # 24 horas de cache para os jogos do dia
+    if cached is not None:
+        print(f"Lendo jogos de {date_str} do cache...")
+        return cached
+
     url = f"{config.BASE_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
     try:
+        print(f"Buscando jogos de {date_str} na API...")
         response = requests.get(url, headers=get_headers())
         response.raise_for_status()
         data = response.json()
-        return filter_main_leagues(data.get('response', []))
+        
+        # Se a API bater limite (429), ela pode retornar 200 com errors
+        if data.get('errors') and len(data.get('errors')) > 0:
+            print("Erro da API:", data.get('errors'))
+            return []
+            
+        result = filter_main_leagues(data.get('response', []))
+        cache.set(cache_key, result)
+        return result
     except Exception as e:
         print(f"Error fetching fixtures: {e}")
         return []
