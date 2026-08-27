@@ -67,7 +67,7 @@ def inject_from_db():
     print("\\n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---")
     db = SessionLocal()
     
-    with open("logs/teams_api.json", "r") as f:
+    with open("data/teams_api.json", "r") as f:
         layback_teams = json.load(f)["data"]["teams"]
 
     targets = [
