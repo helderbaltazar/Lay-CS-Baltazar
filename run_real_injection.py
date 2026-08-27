@@ -61,6 +61,9 @@ def ensure_data_in_db():
         else:
             print("❌ Nenhum jogo configurado nas ligas para hoje/amanhã retornado pela API.")
     
+    final_report = "\n".join(report_lines)
+    from notifications.telegram import send_message
+    send_message(final_report)
     db.close()
 
 def inject_from_db():
@@ -80,6 +83,7 @@ def inject_from_db():
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
     
+    report_lines = ["🤖 *Relatório Diário Layback* 🤖\n"]
     for bot_id, bot_name, target in targets:
         preds = db.query(Prediction).join(Match).filter(
             Prediction.target_score == target,
@@ -91,10 +95,12 @@ def inject_from_db():
             print(f"[{target}] Nenhum jogo no banco para hoje/amanhã.")
             continue
             
+        bot_games_str = []
         teams_data = []
         for p in preds:
             m = p.match
             print(f"[{target}] Rank {p.rank}: {m.home_team} x {m.away_team} (Prob: {p.probability:.2%})")
+            bot_games_str.append(f"⚽ {m.home_team} x {m.away_team} ({p.probability:.2%})")
             h_bf = get_betfair_id(m.home_team, layback_teams)
             a_bf = get_betfair_id(m.away_team, layback_teams)
             if h_bf: teams_data.append(h_bf)
@@ -108,10 +114,18 @@ def inject_from_db():
         print(f"[{target}] Injetando no bot {bot_id} via Playwright...")
         success = inject_teams_ui(bot_id, json_file)
         if success:
+            report_lines.append(f"✅ *{target}* (Bot {bot_id}):")
+            report_lines.extend(bot_games_str)
+            report_lines.append("")
             print(f"[{target}] SUCESSO!")
         else:
+            report_lines.append(f"❌ *{target}* (Bot {bot_id}) FALHOU.")
+            report_lines.append("")
             print(f"[{target}] FALHOU!")
             
+    final_report = "\n".join(report_lines)
+    from notifications.telegram import send_message
+    send_message(final_report)
     db.close()
 
 if __name__ == "__main__":

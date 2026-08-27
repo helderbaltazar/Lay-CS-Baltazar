@@ -76,6 +76,12 @@ def inject_teams_ui(bot_id: int, json_path: str):
             page.wait_for_selector("#username", timeout=15000)
         except Exception as e:
             page.screenshot(path="logs/login_error.png")
+            try:
+                from notifications.telegram import send_document, send_message
+                send_message(f"🚨 *Erro crítico no login do Bot {bot_id}* 🚨\nTimeout ou bloqueio do Cloudflare detectado. Veja a imagem em anexo:")
+                send_document("logs/login_error.png")
+            except Exception:
+                pass
             raise e
         page.fill('#username', config.LAYBACK_EMAIL)
         page.fill('#password', config.LAYBACK_PASSWORD)

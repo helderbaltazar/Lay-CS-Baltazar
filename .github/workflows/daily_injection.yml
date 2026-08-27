@@ -52,7 +52,17 @@ jobs:
           # Supondo que você precisa passar pro config.py:
           # O script lerá do environment (os.getenv) se estiver configurado
         run: |
-          python run_real_injection.py
+          for i in 1 2 3; do
+            echo "Iniciando tentativa $i..."
+            python run_real_injection.py && break || {
+              echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."
+              sleep 15
+            }
+            if [ $i -eq 3 ]; then
+              echo "Todas as 3 tentativas falharam."
+              exit 1
+            fi
+          done
 
       - name: Upload Debug Screenshot
         if: failure()
