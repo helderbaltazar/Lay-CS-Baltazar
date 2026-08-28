@@ -116,7 +116,7 @@ def inject_teams_ui(bot_id: int, json_path: str):
         time.sleep(3)
         
         # Verifica se caiu na tela de login
-        if "login" in page.url:
+        if "login" in page.url or page.locator("text='Continuar com Betfair'").count() > 0 or page.locator("text='Entrar com Betfair'").count() > 0:
             logger.info(f"[{bot_id}] Sessão inválida ou sem cookie. Fazendo login manual...")
             page.goto("https://bot-betfair.layback.trade/login")
             page.click("text='Continuar com Betfair'")
