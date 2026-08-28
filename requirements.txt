@@ -12,3 +12,4 @@ psycopg2-binary
 Flask-HTTPAuth
 gunicorn==21.2.0
 playwright-stealth==1.0.6
+python-dateutil
