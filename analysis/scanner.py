@@ -23,6 +23,25 @@ def calculate_lambdas(home_stats, away_stats, league_avg):
     lam_home = h_attack * a_defense * avg_home
     lam_away = a_attack * h_defense * avg_away
 
+    # Decaimento Exponencial / Peso de Fase Recente (Time-Decay)
+    # Valorizamos o 'form' recente para inflar ou desinflar as lambdas
+    def apply_recent_form(lam, form_str, is_home):
+        if not form_str: return lam
+        # Pegamos os últimos 5 jogos (já retornados pela API)
+        recent = form_str[-5:]
+        weight = 0.0
+        # W = +5%, D = 0%, L = -5% por jogo recente (multiplicador de força)
+        for char in recent:
+            if char == 'W': weight += 0.05
+            elif char == 'L': weight -= 0.05
+        return lam * (1.0 + weight)
+        
+    h_form = home_stats.get('form', '')
+    a_form = away_stats.get('form', '')
+    
+    lam_home = apply_recent_form(lam_home, h_form, True)
+    lam_away = apply_recent_form(lam_away, a_form, False)
+
     lam_home = max(0.2, min(lam_home, 5.0))
     lam_away = max(0.2, min(lam_away, 5.0))
 

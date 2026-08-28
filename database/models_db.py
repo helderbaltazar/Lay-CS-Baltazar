@@ -30,3 +30,9 @@ class Prediction(Base):
     profit_loss = Column(Float, nullable=True)
 
     match = relationship("Match", back_populates="predictions")
+
+class SystemConfig(Base):
+    __tablename__ = "system_config"
+    
+    key = Column(String, primary_key=True, index=True)
+    value = Column(String)

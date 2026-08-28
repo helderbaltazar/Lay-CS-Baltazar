@@ -14,9 +14,6 @@ LAY_0_3_BOT_ID = 27251
 LAY_1_3_BOT_ID = 29778
 
 def generate_layback_json(teams_data: list, bot_name: str) -> str:
-    """
-    Gera o arquivo JSON para ser importado no Layback.
-    """
     bot_json = {
         "version": "1.0",
         "betOnNewTeam": True,
@@ -28,7 +25,7 @@ def generate_layback_json(teams_data: list, bot_name: str) -> str:
             "name": team["name"],
             "id": str(team["id"]),
             "checked": True,
-            "side": "A"  # Both sides
+            "side": "A"
         })
         
     filename = f"data/{bot_name}.json"
@@ -39,17 +36,51 @@ def generate_layback_json(teams_data: list, bot_name: str) -> str:
         
     return filename
 
-def inject_teams_ui(bot_id: int, json_path: str):
+def get_db_session():
+    from database.db import SessionLocal
+    return SessionLocal()
 
-    # MOCK MODE se rodar localmente (sem a flag do GitHub)
+def get_cookies_from_db():
+    from database.models_db import SystemConfig
+    db = get_db_session()
+    try:
+        conf = db.query(SystemConfig).filter(SystemConfig.key == "layback_cookies").first()
+        if conf and conf.value:
+            return json.loads(conf.value)
+    except Exception as e:
+        logger.error(f"Erro ao ler cookies do BD: {e}")
+    finally:
+        db.close()
+    return None
+
+def save_cookies_to_db(cookies):
+    from database.models_db import SystemConfig
+    db = get_db_session()
+    try:
+        conf = db.query(SystemConfig).filter(SystemConfig.key == "layback_cookies").first()
+        if not conf:
+            conf = SystemConfig(key="layback_cookies", value=json.dumps(cookies))
+            db.add(conf)
+        else:
+            conf.value = json.dumps(cookies)
+        db.commit()
+    except Exception as e:
+        logger.error(f"Erro ao salvar cookies no BD: {e}")
+    finally:
+        db.close()
+
+def inject_teams_ui(bot_id: int, json_path: str):
     if not os.getenv("GITHUB_ACTIONS"):
         logger.info(f"[MOCK] Simulando injeção no bot {bot_id} (Arquivo: {json_path})")
         return True
-    """
-    Injeta o JSON no bot navegando pela interface web.
-    """
+
+    try:
+        from playwright_stealth import stealth_sync
+    except ImportError:
+        logger.warning("playwright-stealth não instalado! Continuando sem stealth mode.")
+        stealth_sync = None
+
     with sync_playwright() as play:
-        
         proxy_server = os.getenv("PROXY_SERVER")
         proxy_username = os.getenv("PROXY_USERNAME")
         proxy_password = os.getenv("PROXY_PASSWORD")
@@ -67,27 +98,51 @@ def inject_teams_ui(bot_id: int, json_path: str):
             logger.info(f"[{bot_id}] ⚠️ Nenhum proxy configurado. Rodando com o IP padrão da nuvem.")
             
         browser = play.chromium.launch(**launch_args)
-        page = browser.new_page(viewport={'width': 1280, 'height': 3000})
         
-        logger.info(f"[{bot_id}] Fazendo login...")
-        page.goto("https://bot-betfair.layback.trade/login")
-        page.click("text='Continuar com Betfair'")
-        try:
-            page.wait_for_selector("#username", timeout=15000)
-        except Exception as e:
-            page.screenshot(path="logs/login_error.png")
+        # Cria context e tenta injetar cookies
+        context = browser.new_context(viewport={'width': 1280, 'height': 3000})
+        saved_cookies = get_cookies_from_db()
+        if saved_cookies:
+            context.add_cookies(saved_cookies)
+            logger.info(f"[{bot_id}] Cookies de sessão carregados do banco.")
+            
+        page = context.new_page()
+        if stealth_sync:
+            stealth_sync(page)
+            logger.info(f"[{bot_id}] 🥷 Playwright Stealth ativado.")
+        
+        # Tenta acessar direto a dashboard (Fallback: Se falhar ou pedir login)
+        page.goto("https://bot-betfair.layback.trade/dashboard")
+        time.sleep(3)
+        
+        # Verifica se caiu na tela de login
+        if "login" in page.url:
+            logger.info(f"[{bot_id}] Sessão inválida ou sem cookie. Fazendo login manual...")
+            page.goto("https://bot-betfair.layback.trade/login")
+            page.click("text='Continuar com Betfair'")
             try:
-                from notifications.telegram import send_document, send_message
-                send_message(f"🚨 *Erro crítico no login do Bot {bot_id}* 🚨\nTimeout ou bloqueio do Cloudflare detectado. Veja a imagem em anexo:")
-                send_document("logs/login_error.png")
-            except Exception:
-                pass
-            raise e
-        page.fill('#username', config.LAYBACK_EMAIL)
-        page.fill('#password', config.LAYBACK_PASSWORD)
-        page.click('#login')
-        page.wait_for_selector("[href='/dashboard']", timeout=30000)
-        
+                page.wait_for_selector("#username", timeout=15000)
+                page.fill('#username', config.LAYBACK_EMAIL)
+                page.fill('#password', config.LAYBACK_PASSWORD)
+                page.click('#login')
+                page.wait_for_selector("[href='/dashboard']", timeout=30000)
+                
+                # Salva a nova sessão!
+                new_cookies = context.cookies()
+                save_cookies_to_db(new_cookies)
+                logger.info(f"[{bot_id}] Novos cookies de sessão salvos no Supabase!")
+            except Exception as e:
+                page.screenshot(path="logs/login_error.png")
+                try:
+                    from notifications.telegram import send_document, send_message
+                    send_message(f"🚨 *Erro crítico no login do Bot {bot_id}* 🚨\nTimeout ou bloqueio do Cloudflare detectado. Veja a imagem em anexo:")
+                    send_document("logs/login_error.png")
+                except Exception:
+                    pass
+                raise e
+        else:
+            logger.info(f"[{bot_id}] ✅ Sessão recuperada com sucesso via Cookies!")
+            
         logger.info(f"[{bot_id}] Navegando para edição do bot...")
         page.goto(f"https://bot-betfair.layback.trade/bots/{bot_id}/edit", wait_until="networkidle")
         time.sleep(3)
@@ -101,8 +156,6 @@ def inject_teams_ui(bot_id: int, json_path: str):
             aba_times.last.click()
             time.sleep(2)
             
-
-            # Limpar (deselecionar) times antigos
             deselect = page.locator("text='Deselecionar todas'")
             if deselect.count() > 0:
                 deselect.first.click()
@@ -122,7 +175,6 @@ def inject_teams_ui(bot_id: int, json_path: str):
                     file_input.first.set_input_files(os.path.abspath(json_path))
                     time.sleep(3)
                     
-                    # Gerar evidência (opcional, só se precisar, já geramos no script final_ui_upload)
                     ver_sel = page.locator("button:has-text('selecionados')")
                     if ver_sel.count() > 0:
                         ver_sel.first.click()
@@ -146,7 +198,6 @@ def inject_teams_ui(bot_id: int, json_path: str):
             
         browser.close()
         return False
-
 
 def get_betfair_id(team_name, layback_teams):
     import difflib
