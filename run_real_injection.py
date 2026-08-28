@@ -119,6 +119,11 @@ def inject_from_db():
             report_lines.append(f"❌ *{target}* (Bot {bot_id}) FALHOU.")
             report_lines.append("")
             print(f"[{target}] FALHOU!")
+            final_report = "\n".join(report_lines)
+            from notifications.telegram import send_message
+            send_message(final_report)
+            import sys
+            sys.exit(1)
             
     final_report = "\n".join(report_lines)
     from notifications.telegram import send_message

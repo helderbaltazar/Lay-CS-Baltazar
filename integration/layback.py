@@ -152,7 +152,18 @@ def inject_teams_ui(bot_id: int, json_path: str):
         
         logger.info(f"[{bot_id}] Expandindo aba Times...")
         aba_times = page.locator("text='Times'")
-        if aba_times.count() > 0:
+        if aba_times.count() == 0:
+            logger.error(f"[{bot_id}] Aba Times não encontrada. Tirando screenshot e abortando...")
+            page.screenshot(path=f"logs/error_aba_times_{bot_id}.png")
+            try:
+                from notifications.telegram import send_document, send_message
+                send_message(f"🚨 *Erro ao injetar no Bot {bot_id}* 🚨\nAba 'Times' não encontrada! (Pode ser bloqueio Cloudflare). Veja a imagem em anexo:")
+                send_document(f"logs/error_aba_times_{bot_id}.png")
+            except Exception:
+                pass
+            return False
+            
+        if True:
             aba_times.last.click()
             time.sleep(2)
             
