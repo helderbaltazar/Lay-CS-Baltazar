@@ -131,5 +131,11 @@ def inject_from_db():
     db.close()
 
 if __name__ == "__main__":
+    try:
+        from update_results import update_pending_matches
+        update_pending_matches()
+    except Exception as e:
+        print(f"Erro ao atualizar pendentes: {e}")
+        
     ensure_data_in_db()
     inject_from_db()

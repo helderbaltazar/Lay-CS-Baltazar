@@ -54,12 +54,8 @@ def scan_match(fixture, model, targets):
     away_team = fixture['teams']['away']
 
     home_odd = get_match_winner_odds(fixture_info['id'])
-    if home_odd is None or home_odd > 2.0 or home_odd == 0.0:
-        return None
-        
     over25_odd = get_over25_odds(fixture_info['id'])
-    if over25_odd is None or over25_odd >= 1.80:
-        return None
+    # Removido filtro de odds conforme solicitado pelo usuário
 
     home_stats = get_team_stats(home_team['id'], league_info['id'])
     away_stats = get_team_stats(away_team['id'], league_info['id'])
