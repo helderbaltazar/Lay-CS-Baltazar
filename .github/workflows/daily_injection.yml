@@ -41,6 +41,7 @@ jobs:
       - name: Run Injection Script
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
           LAYBACK_EMAIL: ${{ secrets.LAYBACK_EMAIL }}
           LAYBACK_PASSWORD: ${{ secrets.LAYBACK_PASSWORD }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
