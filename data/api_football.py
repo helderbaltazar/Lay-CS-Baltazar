@@ -68,7 +68,7 @@ def get_team_stats(team_id, competition_id):
     seasons_to_try = [2024, 2023, 2022]
     
     for season in seasons_to_try:
-        time.sleep(0.3) # Rate limit API Free
+        time.sleep(6.1) # Rate limit API Free (10 per minute)
         try:
             stats = fetch_team_stats(team_id, league_id, season)
             if stats:

@@ -46,10 +46,8 @@ def test_scan_match_real_score():
             return {'0-1': 0.1}
             
     with pytest.MonkeyPatch().context() as m:
-        m.setattr(analysis.scanner, 'get_match_winner_odds', lambda x: 1.5)
-        m.setattr(analysis.scanner, 'get_over25_odds', lambda x: 1.5)
         m.setattr(data.api_football, 'get_team_stats', lambda t, l: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}})
-        m.setattr(analysis.scanner, 'get_team_stats', lambda t, l: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}})
+        m.setattr('data.data_manager.DataManager.get_team_stats', lambda t, l: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}})
         m.setattr(data.league_config, 'get_league_avg', lambda x: (1.5, 1.2))
         m.setattr(analysis.scanner, 'get_league_avg', lambda x: (1.5, 1.2))
         

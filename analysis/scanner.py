@@ -1,7 +1,8 @@
 import config
 from data.league_config import get_league_avg
-from data.api_football import get_team_stats, get_match_winner_odds, get_over25_odds
 from models.poisson import PoissonDixonColes
+
+from data.data_manager import DataManager
 
 def calculate_lambdas(home_stats, away_stats, league_avg):
     avg_home, avg_away = league_avg
@@ -9,15 +10,21 @@ def calculate_lambdas(home_stats, away_stats, league_avg):
     h_scored = float(home_stats['goals']['for']['total']['home'] or 0) + 0.1
     h_conceded = float(home_stats['goals']['against']['total']['home'] or 0) + 0.1
     h_games = float(home_stats['fixtures']['played']['home'] or 0) + 0.1
+    h_failed = float(home_stats.get('failed_to_score', {}).get('home') or 0)
 
     a_scored = float(away_stats['goals']['for']['total']['away'] or 0) + 0.1
     a_conceded = float(away_stats['goals']['against']['total']['away'] or 0) + 0.1
     a_games = float(away_stats['fixtures']['played']['away'] or 0) + 0.1
+    a_failed = float(away_stats.get('failed_to_score', {}).get('away') or 0)
 
-    h_attack = (h_scored / h_games) / avg_home
+    # Cálculo Híbrido Avançado (xG Sintético) para Força de Ataque
+    sxg_home = DataManager.calculate_synthetic_xg(h_scored, h_games, h_failed, avg_home)
+    sxg_away = DataManager.calculate_synthetic_xg(a_scored, a_games, a_failed, avg_away)
+
+    h_attack = sxg_home / avg_home
     h_defense = (h_conceded / h_games) / avg_away
     
-    a_attack = (a_scored / a_games) / avg_away
+    a_attack = sxg_away / avg_away
     a_defense = (a_conceded / a_games) / avg_home
 
     lam_home = h_attack * a_defense * avg_home
@@ -47,7 +54,7 @@ def calculate_lambdas(home_stats, away_stats, league_avg):
 
     return lam_home, lam_away
 
-def scan_match(fixture, model, targets):
+def scan_match(fixture, model, targets, source='API-Football'):
     fixture_info = fixture['fixture']
     league_info = fixture['league']
     home_team = fixture['teams']['home']
@@ -57,8 +64,8 @@ def scan_match(fixture, model, targets):
     # para economizar a cota de 100 requests/dia do plano Free.
     home_odd = None
 
-    home_stats = get_team_stats(home_team['id'], league_info['id'])
-    away_stats = get_team_stats(away_team['id'], league_info['id'])
+    home_stats = DataManager.get_team_stats(home_team['id'], league_info['id'], source)
+    away_stats = DataManager.get_team_stats(away_team['id'], league_info['id'], source)
 
     if not home_stats or not away_stats:
         return None
@@ -88,10 +95,10 @@ def scan_match(fixture, model, targets):
         'match_odd': home_odd
     }
 
-def scan_all(fixtures, model):
+def scan_all(fixtures, model, source='API-Football'):
     results = []
     for f in fixtures:
-        res = scan_match(f, model, config.TARGET_SCORES)
+        res = scan_match(f, model, config.TARGET_SCORES, source)
         if res:
             results.append(res)
     return results

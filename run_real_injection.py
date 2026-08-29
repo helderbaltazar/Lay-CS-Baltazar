@@ -5,7 +5,7 @@ from database.db import SessionLocal
 from database.models_db import Match, Prediction
 from analysis.scanner import scan_all, rank_by_target, save_to_db
 from models.poisson import PoissonDixonColes
-from data.api_football import get_fixtures
+from data.data_manager import DataManager
 import json
 import difflib
 from integration.layback import generate_layback_json, inject_teams_ui, LAY_0_1_BOT_ID, LAY_0_2_BOT_ID, LAY_0_3_BOT_ID, LAY_1_3_BOT_ID
@@ -48,13 +48,13 @@ def ensure_data_in_db():
         print("⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...")
         today_str = now_br.strftime("%Y-%m-%d")
         all_fixtures = []
-        f = get_fixtures(today_str)
+        f, source = DataManager.get_fixtures(today_str)
         if f:
             all_fixtures.extend(f)
                 
         if all_fixtures:
             model = PoissonDixonColes()
-            results = scan_all(all_fixtures, model)
+            results = scan_all(all_fixtures, model, source)
             rankings = rank_by_target(results)
             save_to_db(db, rankings)
             print("✅ Novos jogos calculados e salvos no banco de dados com sucesso.")
