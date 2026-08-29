@@ -59,7 +59,7 @@ def ensure_data_in_db():
             save_to_db(db, rankings)
             print("✅ Novos jogos calculados e salvos no banco de dados com sucesso.")
         else:
-            print("❌ Nenhum jogo configurado nas ligas para hoje/amanhã retornado pela API.")
+            print("❌ Nenhum jogo configurado nas ligas para hoje retornado pela API.")
     
     db.close()
 
@@ -89,7 +89,7 @@ def inject_from_db():
         ).order_by(Prediction.rank).limit(2).all()
         
         if not preds:
-            print(f"[{target}] Nenhum jogo no banco para hoje/amanhã.")
+            print(f"[{target}] Nenhum jogo no banco para hoje.")
             continue
             
         bot_games_str = []
