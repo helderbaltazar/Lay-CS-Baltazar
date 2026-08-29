@@ -4,18 +4,13 @@ import pytest
 from data import cache
 
 @pytest.fixture(autouse=True)
-def run_around_tests():
+def run_around_tests(tmp_path):
     # Substitui arquivo de cache para testes
     original_file = cache.CACHE_FILE
-    cache.CACHE_FILE = "cache/test_cache.json"
-    if os.path.exists(cache.CACHE_FILE):
-        os.remove(cache.CACHE_FILE)
+    cache.CACHE_FILE = str(tmp_path / "test_cache.json")
     
     yield # Executa teste
     
-    # Teardown
-    if os.path.exists(cache.CACHE_FILE):
-        os.remove(cache.CACHE_FILE)
     cache.CACHE_FILE = original_file
 
 def test_set_and_get():

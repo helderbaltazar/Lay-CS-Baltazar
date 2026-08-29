@@ -29,16 +29,31 @@ venv/
 logs/
 data_store/
 
-# Scripts de debug criados automaticamente
-patch_*.py
-test_*.py
-inspect_*.py
-click_*.py
-debug_*.py
-force_*.py
-parse_*.py
-upload_*.py
-capture_*.py
+# Scripts de debug criados automaticamente na raiz
+/patch_*.py
+/test_*.py
+/inspect_*.py
+/click_*.py
+/debug_*.py
+/force_*.py
+/parse_*.py
+/upload_*.py
+/capture_*.py
+/fix_*.py
+/discover_*.py
+/find_*.py
+/grep_*.py
+/full_*.py
+/check_*.py
+/render_*.py
+/get_*.py
+/poll_*.py
+/print_*.py
+/search_*.py
+/ui_*.py
+
+!tests/**
+
 
 
 api_cache/

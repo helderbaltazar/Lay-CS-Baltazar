@@ -124,6 +124,8 @@ def rank_by_target(results):
                 'probability': res['probabilities'][target]
             })
             
+    from analysis.ai_analyst import AIAnalyst
+    rankings = AIAnalyst.analyze_top_rankings(rankings)
     return rankings
 
 def save_to_db(db, rankings):
@@ -173,6 +175,10 @@ def save_to_db(db, rankings):
             pred.probability = rec['probability']
             pred.rank = rec['rank']
             pred.match_odd = rec.get('match_odd')
+            pred.ai_verdict = rec.get('ai_verdict', 'APROVADO')
+            pred.ai_confidence = rec.get('ai_confidence')
+            pred.ai_critical_factor = rec.get('ai_critical_factor')
+            pred.ai_analysis = rec.get('ai_analysis')
             
             if match.status in ['FT', 'AET', 'PEN'] and match.real_score:
                 pred.is_hit = (match.real_score != target)

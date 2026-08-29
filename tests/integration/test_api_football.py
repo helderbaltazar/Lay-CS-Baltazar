@@ -13,7 +13,7 @@ def test_filter_main_leagues():
     assert filtered[0]["league"]["id"] == 39
 
 @patch("data.api_football.cache.get")
-@patch("requests.get")
+@patch("data.api_football.requests.get")
 def test_get_fixtures(mock_get, mock_cache):
     mock_cache.return_value = None
     class MockResponse:

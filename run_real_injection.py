@@ -84,12 +84,13 @@ def inject_from_db():
     for bot_id, bot_name, target in targets:
         preds = db.query(Prediction).join(Match).filter(
             Prediction.target_score == target,
+            Prediction.ai_verdict != 'VETADO',
             Prediction.rank <= 2,
             Match.date >= today_start
         ).order_by(Prediction.rank).limit(2).all()
         
         if not preds:
-            print(f"[{target}] Nenhum jogo no banco para hoje.")
+            print(f"[{target}] Nenhum jogo aprovado pela IA no banco para hoje.")
             continue
             
         bot_games_str = []

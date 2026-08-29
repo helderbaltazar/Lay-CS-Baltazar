@@ -2,27 +2,13 @@ import pytest
 from unittest.mock import patch
 from models.poisson import PoissonDixonColes
 from analysis.scanner import scan_all, rank_by_target, save_to_db
-from database.db import Base, engine, SessionLocal
+import database.db
 from database.models_db import Match, Prediction
 import config
 
-@pytest.fixture(autouse=True)
-def setup_db():
-    from sqlalchemy import create_engine
-    import database.db
-    test_engine = create_engine("sqlite:///:memory:")
-    database.db.engine = test_engine
-    database.db.SessionLocal.configure(bind=test_engine)
-    Base.metadata.create_all(bind=test_engine)
-    yield
-    Base.metadata.drop_all(bind=test_engine)
-
-@patch('analysis.scanner.get_match_winner_odds')
-@patch('analysis.scanner.get_over25_odds')
-@patch('analysis.scanner.get_team_stats')
-def test_pipeline_fixtures_to_db(mock_get_stats, mock_get_over25, mock_get_odds):
-    mock_get_odds.return_value = 1.50
-    mock_get_over25.return_value = 1.70
+@patch('data.data_manager.DataManager.get_team_stats')
+def test_pipeline_fixtures_to_db(mock_get_stats):
+    database.db.init_db()
     mock_get_stats.return_value = {
         'goals': {'for': {'total': {'home': 10, 'away': 10}}, 'against': {'total': {'home': 5, 'away': 5}}},
         'fixtures': {'played': {'home': 10, 'away': 10}}
@@ -44,7 +30,7 @@ def test_pipeline_fixtures_to_db(mock_get_stats, mock_get_over25, mock_get_odds)
     assert '0-1' in rankings
     assert rankings['0-1'][0]['home'] == 'Cruzeiro'
     
-    db = SessionLocal()
+    db = database.db.SessionLocal()
     save_to_db(db, rankings)
     
     matches = db.query(Match).all()

@@ -3,10 +3,10 @@ import os
 from unittest.mock import patch, MagicMock
 from integration.layback import generate_layback_json, update_layback_bots, inject_teams_ui
 
-def test_generate_layback_json():
+def test_generate_layback_json(tmp_path):
     teams = [{"name": "Cruzeiro MG", "id": 1915199}]
-    path = generate_layback_json(teams, "test_bot")
-    assert path == "data/test_bot.json"
+    path = generate_layback_json(teams, "test_bot", output_dir=str(tmp_path))
+    assert path == str(tmp_path / "test_bot.json")
     
     import json
     import os
@@ -19,9 +19,10 @@ def test_generate_layback_json():
     assert data["teams"][0]["id"] == "1915199"
 
 @patch.dict(os.environ, {"GITHUB_ACTIONS": "true"})
+@patch("integration.layback.time.sleep")
 @patch("integration.layback.get_cookies_from_db")
 @patch("integration.layback.sync_playwright")
-def test_inject_teams_ui(mock_playwright, mock_db):
+def test_inject_teams_ui(mock_playwright, mock_db, mock_sleep):
     mock_play = MagicMock()
     mock_browser = MagicMock()
     mock_page = MagicMock()

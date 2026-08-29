@@ -49,16 +49,33 @@
             <th>Liga</th>
             <th>Jogo</th>
             <th>Probabilidade do Placar</th>
-            <th>Odd (Home)</th>
+            <th>Auditoria IA 🤖</th>
             <th>Status/Resultado</th>
         </tr>
         {% for m in matches %}
         <tr>
             <td>#{{ m.rank }}</td>
             <td>{{ m.league }}</td>
-            <td>{{ m.home }} x {{ m.away }}</td>
+            <td>
+                <strong>{{ m.home }} x {{ m.away }}</strong>
+                {% if m.ai_critical_factor %}
+                <div style="font-size: 11px; color: #a4b0be; margin-top: 4px;">
+                    💡 {{ m.ai_critical_factor }}
+                </div>
+                {% endif %}
+            </td>
             <td>{{ "%.1f"|format(m.probability * 100) }}%</td>
-            <td>{{ "%.2f"|format(m.match_odd) if m.match_odd else '-' }}</td>
+            <td>
+                {% if m.ai_verdict == 'APROVADO' %}
+                    <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 4px 8px; border-radius: 4px;">
+                        🤖 Aprovado ({{ m.ai_confidence }}%)
+                    </span>
+                {% else %}
+                    <span class="badge" style="background: #ff4757; color: white; font-weight: bold; padding: 4px 8px; border-radius: 4px;">
+                        ⛔ Vetado ({{ m.ai_confidence }}%)
+                    </span>
+                {% endif %}
+            </td>
             <td>
                 {% if m.status == 'FT' %}
                     {% if m.is_hit == True %}

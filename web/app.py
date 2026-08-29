@@ -1,7 +1,9 @@
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-from database.db import SessionLocal
+import database.db
+def get_session():
+    return database.db.SessionLocal()
 from database.models_db import Match, Prediction
 import datetime
 import config
@@ -97,7 +99,7 @@ def _inject_teams_into_bots():
     import pytz
     from integration.layback import update_layback_bots
     
-    db = SessionLocal()
+    db = get_session()
     try:
         now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
         today = now_br.strftime("%Y-%m-%d")
@@ -131,7 +133,7 @@ def _inject_teams_into_bots():
 @app.route("/")
 @auth.login_required
 def index():
-    db = SessionLocal()
+    db = get_session()
     import pytz
     today = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE)).strftime("%Y-%m-%d")
     date_filter = request.args.get('date', today)
@@ -158,7 +160,11 @@ def index():
                     'probability': p.probability,
                     'is_hit': p.is_hit,
                     'match_odd': p.match_odd,
-                    'profit_loss': p.profit_loss
+                    'profit_loss': p.profit_loss,
+                    'ai_verdict': p.ai_verdict or 'APROVADO',
+                    'ai_confidence': p.ai_confidence or 85,
+                    'ai_critical_factor': p.ai_critical_factor or '',
+                    'ai_analysis': p.ai_analysis or ''
                 })
                 
     for t in config.TARGET_SCORES:
@@ -173,7 +179,7 @@ def index():
 @app.route("/history")
 @auth.login_required
 def history():
-    db = SessionLocal()
+    db = get_session()
     page = request.args.get('page', 1, type=int)
     per_page = 50
     
@@ -208,7 +214,7 @@ def history():
 @app.route("/analytics")
 @auth.login_required
 def analytics():
-    db = SessionLocal()
+    db = get_session()
     try:
         from sqlalchemy import func, case
         # Agrupa por liga para pegar total de jogos e win rate
@@ -256,7 +262,7 @@ def export_csv():
     from io import StringIO
     from flask import Response
     
-    db = SessionLocal()
+    db = get_session()
     try:
         matches = db.query(Match).join(Prediction).filter(
             Match.status.in_(['FT', 'AET', 'PEN'])

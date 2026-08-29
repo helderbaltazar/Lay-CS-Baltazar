@@ -13,7 +13,7 @@ LAY_0_2_BOT_ID = 4753
 LAY_0_3_BOT_ID = 27251
 LAY_1_3_BOT_ID = 29778
 
-def generate_layback_json(teams_data: list, bot_name: str) -> str:
+def generate_layback_json(teams_data: list, bot_name: str, output_dir: str = "data") -> str:
     bot_json = {
         "version": "1.0",
         "betOnNewTeam": True,
@@ -28,7 +28,7 @@ def generate_layback_json(teams_data: list, bot_name: str) -> str:
             "side": "A"
         })
         
-    filename = f"data/{bot_name}.json"
+    filename = f"{output_dir}/{bot_name}.json"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     
     with open(filename, "w", encoding="utf-8") as f:

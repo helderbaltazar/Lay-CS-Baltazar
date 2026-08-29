@@ -29,3 +29,9 @@ DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD", "laycs2026")
 
 # GitHub API Token (para acionar workflow)
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+
+# IA Especialista em Lay Correct Score (RAG + Top 10)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+AI_ANALYST_ENABLED = os.getenv("AI_ANALYST_ENABLED", "True").lower() in ("true", "1", "yes")
+AI_ANALYST_TOP_N = int(os.getenv("AI_ANALYST_TOP_N", 10))
+

@@ -28,6 +28,10 @@ class Prediction(Base):
     is_hit = Column(Boolean, nullable=True)
     match_odd = Column(Float, nullable=True)
     profit_loss = Column(Float, nullable=True)
+    ai_verdict = Column(String, nullable=True, default='APROVADO')
+    ai_confidence = Column(Integer, nullable=True)
+    ai_critical_factor = Column(String, nullable=True)
+    ai_analysis = Column(String, nullable=True)
 
     match = relationship("Match", back_populates="predictions")
 

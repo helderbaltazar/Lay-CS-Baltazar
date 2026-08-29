@@ -10,22 +10,9 @@ def get_auth_headers():
     token = base64.b64encode(f"{username}:{password}".encode('utf-8')).decode('utf-8')
     return {'Authorization': f'Basic {token}'}
 
-from database.db import Base, SessionLocal
 import database.db
 from database.models_db import Match, Prediction
-from sqlalchemy import create_engine
 import datetime
-
-@pytest.fixture(autouse=True)
-def setup_db():
-    # Isola o banco de dados dos testes criando um banco em memoria
-    test_engine = create_engine("sqlite:///:memory:")
-    database.db.engine = test_engine
-    database.db.SessionLocal.configure(bind=test_engine)
-    
-    Base.metadata.create_all(bind=test_engine)
-    yield
-    Base.metadata.drop_all(bind=test_engine)
 
 @pytest.fixture
 def client():
@@ -39,7 +26,7 @@ def test_index_route(client):
     assert b"Lay CS Scanner" in response.data
 
 def test_history_route(client):
-    db = SessionLocal()
+    db = database.db.SessionLocal()
     # Adicionamos rank=1 para nao quebrar a ordenacao caso apareca na tela inicial do teste
     m = Match(fixture_id=999, date=datetime.datetime.now(), league_name="PL", home_team="A", away_team="B", status="FT", real_score="2-0")
     db.add(m)
