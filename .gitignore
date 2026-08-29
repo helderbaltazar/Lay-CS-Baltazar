@@ -41,5 +41,4 @@ upload_*.py
 capture_*.py
 
 
-cache/
 api_cache/
