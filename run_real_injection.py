@@ -48,19 +48,28 @@ def ensure_data_in_db():
         if unanalysed:
             print(f"🤖 Auditando {len(unanalysed)} predições com IA...")
             from analysis.ai_analyst import AIAnalyst
-            for p in unanalysed:
+            for i, p in enumerate(unanalysed, 1):
                 m = p.match
-                match_dict = {
-                    'home': m.home_team,
-                    'away': m.away_team,
-                    'league': m.league_name
-                }
-                res = AIAnalyst.analyze_match(match_dict, p.target_score, p.probability or 0.05)
-                p.ai_verdict = res['verdict']
-                p.ai_confidence = res['confidence']
-                p.ai_critical_factor = res['critical_factor']
-                p.ai_analysis = res['detailed_analysis']
-            db.commit()
+                if m:
+                    match_dict = {
+                        'home': m.home_team,
+                        'away': m.away_team,
+                        'league': m.league_name
+                    }
+                    res = AIAnalyst.analyze_match(match_dict, p.target_score, p.probability or 0.05)
+                    p.ai_verdict = res['verdict']
+                    p.ai_confidence = res['confidence']
+                    p.ai_critical_factor = res['critical_factor']
+                    p.ai_analysis = res['detailed_analysis']
+                if i % 20 == 0:
+                    try:
+                        db.commit()
+                    except Exception as ce:
+                        print(f"⚠️ Erro ao commitar lote de IA: {ce}")
+            try:
+                db.commit()
+            except Exception as ce:
+                print(f"⚠️ Erro ao commitar lote final de IA: {ce}")
             print("✅ Auditoria da IA concluída e salva no Supabase!")
     else:
         print("⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...")
