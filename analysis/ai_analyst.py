@@ -63,11 +63,14 @@ Pesquise notícias recentes (escalações prováveis, desfalques, momento dos ti
         prompt = cls.build_prompt(match_info, target_score, prob_poisson)
 
         try:
-            url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}'
+            url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={gemini_key}'
             payload = {
                 'contents': [{'parts': [{'text': prompt}]}],
-                'generationConfig': {'temperature': 0.2, 'maxOutputTokens': 600},
-                'tools': [{'google_search': {}}]
+                'generationConfig': {
+                    'temperature': 0.2,
+                    'maxOutputTokens': 600,
+                    'response_mime_type': 'application/json'
+                }
             }
             
             headers = {'Content-Type': 'application/json'}

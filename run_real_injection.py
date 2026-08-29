@@ -44,7 +44,7 @@ def ensure_data_in_db():
     
     if matches_today:
         print("✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...")
-        unanalysed = db.query(Prediction).join(Match).filter(Match.date >= today_start, Prediction.ai_verdict.is_(None)).all()
+        unanalysed = db.query(Prediction).join(Match).filter(Match.date >= today_start, Prediction.ai_confidence.is_(None)).all()
         if unanalysed:
             print(f"🤖 Auditando {len(unanalysed)} predições com IA...")
             from analysis.ai_analyst import AIAnalyst
