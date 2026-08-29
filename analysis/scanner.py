@@ -53,9 +53,9 @@ def scan_match(fixture, model, targets):
     home_team = fixture['teams']['home']
     away_team = fixture['teams']['away']
 
-    home_odd = get_match_winner_odds(fixture_info['id'])
-    over25_odd = get_over25_odds(fixture_info['id'])
-    # Removido filtro de odds conforme solicitado pelo usuário
+    # Removido filtro de odds e a chamada da API conforme solicitado pelo usuário
+    # para economizar a cota de 100 requests/dia do plano Free.
+    home_odd = None
 
     home_stats = get_team_stats(home_team['id'], league_info['id'])
     away_stats = get_team_stats(away_team['id'], league_info['id'])
