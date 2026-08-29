@@ -43,7 +43,25 @@ def ensure_data_in_db():
     matches_today = db.query(Match).filter(Match.date >= today_start).first()
     
     if matches_today:
-        print("✅ Jogos do dia já existem no banco de dados. Pulando a extração da API...")
+        print("✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...")
+        unanalysed = db.query(Prediction).join(Match).filter(Match.date >= today_start, Prediction.ai_verdict.is_(None)).all()
+        if unanalysed:
+            print(f"🤖 Auditando {len(unanalysed)} predições com IA...")
+            from analysis.ai_analyst import AIAnalyst
+            for p in unanalysed:
+                m = p.match
+                match_dict = {
+                    'home': m.home_team,
+                    'away': m.away_team,
+                    'league': m.league_name
+                }
+                res = AIAnalyst.analyze_match(match_dict, p.target_score, p.probability or 0.05)
+                p.ai_verdict = res['verdict']
+                p.ai_confidence = res['confidence']
+                p.ai_critical_factor = res['critical_factor']
+                p.ai_analysis = res['detailed_analysis']
+            db.commit()
+            print("✅ Auditoria da IA concluída e salva no Supabase!")
     else:
         print("⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...")
         today_str = now_br.strftime("%Y-%m-%d")
@@ -132,6 +150,9 @@ def inject_from_db():
     db.close()
 
 if __name__ == "__main__":
+    from database.db import init_db
+    init_db()
+    
     try:
         from update_results import update_pending_matches
         update_pending_matches()
