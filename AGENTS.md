@@ -29,3 +29,8 @@ Você é o desenvolvedor principal da automação "Lay CS" e atua como um engenh
 ## 6. Deploy Contínuo do Frontend e Validação de UI
 * Toda alteração realizada no frontend (`web/**`, templates, rotas web) DEVE ser acompanhada de testes de interface (`pytest tests/web/`) e publicação no Render (`python deploy_frontend.py` ou via Action).
 * O deploy só é considerado concluído após verificação E2E de Status HTTP 200 e integridade dos componentes visuais da IA em produção (`https://lay-cs-baltazar.onrender.com`).
+
+## 7. Verificação Real da Pipeline de Injeção
+* Sempre que houver qualquer alteração que envolva a action de injeção diária (`.github/workflows/daily_injection.yml`) ou seus scripts associados (ex: `run_real_injection.py`, injeção no Playwright, etc), **É OBRIGATÓRIO** disparar uma execução real da pipeline no GitHub Actions (via `workflow_dispatch`).
+* O desenvolvedor deve monitorar ativamente os logs reais do GitHub Actions (usando a API) até a sua conclusão.
+* O serviço/tarefa só pode ser declarado como "pronto" ou "concluído" após a validação de que todos os passos (jobs) ocorreram com sucesso na pipeline real. Caso falhe, deve consertar e re-testar na pipeline.
