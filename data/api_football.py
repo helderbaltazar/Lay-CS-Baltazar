@@ -149,3 +149,37 @@ def get_odds(fixture_id, target_score):
     except Exception as e:
         print(f"Erro ao buscar odds para fixture {fixture_id}: {e}")
         return None
+
+def get_fixture_injuries(fixture_id):
+    cache_key = f"injuries_{fixture_id}"
+    cached = cache.get(cache_key, ttl_seconds=86400)
+    if cached is not None:
+        return cached
+
+    url = f"{config.BASE_URL}/injuries?fixture={fixture_id}"
+    try:
+        response = requests.get(url, headers=get_headers())
+        data = response.json()
+        result = data.get('response', [])
+        cache.set(cache_key, result)
+        return result
+    except Exception as e:
+        print(f"Erro ao buscar lesoes para fixture {fixture_id}: {e}")
+        return []
+
+def get_fixture_lineups(fixture_id):
+    cache_key = f"lineups_{fixture_id}"
+    cached = cache.get(cache_key, ttl_seconds=86400)
+    if cached is not None:
+        return cached
+
+    url = f"{config.BASE_URL}/fixtures/lineups?fixture={fixture_id}"
+    try:
+        response = requests.get(url, headers=get_headers())
+        data = response.json()
+        result = data.get('response', [])
+        cache.set(cache_key, result)
+        return result
+    except Exception as e:
+        print(f"Erro ao buscar lineups para fixture {fixture_id}: {e}")
+        return []

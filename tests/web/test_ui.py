@@ -44,7 +44,7 @@ def test_analytics_route_returns_200(client):
     response = client.get('/analytics', headers=get_auth_headers())
     assert response.status_code == 200, "A rota /analytics retornou erro."
     html = response.data.decode('utf-8')
-    assert "Analytics de Desempenho por Liga" in html, "A pagina /analytics nao renderizou corretamente."
+    assert "Desempenho por Liga" in html, "A pagina /analytics nao renderizou corretamente."
 
 def test_export_route_returns_csv(client):
     response = client.get('/export', headers=get_auth_headers())

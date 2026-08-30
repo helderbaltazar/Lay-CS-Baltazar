@@ -101,3 +101,28 @@ def test_analyze_top_rankings_enriches_matches():
             assert 'ai_critical_factor' in m
             assert 'ai_analysis' in m
             assert m['ai_verdict'] in ['APROVADO', 'VETADO']
+
+@patch('data.api_football.get_fixture_lineups')
+@patch('data.api_football.get_fixture_injuries')
+@patch('analysis.ai_analyst.requests.post')
+def test_get_deep_match_analysis_with_fixture(mock_post, mock_inj, mock_lin, monkeypatch):
+    from analysis.ai_analyst import AIAnalyst
+    import config
+    monkeypatch.setattr(config, 'GEMINI_API_KEY', 'fake')
+    
+    mock_inj.return_value = [{'player': {'name': 'Player1'}, 'type': 'Missing'}]
+    mock_lin.return_value = [{'team': {'name': 'A'}, 'formation': '4-4-2'}]
+    
+    mock_resp = MagicMock()
+    mock_resp.status_code = 200
+    mock_resp.json.return_value = {'candidates': [{'content': {'parts': [{'text': '{"momentos_gols": "X"}'}]}}]}
+    mock_post.return_value = mock_resp
+    
+    res = AIAnalyst.get_deep_match_analysis('Team A', 'Team B', 'League X', fixture_id=999)
+    assert res['momentos_gols'] == 'X'
+    
+    # Verify the prompt contained the injected text
+    called_json = mock_post.call_args[1]['json']
+    prompt_used = called_json['contents'][0]['parts'][0]['text']
+    assert 'Player1' in prompt_used
+    assert '4-4-2' in prompt_used
