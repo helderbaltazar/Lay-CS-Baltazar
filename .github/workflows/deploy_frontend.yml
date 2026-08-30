@@ -1,0 +1,48 @@
+name: Deploy Frontend to Render & UI Verification
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "web/**"
+      - "deploy_frontend.py"
+      - ".github/workflows/deploy_frontend.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest requests python-dotenv
+
+      - name: Run Local UI Tests
+        run: |
+          python -m pytest tests/web/ -v
+
+      - name: Deploy to Render and Verify Live UI
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY || 'rnd_S8cQDmEMslEPkYDWfsZ6hEWMWXYM' }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID || 'srv-da87ptijnfac73d2o9p0' }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DASHBOARD_USERNAME: ${{ secrets.DASHBOARD_USERNAME || 'helderbaltazar' }}
+          DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD || 'Bonde74812005' }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python deploy_frontend.py

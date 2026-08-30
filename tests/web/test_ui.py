@@ -52,3 +52,57 @@ def test_export_route_returns_csv(client):
     assert response.headers['Content-Type'] == 'text/csv; charset=utf-8' or response.headers['Content-Type'] == 'text/csv', "O Content-Type do export nao e text/csv."
     data = response.data.decode('utf-8')
     assert "Placar Real" in data, "O cabecalho do CSV de exportacao esta ausente."
+
+def test_index_html_has_ai_specialist_panel(client):
+    response = client.get('/', headers=get_auth_headers())
+    assert response.status_code == 200
+    html = response.data.decode('utf-8')
+    assert "IA Especialista em Lay Correct Score Ativa" in html
+    assert "Grau de Confiança da IA" in html
+
+def test_index_html_renders_match_with_ai_drawer_and_top5(client):
+    import database.db
+    from database.models_db import Match, Prediction
+    import datetime
+    
+    db = database.db.SessionLocal()
+    today_dt = datetime.datetime.now()
+    
+    m = Match(
+        fixture_id=7777,
+        date=today_dt,
+        league_name="Premier League",
+        home_team="Chelsea",
+        away_team="Arsenal",
+        status="NS"
+    )
+    db.add(m)
+    db.commit()
+    db.refresh(m)
+    
+    p = Prediction(
+        match_id=m.id,
+        target_score="0-1",
+        probability=0.035,
+        rank=1,
+        ai_verdict="APROVADO",
+        ai_confidence=94,
+        ai_critical_factor="Chelsea muito consistente em casa.",
+        ai_analysis="Análise completa detalhada indicando alta segurança para Lay 0x1."
+    )
+    db.add(p)
+    db.commit()
+    db.close()
+    
+    today_str = today_dt.strftime("%Y-%m-%d")
+    response = client.get(f'/?date={today_str}', headers=get_auth_headers())
+    assert response.status_code == 200
+    html = response.data.decode('utf-8')
+    
+    # Validação dos elementos visuais da IA e Top 5
+    assert "Chelsea x Arsenal" in html
+    assert "Top 5" in html
+    assert "APROVADO (94% Confiança)" in html
+    assert "Chelsea muito consistente em casa." in html
+    assert "Ver Justificativa Completa da IA" in html
+    assert "Análise completa detalhada indicando alta segurança para Lay 0x1." in html

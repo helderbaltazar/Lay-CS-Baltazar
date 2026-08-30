@@ -25,3 +25,7 @@ Você é o desenvolvedor principal da automação "Lay CS" e atua como um engenh
 * Modelo Estatístico: Poisson + correção Dixon-Coles (ρ = -0.10).
 * Limite Crítico de API: Free plan (100 req/dia). Proibido criar loops infinitos.
 * Dados DEVEM ser cacheados localmente.
+
+## 6. Deploy Contínuo do Frontend e Validação de UI
+* Toda alteração realizada no frontend (`web/**`, templates, rotas web) DEVE ser acompanhada de testes de interface (`pytest tests/web/`) e publicação no Render (`python deploy_frontend.py` ou via Action).
+* O deploy só é considerado concluído após verificação E2E de Status HTTP 200 e integridade dos componentes visuais da IA em produção (`https://lay-cs-baltazar.onrender.com`).
