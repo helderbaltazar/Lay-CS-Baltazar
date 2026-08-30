@@ -107,14 +107,16 @@ def inject_from_db():
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
     
-    report_lines = ["🤖 *Relatório Diário Layback* 🤖\n"]
+    report_lines = ["🤖 *Relatório Diário Layback (Top 5 Confiança IA)* 🤖\n"]
     for bot_id, bot_name, target in targets:
         preds = db.query(Prediction).join(Match).filter(
             Prediction.target_score == target,
             Prediction.ai_verdict != 'VETADO',
-            Prediction.rank <= 2,
             Match.date >= today_start
-        ).order_by(Prediction.rank).limit(2).all()
+        ).order_by(
+            Prediction.ai_confidence.desc().nullslast(),
+            Prediction.probability.asc()
+        ).limit(5).all()
         
         if not preds:
             print(f"[{target}] Nenhum jogo aprovado pela IA no banco para hoje.")
@@ -124,8 +126,9 @@ def inject_from_db():
         teams_data = []
         for p in preds:
             m = p.match
-            print(f"[{target}] Rank {p.rank}: {m.home_team} x {m.away_team} (Prob: {p.probability:.2%})")
-            bot_games_str.append(f"⚽ {m.home_team} x {m.away_team} ({p.probability:.2%})")
+            conf_str = f" [IA: {p.ai_confidence}%]" if p.ai_confidence else ""
+            print(f"[{target}] Rank {p.rank}: {m.home_team} x {m.away_team} (Prob: {p.probability:.2%}){conf_str}")
+            bot_games_str.append(f"⚽ {m.home_team} x {m.away_team} ({p.probability:.2%}){conf_str}")
             h_bf = get_betfair_id(m.home_team, layback_teams)
             a_bf = get_betfair_id(m.away_team, layback_teams)
             if h_bf: teams_data.append(h_bf)

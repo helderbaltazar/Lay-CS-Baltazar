@@ -126,6 +126,16 @@ def rank_by_target(results):
             
     from analysis.ai_analyst import AIAnalyst
     rankings = AIAnalyst.analyze_top_rankings(rankings)
+    
+    # Re-ordena pelo grau de confiança da IA (decrescente) e desempata pela menor probabilidade
+    for target in config.TARGET_SCORES:
+        rankings[target].sort(key=lambda x: (
+            -x.get('ai_confidence', 0),
+            x.get('probability', 1.0)
+        ))
+        for idx, item in enumerate(rankings[target]):
+            item['rank'] = idx + 1
+            
     return rankings
 
 def save_to_db(db, rankings):

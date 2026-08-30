@@ -168,7 +168,9 @@ def index():
                 })
                 
     for t in config.TARGET_SCORES:
-        rankings[t].sort(key=lambda x: x['rank'] or 9999)
+        rankings[t].sort(key=lambda x: (-x.get('ai_confidence', 0), x.get('probability', 1.0)))
+        for idx, item in enumerate(rankings[t]):
+            item['rank'] = idx + 1
         
     db.close()
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
