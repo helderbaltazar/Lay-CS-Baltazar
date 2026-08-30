@@ -34,6 +34,27 @@ def get_betfair_id(team_name, layback_teams):
         
     return None
 
+
+def is_injection_completed_today():
+    db = SessionLocal()
+    from database.models_db import SystemConfig
+    now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+    today_str = now_br.strftime("%Y-%m-%d")
+    key = f"injection_completed_{today_str}"
+    flag = db.query(SystemConfig).filter(SystemConfig.key == key).first()
+    db.close()
+    return flag is not None
+
+def mark_injection_completed():
+    db = SessionLocal()
+    from database.models_db import SystemConfig
+    now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+    today_str = now_br.strftime("%Y-%m-%d")
+    key = f"injection_completed_{today_str}"
+    db.add(SystemConfig(key=key, value="true"))
+    db.commit()
+    db.close()
+
 def ensure_data_in_db():
     db = SessionLocal()
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
@@ -165,6 +186,12 @@ if __name__ == "__main__":
     from database.db import init_db
     init_db()
     
+    if is_injection_completed_today():
+        print("✅ A injeção de hoje já foi realizada com sucesso. Encerrando para evitar duplicação.")
+        import sys
+        sys.exit(0)
+
+    
     try:
         from update_results import update_pending_matches
         update_pending_matches()
@@ -173,3 +200,6 @@ if __name__ == "__main__":
         
     ensure_data_in_db()
     inject_from_db()
+    mark_injection_completed()
+    print("🎉 Processo diário finalizado com sucesso!")
+

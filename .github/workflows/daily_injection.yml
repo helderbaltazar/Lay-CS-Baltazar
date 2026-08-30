@@ -4,6 +4,8 @@ on:
   schedule:
     # Rodar todos os dias às 03:01, 08:01 e 12:01 UTC (Cascata de Retry para Resiliência da API)
     - cron: '10 3 * * *'
+    - cron: '10 4 * * *'
+    - cron: '10 5 * * *'
   workflow_dispatch:
     # Permite disparar o workflow manualmente pelo painel do GitHub
 
