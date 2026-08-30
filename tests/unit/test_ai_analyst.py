@@ -47,7 +47,7 @@ def test_fallback_analysis_high_prob():
     match_info = {'home': 'Time Fraco', 'away': 'Bayern'}
     analysis = AIAnalyst._fallback_analysis(match_info, '0-1', 0.18)
     assert analysis['verdict'] == 'VETADO'
-    assert analysis['confidence'] <= 65
+    assert analysis['confidence'] == 82
 
 def test_analyze_match_fallback_when_no_key(monkeypatch):
     monkeypatch.setattr(config, 'GEMINI_API_KEY', '')

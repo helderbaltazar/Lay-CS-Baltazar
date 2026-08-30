@@ -35,12 +35,13 @@ PARTIDA PARA AUDITORIA:
 DIRETRIZES DE ESPECIALISTA EM LAY CS:
 1. Lay 0x1 / Lay 0x2: Apostamos que o visitante NÃO vencerá por 1x0 ou 2x0 sem sofrer gols. Avalie se o mandante tem capacidade de marcar ao menos 1 gol ou segurar o jogo, e se o visitante tem desfalques no ataque.
 2. Lay 0x3 / Lay 1x3: Apostamos que o visitante NÃO marcará 3 gols fora de casa. Avalie se a partida tem baixa tendência de goleada do visitante.
-3. Fatores de Veto: Se o mandante estiver poupando time titular inteiro, com crise grave, ou se houver risco extremo do visitante golear com placar exato de {target_display}, você deve VETAR.
+3. Grau de Confiança: A confiança no Lay deve ser proporcionalmente inversa ao risco do placar (Ex: se a probabilidade calculada for {prob_pct}%, a confiança base de Green no Lay é de ~{100 - prob_pct:.1f}%). Refine esse valor (para cima ou para baixo) de acordo com desfalques, mando de campo e momento.
+4. Fatores de Veto: Se o mandante estiver poupando time titular inteiro, com crise grave, ou se houver risco extremo do visitante vencer com o placar exato de {target_display}, você deve VETAR.
 
-Pesquise notícias recentes (escalações prováveis, desfalques, momento dos times) e responda ESTRITAMENTE em formato JSON com esta estrutura:
+Responda ESTRITAMENTE em formato JSON com esta estrutura:
 {{
   "veredito": "APROVADO" ou "VETADO",
-  "confianca": <inteiro de 0 a 100 representando a segurança no Lay>,
+  "confianca": <inteiro de 10 a 99 representando a segurança no Lay>,
   "fator_critico": "<frase curta de até 120 caracteres resumindo o principal motivo do veredito>",
   "analise_detalhada": "<parágrafo explicativo de 2 a 4 frases para exibição no Dashboard>"
 }}
@@ -50,8 +51,7 @@ Pesquise notícias recentes (escalações prováveis, desfalques, momento dos ti
     def analyze_match(cls, match_info: dict, target_score: str, prob_poisson: float) -> dict:
         """
         Analisa uma partida individualmente.
-        Tenta chamar a API do Gemini com RAG; se falhar ou sem chave,
-        executa o motor heurístico de fallback gracioso.
+        Tenta chamar a API do Gemini com fallback gracioso.
         """
         if not getattr(config, 'AI_ANALYST_ENABLED', True):
             return cls._fallback_analysis(match_info, target_score, prob_poisson, 'IA desativada nas configurações.')
@@ -62,30 +62,33 @@ Pesquise notícias recentes (escalações prováveis, desfalques, momento dos ti
 
         prompt = cls.build_prompt(match_info, target_score, prob_poisson)
 
-        try:
-            url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={gemini_key}'
-            payload = {
-                'contents': [{'parts': [{'text': prompt}]}],
-                'generationConfig': {
-                    'temperature': 0.2,
-                    'maxOutputTokens': 600,
-                    'response_mime_type': 'application/json'
+        models_to_try = ['gemini-flash-lite-latest', 'gemini-3.5-flash-lite', 'gemini-3.6-flash']
+        
+        for model_name in models_to_try:
+            try:
+                url = f'https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_key}'
+                payload = {
+                    'contents': [{'parts': [{'text': prompt}]}],
+                    'generationConfig': {
+                        'temperature': 0.2,
+                        'maxOutputTokens': 600,
+                        'response_mime_type': 'application/json'
+                    }
                 }
-            }
-            
-            headers = {'Content-Type': 'application/json'}
-            resp = requests.post(url, headers=headers, json=payload, timeout=12)
-            
-            if resp.status_code == 200:
-                data = resp.json()
-                text_response = data['candidates'][0]['content']['parts'][0]['text']
-                parsed = cls._parse_ai_json(text_response)
-                if parsed:
-                    return parsed
-            else:
-                logger.warning(f'[AI Analyst] Erro na API Gemini ({resp.status_code}): {resp.text[:200]}')
-        except Exception as e:
-            logger.warning(f'[AI Analyst] Exceção ao consultar Gemini: {e}')
+                
+                headers = {'Content-Type': 'application/json'}
+                resp = requests.post(url, headers=headers, json=payload, timeout=8)
+                
+                if resp.status_code == 200:
+                    data = resp.json()
+                    text_response = data['candidates'][0]['content']['parts'][0]['text']
+                    parsed = cls._parse_ai_json(text_response)
+                    if parsed:
+                        return parsed
+                else:
+                    logger.warning(f'[AI Analyst] API Gemini modelo {model_name} ({resp.status_code}): {resp.text[:120]}')
+            except Exception as e:
+                logger.warning(f'[AI Analyst] Exceção ao consultar Gemini ({model_name}): {e}')
 
         return cls._fallback_analysis(match_info, target_score, prob_poisson)
 
@@ -126,29 +129,34 @@ Pesquise notícias recentes (escalações prováveis, desfalques, momento dos ti
     @classmethod
     def _fallback_analysis(cls, match_info: dict, target_score: str, prob_poisson: float, custom_reason: str = None) -> dict:
         """
-        Gera análise heurística matemática quando a IA estiver offline.
-        Garante estabilidade 100% resiliente.
+        Gera análise estatística contínua e precisa quando a IA estiver offline ou em limite de cota.
+        O grau de confiança no Lay varia proporcionalmente à segurança estatística de cada jogo.
         """
         home_team = match_info.get('home', 'Mandante')
         away_team = match_info.get('away', 'Visitante')
         target_display = target_score.replace('-', 'x')
         prob_pct = prob_poisson * 100
+        
+        # Confiança matemática exata no Lay = probabilidade de NÃO ocorrer o placar
+        calculated_conf = round(100.0 - prob_pct, 1)
+        calculated_conf_int = int(round(calculated_conf))
+        confidence = max(10, min(99, calculated_conf_int))
 
-        if prob_pct <= 6.0:
-            confidence = 92
+        # Crivo de segurança: Se a probabilidade do placar for <= 12% (Confiança >= 88%), é Aprovado
+        if prob_pct <= 12.0:
             verdict = 'APROVADO'
-            critical = custom_reason or f'Risco mínimo de {target_display} ({prob_pct:.1f}% probabilidade calculada via SxG).'
-            detailed = f'O modelo estatístico Poisson + Dixon-Coles indica extrema improbabilidade do placar {target_display}. Mandante ({home_team}) com perfil favorável para anular a ocorrência.'
-        elif prob_pct <= 12.0:
-            confidence = 85
-            verdict = 'APROVADO'
-            critical = custom_reason or f'Boa margem de segurança para Lay {target_display} ({prob_pct:.1f}%).'
-            detailed = f'Estatísticas de consistência indicam tendência favorável para Lay {target_display} contra {away_team}.'
+            critical = custom_reason or f'Risco de apenas {prob_pct:.1f}% para {target_display} (Segurança de {calculated_conf:.1f}% no Lay).'
+            detailed = (
+                f'O modelo estatístico Poisson + Dixon-Coles indica {calculated_conf:.1f}% de probabilidade do placar {target_display} NÃO ocorrer. '
+                f'Mandante ({home_team}) com métricas favoráveis para anular o placar {target_display} contra {away_team}.'
+            )
         else:
-            confidence = 60
             verdict = 'VETADO'
             critical = f'Probabilidade de {target_display} ({prob_pct:.1f}%) acima do limite seguro para Lay.'
-            detailed = f'Partida vetada pelo crivo de segurança: a probabilidade do placar exato {target_display} foi avaliada como alta demais para a estratégia.'
+            detailed = (
+                f'Partida vetada pelo crivo de segurança: o placar exato {target_display} possui {prob_pct:.1f}% de chance calculada, '
+                f'resultando em confiança de {calculated_conf:.1f}%, abaixo do patamar mínimo de 88% para Lay CS.'
+            )
 
         return {
             'verdict': verdict,
