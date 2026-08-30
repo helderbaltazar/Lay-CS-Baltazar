@@ -290,3 +290,13 @@ def export_csv():
         )
     finally:
         db.close()
+
+@app.route('/api/analysis')
+def api_deep_analysis():
+    from flask import request, jsonify
+    home = request.args.get('home', 'Mandante')
+    away = request.args.get('away', 'Visitante')
+    league = request.args.get('league', 'Desconhecida')
+    from analysis.ai_analyst import AIAnalyst
+    data = AIAnalyst.get_deep_match_analysis(home, away, league)
+    return jsonify(data)

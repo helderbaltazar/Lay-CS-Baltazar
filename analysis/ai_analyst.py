@@ -165,6 +165,38 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
             'detailed_analysis': detailed
         }
 
+
+    @classmethod
+    def get_deep_match_analysis(cls, home_team: str, away_team: str, league: str) -> dict:
+        import os, config, requests, re, json
+        import logging
+        logger = logging.getLogger(__name__)
+        gemini_key = getattr(config, 'GEMINI_API_KEY', '') or os.getenv('GEMINI_API_KEY', '')
+        if not gemini_key:
+            return {'momentos_gols': 'Indisponível', 'placares_perigosos': 'Indisponível', 'motivacao': 'Indisponível', 'lesoes': 'Indisponível', 'analise_geral': 'IA offline'}
+        prompt = f'''Você é um analista especialista em Lay Correct Score. Analise a partida {home_team} x {away_team} pela liga {league}.
+Responda APENAS com JSON:
+{{
+  "momentos_gols": "minutos...",
+  "placares_perigosos": "placares...",
+  "motivacao": "motivacao...",
+  "lesoes": "lesoes...",
+  "analise_geral": "resumo..."
+}}'''
+        for model in ['gemini-flash-lite-latest', 'gemini-3.5-flash-lite', 'gemini-3.6-flash']:
+            try:
+                url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}'
+                payload = {'contents': [{'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}
+                resp = requests.post(url, headers={'Content-Type': 'application/json'}, json=payload, timeout=8)
+                if resp.status_code == 200:
+                    text_response = resp.json()['candidates'][0]['content']['parts'][0]['text']
+                    match = re.search(r'\{.*\}', text_response, re.DOTALL)
+                    if match:
+                        return json.loads(match.group(0))
+            except:
+                pass
+        return {'momentos_gols': 'Erro', 'placares_perigosos': 'Erro', 'motivacao': 'Erro', 'lesoes': 'Erro', 'analise_geral': 'Erro ao consultar IA'}
+
     @classmethod
     def analyze_top_rankings(cls, rankings: dict, top_n: int = None) -> dict:
         """

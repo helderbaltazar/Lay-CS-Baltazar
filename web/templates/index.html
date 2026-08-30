@@ -84,7 +84,7 @@
             </td>
             <td><span style="font-size: 12px; color: #747d8c;">{{ m.league }}</span></td>
             <td>
-                <strong style="font-size: 14px;">{{ m.home }} x {{ m.away }}</strong>
+                <strong class="clickable-match" style="font-size: 14px;" onclick="openDeepAnalysis('{{ m.home }}', '{{ m.away }}', '{{ m.league }}')">{{ m.home }} x {{ m.away }} 🤖</strong>
             </td>
             <td>
                 <span style="font-weight: bold; color: #3742fa;">{{ "%.1f"|format(m.probability * 100) }}%</span>
@@ -140,4 +140,39 @@
     {% endif %}
 </div>
 {% endfor %}
+
+<div class="modal-overlay" id="aiModal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2>🤖 Análise Profunda da IA</h2>
+        <h4 id="aiModalMatchName" style="color: #0097e6;"></h4>
+        <div id="aiModalLoading" style="display: none;">⏳ Consultando IA...</div>
+        <div id="aiModalContent" style="display: none;">
+            <div class="ai-section-title">⏱️ Momentos de Gols:</div><div class="ai-section-content" id="aiModalMomentos"></div>
+            <div class="ai-section-title">⚠️ Placares Perigosos:</div><div class="ai-section-content" id="aiModalPlacares"></div>
+            <div class="ai-section-title">🔥 Motivação:</div><div class="ai-section-content" id="aiModalMotivacao"></div>
+            <div class="ai-section-title">🚑 Lesões:</div><div class="ai-section-content" id="aiModalLesoes"></div>
+            <div class="ai-section-title">📋 Análise Geral:</div><div class="ai-section-content" id="aiModalGeral"></div>
+        </div>
+    </div>
+</div>
+<script>
+function openDeepAnalysis(h, a, l) {
+    document.getElementById('aiModalMatchName').innerText = h + ' x ' + a;
+    document.getElementById('aiModal').classList.add('active');
+    document.getElementById('aiModalLoading').style.display = 'block';
+    document.getElementById('aiModalContent').style.display = 'none';
+    fetch(`/api/analysis?home=${encodeURIComponent(h)}&away=${encodeURIComponent(a)}&league=${encodeURIComponent(l)}`)
+        .then(r => r.json()).then(d => {
+            document.getElementById('aiModalMomentos').innerText = d.momentos_gols || 'N/A';
+            document.getElementById('aiModalPlacares').innerText = d.placares_perigosos || 'N/A';
+            document.getElementById('aiModalMotivacao').innerText = d.motivacao || 'N/A';
+            document.getElementById('aiModalLesoes').innerText = d.lesoes || 'N/A';
+            document.getElementById('aiModalGeral').innerText = d.analise_geral || 'N/A';
+            document.getElementById('aiModalLoading').style.display = 'none';
+            document.getElementById('aiModalContent').style.display = 'block';
+        });
+}
+function closeModal(e) { if (!e || e.target.id === 'aiModal' || e.target.className === 'modal-close') document.getElementById('aiModal').classList.remove('active'); }
+</script>
 {% endblock %}

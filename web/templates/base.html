@@ -14,6 +14,14 @@
         .green { color: #44bd32; font-weight: bold; }
         .red { color: #e84118; font-weight: bold; }
         .badge { background: #353b48; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+    
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; padding: 25px; border-radius: 8px; max-width: 600px; width: 90%; position: relative; }
+        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #747d8c; }
+        .ai-section-title { font-size: 14px; font-weight: bold; margin-top: 15px; }
+        .ai-section-content { font-size: 13px; margin-bottom: 10px; }
+        .clickable-match { cursor: pointer; color: #0097e6; text-decoration: underline; text-decoration-style: dotted; }
     </style>
 </head>
 <body>
