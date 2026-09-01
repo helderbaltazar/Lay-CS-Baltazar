@@ -112,13 +112,13 @@ def inject_teams_ui(bot_id: int, json_path: str):
             logger.info(f"[{bot_id}] 🥷 Playwright Stealth ativado.")
         
         # Tenta acessar direto a dashboard (Fallback: Se falhar ou pedir login)
-        page.goto("https://bot-betfair.layback.trade/dashboard")
+        page.goto("https://bot-betfair.layback.trade/dashboard", timeout=60000, wait_until="domcontentloaded")
         time.sleep(3)
         
         # Verifica se caiu na tela de login
         if "login" in page.url or page.locator("text='Continuar com Betfair'").count() > 0 or page.locator("text='Entrar com Betfair'").count() > 0:
             logger.info(f"[{bot_id}] Sessão inválida ou sem cookie. Fazendo login manual...")
-            page.goto("https://bot-betfair.layback.trade/login")
+            page.goto("https://bot-betfair.layback.trade/login", timeout=60000, wait_until="domcontentloaded")
             page.click("text='Continuar com Betfair'")
             try:
                 page.wait_for_selector("#username", timeout=15000)
@@ -144,7 +144,7 @@ def inject_teams_ui(bot_id: int, json_path: str):
             logger.info(f"[{bot_id}] ✅ Sessão recuperada com sucesso via Cookies!")
             
         logger.info(f"[{bot_id}] Navegando para edição do bot...")
-        page.goto(f"https://bot-betfair.layback.trade/bots/{bot_id}/edit", wait_until="networkidle")
+        page.goto(f"https://bot-betfair.layback.trade/bots/{bot_id}/edit", wait_until="domcontentloaded", timeout=60000)
         time.sleep(3)
         
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
