@@ -68,9 +68,10 @@ jobs:
             fi
           done
 
-      - name: Upload Debug Screenshot
+      - name: Upload Debug Screenshots
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: debug-screenshot
-          path: logs/login_error.png
+          name: debug-screenshots
+          path: logs/
+          if-no-files-found: warn

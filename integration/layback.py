@@ -85,7 +85,10 @@ def inject_teams_ui(bot_id: int, json_path: str):
         proxy_username = os.getenv("PROXY_USERNAME")
         proxy_password = os.getenv("PROXY_PASSWORD")
         
-        launch_args = {"headless": True}
+        launch_args = {
+            "headless": True,
+            "args": ["--disable-blink-features=AutomationControlled", "--no-sandbox"]
+        }
         
         if proxy_server and proxy_username and proxy_password:
             logger.info(f"[{bot_id}] 🛡️ Iniciando navegador com Proxy Camuflado...")
@@ -100,7 +103,10 @@ def inject_teams_ui(bot_id: int, json_path: str):
         browser = play.chromium.launch(**launch_args)
         
         # Cria context e tenta injetar cookies
-        context = browser.new_context(viewport={'width': 1280, 'height': 3000})
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            viewport={'width': 1280, 'height': 3000}
+        )
         saved_cookies = get_cookies_from_db()
         if saved_cookies:
             context.add_cookies(saved_cookies)
@@ -110,13 +116,28 @@ def inject_teams_ui(bot_id: int, json_path: str):
         if stealth_sync:
             stealth_sync(page)
             logger.info(f"[{bot_id}] 🥷 Playwright Stealth ativado.")
+        else:
+            logger.warning(f"[{bot_id}] ⚠️ Stealth indisponível. Aplicando overrides manuais anti-detecção...")
+            page.add_init_script("""
+                Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+                Object.defineProperty(navigator, 'plugins', { get: () => [1,2,3,4,5] });
+                Object.defineProperty(navigator, 'languages', { get: () => ['pt-BR','pt','en-US'] });
+                window.chrome = { runtime: {} };
+                Object.defineProperty(navigator, 'platform', { get: () => 'Win32' });
+            """)
         
-        # Tenta acessar direto a dashboard (Fallback: Se falhar ou pedir login)
-        page.goto("https://bot-betfair.layback.trade/dashboard", timeout=60000, wait_until="domcontentloaded")
-        time.sleep(3)
+        # Tenta acessar direto a página de edição (evitando dashboard quando possível)
+        edit_url = f"https://bot-betfair.layback.trade/bots/{bot_id}/edit"
+        try:
+            page.goto(edit_url, timeout=60000, wait_until="domcontentloaded")
+            time.sleep(3)
+        except Exception as e:
+            page.screenshot(path=f"logs/error_nav_{bot_id}.png")
+            logger.error(f"Timeout ao acessar {edit_url}: {e}")
+            raise
         
         # Verifica se caiu na tela de login
-        if "login" in page.url or page.locator("text='Continuar com Betfair'").count() > 0 or page.locator("text='Entrar com Betfair'").count() > 0:
+        if "login" in page.url or page.locator("text='Continuar com Betfair'").count() > 0:
             logger.info(f"[{bot_id}] Sessão inválida ou sem cookie. Fazendo login manual...")
             page.goto("https://bot-betfair.layback.trade/login", timeout=60000, wait_until="domcontentloaded")
             page.click("text='Continuar com Betfair'")
@@ -131,21 +152,24 @@ def inject_teams_ui(bot_id: int, json_path: str):
                 new_cookies = context.cookies()
                 save_cookies_to_db(new_cookies)
                 logger.info(f"[{bot_id}] Novos cookies de sessão salvos no Supabase!")
+                page.goto(edit_url, wait_until="domcontentloaded")
             except Exception as e:
                 page.screenshot(path="logs/login_error.png")
                 try:
                     from notifications.telegram import send_document, send_message
-                    send_message(f"🚨 *Erro crítico no login do Bot {bot_id}* 🚨\nTimeout ou bloqueio do Cloudflare detectado. Veja a imagem em anexo:")
+                    send_message(f"🚨 *Erro crítico no login do Bot {bot_id}* 🚨\nVeja a imagem em anexo:")
                     send_document("logs/login_error.png")
                 except Exception:
                     pass
                 raise e
         else:
             logger.info(f"[{bot_id}] ✅ Sessão recuperada com sucesso via Cookies!")
-            
-        logger.info(f"[{bot_id}] Navegando para edição do bot...")
-        page.goto(f"https://bot-betfair.layback.trade/bots/{bot_id}/edit", wait_until="domcontentloaded", timeout=60000)
-        time.sleep(3)
+        
+        # Garante que estamos na página de edição do bot
+        if f"/bots/{bot_id}/edit" not in page.url:
+            logger.info(f"[{bot_id}] Navegando para edição do bot...")
+            page.goto(edit_url, wait_until="domcontentloaded", timeout=90000)
+            time.sleep(3)
         
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(1)
