@@ -58,61 +58,69 @@ def mark_injection_completed():
 def ensure_data_in_db():
     db = SessionLocal()
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
-    today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
     
-    print(f"[{now_br}] Verificando se os jogos de hoje já estão no Supabase...")
-    matches_today = db.query(Match).filter(Match.date >= today_start).first()
+    dates_to_check = [
+        now_br,
+        now_br + datetime.timedelta(days=1)
+    ]
     
-    if matches_today:
-        print("✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...")
-        unanalysed = db.query(Prediction).join(Match).filter(Match.date >= today_start, Prediction.ai_confidence.is_(None)).all()
-        if unanalysed:
-            print(f"🤖 Auditando {len(unanalysed)} predições com IA...")
-            from analysis.ai_analyst import AIAnalyst
-            for i, p in enumerate(unanalysed, 1):
-                m = p.match
-                if m:
-                    match_dict = {
-                        'home': m.home_team,
-                        'away': m.away_team,
-                        'league': m.league_name
-                    }
-                    res = AIAnalyst.analyze_match(match_dict, p.target_score, p.probability or 0.05)
-                    p.ai_verdict = res['verdict']
-                    p.ai_confidence = res['confidence']
-                    p.ai_critical_factor = res['critical_factor']
-                    p.ai_analysis = res['detailed_analysis']
-                if i % 20 == 0:
-                    try:
-                        db.commit()
-                    except Exception as ce:
-                        print(f"⚠️ Erro ao commitar lote de IA: {ce}")
-            try:
-                db.commit()
-            except Exception as ce:
-                print(f"⚠️ Erro ao commitar lote final de IA: {ce}")
-            print("✅ Auditoria da IA concluída e salva no Supabase!")
-    else:
-        print("⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...")
-        today_str = now_br.strftime("%Y-%m-%d")
-        all_fixtures = []
-        f, source = DataManager.get_fixtures(today_str)
-        if f:
-            all_fixtures.extend(f)
-                
-        if all_fixtures:
-            model = PoissonDixonColes()
-            results = scan_all(all_fixtures, model, source)
-            rankings = rank_by_target(results, model)
-            save_to_db(db, rankings)
-            print("✅ Novos jogos calculados e salvos no banco de dados com sucesso.")
+    for target_dt in dates_to_check:
+        day_start = target_dt.replace(hour=0, minute=0, second=0, microsecond=0)
+        day_end = day_start + datetime.timedelta(days=1)
+        target_str = target_dt.strftime("%Y-%m-%d")
+        
+        print(f"[{now_br}] Verificando se os jogos de {target_str} já estão no Supabase...")
+        matches_today = db.query(Match).filter(Match.date >= day_start, Match.date < day_end).first()
+        
+        if matches_today:
+            print(f"✅ Jogos do dia {target_str} já existem no banco de dados. Verificando auditoria de IA...")
+            unanalysed = db.query(Prediction).join(Match).filter(Match.date >= day_start, Match.date < day_end, Prediction.ai_confidence.is_(None)).all()
+            if unanalysed:
+                print(f"🤖 Auditando {len(unanalysed)} predições com IA...")
+                from analysis.ai_analyst import AIAnalyst
+                for i, p in enumerate(unanalysed, 1):
+                    m = p.match
+                    if m:
+                        match_dict = {
+                            'home': m.home_team,
+                            'away': m.away_team,
+                            'league': m.league_name
+                        }
+                        res = AIAnalyst.analyze_match(match_dict, p.target_score, p.probability or 0.05)
+                        p.ai_verdict = res['verdict']
+                        p.ai_confidence = res['confidence']
+                        p.ai_critical_factor = res['critical_factor']
+                        p.ai_analysis = res['detailed_analysis']
+                    if i % 20 == 0:
+                        try:
+                            db.commit()
+                        except Exception as ce:
+                            print(f"⚠️ Erro ao commitar lote de IA: {ce}")
+                try:
+                    db.commit()
+                except Exception as ce:
+                    print(f"⚠️ Erro ao commitar lote final de IA: {ce}")
+                print(f"✅ Auditoria da IA concluída e salva para {target_str}!")
         else:
-            print("❌ Nenhum jogo configurado nas ligas para hoje retornado pela API.")
-    
+            print(f"⚠️ Nenhum jogo encontrado no banco para {target_str}. Buscando na API...")
+            all_fixtures = []
+            f, source = DataManager.get_fixtures(target_str)
+            if f:
+                all_fixtures.extend(f)
+                    
+            if all_fixtures:
+                model = PoissonDixonColes()
+                results = scan_all(all_fixtures, model, source)
+                rankings = rank_by_target(results, model)
+                save_to_db(db, rankings)
+                print(f"✅ Novos jogos de {target_str} calculados e salvos no banco de dados com sucesso.")
+            else:
+                print(f"⚠️ Sem jogos disponíveis para {target_str} em nenhuma fonte.")
+
     db.close()
 
 def inject_from_db():
-    print("\\n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---")
+    print("\n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---")
     db = SessionLocal()
     
     with open("data/teams_api.json", "r") as f:
