@@ -62,7 +62,7 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
 
         prompt = cls.build_prompt(match_info, target_score, prob_poisson)
 
-        models_to_try = ['gemini-1.5-flash', 'gemini-1.5-flash-8b', 'gemini-2.0-flash']
+        models_to_try = ['gemini-3.5-flash', 'gemini-2.5-flash', 'gemini-flash-latest']
         
         for model_name in models_to_try:
             try:
@@ -214,7 +214,7 @@ Responda APENAS com JSON:
   "lesoes": "lesoes...",
   "analise_geral": "resumo..."
 }}'''
-        for model in ['gemini-1.5-flash', 'gemini-1.5-flash-8b', 'gemini-2.0-flash']:
+        for model in ['gemini-3.5-flash', 'gemini-2.5-flash', 'gemini-flash-latest']:
             try:
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}'
                 payload = {'contents': [{'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}
