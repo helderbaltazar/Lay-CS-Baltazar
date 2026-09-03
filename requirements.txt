@@ -15,3 +15,6 @@ playwright-stealth==1.0.6
 python-dateutil
 
 setuptools<70.0.0
+pandas
+lxml
+beautifulsoup4

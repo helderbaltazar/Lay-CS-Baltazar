@@ -103,7 +103,7 @@ def ensure_data_in_db():
         if all_fixtures:
             model = PoissonDixonColes()
             results = scan_all(all_fixtures, model, source)
-            rankings = rank_by_target(results)
+            rankings = rank_by_target(results, model)
             save_to_db(db, rankings)
             print("✅ Novos jogos calculados e salvos no banco de dados com sucesso.")
         else:

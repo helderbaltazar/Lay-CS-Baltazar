@@ -26,7 +26,7 @@ def test_pipeline_fixtures_to_db(mock_get_stats):
     results = scan_all(fixtures, model)
     assert len(results) == 1
     
-    rankings = rank_by_target(results)
+    rankings = rank_by_target(results, model)
     assert '0-1' in rankings
     assert rankings['0-1'][0]['home'] == 'Cruzeiro'
     

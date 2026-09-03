@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY = os.getenv("API_FOOTBALL_KEY", "")
+ODDS_API_KEY = os.getenv("ODDS_API_KEY", "")
 BASE_URL = "https://v3.football.api-sports.io"
 
 TARGET_SCORES = ["0-1", "0-2", "0-3", "1-3"]

@@ -1,11 +1,14 @@
 import config
 from data.api_football import get_fixtures as api_get_fixtures, get_team_stats as api_get_team_stats
 from data.football_data_api import get_fixtures as fd_get_fixtures, LEAGUE_MAP
+from data.odds_api import get_fixtures as odds_get_fixtures
 
 class DataManager:
     """
     Orchestrates multiple data sources (Chain of Responsibility).
-    Attempts primary source, falls back to secondary if quota exceeded or error.
+    Attempts primary source, falls back to secondary and tertiary if quota exceeded or error.
+    
+    Chain: API-Football → Football-Data.org → Odds API (the-odds-api.com)
     """
     @staticmethod
     def get_fixtures(date_str):
@@ -14,28 +17,47 @@ class DataManager:
         if fixtures:
             return fixtures, "API-Football"
             
-        # 2. Se falhar, tentar Football-Data.org (Fallback)
+        # 2. Se falhar, tentar Football-Data.org (Fallback #1)
         print("⚠️ API-Football falhou ou retornou vazio. Tentando Fallback (Football-Data.org)...")
         fd_fixtures = fd_get_fixtures(date_str)
         if fd_fixtures:
             # Precisa traduzir o formato do Football-Data para o formato esperado pelo scanner
             translated = DataManager._translate_fd_fixtures(fd_fixtures)
             return translated, "Football-Data"
+
+        # 3. Se falhar, tentar Odds API (Fallback #2)
+        print("⚠️ Football-Data.org também falhou. Tentando Fallback (Odds API)...")
+        odds_fixtures = odds_get_fixtures(date_str)
+        if odds_fixtures:
+            return odds_fixtures, "Odds-API"
             
         return [], None
         
     @staticmethod
-    def get_team_stats(team_id, league_id, source="API-Football"):
+    def get_team_stats(team_id, league_id, source="API-Football", team_name=None):
+        """
+        Busca estatísticas do time.
+        Fluxo: API-Football -> Stale Cache (automático no api_get_team_stats) -> FBRef -> Dummy Fallback
+        """
         stats = None
+        
+        # 1. Tenta API-Football (que já tem a lógica de salvar/ler do DB Stale Cache em caso de falha)
         if source == "API-Football":
             stats = api_get_team_stats(team_id, league_id)
             
         if stats is not None:
             return stats
             
-        # Lógica do Football-Data (simplificada)
-        # Se falhou por limite da API (None) ou a fonte for outra, retorna um fallback gracioso (Dummy)
-        # que forçará o modelo a usar a média da liga para não quebrar a injeção.
+        # 2. Se falhou na API e não achou no Stale Cache, tenta raspar do FBRef
+        if team_name:
+            from data.fbref_scraper import get_team_stats_fallback
+            print(f"⚠️ Recorrendo ao Web Scraping (FBRef) para estatísticas do {team_name}...")
+            fbref_stats = get_team_stats_fallback(team_name, league_id)
+            if fbref_stats:
+                return fbref_stats
+            
+        # 3. Lógica do Football-Data (simplificada) ou Dummy para não quebrar a pipeline
+        print(f"❌ FBRef falhou. Aplicando Dummy Stats para {team_name} (Forçará a média da liga).")
         return {
             "fixtures": {"played": {"home": 1, "away": 1, "total": 2}}, 
             "goals": {"for": {"total": {"home": 1, "away": 1}}, "against": {"total": {"home": 1, "away": 1}}},

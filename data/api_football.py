@@ -3,6 +3,9 @@ import time
 from data.league_config import MAIN_LEAGUES, DOMESTIC_LEAGUE_MAP
 from data import cache
 import config
+from database.db import SessionLocal
+from database.models_db import RawDataLog, TeamStatsCache
+import json
 
 def get_headers():
     return {
@@ -22,6 +25,16 @@ def get_fixtures(date_str):
         response = requests.get(url, headers=get_headers())
         response.raise_for_status()
         data = response.json()
+        
+        # LOG PARA BACKTEST (RAW)
+        try:
+            db = SessionLocal()
+            log = RawDataLog(source='API-Football', endpoint=f'fixtures?date={date_str}', payload=json.dumps(data))
+            db.add(log)
+            db.commit()
+            db.close()
+        except Exception as e:
+            print(f"Erro ao salvar RawDataLog (fixtures): {e}")
         
         # Se a API bater limite (429), ela pode retornar 200 com errors
         if data.get('errors') and len(data.get('errors')) > 0:
@@ -53,6 +66,17 @@ def fetch_team_stats(team_id, league_id, season):
     response = requests.get(url, headers=get_headers())
     response.raise_for_status()
     data = response.json()
+    
+    # LOG PARA BACKTEST (RAW)
+    try:
+        db = SessionLocal()
+        log = RawDataLog(source='API-Football', endpoint=f'stats?team={team_id}&league={league_id}', payload=json.dumps(data))
+        db.add(log)
+        db.commit()
+        db.close()
+    except Exception as e:
+        pass
+        
     if data.get('results') == 0 or not data.get('response'):
         return None
     return data['response']
@@ -67,16 +91,44 @@ def get_team_stats(team_id, competition_id):
 
     seasons_to_try = [2026, 2025, 2024]
     
+    stats = None
     for season in seasons_to_try:
         time.sleep(6.1) # Rate limit API Free (10 per minute)
         try:
             stats = fetch_team_stats(team_id, league_id, season)
             if stats:
-                cache.set(cache_key, stats)
-                return stats
+                break
         except Exception as e:
             continue
             
+    if stats:
+        cache.set(cache_key, stats)
+        # Salva no DB (Stale Cache)
+        try:
+            db = SessionLocal()
+            tc = db.query(TeamStatsCache).filter_by(team_id=team_id, league_id=league_id).first()
+            if not tc:
+                tc = TeamStatsCache(team_id=team_id, league_id=league_id)
+                db.add(tc)
+            tc.stats_json = json.dumps(stats)
+            db.commit()
+            db.close()
+        except Exception:
+            pass
+        return stats
+        
+    # Se todas as temporadas falharam (API off ou limite excedido), tentar Stale Cache do BD
+    print(f"⚠️ API-Football falhou para time {team_id}. Buscando Stale Cache no Banco de Dados...")
+    try:
+        db = SessionLocal()
+        tc = db.query(TeamStatsCache).filter_by(team_id=team_id, league_id=league_id).first()
+        db.close()
+        if tc and tc.stats_json:
+            print(f"✅ Stale Cache encontrado para time {team_id}!")
+            return json.loads(tc.stats_json)
+    except Exception as e:
+        print(f"Erro ao buscar Stale Cache: {e}")
+        
     return None
 
 

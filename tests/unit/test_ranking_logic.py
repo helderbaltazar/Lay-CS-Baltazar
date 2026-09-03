@@ -22,7 +22,7 @@ def test_ranking_logic_lowest_prob_is_first():
     ]
     
     config.TARGET_SCORES = ['0-1']
-    rankings = rank_by_target(results)
+    rankings = rank_by_target(results, model)
     
     # O jogo 2 (0.02) deve ser o Rank 1
     assert rankings['0-1'][0]['fixture_id'] == 2

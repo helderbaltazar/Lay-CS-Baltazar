@@ -40,3 +40,20 @@ class SystemConfig(Base):
     
     key = Column(String, primary_key=True, index=True)
     value = Column(String)
+
+class RawDataLog(Base):
+    __tablename__ = "raw_data_logs"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    created_at = Column(DateTime, default=datetime.datetime.now)
+    source = Column(String, index=True)
+    endpoint = Column(String, index=True)
+    payload = Column(String) # For huge JSONs, SQLite handles String as unlimited Text
+
+class TeamStatsCache(Base):
+    __tablename__ = "team_stats_cache"
+    
+    team_id = Column(Integer, primary_key=True)
+    league_id = Column(Integer, primary_key=True)
+    updated_at = Column(DateTime, default=datetime.datetime.now)
+    stats_json = Column(String)
