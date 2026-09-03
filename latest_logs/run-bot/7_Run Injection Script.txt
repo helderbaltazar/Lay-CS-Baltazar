@@ -1,0 +1,388 @@
+﻿2026-08-30T03:18:39.8382231Z ##[group]Run for i in 1 2 3; do
+2026-08-30T03:18:39.8382621Z [36;1mfor i in 1 2 3; do[0m
+2026-08-30T03:18:39.8382952Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-30T03:18:39.8383579Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-30T03:18:39.8384075Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-30T03:18:39.8384537Z [36;1m    sleep 15[0m
+2026-08-30T03:18:39.8384800Z [36;1m  }[0m
+2026-08-30T03:18:39.8385068Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-30T03:18:39.8385415Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-30T03:18:39.8385758Z [36;1m    exit 1[0m
+2026-08-30T03:18:39.8386001Z [36;1m  fi[0m
+2026-08-30T03:18:39.8386247Z [36;1mdone[0m
+2026-08-30T03:18:39.8427786Z shell: /usr/bin/bash -e {0}
+2026-08-30T03:18:39.8428099Z env:
+2026-08-30T03:18:39.8428425Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T03:18:39.8428931Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-30T03:18:39.8429454Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T03:18:39.8429889Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T03:18:39.8430317Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T03:18:39.8430744Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-30T03:18:39.8442261Z   API_FOOTBALL_KEY: ***
+2026-08-30T03:18:39.8442673Z   FOOTBALL_DATA_KEY: ***
+2026-08-30T03:18:39.8443057Z   GEMINI_API_KEY: ***
+2026-08-30T03:18:39.8443546Z   LAYBACK_EMAIL: ***
+2026-08-30T03:18:39.8443842Z   LAYBACK_PASSWORD: ***
+2026-08-30T03:18:39.8444575Z   DATABASE_URL: ***
+2026-08-30T03:18:39.8444965Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-30T03:18:39.8445271Z   TELEGRAM_CHAT_ID: ***
+2026-08-30T03:18:39.8445577Z   PROXY_SERVER: ***
+2026-08-30T03:18:39.8445891Z   PROXY_USERNAME: ***
+2026-08-30T03:18:39.8446186Z   PROXY_PASSWORD: ***
+2026-08-30T03:18:39.8446447Z ##[endgroup]
+2026-08-30T03:18:39.8511954Z Iniciando tentativa 1...
+2026-08-30T03:30:05.5316618Z [AI Analyst] Exceção ao consultar Gemini (gemini-flash-lite-latest): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=8)
+2026-08-30T03:30:07.5317613Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:07.5318310Z   "error": {
+2026-08-30T03:30:07.5318661Z     "code": 429,
+2026-08-30T03:30:07.5319310Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:07.6217988Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:07.6218814Z   "error": {
+2026-08-30T03:30:07.6219485Z     "code": 429,
+2026-08-30T03:30:07.6220129Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:15.6625635Z [AI Analyst] Exceção ao consultar Gemini (gemini-3.6-flash): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=8)
+2026-08-30T03:30:15.7987821Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:15.7988543Z   "error": {
+2026-08-30T03:30:15.7988898Z     "code": 429,
+2026-08-30T03:30:15.7989529Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:15.9031673Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:15.9032360Z   "error": {
+2026-08-30T03:30:15.9032745Z     "code": 429,
+2026-08-30T03:30:15.9033606Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.0035386Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:16.0035861Z   "error": {
+2026-08-30T03:30:16.0036110Z     "code": 429,
+2026-08-30T03:30:16.0036522Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.0974294Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:16.0974799Z   "error": {
+2026-08-30T03:30:16.0975610Z     "code": 429,
+2026-08-30T03:30:16.0976026Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.1875074Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:16.1875579Z   "error": {
+2026-08-30T03:30:16.1875859Z     "code": 429,
+2026-08-30T03:30:16.1876278Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.2785930Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:16.2786409Z   "error": {
+2026-08-30T03:30:16.2786667Z     "code": 429,
+2026-08-30T03:30:16.2787079Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.3800211Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:16.3800720Z   "error": {
+2026-08-30T03:30:16.3800968Z     "code": 429,
+2026-08-30T03:30:16.3801385Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.4800817Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:16.4801311Z   "error": {
+2026-08-30T03:30:16.4801562Z     "code": 429,
+2026-08-30T03:30:16.4801977Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.5809171Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:16.5809641Z   "error": {
+2026-08-30T03:30:16.5809894Z     "code": 429,
+2026-08-30T03:30:16.5810313Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.6735053Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:16.6735560Z   "error": {
+2026-08-30T03:30:16.6735809Z     "code": 429,
+2026-08-30T03:30:16.6736219Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.7658891Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:16.7659396Z   "error": {
+2026-08-30T03:30:16.7659681Z     "code": 429,
+2026-08-30T03:30:16.7660089Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.8452578Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:16.8453067Z   "error": {
+2026-08-30T03:30:16.8453607Z     "code": 429,
+2026-08-30T03:30:16.8454025Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:16.9521690Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:16.9522193Z   "error": {
+2026-08-30T03:30:16.9522438Z     "code": 429,
+2026-08-30T03:30:16.9522860Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:17.0405196Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:17.0405902Z   "error": {
+2026-08-30T03:30:17.0406266Z     "code": 429,
+2026-08-30T03:30:17.0406889Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:17.1513814Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:17.1514440Z   "error": {
+2026-08-30T03:30:17.1514767Z     "code": 429,
+2026-08-30T03:30:17.1515348Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:17.2606266Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:17.2607011Z   "error": {
+2026-08-30T03:30:17.2607367Z     "code": 429,
+2026-08-30T03:30:17.2607998Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:17.3572567Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:17.3573470Z   "error": {
+2026-08-30T03:30:17.3573840Z     "code": 429,
+2026-08-30T03:30:17.3574460Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:21.3316094Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:21.3317076Z   "error": {
+2026-08-30T03:30:21.3317329Z     "code": 429,
+2026-08-30T03:30:21.3317745Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:21.4250502Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:21.4251263Z   "error": {
+2026-08-30T03:30:21.4251661Z     "code": 429,
+2026-08-30T03:30:21.4252322Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:21.5244760Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:21.5245476Z   "error": {
+2026-08-30T03:30:21.5245751Z     "code": 429,
+2026-08-30T03:30:21.5246169Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:21.6229011Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:21.6229739Z   "error": {
+2026-08-30T03:30:21.6230096Z     "code": 429,
+2026-08-30T03:30:21.6230734Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:21.7172140Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:21.7172839Z   "error": {
+2026-08-30T03:30:21.7173196Z     "code": 429,
+2026-08-30T03:30:21.7174083Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:21.8235153Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:21.8235782Z   "error": {
+2026-08-30T03:30:21.8236120Z     "code": 429,
+2026-08-30T03:30:21.8236690Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:21.9307156Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:21.9307888Z   "error": {
+2026-08-30T03:30:21.9308246Z     "code": 429,
+2026-08-30T03:30:21.9308882Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.0038232Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:22.0038737Z   "error": {
+2026-08-30T03:30:22.0038988Z     "code": 429,
+2026-08-30T03:30:22.0039400Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.0927764Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:22.0928264Z   "error": {
+2026-08-30T03:30:22.0928513Z     "code": 429,
+2026-08-30T03:30:22.0928924Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.1910760Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:22.1912011Z   "error": {
+2026-08-30T03:30:22.1912564Z     "code": 429,
+2026-08-30T03:30:22.1913044Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.2889921Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:22.2890596Z   "error": {
+2026-08-30T03:30:22.2890846Z     "code": 429,
+2026-08-30T03:30:22.2891264Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.4008823Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:22.4009412Z   "error": {
+2026-08-30T03:30:22.4009669Z     "code": 429,
+2026-08-30T03:30:22.4010083Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.5129457Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:22.5130077Z   "error": {
+2026-08-30T03:30:22.5130328Z     "code": 429,
+2026-08-30T03:30:22.5130745Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.6012957Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:22.6013830Z   "error": {
+2026-08-30T03:30:22.6014082Z     "code": 429,
+2026-08-30T03:30:22.6014496Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.7031314Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:22.7032299Z   "error": {
+2026-08-30T03:30:22.7032552Z     "code": 429,
+2026-08-30T03:30:22.7032959Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.7985263Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:22.7985915Z   "error": {
+2026-08-30T03:30:22.7986164Z     "code": 429,
+2026-08-30T03:30:22.7986581Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.9015412Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:22.9016135Z   "error": {
+2026-08-30T03:30:22.9016407Z     "code": 429,
+2026-08-30T03:30:22.9016833Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:22.9765392Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:22.9766024Z   "error": {
+2026-08-30T03:30:22.9766279Z     "code": 429,
+2026-08-30T03:30:22.9766732Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.0580608Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:23.0581418Z   "error": {
+2026-08-30T03:30:23.0581686Z     "code": 429,
+2026-08-30T03:30:23.0582630Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.1371069Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:23.1371775Z   "error": {
+2026-08-30T03:30:23.1372030Z     "code": 429,
+2026-08-30T03:30:23.1372450Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.2109704Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:23.2110367Z   "error": {
+2026-08-30T03:30:23.2110662Z     "code": 429,
+2026-08-30T03:30:23.2111083Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.3019288Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:23.3019998Z   "error": {
+2026-08-30T03:30:23.3020315Z     "code": 429,
+2026-08-30T03:30:23.3020732Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.3784609Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:23.3785523Z   "error": {
+2026-08-30T03:30:23.3786076Z     "code": 429,
+2026-08-30T03:30:23.3786558Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.4503815Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:23.4504300Z   "error": {
+2026-08-30T03:30:23.4504548Z     "code": 429,
+2026-08-30T03:30:23.4504955Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.5247700Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:23.5248451Z   "error": {
+2026-08-30T03:30:23.5248842Z     "code": 429,
+2026-08-30T03:30:23.5249471Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.6252470Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:23.6253171Z   "error": {
+2026-08-30T03:30:23.6253841Z     "code": 429,
+2026-08-30T03:30:23.6254480Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.7130415Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:23.7131152Z   "error": {
+2026-08-30T03:30:23.7131488Z     "code": 429,
+2026-08-30T03:30:23.7132065Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.8067563Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:23.8068286Z   "error": {
+2026-08-30T03:30:23.8068650Z     "code": 429,
+2026-08-30T03:30:23.8069266Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.8842125Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:23.8842819Z   "error": {
+2026-08-30T03:30:23.8843183Z     "code": 429,
+2026-08-30T03:30:23.8844055Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:23.9658467Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:23.9659101Z   "error": {
+2026-08-30T03:30:23.9659429Z     "code": 429,
+2026-08-30T03:30:23.9660012Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.0559245Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:24.0559944Z   "error": {
+2026-08-30T03:30:24.0560305Z     "code": 429,
+2026-08-30T03:30:24.0560927Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.1299244Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:24.1299932Z   "error": {
+2026-08-30T03:30:24.1300315Z     "code": 429,
+2026-08-30T03:30:24.1300949Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.2192272Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:24.2192908Z   "error": {
+2026-08-30T03:30:24.2194073Z     "code": 429,
+2026-08-30T03:30:24.2194655Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.3093809Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:24.3094526Z   "error": {
+2026-08-30T03:30:24.3094883Z     "code": 429,
+2026-08-30T03:30:24.3095497Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.4093813Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:24.4094489Z   "error": {
+2026-08-30T03:30:24.4094855Z     "code": 429,
+2026-08-30T03:30:24.4095466Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.4792287Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:24.4792922Z   "error": {
+2026-08-30T03:30:24.4793479Z     "code": 429,
+2026-08-30T03:30:24.4794067Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.5465992Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:24.5466710Z   "error": {
+2026-08-30T03:30:24.5467072Z     "code": 429,
+2026-08-30T03:30:24.5467706Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.6467014Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:24.6467724Z   "error": {
+2026-08-30T03:30:24.6468103Z     "code": 429,
+2026-08-30T03:30:24.6468722Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.7413861Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:24.7414524Z   "error": {
+2026-08-30T03:30:24.7414856Z     "code": 429,
+2026-08-30T03:30:24.7415434Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.8319447Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:24.8320206Z   "error": {
+2026-08-30T03:30:24.8320550Z     "code": 429,
+2026-08-30T03:30:24.8321186Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.9009709Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:24.9010402Z   "error": {
+2026-08-30T03:30:24.9010766Z     "code": 429,
+2026-08-30T03:30:24.9011397Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:24.9890900Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:24.9891523Z   "error": {
+2026-08-30T03:30:24.9891863Z     "code": 429,
+2026-08-30T03:30:24.9892447Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.0712549Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:25.0713475Z   "error": {
+2026-08-30T03:30:25.0713911Z     "code": 429,
+2026-08-30T03:30:25.0714525Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.1484913Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:25.1485391Z   "error": {
+2026-08-30T03:30:25.1485640Z     "code": 429,
+2026-08-30T03:30:25.1486052Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.2396579Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:25.2397090Z   "error": {
+2026-08-30T03:30:25.2397349Z     "code": 429,
+2026-08-30T03:30:25.2397768Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.3355924Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:25.3356677Z   "error": {
+2026-08-30T03:30:25.3356957Z     "code": 429,
+2026-08-30T03:30:25.3357390Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.4110695Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:25.4111721Z   "error": {
+2026-08-30T03:30:25.4124073Z     "code": 429,
+2026-08-30T03:30:25.4124785Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.5081201Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:25.5081841Z   "error": {
+2026-08-30T03:30:25.5082184Z     "code": 429,
+2026-08-30T03:30:25.5082770Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.5861932Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:25.5862667Z   "error": {
+2026-08-30T03:30:25.5863017Z     "code": 429,
+2026-08-30T03:30:25.5863923Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.6786255Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:25.6786975Z   "error": {
+2026-08-30T03:30:25.6787321Z     "code": 429,
+2026-08-30T03:30:25.6787954Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.7888795Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:25.7889427Z   "error": {
+2026-08-30T03:30:25.7889764Z     "code": 429,
+2026-08-30T03:30:25.7890340Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.8765926Z [AI Analyst] API Gemini modelo gemini-flash-lite-latest (429): {
+2026-08-30T03:30:25.8766633Z   "error": {
+2026-08-30T03:30:25.8766997Z     "code": 429,
+2026-08-30T03:30:25.8767622Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:25.9490045Z [AI Analyst] API Gemini modelo gemini-3.5-flash-lite (429): {
+2026-08-30T03:30:25.9490809Z   "error": {
+2026-08-30T03:30:25.9491166Z     "code": 429,
+2026-08-30T03:30:25.9491796Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:26.0390675Z [AI Analyst] API Gemini modelo gemini-3.6-flash (429): {
+2026-08-30T03:30:26.0391364Z   "error": {
+2026-08-30T03:30:26.0391700Z     "code": 429,
+2026-08-30T03:30:26.0392273Z     "message": "You exceeded your current quota, please check your plan and billing deta
+2026-08-30T03:30:33.6926841Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T03:31:11.6402530Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T03:31:52.1012274Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T03:32:30.2447261Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T03:33:07.7144017Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-08-30T03:33:07.7144669Z 23 jogos encontrados pendentes.
+2026-08-30T03:33:07.7146824Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-08-30T03:33:07.7147512Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-08-30T03:33:07.7148159Z Atualizado: Houston Dynamo 0-0 San Jose Earthquakes
+2026-08-30T03:33:07.7148573Z Atualizado: Minnesota United FC 3-3 Orlando City SC
+2026-08-30T03:33:07.7148972Z Atualizado: Sporting Kansas City 0-3 Vancouver Whitecaps
+2026-08-30T03:33:07.7149371Z Atualizado: Atletico Tucuman 0-0 Belgrano Cordoba
+2026-08-30T03:33:07.7149784Z Atualizado: Talleres Cordoba 0-0 Central Cordoba de Santiago
+2026-08-30T03:33:07.7150185Z Atualizado: Nashville SC 4-0 FC Cincinnati
+2026-08-30T03:33:07.7150522Z Atualizado: Vasco DA Gama 3-1 Cruzeiro
+2026-08-30T03:33:07.7150841Z Atualizado: Club America 2-0 Puebla
+2026-08-30T03:33:07.7151217Z Jogo Colorado Rapids x Real Salt Lake ainda com status 2H
+2026-08-30T03:33:07.7151646Z Jogo San Diego x Los Angeles Galaxy ainda com status 1H
+2026-08-30T03:33:07.7152040Z Jogo Portland Timbers x Austin ainda com status 1H
+2026-08-30T03:33:07.7152415Z Atualizado: Sao Paulo 2-1 RB Bragantino
+2026-08-30T03:33:07.7152759Z Atualizado: Atlas 1-3 Club Queretaro
+2026-08-30T03:33:07.7153127Z Atualizado: CF Pachuca 1-1 Guadalajara Chivas
+2026-08-30T03:33:07.7153632Z Atualizado: Inter Miami 7-1 CF Montreal
+2026-08-30T03:33:07.7154140Z Atualizado: DC United 0-0 Los Angeles FC
+2026-08-30T03:33:07.7154507Z Atualizado: New York Red Bulls 1-3 Philadelphia Union
+2026-08-30T03:33:07.7154885Z Atualizado: Toronto FC 1-1 New York City FC
+2026-08-30T03:33:07.7155230Z Atualizado: Atlanta United FC 0-2 Charlotte
+2026-08-30T03:33:07.7155806Z Atualização concluída.
+2026-08-30T03:33:07.7156338Z [2026-08-30 00:18:43.818733-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-30T03:33:07.7159454Z ⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...
+2026-08-30T03:33:07.7160040Z Buscando jogos de 2026-08-30 na API...
+2026-08-30T03:33:07.7160667Z ✅ Novos jogos calculados e salvos no banco de dados com sucesso.
+2026-08-30T03:33:07.7161476Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-30T03:33:07.7162119Z [0-1] Rank 1: Feyenoord x ADO Den Haag (Prob: 0.97%) [IA: 98%]
+2026-08-30T03:33:07.7162767Z [0-1] Rank 2: Toluca x FC Juarez (Prob: 0.77%) [IA: 97%]
+2026-08-30T03:33:07.7163701Z [0-1] Rank 3: Columbus Crew x New England Revolution (Prob: 0.78%) [IA: 97%]
+2026-08-30T03:33:07.7164514Z [0-1] Rank 4: America Mineiro x Ponte Preta (Prob: 1.78%) [IA: 97%]
+2026-08-30T03:33:07.7165241Z [0-1] Rank 5: Monterrey x Atletico San Luis (Prob: 2.29%) [IA: 97%]
+2026-08-30T03:33:07.7165851Z [0-1] Injetando no bot 4626 via Playwright...
+2026-08-30T03:33:07.7166323Z [0-1] SUCESSO!
+2026-08-30T03:33:07.7166787Z [0-2] Rank 1: Feyenoord x ADO Den Haag (Prob: 0.13%) [IA: 99%]
+2026-08-30T03:33:07.7167474Z [0-2] Rank 2: America Mineiro x Ponte Preta (Prob: 0.31%) [IA: 98%]
+2026-08-30T03:33:07.7168121Z [0-2] Rank 3: Toluca x FC Juarez (Prob: 0.37%) [IA: 98%]
+2026-08-30T03:33:07.7168793Z [0-2] Rank 4: Columbus Crew x New England Revolution (Prob: 0.46%) [IA: 98%]
+2026-08-30T03:33:07.7169475Z [0-2] Rank 5: Napoli x Como (Prob: 1.74%) [IA: 98%]
+2026-08-30T03:33:07.7170030Z [0-2] Injetando no bot 4753 via Playwright...
+2026-08-30T03:33:07.7170484Z [0-2] SUCESSO!
+2026-08-30T03:33:07.7170908Z [0-3] Rank 1: Feyenoord x ADO Den Haag (Prob: 0.01%) [IA: 99%]
+2026-08-30T03:33:07.7171583Z [0-3] Rank 2: America Mineiro x Ponte Preta (Prob: 0.03%) [IA: 99%]
+2026-08-30T03:33:07.7172010Z [0-3] Rank 3: Toluca x FC Juarez (Prob: 0.08%) [IA: 99%]
+2026-08-30T03:33:07.7172447Z [0-3] Rank 4: Columbus Crew x New England Revolution (Prob: 0.12%) [IA: 99%]
+2026-08-30T03:33:07.7172884Z [0-3] Rank 5: Nacional x Estrela (Prob: 0.35%) [IA: 99%]
+2026-08-30T03:33:07.7173246Z [0-3] Injetando no bot 27251 via Playwright...
+2026-08-30T03:33:07.7173800Z [0-3] SUCESSO!
+2026-08-30T03:33:07.7174100Z [1-3] Rank 1: Feyenoord x ADO Den Haag (Prob: 0.02%) [IA: 99%]
+2026-08-30T03:33:07.7174520Z [1-3] Rank 2: America Mineiro x Ponte Preta (Prob: 0.06%) [IA: 99%]
+2026-08-30T03:33:07.7175157Z [1-3] Rank 3: Toluca x FC Juarez (Prob: 0.27%) [IA: 99%]
+2026-08-30T03:33:07.7175519Z [1-3] Rank 4: Nacional x Estrela (Prob: 0.36%) [IA: 99%]
+2026-08-30T03:33:07.7175933Z [1-3] Rank 5: Columbus Crew x New England Revolution (Prob: 0.41%) [IA: 99%]
+2026-08-30T03:33:07.7176358Z [1-3] Injetando no bot 29778 via Playwright...
+2026-08-30T03:33:07.7176665Z [1-3] SUCESSO!

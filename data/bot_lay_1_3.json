@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "betOnNewTeam": true,
+  "teams": [
+    {
+      "name": "Oud-Heverlee Leuven",
+      "id": "1996065",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Standard",
+      "id": "1946605",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Galatasaray",
+      "id": "1996156",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Goztepe",
+      "id": "2117502",
+      "checked": true,
+      "side": "A"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+﻿2026-08-29T12:12:22.2791747Z ##[group]Run for i in 1 2 3; do
+2026-08-29T12:12:22.2792132Z [36;1mfor i in 1 2 3; do[0m
+2026-08-29T12:12:22.2792446Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-29T12:12:22.2792838Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-29T12:12:22.2793320Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-29T12:12:22.2793759Z [36;1m    sleep 15[0m
+2026-08-29T12:12:22.2794009Z [36;1m  }[0m
+2026-08-29T12:12:22.2794261Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-29T12:12:22.2794592Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-29T12:12:22.2794927Z [36;1m    exit 1[0m
+2026-08-29T12:12:22.2795162Z [36;1m  fi[0m
+2026-08-29T12:12:22.2795388Z [36;1mdone[0m
+2026-08-29T12:12:22.2834234Z shell: /usr/bin/bash -e {0}
+2026-08-29T12:12:22.2834531Z env:
+2026-08-29T12:12:22.2834852Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:12:22.2835348Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-29T12:12:22.2835909Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:12:22.2836365Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:12:22.2836819Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:12:22.2837422Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-29T12:12:22.2838215Z   API_FOOTBALL_KEY: ***
+2026-08-29T12:12:22.2838561Z   FOOTBALL_DATA_KEY: ***
+2026-08-29T12:12:22.2838874Z   LAYBACK_EMAIL: ***
+2026-08-29T12:12:22.2839155Z   LAYBACK_PASSWORD: ***
+2026-08-29T12:12:22.2839862Z   DATABASE_URL: ***
+2026-08-29T12:12:22.2840240Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-29T12:12:22.2840533Z   TELEGRAM_CHAT_ID: ***
+2026-08-29T12:12:22.2840822Z   PROXY_SERVER: ***
+2026-08-29T12:12:22.2841098Z   PROXY_USERNAME: ***
+2026-08-29T12:12:22.2841408Z   PROXY_PASSWORD: ***
+2026-08-29T12:12:22.2841658Z ##[endgroup]
+2026-08-29T12:12:22.2903770Z Iniciando tentativa 1...
+2026-08-29T12:12:22.8059533Z Traceback (most recent call last):
+2026-08-29T12:12:22.8067996Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 6, in <module>
+2026-08-29T12:12:22.8069065Z     from analysis.scanner import scan_all, rank_by_target, save_to_db
+2026-08-29T12:12:22.8070112Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/analysis/scanner.py", line 5, in <module>
+2026-08-29T12:12:22.8070995Z     from data.data_manager import DataManager
+2026-08-29T12:12:22.8098433Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/data/data_manager.py", line 3, in <module>
+2026-08-29T12:12:22.8099467Z     from data.football_data_api import get_fixtures as fd_get_fixtures, LEAGUE_MAP
+2026-08-29T12:12:22.8100299Z ModuleNotFoundError: No module named 'data.football_data_api'
+2026-08-29T12:12:22.8659874Z Tentativa 1 falhou. Aguardando 15s para tentar de novo...
+2026-08-29T12:12:37.8684826Z Iniciando tentativa 2...
+2026-08-29T12:12:38.2507207Z Traceback (most recent call last):
+2026-08-29T12:12:38.2511191Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 6, in <module>
+2026-08-29T12:12:38.2512467Z     from analysis.scanner import scan_all, rank_by_target, save_to_db
+2026-08-29T12:12:38.2515978Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/analysis/scanner.py", line 5, in <module>
+2026-08-29T12:12:38.2517045Z     from data.data_manager import DataManager
+2026-08-29T12:12:38.2518235Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/data/data_manager.py", line 3, in <module>
+2026-08-29T12:12:38.2519307Z     from data.football_data_api import get_fixtures as fd_get_fixtures, LEAGUE_MAP
+2026-08-29T12:12:38.2520162Z ModuleNotFoundError: No module named 'data.football_data_api'
+2026-08-29T12:12:38.3335669Z Tentativa 2 falhou. Aguardando 15s para tentar de novo...
+2026-08-29T12:12:53.3351530Z Iniciando tentativa 3...
+2026-08-29T12:12:53.7152911Z Traceback (most recent call last):
+2026-08-29T12:12:53.7154258Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 6, in <module>
+2026-08-29T12:12:53.7155802Z     from analysis.scanner import scan_all, rank_by_target, save_to_db
+2026-08-29T12:12:53.7158854Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/analysis/scanner.py", line 5, in <module>
+2026-08-29T12:12:53.7159922Z     from data.data_manager import DataManager
+2026-08-29T12:12:53.7161194Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/data/data_manager.py", line 3, in <module>
+2026-08-29T12:12:53.7162544Z     from data.football_data_api import get_fixtures as fd_get_fixtures, LEAGUE_MAP
+2026-08-29T12:12:53.7163681Z ModuleNotFoundError: No module named 'data.football_data_api'
+2026-08-29T12:12:53.7753693Z Tentativa 3 falhou. Aguardando 15s para tentar de novo...
+2026-08-29T12:13:08.7770637Z Todas as 3 tentativas falharam.
+2026-08-29T12:13:08.7785329Z ##[error]Process completed with exit code 1.

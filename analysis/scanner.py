@@ -81,6 +81,17 @@ def scan_match(fixture, model, targets, source='API-Football'):
         if goals.get('home') is not None and goals.get('away') is not None:
             real_score = f"{goals['home']}-{goals['away']}"
 
+    def evaluate_streaks(stats):
+        form = stats.get('form', '')
+        if not form: return None
+        recent = form[-3:]
+        if recent == 'WWW': return '🔥 HOT'
+        if recent == 'LLL': return '❄️ COLD'
+        return None
+
+    home_streak = evaluate_streaks(home_stats)
+    away_streak = evaluate_streaks(away_stats)
+
     return {
         'fixture_id': fixture_info['id'],
         'date': fixture_info['date'],
@@ -92,7 +103,9 @@ def scan_match(fixture, model, targets, source='API-Football'):
         'lambda_home': lam_home,
         'lambda_away': lam_away,
         'probabilities': probs,
-        'match_odd': home_odd
+        'match_odd': home_odd,
+        'home_streak': home_streak,
+        'away_streak': away_streak
     }
 
 def scan_all(fixtures, model, source='API-Football'):
@@ -103,7 +116,7 @@ def scan_all(fixtures, model, source='API-Football'):
             results.append(res)
     return results
 
-def rank_by_target(results):
+def rank_by_target(results, model):
     rankings = {target: [] for target in config.TARGET_SCORES}
     
     for target in config.TARGET_SCORES:
@@ -121,14 +134,24 @@ def rank_by_target(results):
                 'away': res['away'],
                 'lambda_home': res['lambda_home'],
                 'lambda_away': res['lambda_away'],
-                'probability': res['probabilities'][target]
+                'probability': res['probabilities'][target],
+                'home_streak': res.get('home_streak'),
+                'away_streak': res.get('away_streak')
             })
             
     from analysis.ai_analyst import AIAnalyst
     rankings = AIAnalyst.analyze_top_rankings(rankings)
     
-    # Re-ordena pelo grau de confiança da IA (decrescente) e desempata pela menor probabilidade
+    # Re-calcula probabilidades com o fator de ajuste e re-ordena
     for target in config.TARGET_SCORES:
+        for item in rankings[target]:
+            adj = item.get('ai_adjustment_factor', 1.0)
+            if adj != 1.0:
+                new_lam_home = item['lambda_home'] * adj
+                new_lam_away = item['lambda_away'] * adj
+                new_probs = model.get_probabilities(new_lam_home, new_lam_away, [target])
+                item['probability'] = new_probs[target]
+                
         rankings[target].sort(key=lambda x: (
             -x.get('ai_confidence', 0),
             x.get('probability', 1.0)

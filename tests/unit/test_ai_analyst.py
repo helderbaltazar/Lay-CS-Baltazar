@@ -20,13 +20,14 @@ def test_build_prompt_contains_match_data():
     assert '0.75' in prompt
 
 def test_parse_ai_json_valid():
-    raw_text = '{"veredito": "APROVADO", "confianca": 95, "fator_critico": "Mandante muito seguro em casa.", "analise_detalhada": "Cruzeiro tem defesa forte e visitante desfalcado."}'
+    raw_text = '{"veredito": "APROVADO", "confianca": 95, "fator_critico": "Mandante muito seguro em casa.", "analise_detalhada": "Cruzeiro tem defesa forte e visitante desfalcado.", "fator_ajuste": 0.8}'
     parsed = AIAnalyst._parse_ai_json(raw_text)
     assert parsed is not None
     assert parsed['verdict'] == 'APROVADO'
     assert parsed['confidence'] == 95
     assert parsed['critical_factor'] == 'Mandante muito seguro em casa.'
     assert 'Cruzeiro' in parsed['detailed_analysis']
+    assert parsed['adjustment_factor'] == 0.8
 
 def test_parse_ai_json_with_markdown_ticks():
     raw_text = '```json\n{"veredito": "VETADO", "confianca": 40, "fator_critico": "Artilheiro titular poupado.", "analise_detalhada": "Risco elevado de surpresa."}\n```'
@@ -42,6 +43,7 @@ def test_fallback_analysis_low_prob():
     assert analysis['verdict'] == 'APROVADO'
     assert analysis['confidence'] >= 90
     assert '0x1' in analysis['critical_factor']
+    assert analysis['adjustment_factor'] == 1.0
 
 def test_fallback_analysis_high_prob():
     match_info = {'home': 'Time Fraco', 'away': 'Bayern'}

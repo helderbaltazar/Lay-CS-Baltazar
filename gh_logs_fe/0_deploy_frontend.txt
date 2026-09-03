@@ -1,0 +1,392 @@
+﻿2026-08-30T01:31:29.5667573Z Current runner version: '2.336.0'
+2026-08-30T01:31:29.5691750Z ##[group]Runner Image Provisioner
+2026-08-30T01:31:29.5692820Z Hosted Compute Agent
+2026-08-30T01:31:29.5693501Z Version: 20260819.586
+2026-08-30T01:31:29.5694389Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+2026-08-30T01:31:29.5695250Z Build Date: 2026-08-18T23:20:18Z
+2026-08-30T01:31:29.5695991Z Worker ID: {b0a16535-7899-4d50-b59b-8f2f4d6fd779}
+2026-08-30T01:31:29.5696827Z Azure Region: westcentralus
+2026-08-30T01:31:29.5697474Z ##[endgroup]
+2026-08-30T01:31:29.5699339Z ##[group]Operating System
+2026-08-30T01:31:29.5700008Z Ubuntu
+2026-08-30T01:31:29.5700647Z 24.04.4
+2026-08-30T01:31:29.5701186Z LTS
+2026-08-30T01:31:29.5701774Z ##[endgroup]
+2026-08-30T01:31:29.5702355Z ##[group]Runner Image
+2026-08-30T01:31:29.5703009Z Image: ubuntu-24.04
+2026-08-30T01:31:29.5703622Z Version: 20260823.283.1
+2026-08-30T01:31:29.5705063Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+2026-08-30T01:31:29.5706604Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+2026-08-30T01:31:29.5707612Z ##[endgroup]
+2026-08-30T01:31:29.5708820Z ##[group]GITHUB_TOKEN Permissions
+2026-08-30T01:31:29.5711118Z Contents: read
+2026-08-30T01:31:29.5711725Z Metadata: read
+2026-08-30T01:31:29.5712347Z Packages: read
+2026-08-30T01:31:29.5712906Z ##[endgroup]
+2026-08-30T01:31:29.5715277Z Secret source: Actions
+2026-08-30T01:31:29.5716465Z Prepare workflow directory
+2026-08-30T01:31:29.6061606Z Prepare all required actions
+2026-08-30T01:31:29.6125765Z Getting action download info
+2026-08-30T01:31:29.8775306Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-08-30T01:31:30.0878759Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-08-30T01:31:30.3023005Z Complete job name: deploy_frontend
+2026-08-30T01:31:30.3696433Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-30T01:31:30.3705439Z ##[group]Run actions/checkout@v4
+2026-08-30T01:31:30.3706262Z with:
+2026-08-30T01:31:30.3707255Z   repository: helderbaltazar/Lay-CS-Baltazar
+2026-08-30T01:31:30.3711228Z   token: ***
+2026-08-30T01:31:30.3711799Z   ssh-strict: true
+2026-08-30T01:31:30.3712467Z   ssh-user: git
+2026-08-30T01:31:30.3713013Z   persist-credentials: true
+2026-08-30T01:31:30.3713674Z   clean: true
+2026-08-30T01:31:30.3714420Z   sparse-checkout-cone-mode: true
+2026-08-30T01:31:30.3715147Z   fetch-depth: 1
+2026-08-30T01:31:30.3715714Z   fetch-tags: false
+2026-08-30T01:31:30.3716325Z   show-progress: true
+2026-08-30T01:31:30.3716876Z   lfs: false
+2026-08-30T01:31:30.3717533Z   submodules: false
+2026-08-30T01:31:30.3718159Z   set-safe-directory: true
+2026-08-30T01:31:30.3718792Z   allow-unsafe-pr-checkout: false
+2026-08-30T01:31:30.3719691Z ##[endgroup]
+2026-08-30T01:31:30.4738544Z Syncing repository: helderbaltazar/Lay-CS-Baltazar
+2026-08-30T01:31:30.4740601Z ##[group]Getting Git version info
+2026-08-30T01:31:30.4741536Z Working directory is '/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar'
+2026-08-30T01:31:30.4742803Z [command]/usr/bin/git version
+2026-08-30T01:31:30.4802009Z git version 2.55.0
+2026-08-30T01:31:30.4856713Z ##[endgroup]
+2026-08-30T01:31:30.4875630Z Temporarily overriding HOME='/home/runner/work/_temp/6fd5670e-e0b5-428a-8bb4-40d3a5880fd0' before making global git config changes
+2026-08-30T01:31:30.4877102Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-30T01:31:30.4882278Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-30T01:31:30.4937849Z Deleting the contents of '/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar'
+2026-08-30T01:31:30.4941928Z ##[group]Initializing the repository
+2026-08-30T01:31:30.4946969Z [command]/usr/bin/git init /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-30T01:31:30.5036384Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-08-30T01:31:30.5037587Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-08-30T01:31:30.5039012Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-08-30T01:31:30.5040365Z hint: call:
+2026-08-30T01:31:30.5040879Z hint:
+2026-08-30T01:31:30.5041578Z hint: 	git config --global init.defaultBranch <name>
+2026-08-30T01:31:30.5042379Z hint:
+2026-08-30T01:31:30.5043281Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-08-30T01:31:30.5045002Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-08-30T01:31:30.5046003Z hint:
+2026-08-30T01:31:30.5046599Z hint: 	git branch -m <name>
+2026-08-30T01:31:30.5047219Z hint:
+2026-08-30T01:31:30.5047984Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-08-30T01:31:30.5049375Z Initialized empty Git repository in /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/.git/
+2026-08-30T01:31:30.5052498Z [command]/usr/bin/git remote add origin https://github.com/helderbaltazar/Lay-CS-Baltazar
+2026-08-30T01:31:30.5095919Z ##[endgroup]
+2026-08-30T01:31:30.5096962Z ##[group]Disabling automatic garbage collection
+2026-08-30T01:31:30.5100406Z [command]/usr/bin/git config --local gc.auto 0
+2026-08-30T01:31:30.5130218Z ##[endgroup]
+2026-08-30T01:31:30.5131320Z ##[group]Setting up auth
+2026-08-30T01:31:30.5138307Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-30T01:31:30.5169295Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-30T01:31:30.5511943Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-30T01:31:30.5549927Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-30T01:31:30.5769831Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-30T01:31:30.5803359Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-30T01:31:30.6017700Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-08-30T01:31:30.6051140Z ##[endgroup]
+2026-08-30T01:31:30.6052912Z ##[group]Fetching the repository
+2026-08-30T01:31:30.6063518Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +5b8bda2505a2876369c10ef291caa10e088a9ea3:refs/remotes/origin/main
+2026-08-30T01:31:31.2627520Z From https://github.com/helderbaltazar/Lay-CS-Baltazar
+2026-08-30T01:31:31.2629469Z  * [new ref]         5b8bda2505a2876369c10ef291caa10e088a9ea3 -> origin/main
+2026-08-30T01:31:31.2634380Z ##[endgroup]
+2026-08-30T01:31:31.2636180Z ##[group]Determining the checkout info
+2026-08-30T01:31:31.2638111Z ##[endgroup]
+2026-08-30T01:31:31.2640978Z [command]/usr/bin/git sparse-checkout disable
+2026-08-30T01:31:31.2690092Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-08-30T01:31:31.2724329Z ##[group]Checking out the ref
+2026-08-30T01:31:31.2727815Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-08-30T01:31:31.2880543Z Switched to a new branch 'main'
+2026-08-30T01:31:31.2884401Z branch 'main' set up to track 'origin/main'.
+2026-08-30T01:31:31.2890350Z ##[endgroup]
+2026-08-30T01:31:31.2925716Z [command]/usr/bin/git log -1 --format=%H
+2026-08-30T01:31:31.2947704Z 5b8bda2505a2876369c10ef291caa10e088a9ea3
+2026-08-30T01:31:31.3319051Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-30T01:31:31.3325588Z ##[group]Run actions/setup-python@v5
+2026-08-30T01:31:31.3326989Z with:
+2026-08-30T01:31:31.3328006Z   python-version: 3.12
+2026-08-30T01:31:31.3329193Z   cache: pip
+2026-08-30T01:31:31.3330234Z   check-latest: false
+2026-08-30T01:31:31.3339958Z   token: ***
+2026-08-30T01:31:31.3341068Z   update-environment: true
+2026-08-30T01:31:31.3342234Z   allow-prereleases: false
+2026-08-30T01:31:31.3343497Z   freethreaded: false
+2026-08-30T01:31:31.3344674Z ##[endgroup]
+2026-08-30T01:31:31.4686287Z ##[group]Installed versions
+2026-08-30T01:31:31.4779867Z (node:2231) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-30T01:31:31.4783049Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-30T01:31:31.4785185Z Successfully set up CPython (3.12.14)
+2026-08-30T01:31:31.4787784Z ##[endgroup]
+2026-08-30T01:31:31.5238584Z [command]/opt/hostedtoolcache/Python/3.12.14/x64/bin/pip cache dir
+2026-08-30T01:31:32.3174389Z /home/runner/.cache/pip
+2026-08-30T01:31:32.5570083Z pip cache is not found
+2026-08-30T01:31:32.5693927Z ##[group]Run pip install --upgrade pip
+2026-08-30T01:31:32.5695058Z [36;1mpip install --upgrade pip[0m
+2026-08-30T01:31:32.5695589Z [36;1mpip install -r requirements.txt[0m
+2026-08-30T01:31:32.5696109Z [36;1mpip install pytest requests python-dotenv[0m
+2026-08-30T01:31:32.5728467Z shell: /usr/bin/bash -e {0}
+2026-08-30T01:31:32.5728993Z env:
+2026-08-30T01:31:32.5729505Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:32.5730164Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-30T01:31:32.5730780Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:32.5731473Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:32.5732064Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:32.5732626Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-30T01:31:32.5733183Z ##[endgroup]
+2026-08-30T01:31:33.3895632Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (26.2.1)
+2026-08-30T01:31:34.0897450Z Collecting flask (from -r requirements.txt (line 1))
+2026-08-30T01:31:34.2080728Z   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+2026-08-30T01:31:34.2581943Z Collecting requests (from -r requirements.txt (line 2))
+2026-08-30T01:31:34.2775458Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+2026-08-30T01:31:34.3125000Z Collecting APScheduler (from -r requirements.txt (line 3))
+2026-08-30T01:31:34.3315240Z   Downloading apscheduler-3.11.3-py3-none-any.whl.metadata (6.5 kB)
+2026-08-30T01:31:34.4006185Z Collecting pytz (from -r requirements.txt (line 4))
+2026-08-30T01:31:34.4196979Z   Downloading pytz-2026.3.post1-py2.py3-none-any.whl.metadata (22 kB)
+2026-08-30T01:31:34.7110718Z Collecting SQLAlchemy (from -r requirements.txt (line 5))
+2026-08-30T01:31:34.7302954Z   Downloading sqlalchemy-2.0.52-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.6 kB)
+2026-08-30T01:31:34.7670397Z Collecting python-dotenv (from -r requirements.txt (line 6))
+2026-08-30T01:31:34.7865400Z   Downloading python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+2026-08-30T01:31:34.8360161Z Collecting pytest (from -r requirements.txt (line 7))
+2026-08-30T01:31:34.8554574Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-08-30T01:31:34.8871220Z Collecting pytest-cov (from -r requirements.txt (line 8))
+2026-08-30T01:31:34.9061399Z   Downloading pytest_cov-7.1.0-py3-none-any.whl.metadata (32 kB)
+2026-08-30T01:31:34.9582573Z Collecting playwright (from -r requirements.txt (line 9))
+2026-08-30T01:31:34.9773386Z   Downloading playwright-1.62.0-py3-none-manylinux1_x86_64.whl.metadata (3.3 kB)
+2026-08-30T01:31:35.0429949Z Collecting psycopg2-binary (from -r requirements.txt (line 11))
+2026-08-30T01:31:35.0623835Z   Downloading psycopg2_binary-2.9.12-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+2026-08-30T01:31:35.0930036Z Collecting Flask-HTTPAuth (from -r requirements.txt (line 12))
+2026-08-30T01:31:35.1125090Z   Downloading flask_httpauth-4.8.1-py3-none-any.whl.metadata (3.1 kB)
+2026-08-30T01:31:35.1439920Z Collecting gunicorn==21.2.0 (from -r requirements.txt (line 13))
+2026-08-30T01:31:35.1629231Z   Downloading gunicorn-21.2.0-py3-none-any.whl.metadata (4.1 kB)
+2026-08-30T01:31:35.1927969Z Collecting playwright-stealth==1.0.6 (from -r requirements.txt (line 14))
+2026-08-30T01:31:35.2122112Z   Downloading playwright_stealth-1.0.6-py3-none-any.whl.metadata (2.2 kB)
+2026-08-30T01:31:35.2413975Z Collecting python-dateutil (from -r requirements.txt (line 15))
+2026-08-30T01:31:35.2603508Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+2026-08-30T01:31:35.2943982Z Collecting packaging (from gunicorn==21.2.0->-r requirements.txt (line 13))
+2026-08-30T01:31:35.3135914Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-08-30T01:31:35.3504509Z Collecting blinker>=1.9.0 (from flask->-r requirements.txt (line 1))
+2026-08-30T01:31:35.3692913Z   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+2026-08-30T01:31:35.4039171Z Collecting click>=8.1.3 (from flask->-r requirements.txt (line 1))
+2026-08-30T01:31:35.4229822Z   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+2026-08-30T01:31:35.4507655Z Collecting itsdangerous>=2.2.0 (from flask->-r requirements.txt (line 1))
+2026-08-30T01:31:35.4694829Z   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+2026-08-30T01:31:35.4979376Z Collecting jinja2>=3.1.2 (from flask->-r requirements.txt (line 1))
+2026-08-30T01:31:35.5166260Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+2026-08-30T01:31:35.5729196Z Collecting markupsafe>=2.1.1 (from flask->-r requirements.txt (line 1))
+2026-08-30T01:31:35.5917657Z   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+2026-08-30T01:31:35.6241021Z Collecting werkzeug>=3.1.0 (from flask->-r requirements.txt (line 1))
+2026-08-30T01:31:35.6434303Z   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+2026-08-30T01:31:35.7524806Z Collecting charset_normalizer<4,>=2 (from requests->-r requirements.txt (line 2))
+2026-08-30T01:31:35.7714977Z   Downloading charset_normalizer-3.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (45 kB)
+2026-08-30T01:31:35.8106078Z Collecting idna<4,>=2.5 (from requests->-r requirements.txt (line 2))
+2026-08-30T01:31:35.8307770Z   Downloading idna-3.19-py3-none-any.whl.metadata (9.2 kB)
+2026-08-30T01:31:35.8662028Z Collecting urllib3<3,>=1.26 (from requests->-r requirements.txt (line 2))
+2026-08-30T01:31:35.8857486Z   Downloading urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+2026-08-30T01:31:35.9185112Z Collecting certifi>=2023.5.7 (from requests->-r requirements.txt (line 2))
+2026-08-30T01:31:35.9377975Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-08-30T01:31:35.9693988Z Collecting tzlocal>=3.0 (from APScheduler->-r requirements.txt (line 3))
+2026-08-30T01:31:35.9884329Z   Downloading tzlocal-5.4.4-py3-none-any.whl.metadata (7.7 kB)
+2026-08-30T01:31:36.1397327Z Collecting greenlet>=1 (from SQLAlchemy->-r requirements.txt (line 5))
+2026-08-30T01:31:36.1587807Z   Downloading greenlet-3.5.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+2026-08-30T01:31:36.1903841Z Collecting typing-extensions>=4.6.0 (from SQLAlchemy->-r requirements.txt (line 5))
+2026-08-30T01:31:36.2097285Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-08-30T01:31:36.2380372Z Collecting iniconfig>=1.0.1 (from pytest->-r requirements.txt (line 7))
+2026-08-30T01:31:36.2570810Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+2026-08-30T01:31:36.2855929Z Collecting pluggy<2,>=1.5 (from pytest->-r requirements.txt (line 7))
+2026-08-30T01:31:36.3047719Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2026-08-30T01:31:36.3388602Z Collecting pygments>=2.7.2 (from pytest->-r requirements.txt (line 7))
+2026-08-30T01:31:36.3586652Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-08-30T01:31:36.7030239Z Collecting coverage>=7.10.6 (from coverage[toml]>=7.10.6->pytest-cov->-r requirements.txt (line 8))
+2026-08-30T01:31:36.7222241Z   Downloading coverage-7.16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.6 kB)
+2026-08-30T01:31:36.7553447Z Collecting pyee<14,>=13 (from playwright->-r requirements.txt (line 9))
+2026-08-30T01:31:36.7751503Z   Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+2026-08-30T01:31:36.8087645Z Collecting six>=1.5 (from python-dateutil->-r requirements.txt (line 15))
+2026-08-30T01:31:36.8275496Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2026-08-30T01:31:36.8571163Z Downloading gunicorn-21.2.0-py3-none-any.whl (80 kB)
+2026-08-30T01:31:36.8884021Z Downloading playwright_stealth-1.0.6-py3-none-any.whl (28 kB)
+2026-08-30T01:31:36.9105276Z Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+2026-08-30T01:31:36.9355582Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+2026-08-30T01:31:36.9592236Z Downloading charset_normalizer-3.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (248 kB)
+2026-08-30T01:31:36.9998888Z Downloading idna-3.19-py3-none-any.whl (68 kB)
+2026-08-30T01:31:37.0212668Z Downloading urllib3-2.7.0-py3-none-any.whl (131 kB)
+2026-08-30T01:31:37.0466266Z Downloading apscheduler-3.11.3-py3-none-any.whl (66 kB)
+2026-08-30T01:31:37.0681639Z Downloading pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+2026-08-30T01:31:37.1110610Z Downloading sqlalchemy-2.0.52-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+2026-08-30T01:31:37.1878245Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 43.1 MB/s  0:00:00
+2026-08-30T01:31:37.2067816Z Downloading python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+2026-08-30T01:31:37.2285700Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-08-30T01:31:37.2515356Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+2026-08-30T01:31:37.2727692Z Downloading pytest_cov-7.1.0-py3-none-any.whl (22 kB)
+2026-08-30T01:31:37.2946311Z Downloading playwright-1.62.0-py3-none-manylinux1_x86_64.whl (47.7 MB)
+2026-08-30T01:31:37.7121769Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.7/47.7 MB 114.5 MB/s  0:00:00
+2026-08-30T01:31:37.7314869Z Downloading greenlet-3.5.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+2026-08-30T01:31:37.7400859Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.4/621.4 kB 56.3 MB/s  0:00:00
+2026-08-30T01:31:37.7591463Z Downloading pyee-13.0.1-py3-none-any.whl (15 kB)
+2026-08-30T01:31:37.7805911Z Downloading psycopg2_binary-2.9.12-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.3 MB)
+2026-08-30T01:31:37.8201043Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 111.7 MB/s  0:00:00
+2026-08-30T01:31:37.8399994Z Downloading flask_httpauth-4.8.1-py3-none-any.whl (9.7 kB)
+2026-08-30T01:31:37.8614988Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+2026-08-30T01:31:37.8839647Z Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+2026-08-30T01:31:37.9057946Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-08-30T01:31:37.9283489Z Downloading click-8.5.0-py3-none-any.whl (125 kB)
+2026-08-30T01:31:37.9499740Z Downloading coverage-7.16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (257 kB)
+2026-08-30T01:31:37.9733462Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+2026-08-30T01:31:37.9945135Z Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+2026-08-30T01:31:38.0158036Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+2026-08-30T01:31:38.0377609Z Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+2026-08-30T01:31:38.0593066Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-08-30T01:31:38.0814224Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-08-30T01:31:38.0940965Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 98.0 MB/s  0:00:00
+2026-08-30T01:31:38.1130207Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+2026-08-30T01:31:38.1344412Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-08-30T01:31:38.1559518Z Downloading tzlocal-5.4.4-py3-none-any.whl (18 kB)
+2026-08-30T01:31:38.1771399Z Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+2026-08-30T01:31:38.3621639Z Installing collected packages: pytz, urllib3, tzlocal, typing-extensions, six, python-dotenv, pygments, psycopg2-binary, pluggy, packaging, markupsafe, itsdangerous, iniconfig, idna, greenlet, coverage, click, charset_normalizer, certifi, blinker, werkzeug, SQLAlchemy, requests, python-dateutil, pytest, pyee, jinja2, gunicorn, APScheduler, pytest-cov, playwright, flask, playwright-stealth, Flask-HTTPAuth
+2026-08-30T01:31:42.3138786Z 
+2026-08-30T01:31:42.3170059Z Successfully installed APScheduler-3.11.3 Flask-HTTPAuth-4.8.1 SQLAlchemy-2.0.52 blinker-1.9.0 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 coverage-7.16.0 flask-3.1.3 greenlet-3.5.5 gunicorn-21.2.0 idna-3.19 iniconfig-2.3.0 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 packaging-26.3 playwright-1.62.0 playwright-stealth-1.0.6 pluggy-1.6.0 psycopg2-binary-2.9.12 pyee-13.0.1 pygments-2.21.0 pytest-9.1.1 pytest-cov-7.1.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 pytz-2026.3.post1 requests-2.34.2 six-1.17.0 typing-extensions-4.16.0 tzlocal-5.4.4 urllib3-2.7.0 werkzeug-3.1.8
+2026-08-30T01:31:42.7185117Z Requirement already satisfied: pytest in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (9.1.1)
+2026-08-30T01:31:42.7188434Z Requirement already satisfied: requests in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (2.34.2)
+2026-08-30T01:31:42.7192167Z Requirement already satisfied: python-dotenv in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (1.2.3)
+2026-08-30T01:31:42.7204427Z Requirement already satisfied: iniconfig>=1.0.1 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from pytest) (2.3.0)
+2026-08-30T01:31:42.7209018Z Requirement already satisfied: packaging>=22 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from pytest) (26.3)
+2026-08-30T01:31:42.7213593Z Requirement already satisfied: pluggy<2,>=1.5 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from pytest) (1.6.0)
+2026-08-30T01:31:42.7218019Z Requirement already satisfied: pygments>=2.7.2 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from pytest) (2.21.0)
+2026-08-30T01:31:42.7238103Z Requirement already satisfied: charset_normalizer<4,>=2 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from requests) (3.5.1)
+2026-08-30T01:31:42.7242640Z Requirement already satisfied: idna<4,>=2.5 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from requests) (3.19)
+2026-08-30T01:31:42.7247369Z Requirement already satisfied: urllib3<3,>=1.26 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from requests) (2.7.0)
+2026-08-30T01:31:42.7251251Z Requirement already satisfied: certifi>=2023.5.7 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from requests) (2026.7.22)
+2026-08-30T01:31:42.8116713Z ##[group]Run python -m pytest tests/web/ -v
+2026-08-30T01:31:42.8117195Z [36;1mpython -m pytest tests/web/ -v[0m
+2026-08-30T01:31:42.8144679Z shell: /usr/bin/bash -e {0}
+2026-08-30T01:31:42.8145133Z env:
+2026-08-30T01:31:42.8145536Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8146239Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-30T01:31:42.8146761Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8147246Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8147763Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8148267Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-30T01:31:42.8148697Z ##[endgroup]
+2026-08-30T01:31:43.7138283Z ============================= test session starts ==============================
+2026-08-30T01:31:43.7139621Z platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
+2026-08-30T01:31:43.7140409Z cachedir: .pytest_cache
+2026-08-30T01:31:43.7140874Z rootdir: /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-30T01:31:43.7141403Z configfile: pytest.ini
+2026-08-30T01:31:43.7141735Z plugins: cov-7.1.0
+2026-08-30T01:31:43.9149437Z collecting ... collected 8 items
+2026-08-30T01:31:43.9149909Z 
+2026-08-30T01:31:44.0600731Z tests/web/test_app.py::test_index_route PASSED                           [ 12%]
+2026-08-30T01:31:44.1701055Z tests/web/test_app.py::test_history_route PASSED                         [ 25%]
+2026-08-30T01:31:44.2595440Z tests/web/test_ui.py::test_base_html_has_analytics_link PASSED           [ 37%]
+2026-08-30T01:31:44.3616147Z tests/web/test_ui.py::test_history_html_has_export_link PASSED           [ 50%]
+2026-08-30T01:31:44.4576418Z tests/web/test_ui.py::test_analytics_route_returns_200 PASSED            [ 62%]
+2026-08-30T01:31:44.5480843Z tests/web/test_ui.py::test_export_route_returns_csv PASSED               [ 75%]
+2026-08-30T01:31:44.6382105Z tests/web/test_ui.py::test_index_html_has_ai_specialist_panel PASSED     [ 87%]
+2026-08-30T01:31:44.7739662Z tests/web/test_ui.py::test_index_html_renders_match_with_ai_drawer_and_top5 PASSED [100%]
+2026-08-30T01:31:44.7740353Z 
+2026-08-30T01:31:44.7740716Z ============================== 8 passed in 1.02s ===============================
+2026-08-30T01:31:44.8638026Z ##[group]Run python deploy_frontend.py
+2026-08-30T01:31:44.8638458Z [36;1mpython deploy_frontend.py[0m
+2026-08-30T01:31:44.8663389Z shell: /usr/bin/bash -e {0}
+2026-08-30T01:31:44.8663886Z env:
+2026-08-30T01:31:44.8664412Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8665025Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-30T01:31:44.8665531Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8666048Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8666536Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8667024Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-30T01:31:44.8667527Z   RENDER_API_KEY: rnd_S8cQDmEMslEPkYDWfsZ6hEWMWXYM
+2026-08-30T01:31:44.8667938Z   RENDER_SERVICE_ID: srv-da87ptijnfac73d2o9p0
+2026-08-30T01:31:44.8669003Z   DATABASE_URL: ***
+2026-08-30T01:31:44.8669910Z   DASHBOARD_USERNAME: helderbaltazar
+2026-08-30T01:31:44.8670305Z   DASHBOARD_PASSWORD: Bonde74812005
+2026-08-30T01:31:44.8670780Z   API_FOOTBALL_KEY: ***
+2026-08-30T01:31:44.8671200Z   FOOTBALL_DATA_KEY: ***
+2026-08-30T01:31:44.8671604Z   GEMINI_API_KEY: ***
+2026-08-30T01:31:44.8672079Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-30T01:31:44.8672418Z   TELEGRAM_CHAT_ID: ***
+2026-08-30T01:31:44.8672773Z ##[endgroup]
+2026-08-30T01:31:47.8574386Z 
+2026-08-30T01:31:47.8575904Z --- 1. EXECUTANDO TESTES DE INTERFACE LOCAIS (PYTEST) ---
+2026-08-30T01:31:47.8576696Z ============================= test session starts ==============================
+2026-08-30T01:31:47.8577974Z platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
+2026-08-30T01:31:47.8578544Z cachedir: .pytest_cache
+2026-08-30T01:31:47.8579021Z rootdir: /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-30T01:31:47.8579831Z configfile: pytest.ini
+2026-08-30T01:31:47.8580221Z plugins: cov-7.1.0
+2026-08-30T01:31:47.8580617Z collecting ... collected 8 items
+2026-08-30T01:31:47.8581004Z 
+2026-08-30T01:31:47.8581344Z tests/web/test_app.py::test_index_route PASSED                           [ 12%]
+2026-08-30T01:31:47.8581941Z tests/web/test_app.py::test_history_route PASSED                         [ 25%]
+2026-08-30T01:31:47.8582560Z tests/web/test_ui.py::test_base_html_has_analytics_link PASSED           [ 37%]
+2026-08-30T01:31:47.8583162Z tests/web/test_ui.py::test_history_html_has_export_link PASSED           [ 50%]
+2026-08-30T01:31:47.8583708Z tests/web/test_ui.py::test_analytics_route_returns_200 PASSED            [ 62%]
+2026-08-30T01:31:47.8584699Z tests/web/test_ui.py::test_export_route_returns_csv PASSED               [ 75%]
+2026-08-30T01:31:47.8585431Z tests/web/test_ui.py::test_index_html_has_ai_specialist_panel PASSED     [ 87%]
+2026-08-30T01:31:47.8586344Z tests/web/test_ui.py::test_index_html_renders_match_with_ai_drawer_and_top5 PASSED [100%]
+2026-08-30T01:31:47.8586984Z 
+2026-08-30T01:31:47.8587254Z ============================== 8 passed in 0.96s ===============================
+2026-08-30T01:31:47.8587711Z 
+2026-08-30T01:31:47.8588386Z ✅ Todos os testes de interface locais passaram com sucesso!
+2026-08-30T01:31:47.8588896Z 
+2026-08-30T01:31:47.8589347Z --- 2. SINCRONIZANDO VARIÁVEIS DE AMBIENTE NO RENDER ---
+2026-08-30T01:31:47.8590106Z ✅ Variáveis de ambiente sincronizadas no Render!
+2026-08-30T01:31:47.8590487Z 
+2026-08-30T01:31:47.8590805Z --- 3. DISPARANDO NOVO DEPLOY NO RENDER ---
+2026-08-30T01:31:47.8591529Z 🚀 Deploy iniciado com sucesso! ID: dep-da9og0on74is738od3l0
+2026-08-30T01:31:47.8591983Z 
+2026-08-30T01:31:47.8592339Z --- 4. MONITORANDO STATUS DO DEPLOY (dep-da9og0on74is738od3l0) ---
+2026-08-30T01:31:47.8593030Z [0s] Status do Deploy: build_in_progress
+2026-08-30T01:31:54.0833998Z [6s] Status do Deploy: build_in_progress
+2026-08-30T01:32:00.3396403Z [12s] Status do Deploy: build_in_progress
+2026-08-30T01:32:06.5662480Z [18s] Status do Deploy: build_in_progress
+2026-08-30T01:32:12.8142323Z [25s] Status do Deploy: build_in_progress
+2026-08-30T01:32:19.0558955Z [31s] Status do Deploy: update_in_progress
+2026-08-30T01:32:25.3153982Z [37s] Status do Deploy: update_in_progress
+2026-08-30T01:32:31.5565140Z [43s] Status do Deploy: update_in_progress
+2026-08-30T01:32:37.8037985Z [50s] Status do Deploy: update_in_progress
+2026-08-30T01:32:44.0428403Z [56s] Status do Deploy: update_in_progress
+2026-08-30T01:32:50.3294557Z [62s] Status do Deploy: update_in_progress
+2026-08-30T01:32:56.5658609Z [68s] Status do Deploy: update_in_progress
+2026-08-30T01:33:02.8312085Z [75s] Status do Deploy: update_in_progress
+2026-08-30T01:33:09.0964932Z [81s] Status do Deploy: live
+2026-08-30T01:33:15.6873066Z 🎉 Deploy finalizado e online no Render!
+2026-08-30T01:33:15.6873752Z 
+2026-08-30T01:33:15.6876411Z --- 5. TESTE DE INTERFACE E2E EM PRODUÇÃO (RENDER) ---
+2026-08-30T01:33:15.6877155Z Tentativa 1: Testando https://lay-cs-baltazar.onrender.com...
+2026-08-30T01:33:15.6877561Z 
+2026-08-30T01:33:15.6877995Z Resultado dos Testes Visuais em Produção:
+2026-08-30T01:33:15.6878676Z   ✅ Painel IA Especialista: OK
+2026-08-30T01:33:15.6879239Z   ✅ Ordenação por Confiança: OK
+2026-08-30T01:33:15.6879884Z   ✅ Gaveta de Parecer IA: OK
+2026-08-30T01:33:15.6880426Z   ✅ Destaque Top 5: OK
+2026-08-30T01:33:15.6880795Z 
+2026-08-30T01:33:15.6881338Z 🌟 VALIDAÇÃO COMPLETA: O Frontend está 100% íntegro em produção!
+2026-08-30T01:33:15.7173429Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-30T01:33:15.7175199Z Post job cleanup.
+2026-08-30T01:33:15.8400532Z (node:2386) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-30T01:33:15.8401644Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-30T01:33:15.8571238Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar --files-from manifest.txt --use-compress-program zstdmt
+2026-08-30T01:33:16.2060763Z (node:2386) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-08-30T01:33:17.1942661Z Sent 40435712 of 62787831 (64.4%), 38.5 MBs/sec
+2026-08-30T01:33:17.9071633Z Sent 62787831 of 62787831 (100.0%), 35.0 MBs/sec
+2026-08-30T01:33:18.1551621Z Cache saved with the key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-cef96a2e7d78bdad3f6efc89025e23ecbacfbba5aa9b0cb49831cdea0aa26491
+2026-08-30T01:33:18.1709324Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-30T01:33:18.1710564Z Post job cleanup.
+2026-08-30T01:33:18.2555345Z [command]/usr/bin/git version
+2026-08-30T01:33:18.2575285Z git version 2.55.0
+2026-08-30T01:33:18.2647547Z Temporarily overriding HOME='/home/runner/work/_temp/d8baa115-9365-4153-807b-36e590d3d205' before making global git config changes
+2026-08-30T01:33:18.2653973Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-30T01:33:18.2655352Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-30T01:33:18.2657876Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-30T01:33:18.2680600Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-30T01:33:18.2883112Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-30T01:33:18.2908150Z http.https://github.com/.extraheader
+2026-08-30T01:33:18.2917522Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-08-30T01:33:18.2956084Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-30T01:33:18.3155650Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-30T01:33:18.3187999Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-30T01:33:18.3550886Z Cleaning up orphan processes
+2026-08-30T01:33:18.3830071Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,179 @@
+Toggle Sidebar
+Layback Bot
+Modo Teste
+R$ 2.068,10
+HB
+Helder Baltazar De Alcantara
+Dashboard
+Bots
+Versão Desktop
+Novo Bot
+Jogos ao vivo
+Listas de jogos
+Trading em execução
+4
+Relatórios
+Indicadores
+Logs dos Bots
+Projeto Público
+Compartilhamento
+Pagamentos
+Marketplace
+Novo
+Backtest
+Novo
+Manual
+Plano atual
+26/50 Bots
+Expira em
+21/09/2026
+Restam
+26 dias
+Discord
+Suporte
+Ajuda
+Betfair Brasil
+Configurações
+Status do Sistema
+Back
+Editar Bot
+ID: 4626
+
+Atualize as configurações do seu bot.
+
+0.
+Informações básicas
+Entenda essa etapa
+Ativo
+Nome do Bot
+15/100
+Lay 0 a 1 lista
+Grupo
+Lista CS
+Usa lista
+Voltar
+Avançar
+1.
+Critérios de entrada
+Entenda essa etapa
+2.
+Gestão de Stake
+Entenda essa etapa
+3.
+Placar
+Entenda essa etapa
+4.
+Estatísticas
+Entenda essa etapa
+5.
+Histórico
+Entenda essa etapa
+6.
+Competições
+Entenda essa etapa
+7.
+Times
+Entenda essa etapa
+Apostar em novos times
+
+Seu bot vai apostar em novos times que são adicionados ao nosso banco de dados.
+
+Exportar times
+Importar times
+Selecionar todas
+Deselecionar todas
+07 Vestur
+Ambos
+Casa
+Fora
+Ambos
+1 Dezembro
+Ambos
+Casa
+Fora
+Ambos
+1 FC Slovacko (W)
+Ambos
+Casa
+Fora
+Ambos
+1. FC Koln (W)
+Ambos
+Casa
+Fora
+Ambos
+1. FC Union Berlin (W)
+Ambos
+Casa
+Fora
+Ambos
+1.MFK Kezmarok
+Ambos
+Casa
+Fora
+Ambos
+12 de Junio de Villa Hayes
+Ambos
+Casa
+Fora
+Ambos
+12 de Octubre de Itaugua
+Ambos
+Casa
+Fora
+Ambos
+1860 Munich
+Ambos
+Casa
+Fora
+Ambos
+1926 Polatli Belediye Spor
+Ambos
+Casa
+Fora
+Ambos
+22 de Julio FC
+Ambos
+Casa
+Fora
+Ambos
+24 de Setiembre
+Ambos
+Casa
+Fora
+Ambos
+29 de Setiembre
+Ambos
+Casa
+Fora
+Ambos
+3 de Febrero FBC
+Ambos
+Casa
+Fora
+Ambos
+3 de Noviembre
+Ambos
+Casa
+Fora
+Ambos
+1
+2
+...
+426
+Resumo
+Times para apostar:
+4
+Ver selecionados
+Times para NÃO apostar:
+6377
+Ver não selecionados
+Voltar
+Avançar
+8.
+Configurações de Saída
+Entenda essa etapa
+9.
+Configurações gerais
+Entenda essa etapa
+Salvar Bot

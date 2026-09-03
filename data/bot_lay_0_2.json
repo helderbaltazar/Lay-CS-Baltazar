@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "betOnNewTeam": true,
+  "teams": [
+    {
+      "name": "Al-Hilal",
+      "id": "1995258",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Al-Adalh",
+      "id": "2119112",
+      "checked": true,
+      "side": "A"
+    }
+  ]
+}

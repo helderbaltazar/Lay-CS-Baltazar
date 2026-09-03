@@ -1,0 +1,21 @@
+﻿2026-08-29T12:15:48.1026221Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-29T12:15:48.1032992Z ##[group]Run actions/cache@v4
+2026-08-29T12:15:48.1034161Z with:
+2026-08-29T12:15:48.1035056Z   path: cache/
+2026-08-29T12:15:48.1036084Z   key: api-cache-Linux-33252057719
+2026-08-29T12:15:48.1037398Z   restore-keys: api-cache-Linux-
+
+2026-08-29T12:15:48.1038685Z   enableCrossOsArchive: false
+2026-08-29T12:15:48.1039898Z   fail-on-cache-miss: false
+2026-08-29T12:15:48.1041315Z   lookup-only: false
+2026-08-29T12:15:48.1042409Z   save-always: false
+2026-08-29T12:15:48.1043434Z ##[endgroup]
+2026-08-29T12:15:48.2167137Z (node:2139) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-29T12:15:48.2171646Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-29T12:15:48.4654653Z Cache hit for restore-key: api-cache-Linux-33246336551
+2026-08-29T12:15:48.4776465Z (node:2139) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-08-29T12:15:48.9233518Z Received 74949 of 74949 (100.0%), 0.4 MBs/sec
+2026-08-29T12:15:48.9234820Z Cache Size: ~0 MB (74949 B)
+2026-08-29T12:15:48.9264011Z [command]/usr/bin/tar -xf /home/runner/work/_temp/a2dc6984-b3f9-405b-a51a-21f913f5b5c9/cache.tzst -P -C /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar --use-compress-program unzstd
+2026-08-29T12:15:48.9354904Z Cache restored successfully
+2026-08-29T12:15:48.9432265Z Cache restored from key: api-cache-Linux-33246336551

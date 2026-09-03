@@ -1,0 +1,20 @@
+﻿2026-08-29T22:42:58.1182033Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-29T22:42:58.1183374Z ##[group]Run actions/upload-artifact@v4
+2026-08-29T22:42:58.1183686Z with:
+2026-08-29T22:42:58.1183933Z   name: debug-screenshot
+2026-08-29T22:42:58.1184209Z   path: logs/login_error.png
+2026-08-29T22:42:58.1184511Z   if-no-files-found: warn
+2026-08-29T22:42:58.1184781Z   compression-level: 6
+2026-08-29T22:42:58.1185048Z   overwrite: false
+2026-08-29T22:42:58.1185311Z   include-hidden-files: false
+2026-08-29T22:42:58.1185589Z env:
+2026-08-29T22:42:58.1185883Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:58.1186353Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-29T22:42:58.1186814Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:58.1187282Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:58.1187698Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:58.1188291Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-29T22:42:58.1188653Z ##[endgroup]
+2026-08-29T22:42:58.2853514Z (node:4653) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-29T22:42:58.2854416Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-29T22:42:58.2890985Z ##[warning]No files were found with the provided path: logs/login_error.png. No artifacts will be uploaded.

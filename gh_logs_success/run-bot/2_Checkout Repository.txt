@@ -1,0 +1,74 @@
+﻿2026-08-29T22:45:51.8583331Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-29T22:45:51.8593015Z ##[group]Run actions/checkout@v4
+2026-08-29T22:45:51.8594013Z with:
+2026-08-29T22:45:51.8594642Z   repository: helderbaltazar/Lay-CS-Baltazar
+2026-08-29T22:45:51.8599040Z   token: ***
+2026-08-29T22:45:51.8599617Z   ssh-strict: true
+2026-08-29T22:45:51.8600195Z   ssh-user: git
+2026-08-29T22:45:51.8600776Z   persist-credentials: true
+2026-08-29T22:45:51.8601405Z   clean: true
+2026-08-29T22:45:51.8601978Z   sparse-checkout-cone-mode: true
+2026-08-29T22:45:51.8602868Z   fetch-depth: 1
+2026-08-29T22:45:51.8603525Z   fetch-tags: false
+2026-08-29T22:45:51.8604148Z   show-progress: true
+2026-08-29T22:45:51.8604729Z   lfs: false
+2026-08-29T22:45:51.8605302Z   submodules: false
+2026-08-29T22:45:51.8605944Z   set-safe-directory: true
+2026-08-29T22:45:51.8606583Z   allow-unsafe-pr-checkout: false
+2026-08-29T22:45:51.8607554Z ##[endgroup]
+2026-08-29T22:45:51.9670385Z Syncing repository: helderbaltazar/Lay-CS-Baltazar
+2026-08-29T22:45:51.9674219Z ##[group]Getting Git version info
+2026-08-29T22:45:51.9676009Z Working directory is '/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar'
+2026-08-29T22:45:51.9678523Z [command]/usr/bin/git version
+2026-08-29T22:45:51.9752409Z git version 2.55.0
+2026-08-29T22:45:51.9775330Z ##[endgroup]
+2026-08-29T22:45:51.9800446Z Temporarily overriding HOME='/home/runner/work/_temp/6615d76f-0c03-4b05-a925-e6653a65cb88' before making global git config changes
+2026-08-29T22:45:51.9803463Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-29T22:45:51.9807287Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-29T22:45:51.9861069Z Deleting the contents of '/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar'
+2026-08-29T22:45:51.9865713Z ##[group]Initializing the repository
+2026-08-29T22:45:51.9871078Z [command]/usr/bin/git init /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-29T22:45:51.9979357Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-08-29T22:45:51.9981507Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-08-29T22:45:51.9983868Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-08-29T22:45:51.9985896Z hint: call:
+2026-08-29T22:45:51.9987983Z hint:
+2026-08-29T22:45:51.9989329Z hint: 	git config --global init.defaultBranch <name>
+2026-08-29T22:45:51.9990774Z hint:
+2026-08-29T22:45:52.0067095Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-08-29T22:45:52.0068834Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-08-29T22:45:52.0070216Z hint:
+2026-08-29T22:45:52.0071287Z hint: 	git branch -m <name>
+2026-08-29T22:45:52.0072399Z hint:
+2026-08-29T22:45:52.0073981Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-08-29T22:45:52.0076423Z Initialized empty Git repository in /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/.git/
+2026-08-29T22:45:52.0080468Z [command]/usr/bin/git remote add origin https://github.com/helderbaltazar/Lay-CS-Baltazar
+2026-08-29T22:45:52.0084662Z ##[endgroup]
+2026-08-29T22:45:52.0086449Z ##[group]Disabling automatic garbage collection
+2026-08-29T22:45:52.0088001Z [command]/usr/bin/git config --local gc.auto 0
+2026-08-29T22:45:52.0098969Z ##[endgroup]
+2026-08-29T22:45:52.0100563Z ##[group]Setting up auth
+2026-08-29T22:45:52.0107105Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-29T22:45:52.0142211Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-29T22:45:52.0535167Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-29T22:45:52.0579081Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-29T22:45:52.0815965Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-29T22:45:52.0854630Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-29T22:45:52.1084406Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-08-29T22:45:52.1125060Z ##[endgroup]
+2026-08-29T22:45:52.1126836Z ##[group]Fetching the repository
+2026-08-29T22:45:52.1134994Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +c356467dc767290db91d931a2c8a9d3e878bfa67:refs/remotes/origin/main
+2026-08-29T22:45:52.8006321Z From https://github.com/helderbaltazar/Lay-CS-Baltazar
+2026-08-29T22:45:52.8008103Z  * [new ref]         c356467dc767290db91d931a2c8a9d3e878bfa67 -> origin/main
+2026-08-29T22:45:52.8027010Z ##[endgroup]
+2026-08-29T22:45:52.8028688Z ##[group]Determining the checkout info
+2026-08-29T22:45:52.8030423Z ##[endgroup]
+2026-08-29T22:45:52.8031522Z [command]/usr/bin/git sparse-checkout disable
+2026-08-29T22:45:52.8088093Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-08-29T22:45:52.8129342Z ##[group]Checking out the ref
+2026-08-29T22:45:52.8135023Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-08-29T22:45:52.8304929Z Switched to a new branch 'main'
+2026-08-29T22:45:52.8309790Z branch 'main' set up to track 'origin/main'.
+2026-08-29T22:45:52.8353236Z ##[endgroup]
+2026-08-29T22:45:52.8415786Z [command]/usr/bin/git log -1 --format=%H
+2026-08-29T22:45:52.8450620Z c356467dc767290db91d931a2c8a9d3e878bfa67

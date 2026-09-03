@@ -54,3 +54,31 @@ class PoissonDixonColes:
             else:
                 results[target] = 0.0
         return results
+
+    def get_under_over_probabilities(self, lam_home, lam_away, limit=2.5):
+        matrix = self.predict(lam_home, lam_away)
+        under = 0.0
+        for (h, a), prob in matrix.items():
+            if (h + a) < limit:
+                under += prob
+        return {"under": under, "over": 1.0 - under}
+
+    def get_btts_probabilities(self, lam_home, lam_away):
+        matrix = self.predict(lam_home, lam_away)
+        yes = 0.0
+        for (h, a), prob in matrix.items():
+            if h > 0 and a > 0:
+                yes += prob
+        return {"yes": yes, "no": 1.0 - yes}
+
+    def get_match_odds(self, lam_home, lam_away):
+        matrix = self.predict(lam_home, lam_away)
+        home = draw = away = 0.0
+        for (h, a), prob in matrix.items():
+            if h > a:
+                home += prob
+            elif h == a:
+                draw += prob
+            else:
+                away += prob
+        return {"home": home, "draw": draw, "away": away}

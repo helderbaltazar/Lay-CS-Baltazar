@@ -1,0 +1,29 @@
+﻿2026-08-30T01:31:42.8116695Z ##[group]Run python -m pytest tests/web/ -v
+2026-08-30T01:31:42.8117192Z [36;1mpython -m pytest tests/web/ -v[0m
+2026-08-30T01:31:42.8144671Z shell: /usr/bin/bash -e {0}
+2026-08-30T01:31:42.8145130Z env:
+2026-08-30T01:31:42.8145532Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8146235Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-30T01:31:42.8146758Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8147243Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8147761Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:42.8148264Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-30T01:31:42.8148693Z ##[endgroup]
+2026-08-30T01:31:43.7138228Z ============================= test session starts ==============================
+2026-08-30T01:31:43.7139321Z platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
+2026-08-30T01:31:43.7140406Z cachedir: .pytest_cache
+2026-08-30T01:31:43.7140869Z rootdir: /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-30T01:31:43.7141367Z configfile: pytest.ini
+2026-08-30T01:31:43.7141732Z plugins: cov-7.1.0
+2026-08-30T01:31:43.9149387Z collecting ... collected 8 items
+2026-08-30T01:31:43.9149905Z 
+2026-08-30T01:31:44.0600677Z tests/web/test_app.py::test_index_route PASSED                           [ 12%]
+2026-08-30T01:31:44.1700998Z tests/web/test_app.py::test_history_route PASSED                         [ 25%]
+2026-08-30T01:31:44.2595384Z tests/web/test_ui.py::test_base_html_has_analytics_link PASSED           [ 37%]
+2026-08-30T01:31:44.3616089Z tests/web/test_ui.py::test_history_html_has_export_link PASSED           [ 50%]
+2026-08-30T01:31:44.4576362Z tests/web/test_ui.py::test_analytics_route_returns_200 PASSED            [ 62%]
+2026-08-30T01:31:44.5480754Z tests/web/test_ui.py::test_export_route_returns_csv PASSED               [ 75%]
+2026-08-30T01:31:44.6382048Z tests/web/test_ui.py::test_index_html_has_ai_specialist_panel PASSED     [ 87%]
+2026-08-30T01:31:44.7739597Z tests/web/test_ui.py::test_index_html_renders_match_with_ai_drawer_and_top5 PASSED [100%]
+2026-08-30T01:31:44.7740348Z 
+2026-08-30T01:31:44.7740712Z ============================== 8 passed in 1.02s ===============================

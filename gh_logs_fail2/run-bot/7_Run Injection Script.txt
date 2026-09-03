@@ -1,0 +1,47 @@
+﻿2026-08-29T12:16:46.8199658Z ##[group]Run for i in 1 2 3; do
+2026-08-29T12:16:46.8200294Z [36;1mfor i in 1 2 3; do[0m
+2026-08-29T12:16:46.8200659Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-29T12:16:46.8201061Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-29T12:16:46.8201535Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-29T12:16:46.8201974Z [36;1m    sleep 15[0m
+2026-08-29T12:16:46.8202221Z [36;1m  }[0m
+2026-08-29T12:16:46.8202465Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-29T12:16:46.8202837Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-29T12:16:46.8203184Z [36;1m    exit 1[0m
+2026-08-29T12:16:46.8203423Z [36;1m  fi[0m
+2026-08-29T12:16:46.8203647Z [36;1mdone[0m
+2026-08-29T12:16:46.8242869Z shell: /usr/bin/bash -e {0}
+2026-08-29T12:16:46.8243163Z env:
+2026-08-29T12:16:46.8243483Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:16:46.8243981Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-29T12:16:46.8244525Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:16:46.8244962Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:16:46.8245397Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T12:16:46.8245832Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-29T12:16:46.8246710Z   API_FOOTBALL_KEY: ***
+2026-08-29T12:16:46.8247046Z   FOOTBALL_DATA_KEY: ***
+2026-08-29T12:16:46.8247350Z   LAYBACK_EMAIL: ***
+2026-08-29T12:16:46.8247623Z   LAYBACK_PASSWORD: ***
+2026-08-29T12:16:46.8248298Z   DATABASE_URL: ***
+2026-08-29T12:16:46.8248661Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-29T12:16:46.8248970Z   TELEGRAM_CHAT_ID: ***
+2026-08-29T12:16:46.8249253Z   PROXY_SERVER: ***
+2026-08-29T12:16:46.8249522Z   PROXY_USERNAME: ***
+2026-08-29T12:16:46.8249843Z   PROXY_PASSWORD: ***
+2026-08-29T12:16:46.8250350Z ##[endgroup]
+2026-08-29T12:16:46.8325158Z Iniciando tentativa 1...
+2026-08-29T12:16:51.9863364Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-08-29T12:16:51.9864203Z 4 jogos encontrados pendentes.
+2026-08-29T12:16:51.9865025Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-08-29T12:16:51.9866201Z Atualização concluída.
+2026-08-29T12:16:51.9868992Z [2026-08-29 09:16:48.921528-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-29T12:16:51.9870564Z ⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...
+2026-08-29T12:16:51.9871233Z Buscando jogos de 2026-08-29 na API...
+2026-08-29T12:16:51.9872126Z Erro da API: {'requests': 'You have reached the request limit for the day, Go to https://dashboard.api-football.com to upgrade your plan.'}
+2026-08-29T12:16:51.9873309Z ⚠️ API-Football falhou ou retornou vazio. Tentando Fallback (Football-Data.org)...
+2026-08-29T12:16:51.9874126Z ❌ Nenhum jogo configurado nas ligas para hoje retornado pela API.
+2026-08-29T12:16:51.9875062Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-29T12:16:51.9875596Z [0-1] Nenhum jogo no banco para hoje.
+2026-08-29T12:16:51.9876052Z [0-2] Nenhum jogo no banco para hoje.
+2026-08-29T12:16:51.9876493Z [0-3] Nenhum jogo no banco para hoje.
+2026-08-29T12:16:51.9876914Z [1-3] Nenhum jogo no banco para hoje.

@@ -115,12 +115,15 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                 detailed = str(data.get('analise_detalhada', '')).strip()
                 if not detailed:
                     detailed = f'Partida auditada com veredito {verdict}. Segurança estimada em {confidence}%.'
+                    
+                adjustment_factor = float(data.get('fator_ajuste', 1.0))
 
                 return {
                     'verdict': verdict,
                     'confidence': confidence,
                     'critical_factor': critical[:250],
-                    'detailed_analysis': detailed
+                    'detailed_analysis': detailed,
+                    'adjustment_factor': adjustment_factor
                 }
         except Exception as e:
             logger.warning(f'[AI Analyst] Falha ao parsear JSON da IA: {e}')
@@ -162,7 +165,8 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
             'verdict': verdict,
             'confidence': confidence,
             'critical_factor': critical[:250],
-            'detailed_analysis': detailed
+            'detailed_analysis': detailed,
+            'adjustment_factor': 1.0
         }
 
 
@@ -242,11 +246,13 @@ Responda APENAS com JSON:
                     match['ai_confidence'] = analysis['confidence']
                     match['ai_critical_factor'] = analysis['critical_factor']
                     match['ai_analysis'] = analysis['detailed_analysis']
+                    match['ai_adjustment_factor'] = analysis.get('adjustment_factor', 1.0)
                 else:
                     fallback = cls._fallback_analysis(match, target_score, prob, 'Fora do Top 10 prioritário.')
                     match['ai_verdict'] = fallback['verdict']
                     match['ai_confidence'] = fallback['confidence']
                     match['ai_critical_factor'] = fallback['critical_factor']
                     match['ai_analysis'] = fallback['detailed_analysis']
+                    match['ai_adjustment_factor'] = fallback.get('adjustment_factor', 1.0)
 
         return rankings

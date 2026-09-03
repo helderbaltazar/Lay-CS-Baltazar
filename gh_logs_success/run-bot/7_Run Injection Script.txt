@@ -1,0 +1,61 @@
+﻿2026-08-29T22:46:42.4732910Z ##[group]Run for i in 1 2 3; do
+2026-08-29T22:46:42.4733325Z [36;1mfor i in 1 2 3; do[0m
+2026-08-29T22:46:42.4733646Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-29T22:46:42.4734042Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-29T22:46:42.4734527Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-29T22:46:42.4734972Z [36;1m    sleep 15[0m
+2026-08-29T22:46:42.4735243Z [36;1m  }[0m
+2026-08-29T22:46:42.4735491Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-29T22:46:42.4735824Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-29T22:46:42.4736156Z [36;1m    exit 1[0m
+2026-08-29T22:46:42.4736392Z [36;1m  fi[0m
+2026-08-29T22:46:42.4736618Z [36;1mdone[0m
+2026-08-29T22:46:42.4773595Z shell: /usr/bin/bash -e {0}
+2026-08-29T22:46:42.4773890Z env:
+2026-08-29T22:46:42.4774205Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:46:42.4774705Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-29T22:46:42.4785246Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:46:42.4785731Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:46:42.4786180Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:46:42.4786633Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-29T22:46:42.4787363Z   API_FOOTBALL_KEY: ***
+2026-08-29T22:46:42.4787687Z   FOOTBALL_DATA_KEY: ***
+2026-08-29T22:46:42.4788025Z   GEMINI_API_KEY: ***
+2026-08-29T22:46:42.4788308Z   LAYBACK_EMAIL: ***
+2026-08-29T22:46:42.4788579Z   LAYBACK_PASSWORD: ***
+2026-08-29T22:46:42.4789278Z   DATABASE_URL: ***
+2026-08-29T22:46:42.4789643Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-29T22:46:42.4789929Z   TELEGRAM_CHAT_ID: ***
+2026-08-29T22:46:42.4790213Z   PROXY_SERVER: ***
+2026-08-29T22:46:42.4790476Z   PROXY_USERNAME: ***
+2026-08-29T22:46:42.4790750Z   PROXY_PASSWORD: ***
+2026-08-29T22:46:42.4790995Z ##[endgroup]
+2026-08-29T22:46:42.4848452Z Iniciando tentativa 1...
+2026-08-29T22:46:45.8308808Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-29T22:47:24.5773524Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-29T22:48:02.3065866Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-29T22:48:39.6118272Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-29T22:49:13.9511247Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-08-29T22:49:13.9513570Z 67 jogos encontrados pendentes.
+2026-08-29T22:49:13.9514529Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-08-29T22:49:13.9515479Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-08-29T22:49:13.9519505Z Atualização concluída.
+2026-08-29T22:49:13.9520225Z [2026-08-29 19:46:45.338898-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-29T22:49:13.9520958Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-08-29T22:49:13.9521601Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-29T22:49:13.9522155Z [0-1] Rank 1: Galatasaray x Göztepe (Prob: 0.71%)
+2026-08-29T22:49:13.9522874Z [0-1] Rank 2: AZ Alkmaar x GO Ahead Eagles (Prob: 1.85%)
+2026-08-29T22:49:13.9523328Z [0-1] Injetando no bot 4626 via Playwright...
+2026-08-29T22:49:13.9523693Z [0-1] SUCESSO!
+2026-08-29T22:49:13.9524073Z [0-2] Rank 1: Galatasaray x Göztepe (Prob: 0.44%)
+2026-08-29T22:49:13.9524506Z [0-2] Rank 2: Juventus x Parma (Prob: 1.25%)
+2026-08-29T22:49:13.9524897Z [0-2] Injetando no bot 4753 via Playwright...
+2026-08-29T22:49:13.9525250Z [0-2] SUCESSO!
+2026-08-29T22:49:13.9525598Z [0-3] Rank 1: Galatasaray x Göztepe (Prob: 0.12%)
+2026-08-29T22:49:13.9526020Z [0-3] Rank 2: Juventus x Parma (Prob: 0.24%)
+2026-08-29T22:49:13.9526370Z [0-3] Injetando no bot 27251 via Playwright...
+2026-08-29T22:49:13.9526685Z [0-3] SUCESSO!
+2026-08-29T22:49:13.9526957Z [1-3] Rank 1: OH Leuven x Standard Liege (Prob: 0.29%)
+2026-08-29T22:49:13.9527374Z [1-3] Rank 2: Galatasaray x Göztepe (Prob: 0.42%)
+2026-08-29T22:49:13.9528165Z [1-3] Injetando no bot 29778 via Playwright...
+2026-08-29T22:49:13.9528474Z [1-3] SUCESSO!

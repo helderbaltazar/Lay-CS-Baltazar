@@ -1,0 +1,96 @@
+﻿2026-08-28T09:17:03.8909907Z ##[group]Run for i in 1 2 3; do
+2026-08-28T09:17:03.8910285Z [36;1mfor i in 1 2 3; do[0m
+2026-08-28T09:17:03.8910600Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-28T09:17:03.8910990Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-28T09:17:03.8911465Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-28T09:17:03.8911891Z [36;1m    sleep 15[0m
+2026-08-28T09:17:03.8912151Z [36;1m  }[0m
+2026-08-28T09:17:03.8912389Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-28T09:17:03.8912916Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-28T09:17:03.8913252Z [36;1m    exit 1[0m
+2026-08-28T09:17:03.8913483Z [36;1m  fi[0m
+2026-08-28T09:17:03.8913707Z [36;1mdone[0m
+2026-08-28T09:17:03.8951300Z shell: /usr/bin/bash -e {0}
+2026-08-28T09:17:03.8951594Z env:
+2026-08-28T09:17:03.8951897Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:17:03.8952394Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-28T09:17:03.8953082Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:17:03.8953512Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:17:03.8953935Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:17:03.8954364Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-28T09:17:03.8954901Z   API_FOOTBALL_KEY: ***
+2026-08-28T09:17:03.8955396Z   LAYBACK_EMAIL: ***
+2026-08-28T09:17:03.8955669Z   LAYBACK_PASSWORD: ***
+2026-08-28T09:17:03.8956345Z   DATABASE_URL: ***
+2026-08-28T09:17:03.8956704Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-28T09:17:03.8956987Z   TELEGRAM_CHAT_ID: ***
+2026-08-28T09:17:03.8957268Z   PROXY_SERVER: ***
+2026-08-28T09:17:03.8957528Z   PROXY_USERNAME: ***
+2026-08-28T09:17:03.8957800Z   PROXY_PASSWORD: ***
+2026-08-28T09:17:03.8958040Z ##[endgroup]
+2026-08-28T09:17:03.9015875Z Iniciando tentativa 1...
+2026-08-28T09:17:13.1522188Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-28T09:17:30.2231893Z [4626] Aba Times não encontrada
+2026-08-28T09:17:30.3520693Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-28T09:17:34.2778913Z Traceback (most recent call last):
+2026-08-28T09:17:34.2788562Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 130, in <module>
+2026-08-28T09:17:34.2789625Z [2026-08-28 06:17:04.448850-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-28T09:17:34.2790282Z ⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...
+2026-08-28T09:17:34.2800503Z Buscando jogos de 2026-08-28 na API...
+2026-08-28T09:17:34.2801482Z ✅ Novos jogos calculados e salvos no banco de dados com sucesso.
+2026-08-28T09:17:34.2802902Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-28T09:17:34.2803685Z [0-1] Rank 1: Groningen x Fortuna Sittard (Prob: 5.25%)
+2026-08-28T09:17:34.2804314Z [0-1] Injetando no bot 4626 via Playwright...
+2026-08-28T09:17:34.2804839Z [0-1] FALHOU!
+2026-08-28T09:17:34.2805349Z [0-2] Rank 1: Groningen x Fortuna Sittard (Prob: 2.69%)
+2026-08-28T09:17:34.2805991Z [0-2] Injetando no bot 4753 via Playwright...
+2026-08-28T09:17:34.2806603Z     inject_from_db()
+2026-08-28T09:17:34.2807580Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 112, in inject_from_db
+2026-08-28T09:17:34.2808601Z     success = inject_teams_ui(bot_id, json_file)
+2026-08-28T09:17:34.2809104Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-28T09:17:34.2809735Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/integration/layback.py", line 115, in inject_teams_ui
+2026-08-28T09:17:34.2810411Z     page.goto("https://bot-betfair.layback.trade/dashboard")
+2026-08-28T09:17:34.2811175Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 9875, in goto
+2026-08-28T09:17:34.2811819Z     self._sync(
+2026-08-28T09:17:34.2812399Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+2026-08-28T09:17:34.2813637Z     return task.result()
+2026-08-28T09:17:34.2813913Z            ^^^^^^^^^^^^^
+2026-08-28T09:17:34.2814501Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 560, in goto
+2026-08-28T09:17:34.2815224Z     return await self._main_frame.goto(**locals_to_params(locals()))
+2026-08-28T09:17:34.2815659Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-28T09:17:34.2816316Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 156, in goto
+2026-08-28T09:17:34.2816921Z     await self._channel.send(
+2026-08-28T09:17:34.2817526Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+2026-08-28T09:17:34.2818159Z     return await self._connection.wrap_api_call(
+2026-08-28T09:17:34.2818502Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-28T09:17:34.2819179Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+2026-08-28T09:17:34.2819978Z     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+2026-08-28T09:17:34.2820813Z playwright._impl._errors.Error: Page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://bot-betfair.layback.trade/dashboard
+2026-08-28T09:17:34.2821618Z Call log:
+2026-08-28T09:17:34.2822026Z   - navigating to "https://bot-betfair.layback.trade/dashboard", waiting until "load"
+2026-08-28T09:17:34.2822407Z 
+2026-08-28T09:17:34.4232026Z Tentativa 1 falhou. Aguardando 15s para tentar de novo...
+2026-08-28T09:17:49.4258009Z Iniciando tentativa 2...
+2026-08-28T09:17:51.3010792Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-28T09:18:07.0433595Z [4626] Aba Times não encontrada
+2026-08-28T09:18:07.1699117Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-28T09:18:22.6315666Z [4753] Aba Times não encontrada
+2026-08-28T09:18:22.7565609Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-28T09:18:41.4446367Z [27251] Aba Times não encontrada
+2026-08-28T09:18:41.5721186Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-28T09:18:58.3917840Z [29778] Aba Times não encontrada
+2026-08-28T09:18:59.1605212Z [2026-08-28 06:17:49.831982-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-28T09:18:59.1609500Z ✅ Jogos do dia já existem no banco de dados. Pulando a extração da API...
+2026-08-28T09:18:59.1610493Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-28T09:18:59.1611109Z [0-1] Rank 1: Groningen x Fortuna Sittard (Prob: 5.25%)
+2026-08-28T09:18:59.1611650Z [0-1] Injetando no bot 4626 via Playwright...
+2026-08-28T09:18:59.1612107Z [0-1] FALHOU!
+2026-08-28T09:18:59.1612798Z [0-2] Rank 1: Groningen x Fortuna Sittard (Prob: 2.69%)
+2026-08-28T09:18:59.1613488Z [0-2] Injetando no bot 4753 via Playwright...
+2026-08-28T09:18:59.1614081Z [0-2] FALHOU!
+2026-08-28T09:18:59.1614485Z [0-3] Rank 1: Groningen x Fortuna Sittard (Prob: 0.76%)
+2026-08-28T09:18:59.1615028Z [0-3] Injetando no bot 27251 via Playwright...
+2026-08-28T09:18:59.1615476Z [0-3] FALHOU!
+2026-08-28T09:18:59.1615855Z [1-3] Rank 1: Groningen x Fortuna Sittard (Prob: 1.33%)
+2026-08-28T09:18:59.1616367Z [1-3] Injetando no bot 29778 via Playwright...
+2026-08-28T09:18:59.1616815Z [1-3] FALHOU!

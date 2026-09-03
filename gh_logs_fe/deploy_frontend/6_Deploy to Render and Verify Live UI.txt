@@ -1,0 +1,77 @@
+﻿2026-08-30T01:31:44.8638006Z ##[group]Run python deploy_frontend.py
+2026-08-30T01:31:44.8638455Z [36;1mpython deploy_frontend.py[0m
+2026-08-30T01:31:44.8663377Z shell: /usr/bin/bash -e {0}
+2026-08-30T01:31:44.8663883Z env:
+2026-08-30T01:31:44.8664405Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8665022Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-30T01:31:44.8665528Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8666046Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8666533Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T01:31:44.8667022Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-30T01:31:44.8667524Z   RENDER_API_KEY: rnd_S8cQDmEMslEPkYDWfsZ6hEWMWXYM
+2026-08-30T01:31:44.8667936Z   RENDER_SERVICE_ID: srv-da87ptijnfac73d2o9p0
+2026-08-30T01:31:44.8669000Z   DATABASE_URL: ***
+2026-08-30T01:31:44.8669360Z   DASHBOARD_USERNAME: helderbaltazar
+2026-08-30T01:31:44.8670302Z   DASHBOARD_PASSWORD: Bonde74812005
+2026-08-30T01:31:44.8670778Z   API_FOOTBALL_KEY: ***
+2026-08-30T01:31:44.8671198Z   FOOTBALL_DATA_KEY: ***
+2026-08-30T01:31:44.8671602Z   GEMINI_API_KEY: ***
+2026-08-30T01:31:44.8672077Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-30T01:31:44.8672417Z   TELEGRAM_CHAT_ID: ***
+2026-08-30T01:31:44.8672771Z ##[endgroup]
+2026-08-30T01:31:47.8574323Z 
+2026-08-30T01:31:47.8575866Z --- 1. EXECUTANDO TESTES DE INTERFACE LOCAIS (PYTEST) ---
+2026-08-30T01:31:47.8576692Z ============================= test session starts ==============================
+2026-08-30T01:31:47.8577970Z platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
+2026-08-30T01:31:47.8578541Z cachedir: .pytest_cache
+2026-08-30T01:31:47.8579018Z rootdir: /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar
+2026-08-30T01:31:47.8579829Z configfile: pytest.ini
+2026-08-30T01:31:47.8580218Z plugins: cov-7.1.0
+2026-08-30T01:31:47.8580601Z collecting ... collected 8 items
+2026-08-30T01:31:47.8581000Z 
+2026-08-30T01:31:47.8581340Z tests/web/test_app.py::test_index_route PASSED                           [ 12%]
+2026-08-30T01:31:47.8581938Z tests/web/test_app.py::test_history_route PASSED                         [ 25%]
+2026-08-30T01:31:47.8582558Z tests/web/test_ui.py::test_base_html_has_analytics_link PASSED           [ 37%]
+2026-08-30T01:31:47.8583160Z tests/web/test_ui.py::test_history_html_has_export_link PASSED           [ 50%]
+2026-08-30T01:31:47.8583707Z tests/web/test_ui.py::test_analytics_route_returns_200 PASSED            [ 62%]
+2026-08-30T01:31:47.8584691Z tests/web/test_ui.py::test_export_route_returns_csv PASSED               [ 75%]
+2026-08-30T01:31:47.8585427Z tests/web/test_ui.py::test_index_html_has_ai_specialist_panel PASSED     [ 87%]
+2026-08-30T01:31:47.8586335Z tests/web/test_ui.py::test_index_html_renders_match_with_ai_drawer_and_top5 PASSED [100%]
+2026-08-30T01:31:47.8586980Z 
+2026-08-30T01:31:47.8587239Z ============================== 8 passed in 0.96s ===============================
+2026-08-30T01:31:47.8587708Z 
+2026-08-30T01:31:47.8588379Z ✅ Todos os testes de interface locais passaram com sucesso!
+2026-08-30T01:31:47.8588893Z 
+2026-08-30T01:31:47.8589343Z --- 2. SINCRONIZANDO VARIÁVEIS DE AMBIENTE NO RENDER ---
+2026-08-30T01:31:47.8590102Z ✅ Variáveis de ambiente sincronizadas no Render!
+2026-08-30T01:31:47.8590483Z 
+2026-08-30T01:31:47.8590802Z --- 3. DISPARANDO NOVO DEPLOY NO RENDER ---
+2026-08-30T01:31:47.8591524Z 🚀 Deploy iniciado com sucesso! ID: dep-da9og0on74is738od3l0
+2026-08-30T01:31:47.8591981Z 
+2026-08-30T01:31:47.8592336Z --- 4. MONITORANDO STATUS DO DEPLOY (dep-da9og0on74is738od3l0) ---
+2026-08-30T01:31:47.8593026Z [0s] Status do Deploy: build_in_progress
+2026-08-30T01:31:54.0833944Z [6s] Status do Deploy: build_in_progress
+2026-08-30T01:32:00.3396362Z [12s] Status do Deploy: build_in_progress
+2026-08-30T01:32:06.5662431Z [18s] Status do Deploy: build_in_progress
+2026-08-30T01:32:12.8140898Z [25s] Status do Deploy: build_in_progress
+2026-08-30T01:32:19.0558901Z [31s] Status do Deploy: update_in_progress
+2026-08-30T01:32:25.3153932Z [37s] Status do Deploy: update_in_progress
+2026-08-30T01:32:31.5565088Z [43s] Status do Deploy: update_in_progress
+2026-08-30T01:32:37.8037931Z [50s] Status do Deploy: update_in_progress
+2026-08-30T01:32:44.0428353Z [56s] Status do Deploy: update_in_progress
+2026-08-30T01:32:50.3294517Z [62s] Status do Deploy: update_in_progress
+2026-08-30T01:32:56.5658562Z [68s] Status do Deploy: update_in_progress
+2026-08-30T01:33:02.8312039Z [75s] Status do Deploy: update_in_progress
+2026-08-30T01:33:09.0964882Z [81s] Status do Deploy: live
+2026-08-30T01:33:15.6873011Z 🎉 Deploy finalizado e online no Render!
+2026-08-30T01:33:15.6873745Z 
+2026-08-30T01:33:15.6876395Z --- 5. TESTE DE INTERFACE E2E EM PRODUÇÃO (RENDER) ---
+2026-08-30T01:33:15.6877151Z Tentativa 1: Testando https://lay-cs-baltazar.onrender.com...
+2026-08-30T01:33:15.6877556Z 
+2026-08-30T01:33:15.6877975Z Resultado dos Testes Visuais em Produção:
+2026-08-30T01:33:15.6878671Z   ✅ Painel IA Especialista: OK
+2026-08-30T01:33:15.6879235Z   ✅ Ordenação por Confiança: OK
+2026-08-30T01:33:15.6879881Z   ✅ Gaveta de Parecer IA: OK
+2026-08-30T01:33:15.6880423Z   ✅ Destaque Top 5: OK
+2026-08-30T01:33:15.6880791Z 
+2026-08-30T01:33:15.6881333Z 🌟 VALIDAÇÃO COMPLETA: O Frontend está 100% íntegro em produção!

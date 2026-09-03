@@ -1,0 +1,8 @@
+﻿2026-08-28T09:18:59.3809389Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-28T09:18:59.3810915Z Post job cleanup.
+2026-08-28T09:18:59.5082766Z (node:5097) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-28T09:18:59.5083657Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-28T09:18:59.5258028Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar --files-from manifest.txt --use-compress-program zstdmt
+2026-08-28T09:18:59.7980464Z (node:5097) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-08-28T09:19:00.1743019Z Sent 74933 of 74933 (100.0%), 0.2 MBs/sec
+2026-08-28T09:19:00.3255337Z Cache saved with key: api-cache-Linux-33158655173

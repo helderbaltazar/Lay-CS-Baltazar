@@ -1,0 +1,253 @@
+﻿2026-08-29T22:42:06.2118658Z ##[group]Run for i in 1 2 3; do
+2026-08-29T22:42:06.2119085Z [36;1mfor i in 1 2 3; do[0m
+2026-08-29T22:42:06.2119401Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-29T22:42:06.2119812Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-29T22:42:06.2120315Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-29T22:42:06.2120765Z [36;1m    sleep 15[0m
+2026-08-29T22:42:06.2121024Z [36;1m  }[0m
+2026-08-29T22:42:06.2121271Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-29T22:42:06.2121623Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-29T22:42:06.2121961Z [36;1m    exit 1[0m
+2026-08-29T22:42:06.2122199Z [36;1m  fi[0m
+2026-08-29T22:42:06.2122483Z [36;1mdone[0m
+2026-08-29T22:42:06.2170690Z shell: /usr/bin/bash -e {0}
+2026-08-29T22:42:06.2171011Z env:
+2026-08-29T22:42:06.2171328Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:06.2171821Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-29T22:42:06.2172352Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:06.2172782Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:06.2173215Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-29T22:42:06.2173645Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-29T22:42:06.2174399Z   API_FOOTBALL_KEY: ***
+2026-08-29T22:42:06.2174727Z   FOOTBALL_DATA_KEY: ***
+2026-08-29T22:42:06.2175069Z   GEMINI_API_KEY: ***
+2026-08-29T22:42:06.2175357Z   LAYBACK_EMAIL: ***
+2026-08-29T22:42:06.2175628Z   LAYBACK_PASSWORD: ***
+2026-08-29T22:42:06.2176307Z   DATABASE_URL: ***
+2026-08-29T22:42:06.2176670Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-29T22:42:06.2176954Z   TELEGRAM_CHAT_ID: ***
+2026-08-29T22:42:06.2177239Z   PROXY_SERVER: ***
+2026-08-29T22:42:06.2177529Z   PROXY_USERNAME: ***
+2026-08-29T22:42:06.2178127Z   PROXY_PASSWORD: ***
+2026-08-29T22:42:06.2178402Z ##[endgroup]
+2026-08-29T22:42:06.2238633Z Iniciando tentativa 1...
+2026-08-29T22:42:08.7838106Z Traceback (most recent call last):
+2026-08-29T22:42:08.7839081Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-08-29T22:42:08.7850430Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+2026-08-29T22:42:08.7851749Z 67 jogos encontrados pendentes.
+2026-08-29T22:42:08.7852390Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-08-29T22:42:08.7853162Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-08-29T22:42:08.7854079Z Atualização concluída.
+2026-08-29T22:42:08.7854975Z [2026-08-29 19:42:08.534294-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-29T22:42:08.7856104Z ✅ Jogos do dia já existem no banco de dados. Pulando a extração da API...
+2026-08-29T22:42:08.7857281Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-29T22:42:08.7858275Z     self.dialect.do_execute(
+2026-08-29T22:42:08.7859463Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+2026-08-29T22:42:08.7860689Z     cursor.execute(statement, parameters)
+2026-08-29T22:42:08.7861522Z psycopg2.errors.UndefinedColumn: column predictions.ai_verdict does not exist
+2026-08-29T22:42:08.7862571Z LINE 1: ...edictions.profit_loss AS predictions_profit_loss, prediction...
+2026-08-29T22:42:08.7863381Z                                                              ^
+2026-08-29T22:42:08.7863791Z 
+2026-08-29T22:42:08.7863803Z 
+2026-08-29T22:42:08.7864183Z The above exception was the direct cause of the following exception:
+2026-08-29T22:42:08.7864739Z 
+2026-08-29T22:42:08.7864945Z Traceback (most recent call last):
+2026-08-29T22:42:08.7865921Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 142, in <module>
+2026-08-29T22:42:08.7866861Z     inject_from_db()
+2026-08-29T22:42:08.7867972Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 90, in inject_from_db
+2026-08-29T22:42:08.7869552Z     ).order_by(Prediction.rank).limit(2).all()
+2026-08-29T22:42:08.7870167Z                                          ^^^^^
+2026-08-29T22:42:08.7871282Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2711, in all
+2026-08-29T22:42:08.7872391Z     return self._iter().all()  # type: ignore
+2026-08-29T22:42:08.7872936Z            ^^^^^^^^^^^^
+2026-08-29T22:42:08.7873946Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2864, in _iter
+2026-08-29T22:42:08.7875222Z     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+2026-08-29T22:42:08.7876031Z                                                   ^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:08.7877267Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+2026-08-29T22:42:08.7878616Z     return self._execute_internal(
+2026-08-29T22:42:08.7879143Z            ^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:08.7880331Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+2026-08-29T22:42:08.7881695Z     result: Result[Any] = compile_state_cls.orm_execute_statement(
+2026-08-29T22:42:08.7882723Z                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:08.7884067Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+2026-08-29T22:42:08.7885276Z     result = conn.execute(
+2026-08-29T22:42:08.7885742Z              ^^^^^^^^^^^^^
+2026-08-29T22:42:08.7886796Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+2026-08-29T22:42:08.7888098Z     return meth(
+2026-08-29T22:42:08.7888504Z            ^^^^^
+2026-08-29T22:42:08.7889651Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+2026-08-29T22:42:08.7890946Z     return connection._execute_clauseelement(
+2026-08-29T22:42:08.7891548Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:08.7892802Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+2026-08-29T22:42:08.7894035Z     ret = self._execute_context(
+2026-08-29T22:42:08.7894594Z           ^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:08.7895726Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+2026-08-29T22:42:08.7896930Z     return self._exec_single_context(
+2026-08-29T22:42:08.7897460Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:08.7898904Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+2026-08-29T22:42:08.7900143Z     self._handle_dbapi_exception(
+2026-08-29T22:42:08.7901371Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+2026-08-29T22:42:08.7902848Z     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+2026-08-29T22:42:08.7904301Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+2026-08-29T22:42:08.7907001Z     self.dialect.do_execute(
+2026-08-29T22:42:08.7908451Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+2026-08-29T22:42:08.7909697Z     cursor.execute(statement, parameters)
+2026-08-29T22:42:08.7911231Z sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column predictions.ai_verdict does not exist
+2026-08-29T22:42:08.7912489Z LINE 1: ...edictions.profit_loss AS predictions_profit_loss, prediction...
+2026-08-29T22:42:08.7913473Z                                                              ^
+2026-08-29T22:42:08.7913837Z 
+2026-08-29T22:42:08.7917282Z [SQL: SELECT predictions.id AS predictions_id, predictions.match_id AS predictions_match_id, predictions.target_score AS predictions_target_score, predictions.probability AS predictions_probability, predictions.rank AS predictions_rank, predictions.is_hit AS predictions_is_hit, predictions.match_odd AS predictions_match_odd, predictions.profit_loss AS predictions_profit_loss, predictions.ai_verdict AS predictions_ai_verdict, predictions.ai_confidence AS predictions_ai_confidence, predictions.ai_critical_factor AS predictions_ai_critical_factor, predictions.ai_analysis AS predictions_ai_analysis 
+2026-08-29T22:42:08.7921387Z FROM predictions JOIN matches ON matches.id = predictions.match_id 
+2026-08-29T22:42:08.7922818Z WHERE predictions.target_score = %(target_score_1)s AND predictions.ai_verdict != %(ai_verdict_1)s AND predictions.rank <= %(rank_1)s AND matches.date >= %(date_1)s ORDER BY predictions.rank 
+2026-08-29T22:42:08.7924092Z  LIMIT %(param_1)s]
+2026-08-29T22:42:08.7925291Z [parameters: {'target_score_1': '0-1', 'ai_verdict_1': 'VETADO', 'rank_1': 2, 'date_1': datetime.datetime(2026, 8, 29, 0, 0, tzinfo=<DstTzInfo 'America/Sao_Paulo' -03-1 day, 21:00:00 STD>), 'param_1': 2}]
+2026-08-29T22:42:08.7926835Z (Background on this error at: https://sqlalche.me/e/20/f405)
+2026-08-29T22:42:08.9103595Z Tentativa 1 falhou. Aguardando 15s para tentar de novo...
+2026-08-29T22:42:23.9126794Z Iniciando tentativa 2...
+2026-08-29T22:42:25.8630808Z Traceback (most recent call last):
+2026-08-29T22:42:25.8631370Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-08-29T22:42:25.8632798Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+2026-08-29T22:42:25.8633715Z 67 jogos encontrados pendentes.
+2026-08-29T22:42:25.8634218Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-08-29T22:42:25.8634981Z     self.dialect.do_execute(
+2026-08-29T22:42:25.8636557Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+2026-08-29T22:42:25.8637967Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-08-29T22:42:25.8638962Z Atualização concluída.
+2026-08-29T22:42:25.8639800Z [2026-08-29 19:42:25.626901-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-29T22:42:25.8640999Z     cursor.execute(statement, parameters)
+2026-08-29T22:42:25.8641908Z psycopg2.errors.UndefinedColumn: column predictions.ai_verdict does not exist
+2026-08-29T22:42:25.8643105Z LINE 1: ...edictions.profit_loss AS predictions_profit_loss, prediction...
+2026-08-29T22:42:25.8644037Z                                                              ^
+2026-08-29T22:42:25.8644516Z 
+2026-08-29T22:42:25.8644525Z 
+2026-08-29T22:42:25.8644950Z The above exception was the direct cause of the following exception:
+2026-08-29T22:42:25.8645580Z 
+2026-08-29T22:42:25.8645743Z Traceback (most recent call last):
+2026-08-29T22:42:25.8646492Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 142, in <module>
+2026-08-29T22:42:25.8647195Z     inject_from_db()
+2026-08-29T22:42:25.8648195Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 90, in inject_from_db
+2026-08-29T22:42:25.8649476Z ✅ Jogos do dia já existem no banco de dados. Pulando a extração da API...
+2026-08-29T22:42:25.8650058Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-29T22:42:25.8650470Z     ).order_by(Prediction.rank).limit(2).all()
+2026-08-29T22:42:25.8668816Z                                          ^^^^^
+2026-08-29T22:42:25.8679388Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2711, in all
+2026-08-29T22:42:25.8680505Z     return self._iter().all()  # type: ignore
+2026-08-29T22:42:25.8681048Z            ^^^^^^^^^^^^
+2026-08-29T22:42:25.8682431Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2864, in _iter
+2026-08-29T22:42:25.8683626Z     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+2026-08-29T22:42:25.8684378Z                                                   ^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:25.8685521Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+2026-08-29T22:42:25.8686575Z     return self._execute_internal(
+2026-08-29T22:42:25.8687073Z            ^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:25.8688412Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+2026-08-29T22:42:25.8689673Z     result: Result[Any] = compile_state_cls.orm_execute_statement(
+2026-08-29T22:42:25.8690381Z                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:25.8691601Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+2026-08-29T22:42:25.8692619Z     result = conn.execute(
+2026-08-29T22:42:25.8692903Z              ^^^^^^^^^^^^^
+2026-08-29T22:42:25.8693618Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+2026-08-29T22:42:25.8694440Z     return meth(
+2026-08-29T22:42:25.8694681Z            ^^^^^
+2026-08-29T22:42:25.8695311Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+2026-08-29T22:42:25.8695996Z     return connection._execute_clauseelement(
+2026-08-29T22:42:25.8696334Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:25.8697034Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+2026-08-29T22:42:25.8697698Z     ret = self._execute_context(
+2026-08-29T22:42:25.8698287Z           ^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:25.8698929Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+2026-08-29T22:42:25.8699582Z     return self._exec_single_context(
+2026-08-29T22:42:25.8699894Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:25.8700545Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+2026-08-29T22:42:25.8701191Z     self._handle_dbapi_exception(
+2026-08-29T22:42:25.8701923Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+2026-08-29T22:42:25.8702678Z     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+2026-08-29T22:42:25.8703425Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+2026-08-29T22:42:25.8704072Z     self.dialect.do_execute(
+2026-08-29T22:42:25.8704676Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+2026-08-29T22:42:25.8705313Z     cursor.execute(statement, parameters)
+2026-08-29T22:42:25.8705911Z sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column predictions.ai_verdict does not exist
+2026-08-29T22:42:25.8706610Z LINE 1: ...edictions.profit_loss AS predictions_profit_loss, prediction...
+2026-08-29T22:42:25.8707070Z                                                              ^
+2026-08-29T22:42:25.8707301Z 
+2026-08-29T22:42:25.8709662Z [SQL: SELECT predictions.id AS predictions_id, predictions.match_id AS predictions_match_id, predictions.target_score AS predictions_target_score, predictions.probability AS predictions_probability, predictions.rank AS predictions_rank, predictions.is_hit AS predictions_is_hit, predictions.match_odd AS predictions_match_odd, predictions.profit_loss AS predictions_profit_loss, predictions.ai_verdict AS predictions_ai_verdict, predictions.ai_confidence AS predictions_ai_confidence, predictions.ai_critical_factor AS predictions_ai_critical_factor, predictions.ai_analysis AS predictions_ai_analysis 
+2026-08-29T22:42:25.8712215Z FROM predictions JOIN matches ON matches.id = predictions.match_id 
+2026-08-29T22:42:25.8713118Z WHERE predictions.target_score = %(target_score_1)s AND predictions.ai_verdict != %(ai_verdict_1)s AND predictions.rank <= %(rank_1)s AND matches.date >= %(date_1)s ORDER BY predictions.rank 
+2026-08-29T22:42:25.8713907Z  LIMIT %(param_1)s]
+2026-08-29T22:42:25.8714693Z [parameters: {'target_score_1': '0-1', 'ai_verdict_1': 'VETADO', 'rank_1': 2, 'date_1': datetime.datetime(2026, 8, 29, 0, 0, tzinfo=<DstTzInfo 'America/Sao_Paulo' -03-1 day, 21:00:00 STD>), 'param_1': 2}]
+2026-08-29T22:42:25.8715561Z (Background on this error at: https://sqlalche.me/e/20/f405)
+2026-08-29T22:42:25.9907542Z Tentativa 2 falhou. Aguardando 15s para tentar de novo...
+2026-08-29T22:42:40.9923585Z Iniciando tentativa 3...
+2026-08-29T22:42:42.9819804Z Traceback (most recent call last):
+2026-08-29T22:42:42.9821790Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+2026-08-29T22:42:42.9824200Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-08-29T22:42:42.9825099Z     self.dialect.do_execute(
+2026-08-29T22:42:42.9826722Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+2026-08-29T22:42:42.9828677Z 67 jogos encontrados pendentes.
+2026-08-29T22:42:42.9829585Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-08-29T22:42:42.9830594Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-08-29T22:42:42.9831619Z Atualização concluída.
+2026-08-29T22:42:42.9832610Z [2026-08-29 19:42:42.735490-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-29T22:42:42.9833939Z ✅ Jogos do dia já existem no banco de dados. Pulando a extração da API...
+2026-08-29T22:42:42.9835058Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-29T22:42:42.9835875Z     cursor.execute(statement, parameters)
+2026-08-29T22:42:42.9836834Z psycopg2.errors.UndefinedColumn: column predictions.ai_verdict does not exist
+2026-08-29T22:42:42.9838266Z LINE 1: ...edictions.profit_loss AS predictions_profit_loss, prediction...
+2026-08-29T22:42:42.9839219Z                                                              ^
+2026-08-29T22:42:42.9839668Z 
+2026-08-29T22:42:42.9839675Z 
+2026-08-29T22:42:42.9839950Z The above exception was the direct cause of the following exception:
+2026-08-29T22:42:42.9840358Z 
+2026-08-29T22:42:42.9840513Z Traceback (most recent call last):
+2026-08-29T22:42:42.9841233Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 142, in <module>
+2026-08-29T22:42:42.9841820Z     inject_from_db()
+2026-08-29T22:42:42.9842765Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 90, in inject_from_db
+2026-08-29T22:42:42.9843509Z     ).order_by(Prediction.rank).limit(2).all()
+2026-08-29T22:42:42.9843848Z                                          ^^^^^
+2026-08-29T22:42:42.9844451Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2711, in all
+2026-08-29T22:42:42.9845059Z     return self._iter().all()  # type: ignore
+2026-08-29T22:42:42.9845374Z            ^^^^^^^^^^^^
+2026-08-29T22:42:42.9846314Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2864, in _iter
+2026-08-29T22:42:42.9847530Z     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+2026-08-29T22:42:42.9849155Z                                                   ^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:42.9850378Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+2026-08-29T22:42:42.9851690Z     return self._execute_internal(
+2026-08-29T22:42:42.9852187Z            ^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:42.9853285Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+2026-08-29T22:42:42.9854712Z     result: Result[Any] = compile_state_cls.orm_execute_statement(
+2026-08-29T22:42:42.9855214Z                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:42.9855911Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+2026-08-29T22:42:42.9856558Z     result = conn.execute(
+2026-08-29T22:42:42.9856827Z              ^^^^^^^^^^^^^
+2026-08-29T22:42:42.9857386Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+2026-08-29T22:42:42.9858204Z     return meth(
+2026-08-29T22:42:42.9858631Z            ^^^^^
+2026-08-29T22:42:42.9859588Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+2026-08-29T22:42:42.9860275Z     return connection._execute_clauseelement(
+2026-08-29T22:42:42.9860611Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:42.9861270Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+2026-08-29T22:42:42.9869255Z     ret = self._execute_context(
+2026-08-29T22:42:42.9869839Z           ^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:42.9871060Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+2026-08-29T22:42:42.9872148Z     return self._exec_single_context(
+2026-08-29T22:42:42.9872703Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-08-29T22:42:42.9873845Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+2026-08-29T22:42:42.9875008Z     self._handle_dbapi_exception(
+2026-08-29T22:42:42.9876157Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+2026-08-29T22:42:42.9877543Z     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+2026-08-29T22:42:42.9879241Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+2026-08-29T22:42:42.9880446Z     self.dialect.do_execute(
+2026-08-29T22:42:42.9881577Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+2026-08-29T22:42:42.9882804Z     cursor.execute(statement, parameters)
+2026-08-29T22:42:42.9883663Z sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column predictions.ai_verdict does not exist
+2026-08-29T22:42:42.9884397Z LINE 1: ...edictions.profit_loss AS predictions_profit_loss, prediction...
+2026-08-29T22:42:42.9884847Z                                                              ^
+2026-08-29T22:42:42.9885070Z 
+2026-08-29T22:42:42.9887126Z [SQL: SELECT predictions.id AS predictions_id, predictions.match_id AS predictions_match_id, predictions.target_score AS predictions_target_score, predictions.probability AS predictions_probability, predictions.rank AS predictions_rank, predictions.is_hit AS predictions_is_hit, predictions.match_odd AS predictions_match_odd, predictions.profit_loss AS predictions_profit_loss, predictions.ai_verdict AS predictions_ai_verdict, predictions.ai_confidence AS predictions_ai_confidence, predictions.ai_critical_factor AS predictions_ai_critical_factor, predictions.ai_analysis AS predictions_ai_analysis 
+2026-08-29T22:42:42.9889724Z FROM predictions JOIN matches ON matches.id = predictions.match_id 
+2026-08-29T22:42:42.9890624Z WHERE predictions.target_score = %(target_score_1)s AND predictions.ai_verdict != %(ai_verdict_1)s AND predictions.rank <= %(rank_1)s AND matches.date >= %(date_1)s ORDER BY predictions.rank 
+2026-08-29T22:42:42.9891634Z  LIMIT %(param_1)s]
+2026-08-29T22:42:42.9892366Z [parameters: {'target_score_1': '0-1', 'ai_verdict_1': 'VETADO', 'rank_1': 2, 'date_1': datetime.datetime(2026, 8, 29, 0, 0, tzinfo=<DstTzInfo 'America/Sao_Paulo' -03-1 day, 21:00:00 STD>), 'param_1': 2}]
+2026-08-29T22:42:42.9893363Z (Background on this error at: https://sqlalche.me/e/20/f405)
+2026-08-29T22:42:43.1078914Z Tentativa 3 falhou. Aguardando 15s para tentar de novo...
+2026-08-29T22:42:58.1094314Z Todas as 3 tentativas falharam.
+2026-08-29T22:42:58.1110946Z ##[error]Process completed with exit code 1.

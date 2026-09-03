@@ -1,0 +1,163 @@
+﻿2026-09-01T23:45:46.5378102Z ##[group]Run for i in 1 2 3; do
+2026-09-01T23:45:46.5378504Z [36;1mfor i in 1 2 3; do[0m
+2026-09-01T23:45:46.5378833Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-09-01T23:45:46.5379241Z [36;1m  python run_real_injection.py && break || {[0m
+2026-09-01T23:45:46.5379745Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-09-01T23:45:46.5380194Z [36;1m    sleep 15[0m
+2026-09-01T23:45:46.5380462Z [36;1m  }[0m
+2026-09-01T23:45:46.5380723Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-09-01T23:45:46.5381069Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-09-01T23:45:46.5381412Z [36;1m    exit 1[0m
+2026-09-01T23:45:46.5381660Z [36;1m  fi[0m
+2026-09-01T23:45:46.5381904Z [36;1mdone[0m
+2026-09-01T23:45:46.5423643Z shell: /usr/bin/bash -e {0}
+2026-09-01T23:45:46.5423947Z env:
+2026-09-01T23:45:46.5424275Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-01T23:45:46.5424783Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-01T23:45:46.5425320Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-01T23:45:46.5425754Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-01T23:45:46.5426199Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-01T23:45:46.5426645Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-01T23:45:46.5427230Z   API_FOOTBALL_KEY: ***
+2026-09-01T23:45:46.5427566Z   FOOTBALL_DATA_KEY: ***
+2026-09-01T23:45:46.5427924Z   GEMINI_API_KEY: ***
+2026-09-01T23:45:46.5428221Z   LAYBACK_EMAIL: ***
+2026-09-01T23:45:46.5428507Z   LAYBACK_PASSWORD: ***
+2026-09-01T23:45:46.5429215Z   DATABASE_URL: ***
+2026-09-01T23:45:46.5429599Z   TELEGRAM_BOT_TOKEN: ***
+2026-09-01T23:45:46.5429903Z   TELEGRAM_CHAT_ID: ***
+2026-09-01T23:45:46.5430198Z   PROXY_SERVER: ***
+2026-09-01T23:45:46.5430509Z   PROXY_USERNAME: ***
+2026-09-01T23:45:46.5430808Z   PROXY_PASSWORD: ***
+2026-09-01T23:45:46.5431067Z ##[endgroup]
+2026-09-01T23:45:46.5496145Z Iniciando tentativa 1...
+2026-09-01T23:45:49.8398885Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-09-01T23:46:50.7523955Z Traceback (most recent call last):
+2026-09-01T23:46:50.7524488Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-09-01T23:46:50.7535326Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 202, in <module>
+2026-09-01T23:46:50.7536038Z     inject_from_db()
+2026-09-01T23:46:50.7536642Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 164, in inject_from_db
+2026-09-01T23:46:50.7537250Z     success = inject_teams_ui(bot_id, json_file)
+2026-09-01T23:46:50.7537612Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:46:50.7538205Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/integration/layback.py", line 115, in inject_teams_ui
+2026-09-01T23:46:50.7539027Z     page.goto("https://bot-betfair.layback.trade/dashboard", timeout=60000, wait_until="domcontentloaded")
+2026-09-01T23:46:50.7539968Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 9875, in goto
+2026-09-01T23:46:50.7540672Z 9 jogos encontrados pendentes.
+2026-09-01T23:46:50.7541051Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-09-01T23:46:50.7541479Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-09-01T23:46:50.7541883Z Buscando placares da data 2026-09-02 na API (1 Request)...
+2026-09-01T23:46:50.7542808Z Buscando placares da data 2026-09-01 na API (1 Request)...
+2026-09-01T23:46:50.7543629Z Atualização concluída.
+2026-09-01T23:46:50.7544458Z [2026-09-01 20:45:49.501005-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-09-01T23:46:50.7545473Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-09-01T23:46:50.7546280Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-09-01T23:46:50.7547045Z [0-1] Rank 1: Al-Hilal Saudi FC x Al-Ahli Jeddah (Prob: 3.06%) [IA: 97%]
+2026-09-01T23:46:50.7548316Z [0-1] Rank 1: Flamengo x Mirassol (Prob: 10.11%) [IA: 90%]
+2026-09-01T23:46:50.7548871Z [0-1] Injetando no bot 4626 via Playwright...
+2026-09-01T23:46:50.7549337Z     self._sync(
+2026-09-01T23:46:50.7550290Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+2026-09-01T23:46:50.7551084Z     return task.result()
+2026-09-01T23:46:50.7551378Z            ^^^^^^^^^^^^^
+2026-09-01T23:46:50.7551929Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 560, in goto
+2026-09-01T23:46:50.7556327Z     return await self._main_frame.goto(**locals_to_params(locals()))
+2026-09-01T23:46:50.7556770Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:46:50.7557429Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 156, in goto
+2026-09-01T23:46:50.7558039Z     await self._channel.send(
+2026-09-01T23:46:50.7558653Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+2026-09-01T23:46:50.7559293Z     return await self._connection.wrap_api_call(
+2026-09-01T23:46:50.7559642Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:46:50.7560333Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+2026-09-01T23:46:50.7561118Z     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+2026-09-01T23:46:50.7561689Z playwright._impl._errors.TimeoutError: Page.goto: Timeout 60000ms exceeded.
+2026-09-01T23:46:50.7562477Z Call log:
+2026-09-01T23:46:50.7562939Z   - navigating to "https://bot-betfair.layback.trade/dashboard", waiting until "domcontentloaded"
+2026-09-01T23:46:50.7563354Z 
+2026-09-01T23:46:50.9021627Z Tentativa 1 falhou. Aguardando 15s para tentar de novo...
+2026-09-01T23:47:05.9044582Z Iniciando tentativa 2...
+2026-09-01T23:47:08.7616151Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-09-01T23:48:09.5351783Z Traceback (most recent call last):
+2026-09-01T23:48:09.5352660Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-09-01T23:48:09.5353210Z 9 jogos encontrados pendentes.
+2026-09-01T23:48:09.5353702Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-09-01T23:48:09.5354379Z Buscando placares da data 2026-09-02 na API (1 Request)...
+2026-09-01T23:48:09.5355036Z Buscando placares da data 2026-09-01 na API (1 Request)...
+2026-09-01T23:48:09.5355683Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-09-01T23:48:09.5356565Z Atualização concluída.
+2026-09-01T23:48:09.5359237Z [2026-09-01 20:47:08.415287-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-09-01T23:48:09.5360300Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-09-01T23:48:09.5360917Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-09-01T23:48:09.5361450Z [0-1] Rank 1: Al-Hilal Saudi FC x Al-Ahli Jeddah (Prob: 3.06%) [IA: 97%]
+2026-09-01T23:48:09.5361930Z [0-1] Rank 1: Flamengo x Mirassol (Prob: 10.11%) [IA: 90%]
+2026-09-01T23:48:09.5362531Z [0-1] Injetando no bot 4626 via Playwright...
+2026-09-01T23:48:09.5363295Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 202, in <module>
+2026-09-01T23:48:09.5363864Z     inject_from_db()
+2026-09-01T23:48:09.5364449Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 164, in inject_from_db
+2026-09-01T23:48:09.5365057Z     success = inject_teams_ui(bot_id, json_file)
+2026-09-01T23:48:09.5365409Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:48:09.5365987Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/integration/layback.py", line 115, in inject_teams_ui
+2026-09-01T23:48:09.5366790Z     page.goto("https://bot-betfair.layback.trade/dashboard", timeout=60000, wait_until="domcontentloaded")
+2026-09-01T23:48:09.5367672Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 9875, in goto
+2026-09-01T23:48:09.5377088Z     self._sync(
+2026-09-01T23:48:09.5378115Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+2026-09-01T23:48:09.5382861Z     return task.result()
+2026-09-01T23:48:09.5395003Z            ^^^^^^^^^^^^^
+2026-09-01T23:48:09.5395763Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 560, in goto
+2026-09-01T23:48:09.5396669Z     return await self._main_frame.goto(**locals_to_params(locals()))
+2026-09-01T23:48:09.5397305Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:48:09.5398276Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 156, in goto
+2026-09-01T23:48:09.5399032Z     await self._channel.send(
+2026-09-01T23:48:09.5399989Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+2026-09-01T23:48:09.5400783Z     return await self._connection.wrap_api_call(
+2026-09-01T23:48:09.5401334Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:48:09.5402515Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+2026-09-01T23:48:09.5403544Z     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+2026-09-01T23:48:09.5404326Z playwright._impl._errors.TimeoutError: Page.goto: Timeout 60000ms exceeded.
+2026-09-01T23:48:09.5404937Z Call log:
+2026-09-01T23:48:09.5405661Z   - navigating to "https://bot-betfair.layback.trade/dashboard", waiting until "domcontentloaded"
+2026-09-01T23:48:09.5406317Z 
+2026-09-01T23:48:09.6687400Z Tentativa 2 falhou. Aguardando 15s para tentar de novo...
+2026-09-01T23:48:24.6704720Z Iniciando tentativa 3...
+2026-09-01T23:48:27.7338110Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-09-01T23:49:28.5191698Z Traceback (most recent call last):
+2026-09-01T23:49:28.5193035Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 202, in <module>
+2026-09-01T23:49:28.5193947Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-09-01T23:49:28.5194515Z 9 jogos encontrados pendentes.
+2026-09-01T23:49:28.5195114Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-09-01T23:49:28.5195794Z Buscando placares da data 2026-09-02 na API (1 Request)...
+2026-09-01T23:49:28.5196453Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-09-01T23:49:28.5197097Z Buscando placares da data 2026-09-01 na API (1 Request)...
+2026-09-01T23:49:28.5197888Z Atualização concluída.
+2026-09-01T23:49:28.5198432Z [2026-09-01 20:48:27.390690-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-09-01T23:49:28.5199131Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-09-01T23:49:28.5199792Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-09-01T23:49:28.5200263Z [0-1] Rank 1: Al-Hilal Saudi FC x Al-Ahli Jeddah (Prob: 3.06%) [IA: 97%]
+2026-09-01T23:49:28.5200717Z [0-1] Rank 1: Flamengo x Mirassol (Prob: 10.11%) [IA: 90%]
+2026-09-01T23:49:28.5201125Z [0-1] Injetando no bot 4626 via Playwright...
+2026-09-01T23:49:28.5203252Z     inject_from_db()
+2026-09-01T23:49:28.5205391Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 164, in inject_from_db
+2026-09-01T23:49:28.5206015Z     success = inject_teams_ui(bot_id, json_file)
+2026-09-01T23:49:28.5206389Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:49:28.5207010Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/integration/layback.py", line 115, in inject_teams_ui
+2026-09-01T23:49:28.5207833Z     page.goto("https://bot-betfair.layback.trade/dashboard", timeout=60000, wait_until="domcontentloaded")
+2026-09-01T23:49:28.5208725Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 9875, in goto
+2026-09-01T23:49:28.5214037Z     self._sync(
+2026-09-01T23:49:28.5214958Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+2026-09-01T23:49:28.5215927Z     return task.result()
+2026-09-01T23:49:28.5216332Z            ^^^^^^^^^^^^^
+2026-09-01T23:49:28.5217192Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 560, in goto
+2026-09-01T23:49:28.5218269Z     return await self._main_frame.goto(**locals_to_params(locals()))
+2026-09-01T23:49:28.5218917Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:49:28.5219902Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 156, in goto
+2026-09-01T23:49:28.5220851Z     await self._channel.send(
+2026-09-01T23:49:28.5221813Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+2026-09-01T23:49:28.5222996Z     return await self._connection.wrap_api_call(
+2026-09-01T23:49:28.5223529Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-01T23:49:28.5224660Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+2026-09-01T23:49:28.5225917Z     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+2026-09-01T23:49:28.5226767Z playwright._impl._errors.TimeoutError: Page.goto: Timeout 60000ms exceeded.
+2026-09-01T23:49:28.5227204Z Call log:
+2026-09-01T23:49:28.5227659Z   - navigating to "https://bot-betfair.layback.trade/dashboard", waiting until "domcontentloaded"
+2026-09-01T23:49:28.5228058Z 
+2026-09-01T23:49:28.7186805Z Tentativa 3 falhou. Aguardando 15s para tentar de novo...
+2026-09-01T23:49:43.7204906Z Todas as 3 tentativas falharam.
+2026-09-01T23:49:43.7219433Z ##[error]Process completed with exit code 1.

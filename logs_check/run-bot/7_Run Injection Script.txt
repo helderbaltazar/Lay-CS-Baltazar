@@ -1,0 +1,157 @@
+﻿2026-09-02T06:31:38.7749898Z ##[group]Run for i in 1 2 3; do
+2026-09-02T06:31:38.7750327Z [36;1mfor i in 1 2 3; do[0m
+2026-09-02T06:31:38.7750666Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-09-02T06:31:38.7751083Z [36;1m  python run_real_injection.py && break || {[0m
+2026-09-02T06:31:38.7751583Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-09-02T06:31:38.7752030Z [36;1m    sleep 15[0m
+2026-09-02T06:31:38.7752309Z [36;1m  }[0m
+2026-09-02T06:31:38.7752575Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-09-02T06:31:38.7753133Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-09-02T06:31:38.7753497Z [36;1m    exit 1[0m
+2026-09-02T06:31:38.7753753Z [36;1m  fi[0m
+2026-09-02T06:31:38.7754002Z [36;1mdone[0m
+2026-09-02T06:31:38.7795028Z shell: /usr/bin/bash -e {0}
+2026-09-02T06:31:38.7795340Z env:
+2026-09-02T06:31:38.7795676Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T06:31:38.7796191Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-02T06:31:38.7796731Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T06:31:38.7797171Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T06:31:38.7797603Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T06:31:38.7798034Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-02T06:31:38.7798598Z   API_FOOTBALL_KEY: ***
+2026-09-02T06:31:38.7798942Z   FOOTBALL_DATA_KEY: ***
+2026-09-02T06:31:38.7799316Z   GEMINI_API_KEY: ***
+2026-09-02T06:31:38.7799625Z   LAYBACK_EMAIL: ***
+2026-09-02T06:31:38.7799916Z   LAYBACK_PASSWORD: ***
+2026-09-02T06:31:38.7800662Z   DATABASE_URL: ***
+2026-09-02T06:31:38.7801062Z   TELEGRAM_BOT_TOKEN: ***
+2026-09-02T06:31:38.7801371Z   TELEGRAM_CHAT_ID: ***
+2026-09-02T06:31:38.7801710Z   PROXY_SERVER: ***
+2026-09-02T06:31:38.7802008Z   PROXY_USERNAME: ***
+2026-09-02T06:31:38.7802326Z   PROXY_PASSWORD: ***
+2026-09-02T06:31:38.7802592Z ##[endgroup]
+2026-09-02T06:31:38.7865729Z Iniciando tentativa 1...
+2026-09-02T06:33:11.4970532Z Traceback (most recent call last):
+2026-09-02T06:33:11.4977378Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 202, in <module>
+2026-09-02T06:33:11.4978053Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-09-02T06:33:11.4978428Z 9 jogos encontrados pendentes.
+2026-09-02T06:33:11.4978809Z Buscando placares da data 2026-09-02 na API (1 Request)...
+2026-09-02T06:33:11.4979259Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-09-02T06:33:11.4979690Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-09-02T06:33:11.4980094Z Buscando placares da data 2026-09-01 na API (1 Request)...
+2026-09-02T06:33:11.4980728Z Atualização concluída.
+2026-09-02T06:33:11.4981275Z [2026-09-02 03:31:40.524812-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-09-02T06:33:11.4981941Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-09-02T06:33:11.4982659Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-09-02T06:33:11.4983425Z [0-1] Rank 1: Flamengo x Mirassol (Prob: 10.11%) [IA: 90%]
+2026-09-02T06:33:11.4983823Z [0-1] Injetando no bot 4626 via Playwright...
+2026-09-02T06:33:11.4984368Z     inject_from_db()
+2026-09-02T06:33:11.4984980Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 164, in inject_from_db
+2026-09-02T06:33:11.4985653Z     success = inject_teams_ui(bot_id, json_file)
+2026-09-02T06:33:11.4986069Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:33:11.4986698Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/integration/layback.py", line 135, in inject_teams_ui
+2026-09-02T06:33:11.4987383Z     page.screenshot(path=f"logs/error_nav_{bot_id}.png")
+2026-09-02T06:33:11.4988179Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 10872, in screenshot
+2026-09-02T06:33:11.4991119Z     self._sync(
+2026-09-02T06:33:11.4991760Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+2026-09-02T06:33:11.4992805Z     return task.result()
+2026-09-02T06:33:11.4993380Z            ^^^^^^^^^^^^^
+2026-09-02T06:33:11.4993980Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 828, in screenshot
+2026-09-02T06:33:11.4994625Z     encoded_binary = await self._channel.send(
+2026-09-02T06:33:11.4995030Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:33:11.4995645Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+2026-09-02T06:33:11.4996348Z     return await self._connection.wrap_api_call(
+2026-09-02T06:33:11.4996751Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:33:11.4997413Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+2026-09-02T06:33:11.4998273Z     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+2026-09-02T06:33:11.4998920Z playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+2026-09-02T06:33:11.4999446Z Call log:
+2026-09-02T06:33:11.4999720Z   - taking page screenshot
+2026-09-02T06:33:11.5000095Z   - waiting for fonts to load...
+2026-09-02T06:33:11.5000444Z   - fonts loaded
+2026-09-02T06:33:11.5000608Z 
+2026-09-02T06:33:11.5929204Z Tentativa 1 falhou. Aguardando 15s para tentar de novo...
+2026-09-02T06:33:26.5950843Z Iniciando tentativa 2...
+2026-09-02T06:34:58.6350869Z Traceback (most recent call last):
+2026-09-02T06:34:58.6351556Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-09-02T06:34:58.6352769Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 202, in <module>
+2026-09-02T06:34:58.6355073Z     inject_from_db()
+2026-09-02T06:34:58.6356025Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 164, in inject_from_db
+2026-09-02T06:34:58.6357433Z 9 jogos encontrados pendentes.
+2026-09-02T06:34:58.6358026Z Buscando placares da data 2026-09-01 na API (1 Request)...
+2026-09-02T06:34:58.6358734Z Buscando placares da data 2026-09-02 na API (1 Request)...
+2026-09-02T06:34:58.6359426Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-09-02T06:34:58.6360114Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-09-02T06:34:58.6360993Z Atualização concluída.
+2026-09-02T06:34:58.6361823Z [2026-09-02 03:33:27.924364-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-09-02T06:34:58.6363166Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-09-02T06:34:58.6364130Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-09-02T06:34:58.6364847Z [0-1] Rank 1: Flamengo x Mirassol (Prob: 10.11%) [IA: 90%]
+2026-09-02T06:34:58.6365493Z [0-1] Injetando no bot 4626 via Playwright...
+2026-09-02T06:34:58.6375271Z     success = inject_teams_ui(bot_id, json_file)
+2026-09-02T06:34:58.6375913Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:34:58.6376907Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/integration/layback.py", line 135, in inject_teams_ui
+2026-09-02T06:34:58.6377908Z     page.screenshot(path=f"logs/error_nav_{bot_id}.png")
+2026-09-02T06:34:58.6379088Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 10872, in screenshot
+2026-09-02T06:34:58.6380108Z     self._sync(
+2026-09-02T06:34:58.6381021Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+2026-09-02T06:34:58.6381975Z     return task.result()
+2026-09-02T06:34:58.6382381Z            ^^^^^^^^^^^^^
+2026-09-02T06:34:58.6383493Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 828, in screenshot
+2026-09-02T06:34:58.6384512Z     encoded_binary = await self._channel.send(
+2026-09-02T06:34:58.6385323Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:34:58.6386282Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+2026-09-02T06:34:58.6386934Z     return await self._connection.wrap_api_call(
+2026-09-02T06:34:58.6387282Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:34:58.6387925Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+2026-09-02T06:34:58.6388707Z     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+2026-09-02T06:34:58.6389299Z playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+2026-09-02T06:34:58.6389762Z Call log:
+2026-09-02T06:34:58.6390025Z   - taking page screenshot
+2026-09-02T06:34:58.6390336Z   - waiting for fonts to load...
+2026-09-02T06:34:58.6390633Z   - fonts loaded
+2026-09-02T06:34:58.6390783Z 
+2026-09-02T06:34:58.7241301Z Tentativa 2 falhou. Aguardando 15s para tentar de novo...
+2026-09-02T06:35:13.7258744Z Iniciando tentativa 3...
+2026-09-02T06:36:45.7755108Z Traceback (most recent call last):
+2026-09-02T06:36:45.7755629Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-09-02T06:36:45.7756168Z 9 jogos encontrados pendentes.
+2026-09-02T06:36:45.7756549Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-09-02T06:36:45.7756993Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-09-02T06:36:45.7757417Z Buscando placares da data 2026-09-01 na API (1 Request)...
+2026-09-02T06:36:45.7757814Z Buscando placares da data 2026-09-02 na API (1 Request)...
+2026-09-02T06:36:45.7758431Z Atualização concluída.
+2026-09-02T06:36:45.7758967Z [2026-09-02 03:35:15.069658-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-09-02T06:36:45.7759632Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-09-02T06:36:45.7760228Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-09-02T06:36:45.7761035Z [0-1] Rank 1: Flamengo x Mirassol (Prob: 10.11%) [IA: 90%]
+2026-09-02T06:36:45.7761426Z [0-1] Injetando no bot 4626 via Playwright...
+2026-09-02T06:36:45.7762465Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 202, in <module>
+2026-09-02T06:36:45.7763263Z     inject_from_db()
+2026-09-02T06:36:45.7765836Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 164, in inject_from_db
+2026-09-02T06:36:45.7766822Z     success = inject_teams_ui(bot_id, json_file)
+2026-09-02T06:36:45.7767369Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:36:45.7768031Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/integration/layback.py", line 135, in inject_teams_ui
+2026-09-02T06:36:45.7768693Z     page.screenshot(path=f"logs/error_nav_{bot_id}.png")
+2026-09-02T06:36:45.7769471Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 10872, in screenshot
+2026-09-02T06:36:45.7780470Z     self._sync(
+2026-09-02T06:36:45.7781583Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+2026-09-02T06:36:45.7782326Z     return task.result()
+2026-09-02T06:36:45.7782622Z            ^^^^^^^^^^^^^
+2026-09-02T06:36:45.7785270Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 828, in screenshot
+2026-09-02T06:36:45.7785932Z     encoded_binary = await self._channel.send(
+2026-09-02T06:36:45.7786284Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:36:45.7786909Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+2026-09-02T06:36:45.7787541Z     return await self._connection.wrap_api_call(
+2026-09-02T06:36:45.7787890Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-02T06:36:45.7788532Z   File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+2026-09-02T06:36:45.7789581Z     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+2026-09-02T06:36:45.7790165Z playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+2026-09-02T06:36:45.7790619Z Call log:
+2026-09-02T06:36:45.7790875Z   - taking page screenshot
+2026-09-02T06:36:45.7791177Z   - waiting for fonts to load...
+2026-09-02T06:36:45.7791474Z   - fonts loaded
+2026-09-02T06:36:45.7791624Z 
+2026-09-02T06:36:45.8707537Z Tentativa 3 falhou. Aguardando 15s para tentar de novo...
+2026-09-02T06:37:00.8724015Z Todas as 3 tentativas falharam.
+2026-09-02T06:37:00.8741252Z ##[error]Process completed with exit code 1.

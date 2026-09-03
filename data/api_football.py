@@ -65,7 +65,7 @@ def get_team_stats(team_id, competition_id):
     if cached:
         return cached
 
-    seasons_to_try = [2024, 2023, 2022]
+    seasons_to_try = [2026, 2025, 2024]
     
     for season in seasons_to_try:
         time.sleep(6.1) # Rate limit API Free (10 per minute)

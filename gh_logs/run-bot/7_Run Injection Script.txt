@@ -1,0 +1,71 @@
+﻿2026-08-28T09:08:45.9884025Z ##[group]Run for i in 1 2 3; do
+2026-08-28T09:08:45.9884406Z [36;1mfor i in 1 2 3; do[0m
+2026-08-28T09:08:45.9884700Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-28T09:08:45.9885090Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-28T09:08:45.9885548Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-28T09:08:45.9885948Z [36;1m    sleep 15[0m
+2026-08-28T09:08:45.9886197Z [36;1m  }[0m
+2026-08-28T09:08:45.9886441Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-28T09:08:45.9886748Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-28T09:08:45.9887585Z [36;1m    exit 1[0m
+2026-08-28T09:08:45.9887830Z [36;1m  fi[0m
+2026-08-28T09:08:45.9888053Z [36;1mdone[0m
+2026-08-28T09:08:45.9927803Z shell: /usr/bin/bash -e {0}
+2026-08-28T09:08:45.9928092Z env:
+2026-08-28T09:08:45.9928385Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:08:45.9928844Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-28T09:08:45.9929338Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:08:45.9929743Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:08:45.9930132Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-28T09:08:45.9930537Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-28T09:08:45.9931133Z   API_FOOTBALL_KEY: ***
+2026-08-28T09:08:45.9931426Z   LAYBACK_EMAIL: ***
+2026-08-28T09:08:45.9931691Z   LAYBACK_PASSWORD: ***
+2026-08-28T09:08:45.9932367Z   DATABASE_URL: ***
+2026-08-28T09:08:45.9932722Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-28T09:08:45.9933004Z   TELEGRAM_CHAT_ID: ***
+2026-08-28T09:08:45.9933283Z   PROXY_SERVER: ***
+2026-08-28T09:08:45.9933538Z   PROXY_USERNAME: ***
+2026-08-28T09:08:45.9933805Z   PROXY_PASSWORD: ***
+2026-08-28T09:08:45.9934043Z ##[endgroup]
+2026-08-28T09:08:45.9995125Z Iniciando tentativa 1...
+2026-08-28T09:08:53.7780376Z Traceback (most recent call last):
+2026-08-28T09:08:53.7781577Z [2026-08-28 06:08:47.351116-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-28T09:08:53.7792191Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 129, in <module>
+2026-08-28T09:08:53.7792972Z ⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...
+2026-08-28T09:08:53.7793395Z Buscando jogos de 2026-08-28 na API...
+2026-08-28T09:08:53.7793746Z     ensure_data_in_db()
+2026-08-28T09:08:53.7794305Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 59, in ensure_data_in_db
+2026-08-28T09:08:53.7794848Z     save_to_db(db, rankings)
+2026-08-28T09:08:53.7795340Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/analysis/scanner.py", line 128, in save_to_db
+2026-08-28T09:08:53.7795850Z     from dateutil.parser import parse
+2026-08-28T09:08:53.7796191Z ModuleNotFoundError: No module named 'dateutil'
+2026-08-28T09:08:53.8635173Z Tentativa 1 falhou. Aguardando 15s para tentar de novo...
+2026-08-28T09:09:08.8657660Z Iniciando tentativa 2...
+2026-08-28T09:09:10.6431573Z Traceback (most recent call last):
+2026-08-28T09:09:10.6432736Z [2026-08-28 06:09:09.266867-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-28T09:09:10.6433638Z ⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...
+2026-08-28T09:09:10.6434254Z Lendo jogos de 2026-08-28 do cache...
+2026-08-28T09:09:10.6435088Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 129, in <module>
+2026-08-28T09:09:10.6435623Z     ensure_data_in_db()
+2026-08-28T09:09:10.6438646Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 59, in ensure_data_in_db
+2026-08-28T09:09:10.6439384Z     save_to_db(db, rankings)
+2026-08-28T09:09:10.6440088Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/analysis/scanner.py", line 128, in save_to_db
+2026-08-28T09:09:10.6440817Z     from dateutil.parser import parse
+2026-08-28T09:09:10.6441334Z ModuleNotFoundError: No module named 'dateutil'
+2026-08-28T09:09:10.7331574Z Tentativa 2 falhou. Aguardando 15s para tentar de novo...
+2026-08-28T09:09:25.7348961Z Iniciando tentativa 3...
+2026-08-28T09:09:27.0515810Z Traceback (most recent call last):
+2026-08-28T09:09:27.0516852Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 129, in <module>
+2026-08-28T09:09:27.0518346Z [2026-08-28 06:09:26.145420-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-28T09:09:27.0521880Z     ensure_data_in_db()
+2026-08-28T09:09:27.0522677Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/run_real_injection.py", line 59, in ensure_data_in_db
+2026-08-28T09:09:27.0523429Z     save_to_db(db, rankings)
+2026-08-28T09:09:27.0524180Z   File "/home/runner/work/Lay-CS-Baltazar/Lay-CS-Baltazar/analysis/scanner.py", line 128, in save_to_db
+2026-08-28T09:09:27.0524957Z     from dateutil.parser import parse
+2026-08-28T09:09:27.0525491Z ModuleNotFoundError: No module named 'dateutil'
+2026-08-28T09:09:27.0526318Z ⚠️ Nenhum jogo encontrado no banco para hoje. Buscando na API...
+2026-08-28T09:09:27.0527248Z Lendo jogos de 2026-08-28 do cache...
+2026-08-28T09:09:27.1352416Z Tentativa 3 falhou. Aguardando 15s para tentar de novo...
+2026-08-28T09:09:42.1369255Z Todas as 3 tentativas falharam.
+2026-08-28T09:09:42.1385991Z ##[error]Process completed with exit code 1.

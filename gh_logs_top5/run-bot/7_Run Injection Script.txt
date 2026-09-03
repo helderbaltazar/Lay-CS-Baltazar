@@ -1,0 +1,136 @@
+﻿2026-08-30T00:09:16.3333079Z ##[group]Run for i in 1 2 3; do
+2026-08-30T00:09:16.3333483Z [36;1mfor i in 1 2 3; do[0m
+2026-08-30T00:09:16.3333824Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-08-30T00:09:16.3334238Z [36;1m  python run_real_injection.py && break || {[0m
+2026-08-30T00:09:16.3334725Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-08-30T00:09:16.3335180Z [36;1m    sleep 15[0m
+2026-08-30T00:09:16.3335461Z [36;1m  }[0m
+2026-08-30T00:09:16.3335740Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-08-30T00:09:16.3336091Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-08-30T00:09:16.3336440Z [36;1m    exit 1[0m
+2026-08-30T00:09:16.3336698Z [36;1m  fi[0m
+2026-08-30T00:09:16.3336951Z [36;1mdone[0m
+2026-08-30T00:09:16.3377725Z shell: /usr/bin/bash -e {0}
+2026-08-30T00:09:16.3378040Z env:
+2026-08-30T00:09:16.3378374Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T00:09:16.3378870Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-08-30T00:09:16.3379435Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T00:09:16.3379864Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T00:09:16.3380680Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-08-30T00:09:16.3381114Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-08-30T00:09:16.3381888Z   API_FOOTBALL_KEY: ***
+2026-08-30T00:09:16.3382226Z   FOOTBALL_DATA_KEY: ***
+2026-08-30T00:09:16.3382585Z   GEMINI_API_KEY: ***
+2026-08-30T00:09:16.3382887Z   LAYBACK_EMAIL: ***
+2026-08-30T00:09:16.3383174Z   LAYBACK_PASSWORD: ***
+2026-08-30T00:09:16.3383885Z   DATABASE_URL: ***
+2026-08-30T00:09:16.3395584Z   TELEGRAM_BOT_TOKEN: ***
+2026-08-30T00:09:16.3396043Z   TELEGRAM_CHAT_ID: ***
+2026-08-30T00:09:16.3396358Z   PROXY_SERVER: ***
+2026-08-30T00:09:16.3396689Z   PROXY_USERNAME: ***
+2026-08-30T00:09:16.3396985Z   PROXY_PASSWORD: ***
+2026-08-30T00:09:16.3397251Z ##[endgroup]
+2026-08-30T00:09:16.3461463Z Iniciando tentativa 1...
+2026-08-30T00:09:20.1041696Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T00:09:57.8413243Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T00:10:30.0294109Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T00:11:10.8965963Z playwright-stealth não instalado! Continuando sem stealth mode.
+2026-08-30T00:11:46.9221875Z \n--- ATUALIZANDO RESULTADOS PENDENTES ---
+2026-08-30T00:11:46.9222481Z 67 jogos encontrados pendentes.
+2026-08-30T00:11:46.9223029Z Buscando placares da data 2026-08-27 na API (1 Request)...
+2026-08-30T00:11:46.9223624Z Buscando placares da data 2026-08-29 na API (1 Request)...
+2026-08-30T00:11:46.9224479Z Atualizado: Galatasaray 3-2 Göztepe
+2026-08-30T00:11:46.9224933Z Atualizado: AZ Alkmaar 5-2 GO Ahead Eagles
+2026-08-30T00:11:46.9225446Z Atualizado: Lyon 1-1 Le Havre
+2026-08-30T00:11:46.9226021Z Jogo Houston Dynamo x San Jose Earthquakes ainda com status NS
+2026-08-30T00:11:46.9226659Z Atualizado: Al-Fateh 0-0 Al-Ittihad FC
+2026-08-30T00:11:46.9227301Z Jogo Minnesota United FC x Orlando City SC ainda com status NS
+2026-08-30T00:11:46.9227905Z Atualizado: Juventus 2-0 Parma
+2026-08-30T00:11:46.9228386Z Atualizado: Liverpool 2-2 Nottingham Forest
+2026-08-30T00:11:46.9228946Z Atualizado: Borussia Dortmund 2-0 Hamburger SV
+2026-08-30T00:11:46.9229663Z Atualizado: RB Leipzig 3-0 Borussia Mönchengladbach
+2026-08-30T00:11:46.9230507Z Jogo Sporting Kansas City x Vancouver Whitecaps ainda com status NS
+2026-08-30T00:11:46.9230963Z Atualizado: SV Elversberg 3-2 Bayer Leverkusen
+2026-08-30T00:11:46.9231317Z Atualizado: Tottenham 0-2 Newcastle
+2026-08-30T00:11:46.9231622Z Atualizado: Atletico-MG 2-1 Vitoria
+2026-08-30T00:11:46.9231952Z Atualizado: Stade Brestois 29 2-2 Toulouse
+2026-08-30T00:11:46.9232287Z Atualizado: Gaziantep FK 1-2 Rizespor
+2026-08-30T00:11:46.9232666Z Jogo Atletico Tucuman x Belgrano Cordoba ainda com status NS
+2026-08-30T00:11:46.9233059Z Atualizado: Strasbourg 2-1 Lens
+2026-08-30T00:11:46.9233433Z Atualizado: 1. FC Köln 3-2 1899 Hoffenheim
+2026-08-30T00:11:46.9234277Z Atualizado: PEC Zwolle 1-3 NEC Nijmegen
+2026-08-30T00:11:46.9234610Z Atualizado: Kortrijk 1-3 Charleroi
+2026-08-30T00:11:46.9235010Z Jogo Talleres Cordoba x Central Cordoba de Santiago ainda com status NS
+2026-08-30T00:11:46.9235442Z Atualizado: Fiorentina 0-3 Frosinone
+2026-08-30T00:11:46.9235835Z Jogo Nashville SC x FC Cincinnati ainda com status NS
+2026-08-30T00:11:46.9236212Z Atualizado: Al Kholood 3-1 Al-Ahli Jeddah
+2026-08-30T00:11:46.9236559Z Atualizado: OH Leuven 1-2 Standard Liege
+2026-08-30T00:11:46.9236961Z Atualizado: RAAL La Louvière 2-2 KV Mechelen
+2026-08-30T00:11:46.9239075Z Atualizado: Levante 5-2 Real Betis
+2026-08-30T00:11:46.9239524Z Atualizado: Sassuolo 2-1 Torino
+2026-08-30T00:11:46.9240170Z Atualizado: Auxerre 1-3 Angers
+2026-08-30T00:11:46.9240632Z Atualizado: Union Berlin 3-3 Eintracht Frankfurt
+2026-08-30T00:11:46.9241165Z Atualizado: Real Sociedad 2-1 Espanyol
+2026-08-30T00:11:46.9241681Z Atualizado: Deportivo Riestra 1-1 Velez Sarsfield
+2026-08-30T00:11:46.9242235Z Atualizado: Bournemouth 1-1 Everton
+2026-08-30T00:11:46.9242759Z Atualizado: Cercle Brugge 0-1 Lommel United
+2026-08-30T00:11:46.9243303Z Atualizado: Konyaspor 1-2 Kocaelispor
+2026-08-30T00:11:46.9243830Z Atualizado: Academico Viseu 0-3 FC Porto
+2026-08-30T00:11:46.9244688Z Atualizado: Rosario Central 1-2 Gimnasia L.P.
+2026-08-30T00:11:46.9245259Z Atualizado: Huracan 1-1 Estudiantes de Rio Cuarto
+2026-08-30T00:11:46.9245783Z Atualizado: Botafogo SP 1-2 Cuiaba
+2026-08-30T00:11:46.9246289Z Atualizado: FSV Mainz 05 0-0 SC Paderborn 07
+2026-08-30T00:11:46.9246837Z Atualizado: Excelsior 2-1 Sparta Rotterdam
+2026-08-30T00:11:46.9247399Z Jogo Sao Paulo x RB Bragantino ainda com status HT
+2026-08-30T00:11:46.9247980Z Jogo Vasco DA Gama x Cruzeiro ainda com status NS
+2026-08-30T00:11:46.9248533Z Atualizado: Lorient 1-2 Estac Troyes
+2026-08-30T00:11:46.9249024Z Atualizado: Alverca 1-1 Santa Clara
+2026-08-30T00:11:46.9249513Z Atualizado: Al-Ettifaq 0-3 Al Diriyah
+2026-08-30T00:11:46.9250359Z Jogo Atlas x Club Queretaro ainda com status 2H
+2026-08-30T00:11:46.9250995Z Jogo CF Pachuca x Guadalajara Chivas ainda com status HT
+2026-08-30T00:11:46.9251605Z Jogo Club America x Puebla ainda com status NS
+2026-08-30T00:11:46.9252137Z Atualizado: Coventry 0-1 Hull City
+2026-08-30T00:11:46.9252666Z Atualizado: Seattle Sounders 2-2 Chicago Fire
+2026-08-30T00:11:46.9253223Z Jogo Inter Miami x CF Montreal ainda com status 1H
+2026-08-30T00:11:46.9253766Z Jogo DC United x Los Angeles FC ainda com status 1H
+2026-08-30T00:11:46.9254432Z Jogo New York Red Bulls x Philadelphia Union ainda com status 1H
+2026-08-30T00:11:46.9255151Z Jogo Toronto FC x New York City FC ainda com status 1H
+2026-08-30T00:11:46.9255801Z Jogo Atlanta United FC x Charlotte ainda com status 1H
+2026-08-30T00:11:46.9256467Z Jogo Colorado Rapids x Real Salt Lake ainda com status NS
+2026-08-30T00:11:46.9257011Z Jogo San Diego x Los Angeles Galaxy ainda com status NS
+2026-08-30T00:11:46.9257405Z Jogo Portland Timbers x Austin ainda com status NS
+2026-08-30T00:11:46.9257768Z Atualizado: Monza 2-3 Udinese
+2026-08-30T00:11:46.9258069Z Atualizado: Arouca 2-1 Maritimo
+2026-08-30T00:11:46.9258380Z Atualizado: Sevilla 1-3 Atletico Madrid
+2026-08-30T00:11:46.9258801Z Atualização concluída.
+2026-08-30T00:11:46.9259313Z [2026-08-29 21:09:19.946526-03:00] Verificando se os jogos de hoje já estão no Supabase...
+2026-08-30T00:11:46.9260747Z ✅ Jogos do dia já existem no banco de dados. Verificando auditoria de IA...
+2026-08-30T00:11:46.9261754Z \n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---
+2026-08-30T00:11:46.9262543Z [0-1] Rank 1: Galatasaray x Göztepe (Prob: 0.71%) [IA: 92%]
+2026-08-30T00:11:46.9263259Z [0-1] Rank 2: AZ Alkmaar x GO Ahead Eagles (Prob: 1.85%) [IA: 92%]
+2026-08-30T00:11:46.9263929Z [0-1] Rank 3: Lyon x Le Havre (Prob: 2.59%) [IA: 92%]
+2026-08-30T00:11:46.9264642Z [0-1] Rank 5: Houston Dynamo x San Jose Earthquakes (Prob: 3.12%) [IA: 92%]
+2026-08-30T00:11:46.9265423Z [0-1] Rank 6: Al-Fateh x Al-Ittihad FC (Prob: 3.36%) [IA: 92%]
+2026-08-30T00:11:46.9266359Z [0-1] Injetando no bot 4626 via Playwright...
+2026-08-30T00:11:46.9266878Z [0-1] SUCESSO!
+2026-08-30T00:11:46.9267505Z [0-2] Rank 1: Galatasaray x Göztepe (Prob: 0.44%) [IA: 92%]
+2026-08-30T00:11:46.9268157Z [0-2] Rank 2: Juventus x Parma (Prob: 1.25%) [IA: 92%]
+2026-08-30T00:11:46.9268622Z [0-2] Rank 3: AZ Alkmaar x GO Ahead Eagles (Prob: 1.31%) [IA: 92%]
+2026-08-30T00:11:46.9269101Z [0-2] Rank 4: Houston Dynamo x San Jose Earthquakes (Prob: 1.50%) [IA: 92%]
+2026-08-30T00:11:46.9269550Z [0-2] Rank 5: Lyon x Le Havre (Prob: 2.38%) [IA: 92%]
+2026-08-30T00:11:46.9270162Z [0-2] Injetando no bot 4753 via Playwright...
+2026-08-30T00:11:46.9270508Z [0-2] SUCESSO!
+2026-08-30T00:11:46.9270898Z [0-3] Rank 1: Galatasaray x Göztepe (Prob: 0.12%) [IA: 92%]
+2026-08-30T00:11:46.9271296Z [0-3] Rank 2: Juventus x Parma (Prob: 0.24%) [IA: 92%]
+2026-08-30T00:11:46.9271700Z [0-3] Rank 3: OH Leuven x Standard Liege (Prob: 0.34%) [IA: 92%]
+2026-08-30T00:11:46.9272160Z [0-3] Rank 4: Houston Dynamo x San Jose Earthquakes (Prob: 0.38%) [IA: 92%]
+2026-08-30T00:11:46.9272639Z [0-3] Rank 5: AZ Alkmaar x GO Ahead Eagles (Prob: 0.45%) [IA: 92%]
+2026-08-30T00:11:46.9273031Z [0-3] Injetando no bot 27251 via Playwright...
+2026-08-30T00:11:46.9273350Z [0-3] SUCESSO!
+2026-08-30T00:11:46.9273671Z [1-3] Rank 1: OH Leuven x Standard Liege (Prob: 0.29%) [IA: 92%]
+2026-08-30T00:11:46.9274417Z [1-3] Rank 2: Galatasaray x Göztepe (Prob: 0.42%) [IA: 92%]
+2026-08-30T00:11:46.9274853Z [1-3] Rank 3: Juventus x Parma (Prob: 0.47%) [IA: 92%]
+2026-08-30T00:11:46.9275243Z [1-3] Rank 4: Bournemouth x Everton (Prob: 0.65%) [IA: 92%]
+2026-08-30T00:11:46.9275685Z [1-3] Rank 5: Atletico Tucuman x Belgrano Cordoba (Prob: 0.71%) [IA: 92%]
+2026-08-30T00:11:46.9276122Z [1-3] Injetando no bot 29778 via Playwright...
+2026-08-30T00:11:46.9276449Z [1-3] SUCESSO!

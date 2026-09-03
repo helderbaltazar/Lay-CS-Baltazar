@@ -1,0 +1,34 @@
+﻿2026-09-02T22:14:33.7869531Z ##[group]Run for i in 1 2 3; do
+2026-09-02T22:14:33.7869925Z [36;1mfor i in 1 2 3; do[0m
+2026-09-02T22:14:33.7870255Z [36;1m  echo "Iniciando tentativa $i..."[0m
+2026-09-02T22:14:33.7870657Z [36;1m  python run_real_injection.py && break || {[0m
+2026-09-02T22:14:33.7871139Z [36;1m    echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."[0m
+2026-09-02T22:14:33.7871582Z [36;1m    sleep 15[0m
+2026-09-02T22:14:33.7871835Z [36;1m  }[0m
+2026-09-02T22:14:33.7872083Z [36;1m  if [ $i -eq 3 ]; then[0m
+2026-09-02T22:14:33.7872417Z [36;1m    echo "Todas as 3 tentativas falharam."[0m
+2026-09-02T22:14:33.7872755Z [36;1m    exit 1[0m
+2026-09-02T22:14:33.7872998Z [36;1m  fi[0m
+2026-09-02T22:14:33.7873232Z [36;1mdone[0m
+2026-09-02T22:14:33.7910673Z shell: /usr/bin/bash -e {0}
+2026-09-02T22:14:33.7910973Z env:
+2026-09-02T22:14:33.7911286Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T22:14:33.7911788Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-02T22:14:33.7912318Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T22:14:33.7912748Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T22:14:33.7913188Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-02T22:14:33.7913836Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-02T22:14:33.7914429Z   API_FOOTBALL_KEY: ***
+2026-09-02T22:14:33.7914761Z   FOOTBALL_DATA_KEY: ***
+2026-09-02T22:14:33.7915113Z   GEMINI_API_KEY: ***
+2026-09-02T22:14:33.7915401Z   LAYBACK_EMAIL: ***
+2026-09-02T22:14:33.7915672Z   LAYBACK_PASSWORD: ***
+2026-09-02T22:14:33.7916353Z   DATABASE_URL: ***
+2026-09-02T22:14:33.7916716Z   TELEGRAM_BOT_TOKEN: ***
+2026-09-02T22:14:33.7917008Z   TELEGRAM_CHAT_ID: ***
+2026-09-02T22:14:33.7917288Z   PROXY_SERVER: ***
+2026-09-02T22:14:33.7917592Z   PROXY_USERNAME: ***
+2026-09-02T22:14:33.7917880Z   PROXY_PASSWORD: ***
+2026-09-02T22:14:33.7918128Z ##[endgroup]
+2026-09-02T22:14:33.7976526Z Iniciando tentativa 1...
+2026-09-02T22:14:35.4817652Z ✅ A injeção de hoje já foi realizada com sucesso. Encerrando para evitar duplicação.
