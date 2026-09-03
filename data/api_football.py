@@ -12,6 +12,12 @@ def get_headers():
         'x-apisports-key': config.API_KEY
     }
 
+def get_rapid_headers():
+    return {
+        'X-RapidAPI-Key': config.RAPID_API_KEY,
+        'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+    }
+
 def get_fixtures(date_str):
     cache_key = f"fixtures_{date_str}"
     cached = cache.get(cache_key, ttl_seconds=86400) # 24 horas de cache para os jogos do dia
@@ -25,6 +31,19 @@ def get_fixtures(date_str):
         response = requests.get(url, headers=get_headers())
         response.raise_for_status()
         data = response.json()
+        if data.get('errors'):
+            raise Exception(f"API Error: {data['errors']}")
+            
+    except Exception as e:
+        if config.RAPID_API_KEY:
+            print(f"⚠️ API Direta falhou. Acionando RapidAPI Fallback para fixtures...")
+            url_rapid = f"{config.RAPID_API_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
+            response = requests.get(url_rapid, headers=get_rapid_headers())
+            response.raise_for_status()
+            data = response.json()
+        else:
+            print(f"Error fetching fixtures: {e}")
+            return []
         
         # LOG PARA BACKTEST (RAW)
         try:
@@ -62,10 +81,27 @@ def get_team_domestic_league(team_id, current_league_id):
     return current_league_id
 
 def fetch_team_stats(team_id, league_id, season):
+    # 1. Tentar API-Football Direta
     url = f"{config.BASE_URL}/teams/statistics?league={league_id}&season={season}&team={team_id}"
-    response = requests.get(url, headers=get_headers())
-    response.raise_for_status()
-    data = response.json()
+    try:
+        response = requests.get(url, headers=get_headers())
+        response.raise_for_status()
+        data = response.json()
+        
+        # Se bater a cota na API original (errors -> account/requests limits)
+        if data.get('errors'):
+            raise Exception(f"API Error: {data['errors']}")
+            
+    except Exception as e:
+        # 2. Tentar Fallback via RapidAPI (se configurado)
+        if config.RAPID_API_KEY:
+            print(f"⚠️ API Direta falhou. Acionando RapidAPI Fallback para time {team_id}...")
+            url_rapid = f"{config.RAPID_API_URL}/teams/statistics?league={league_id}&season={season}&team={team_id}"
+            response = requests.get(url_rapid, headers=get_rapid_headers())
+            response.raise_for_status()
+            data = response.json()
+        else:
+            raise e
     
     # LOG PARA BACKTEST (RAW)
     try:
