@@ -68,6 +68,8 @@
             <th>Liga</th>
             <th>Partida</th>
             <th style="width: 110px;">Prob. Placar</th>
+            <th>Odd Justa</th>
+            <th>+EV (Edge)</th>
             <th>Auditoria & Parecer da IA 🤖</th>
             <th style="width: 140px;">Status / Resultado</th>
         </tr>
@@ -88,6 +90,10 @@
             </td>
             <td>
                 <span style="font-weight: bold; color: #3742fa;">{{ "%.1f"|format(m.probability * 100) }}%</span>
+            </td>
+            <td>{{ m.fair_odd }}</td>
+            <td style="color: {% if m.edge > 0 %}#4cd137{% else %}#e84118{% endif %}; font-weight: bold;">
+                {% if m.edge != 0 %}{{ "%.1f"|format(m.edge) }}%{% else %}-{% endif %}
             </td>
             <td>
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">

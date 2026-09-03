@@ -164,7 +164,9 @@ def index():
                     'ai_verdict': p.ai_verdict or 'APROVADO',
                     'ai_confidence': p.ai_confidence or 85,
                     'ai_critical_factor': p.ai_critical_factor or '',
-                    'ai_analysis': p.ai_analysis or ''
+                    'ai_analysis': p.ai_analysis or '',
+                    'fair_odd': round(100.0 / (p.probability * 100), 2) if p.probability > 0 else 0,
+                    'edge': round(((p.match_odd / (1.0 / p.probability)) - 1) * 100, 1) if p.match_odd and p.probability > 0 else 0
                 })
                 
     for t in config.TARGET_SCORES:
@@ -263,9 +265,31 @@ def analytics():
             Prediction.rank <= 5
         ).first()
         
-        top5_total = top5_stats.total if top5_stats and top5_stats.total else 0
-        top5_hits = top5_stats.hits if top5_stats and top5_stats.hits else 0
-        top5_winrate = (top5_hits / top5_total * 100) if top5_total > 0 else 0.0
+        top5_winrate = (top5_stats.hits / top5_stats.total * 100) if top5_stats and top5_stats.total > 0 else 0
+
+        # AI Verdict Stats
+        ai_stats_raw = db.query(
+            Prediction.ai_verdict,
+            func.count(Match.id).label('total_games'),
+            func.sum(case((Prediction.is_hit == True, 1), else_=0)).label('hits'),
+            func.sum(case((Prediction.is_hit == False, 1), else_=0)).label('misses')
+        ).join(Match).filter(
+            Match.status.in_(['FT', 'AET', 'PEN']),
+            Prediction.is_hit != None,
+            Prediction.ai_verdict != None
+        ).group_by(Prediction.ai_verdict).all()
+        
+        ai_data = []
+        for a in ai_stats_raw:
+            tot = a.hits + a.misses
+            wr = (a.hits / tot * 100) if tot > 0 else 0
+            ai_data.append({
+                'verdict': a.ai_verdict,
+                'total_games': tot,
+                'hits': a.hits,
+                'misses': a.misses,
+                'win_rate': round(wr, 2)
+            })
 
         # Calcula Win-Rate Confiança >= 95
         high_conf_stats = db.query(

@@ -91,4 +91,30 @@
         }
     });
 </script>
+<div class="card mt-4">
+    <h2>Performance por Veredito da IA (AI Analyst)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Veredito</th>
+                <th>Jogos</th>
+                <th>Greens (Acertos)</th>
+                <th>Reds (Erros)</th>
+                <th>Win Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in ai_data %}
+            <tr>
+                <td>{{ a.verdict }}</td>
+                <td>{{ a.total_games }}</td>
+                <td style="color: #4cd137;">{{ a.hits }}</td>
+                <td style="color: #e84118;">{{ a.misses }}</td>
+                <td><strong>{{ a.win_rate }}%</strong></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}
