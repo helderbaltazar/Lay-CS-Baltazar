@@ -145,13 +145,15 @@ def index():
         
     matches = db.query(Match).filter(func.date(Match.date) == date_obj).all()
     
-    rankings = {t: [] for t in config.TARGET_SCORES}
+    rankings = {t: {'approved': [], 'rejected': []} for t in config.TARGET_SCORES}
+    
+    # Lista temporária para ordenar tudo primeiro
+    temp_rankings = {t: [] for t in config.TARGET_SCORES}
     
     for m in matches:
         for p in m.predictions:
-            if p.target_score in rankings:
-                rankings[p.target_score].append({
-                    'rank': p.rank,
+            if p.target_score in temp_rankings:
+                temp_rankings[p.target_score].append({
                     'home': m.home_team,
                     'away': m.away_team,
                     'league': m.league_name,
@@ -166,13 +168,24 @@ def index():
                     'ai_critical_factor': p.ai_critical_factor or '',
                     'ai_analysis': p.ai_analysis or '',
                     'fair_odd': round(100.0 / (p.probability * 100), 2) if p.probability > 0 else 0,
-                    'edge': round(((p.match_odd / (1.0 / p.probability)) - 1) * 100, 1) if p.match_odd and p.probability > 0 else 0
+                    'edge': round(((p.match_odd / (1.0 / p.probability)) - 1) * 100, 1) if p.match_odd and p.probability > 0 else 0,
+                    'fixture_id': m.fixture_id
                 })
                 
     for t in config.TARGET_SCORES:
-        rankings[t].sort(key=lambda x: (-x.get('ai_confidence', 0), x.get('probability', 1.0)))
-        for idx, item in enumerate(rankings[t]):
+        # Ordena: Aprovados primeiro, Confiança desc, Prob asc
+        temp_rankings[t].sort(key=lambda x: (
+            0 if x['ai_verdict'] != 'VETADO' else 1, 
+            -x.get('ai_confidence', 0), 
+            x.get('probability', 1.0)
+        ))
+        
+        for idx, item in enumerate(temp_rankings[t]):
             item['rank'] = idx + 1
+            if item['rank'] <= 5 and item['ai_verdict'] != 'VETADO':
+                rankings[t]['approved'].append(item)
+            else:
+                rankings[t]['rejected'].append(item)
         
     db.close()
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))

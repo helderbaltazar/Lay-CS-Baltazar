@@ -53,16 +53,19 @@
     </div>
 </div>
 
-{% for target, matches in rankings.items() %}
-<div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px;">
-        <h3 style="margin: 0;">Rankings: LAY {{ target }}</h3>
+{% for target, categories in rankings.items() %}
+<div class="card" style="margin-bottom: 30px;">
+    <h3 style="margin: 0 0 12px 0;">Rankings: LAY {{ target }}</h3>
+
+    <!-- JOGOS APROVADOS (INJETADOS) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px;">
+        <h4 style="margin: 0; color: #2ed573;">🟢 Jogos Aprovados (Injetados no Robô)</h4>
         <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 4px 10px; border-radius: 12px; font-size: 12px;">
-            🏆 Ordenado por Grau de Confiança da IA (Top 5 Injetados)
+            🏆 Top 5 IA
         </span>
     </div>
-    {% if matches %}
-    <table>
+    {% if categories.approved %}
+    <table style="margin-bottom: 20px;">
         <tr>
             <th style="width: 70px;">Rank</th>
             <th>Liga</th>
@@ -73,16 +76,12 @@
             <th>Auditoria & Parecer da IA 🤖</th>
             <th style="width: 140px;">Status / Resultado</th>
         </tr>
-        {% for m in matches %}
-        <tr style="{% if m.rank <= 5 %}background: rgba(46, 213, 115, 0.05);{% endif %}">
+        {% for m in categories.approved %}
+        <tr style="background: rgba(46, 213, 115, 0.05);">
             <td>
-                {% if m.rank <= 5 %}
-                    <span style="background: #e67e22; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 12px;">
-                        #{{ m.rank }} ⭐ Top 5
-                    </span>
-                {% else %}
-                    <span style="color: #a4b0be; font-weight: bold;">#{{ m.rank }}</span>
-                {% endif %}
+                <span style="background: #e67e22; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 12px;">
+                    #{{ m.rank }} ⭐ Top 5
+                </span>
             </td>
             <td><span style="font-size: 12px; color: #747d8c;">{{ m.league }}</span></td>
             <td>
@@ -97,23 +96,15 @@
             </td>
             <td>
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
-                    {% if m.ai_verdict == 'APROVADO' %}
-                        <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
-                            🤖 APROVADO ({{ m.ai_confidence }}% Confiança)
-                        </span>
-                    {% else %}
-                        <span class="badge" style="background: #ff4757; color: white; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
-                            ⛔ VETADO ({{ m.ai_confidence }}% Confiança)
-                        </span>
-                    {% endif %}
+                    <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
+                        🤖 APROVADO ({{ m.ai_confidence }}% Confiança)
+                    </span>
                 </div>
-                
                 {% if m.ai_critical_factor %}
                 <div style="font-size: 12px; color: #f1f2f6; margin-top: 2px;">
                     <strong>💡 Fator Crítico:</strong> {{ m.ai_critical_factor }}
                 </div>
                 {% endif %}
-
                 {% if m.ai_analysis %}
                 <details style="margin-top: 6px; cursor: pointer;">
                     <summary style="color: #70a1ff; font-size: 11px; font-weight: bold; outline: none;">
@@ -142,7 +133,73 @@
         {% endfor %}
     </table>
     {% else %}
-    <p style="color: #747d8c; padding: 10px 0;">Nenhum jogo encontrado para esta data e placar.</p>
+    <p style="color: #747d8c; padding: 10px 0;">Nenhum jogo aprovado para esta data.</p>
+    {% endif %}
+
+    <!-- DEMAIS JOGOS (NÃO APROVADOS) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px; margin-top: 15px;">
+        <h4 style="margin: 0; color: #a4b0be;">🔴 Demais Jogos da Grade (Não Injetados)</h4>
+    </div>
+    {% if categories.rejected %}
+    <table>
+        <tr>
+            <th style="width: 70px;">Rank</th>
+            <th>Liga</th>
+            <th>Partida</th>
+            <th style="width: 110px;">Prob. Placar</th>
+            <th>Odd Justa</th>
+            <th>Auditoria & Parecer da IA 🤖</th>
+            <th style="width: 140px;">Status / Resultado</th>
+        </tr>
+        {% for m in categories.rejected %}
+        <tr>
+            <td>
+                <span style="color: #a4b0be; font-weight: bold;">#{{ m.rank }}</span>
+            </td>
+            <td><span style="font-size: 12px; color: #747d8c;">{{ m.league }}</span></td>
+            <td>
+                <strong class="clickable-match" style="font-size: 14px;" onclick="openDeepAnalysis('{{ m.home }}', '{{ m.away }}', '{{ m.league }}', '{{ m.fixture_id }}')">{{ m.home }} x {{ m.away }} 🤖</strong>
+            </td>
+            <td>
+                <span style="font-weight: bold; color: #3742fa;">{{ "%.1f"|format(m.probability * 100) }}%</span>
+            </td>
+            <td>{{ m.fair_odd }}</td>
+            <td>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
+                    {% if m.ai_verdict == 'APROVADO' %}
+                        <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
+                            🤖 APROVADO ({{ m.ai_confidence }}% Confiança)
+                        </span>
+                    {% else %}
+                        <span class="badge" style="background: #ff4757; color: white; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
+                            ⛔ VETADO ({{ m.ai_confidence }}% Confiança)
+                        </span>
+                    {% endif %}
+                </div>
+                {% if m.ai_critical_factor %}
+                <div style="font-size: 12px; color: #f1f2f6; margin-top: 2px;">
+                    <strong>💡 Fator Crítico:</strong> {{ m.ai_critical_factor }}
+                </div>
+                {% endif %}
+            </td>
+            <td>
+                {% if m.status == 'FT' %}
+                    {% if m.is_hit == True %}
+                        <span class="green" style="font-weight: bold;">{{ m.real_score }} ✅</span>
+                    {% elif m.is_hit == False %}
+                        <span class="red" style="font-weight: bold;">{{ m.real_score }} ❌</span>
+                    {% else %}
+                        {{ m.real_score }}
+                    {% endif %}
+                {% else %}
+                    <span style="color: #747d8c; font-size: 12px;">{{ m.status }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p style="color: #747d8c; padding: 10px 0;">Nenhum outro jogo listado para esta data.</p>
     {% endif %}
 </div>
 {% endfor %}
