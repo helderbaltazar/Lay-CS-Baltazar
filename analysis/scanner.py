@@ -285,6 +285,21 @@ def save_to_db(db, rankings):
             else:
                 pred.ai_confidence = ai_boost if ai_boost > 0 else None
                 
+            # LayCS Power Score (Medição Única Matemática + IA)
+            lay_markets = ["0-1", "0-2", "0-3", "1-3", "LAY_DRAW"]
+            if target in lay_markets:
+                math_conf = (1.0 - pred.probability) * 100
+            else:
+                math_conf = pred.probability * 100
+                
+            ai_conf = pred.ai_confidence if pred.ai_confidence is not None else math_conf
+            ev_bonus = 0.0
+            if pred.ev and pred.ev > 0:
+                ev_bonus = min(10.0, pred.ev * 100) # Máximo de 10 pontos de EV
+                
+            power_score = (math_conf * 0.45) + (ai_conf * 0.45) + ev_bonus
+            pred.power_score = min(100.0, power_score)
+                
             pred.ai_verdict = rec.get('ai_verdict', 'APROVADO')
             pred.ai_critical_factor = rec.get('ai_critical_factor')
             pred.ai_analysis = rec.get('ai_analysis')

@@ -28,6 +28,7 @@ class Prediction(Base):
     is_hit = Column(Boolean, nullable=True)
     match_odd = Column(Float, nullable=True)
     ev = Column(Float, nullable=True)
+    power_score = Column(Float, nullable=True)
     profit_loss = Column(Float, nullable=True)
     ai_verdict = Column(String, nullable=True, default='APROVADO')
     ai_confidence = Column(Integer, nullable=True)

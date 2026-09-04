@@ -487,11 +487,12 @@ def methodologies():
                         'prob': p.probability,
                         'league': m.league_name,
                         'ev': p.ev,
-                        'ai_confidence': p.ai_confidence
+                        'ai_confidence': p.ai_confidence,
+                        'power_score': p.power_score
                     })
                     
         for k in recs:
-            recs[k].sort(key=lambda x: x['prob'], reverse=True)
+            recs[k].sort(key=lambda x: x['power_score'] if x.get('power_score') is not None else x['prob'], reverse=True)
             recs[k] = recs[k][:5] # Top 5
             
     finally:
