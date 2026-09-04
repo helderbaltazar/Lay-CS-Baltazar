@@ -136,28 +136,30 @@ def inject_from_db():
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
     
-    report_lines = ["🤖 *Relatório Diário Layback (Top 5 Confiança IA)* 🤖\n"]
+    report_lines = ["🤖 *Relatório Diário Layback (Power Score)* 🤖\n"]
     for bot_id, bot_name, target in targets:
+        # Define o limiar de Power Score com base no mercado
+        threshold = 89.4 if target in ["0-3", "1-3"] else 85.0
+        
         preds = db.query(Prediction).join(Match).filter(
             Prediction.target_score == target,
-            Prediction.ai_verdict != 'VETADO',
+            Prediction.power_score >= threshold,
             Match.date >= today_start
         ).order_by(
-            Prediction.ai_confidence.desc().nullslast(),
-            Prediction.probability.asc()
-        ).limit(5).all()
+            Prediction.power_score.desc().nullslast(),
+        ).all()
         
         if not preds:
-            print(f"[{target}] Nenhum jogo aprovado pela IA no banco para hoje.")
+            print(f"[{target}] Nenhum jogo aprovado pelo Power Score (>= {threshold}) para hoje.")
             continue
             
         bot_games_str = []
         teams_data = []
         for p in preds:
             m = p.match
-            conf_str = f" [IA: {p.ai_confidence}%]" if p.ai_confidence else ""
-            print(f"[{target}] Rank {p.rank}: {m.home_team} x {m.away_team} (Prob: {p.probability:.2%}){conf_str}")
-            bot_games_str.append(f"⚽ {m.home_team} x {m.away_team} ({p.probability:.2%}){conf_str}")
+            conf_str = f" [Score: {p.power_score:.1f}]" if p.power_score else ""
+            print(f"[{target}] {m.home_team} x {m.away_team} {conf_str}")
+            bot_games_str.append(f"⚽ {m.home_team} x {m.away_team} {conf_str}")
             h_bf = get_betfair_id(m.home_team, layback_teams)
             a_bf = get_betfair_id(m.away_team, layback_teams)
             if h_bf: teams_data.append(h_bf)

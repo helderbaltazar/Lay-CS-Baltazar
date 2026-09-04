@@ -47,7 +47,7 @@
             <h4 style="margin: 0; color: #70a1ff; font-size: 16px;">IA Especialista em Lay Correct Score Ativa</h4>
             <p style="margin: 4px 0 0 0; font-size: 13px; color: #ced6e0;">
                 Os jogos abaixo são ordenados prioritariamente pelo <strong>Grau de Confiança da IA</strong> (combinando Poisson + Dixon-Coles + RAG contextual).
-                Os <strong>Top 5 aprovados</strong> de cada alvo são enviados aos robôs da Layback.
+                Os <strong>Indicações aprovados</strong> de cada alvo são enviados aos robôs da Layback.
             </p>
         </div>
     </div>
@@ -61,7 +61,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px;">
         <h4 style="margin: 0; color: #2ed573;">🟢 Jogos Aprovados (Injetados no Robô)</h4>
         <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 4px 10px; border-radius: 12px; font-size: 12px;">
-            🏆 Top 5 IA
+            🏆 Indicações IA
         </span>
     </div>
     {% if categories.approved %}
@@ -80,7 +80,7 @@
         <tr style="background: rgba(46, 213, 115, 0.05);">
             <td>
                 <span style="background: #e67e22; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 12px;">
-                    #{{ m.rank }} ⭐ Top 5
+                    #{{ m.rank }} ⭐ Indicações
                 </span>
             </td>
             <td><span style="font-size: 12px; color: #747d8c;">{{ m.league }}</span></td>
@@ -97,7 +97,7 @@
             <td>
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
                     <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
-                        🤖 APROVADO ({{ m.ai_confidence }}% Confiança)
+                        🤖 APROVADO (Score: {{ "%.1f"|format(m.power_score) if m.power_score else 0 }})
                     </span>
                 </div>
                 {% if m.ai_critical_factor %}
@@ -168,11 +168,11 @@
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
                     {% if m.ai_verdict == 'APROVADO' %}
                         <span class="badge" style="background: #2ed573; color: #1e272e; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
-                            🤖 APROVADO ({{ m.ai_confidence }}% Confiança)
+                            🤖 APROVADO (Score: {{ "%.1f"|format(m.power_score) if m.power_score else 0 }})
                         </span>
                     {% else %}
                         <span class="badge" style="background: #ff4757; color: white; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 11px;">
-                            ⛔ VETADO ({{ m.ai_confidence }}% Confiança)
+                            ⛔ VETADO (Score: {{ "%.1f"|format(m.power_score) if m.power_score else 0 }})
                         </span>
                     {% endif %}
                 </div>

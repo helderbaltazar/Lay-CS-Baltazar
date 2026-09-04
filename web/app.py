@@ -95,40 +95,9 @@ def task_status():
     return jsonify(_task_status)
 
 def _inject_teams_into_bots():
-    """Busca os melhores jogos do banco e injeta nos bots Layback via API."""
-    import pytz
+    """Injeta nos bots Layback os jogos acima da nota de corte."""
     from integration.layback import update_layback_bots
-    
-    db = get_session()
-    try:
-        now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
-        today = now_br.strftime("%Y-%m-%d")
-        tomorrow = (now_br + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
-        
-        # Busca os melhores jogos (rank 1) para cada target score
-        best_picks = {}
-        for target in config.TARGET_SCORES:
-            match = db.query(Match).join(Prediction).filter(
-                Prediction.target_score == target,
-                Prediction.rank == 1,
-                func.date(Match.date).in_([today, tomorrow]),
-                Match.status == 'NS'
-            ).first()
-            
-            if match:
-                best_picks[target] = match
-                print(f"[Inject] Melhor jogo para Lay {target}: {match.home_team} x {match.away_team}")
-            else:
-                print(f"[Inject] Nenhum jogo encontrado para Lay {target}")
-        
-        if best_picks:
-            update_layback_bots(best_picks)
-        else:
-            print("[Inject] Nenhum jogo para injetar nos bots.")
-            from notifications.telegram import send_message
-            send_message("⚠️ Nenhum jogo encontrado no scan de hoje/amanhã para injetar nos bots Layback.")
-    finally:
-        db.close()
+    update_layback_bots()
 
 @app.route("/")
 @auth.login_required
@@ -169,20 +138,19 @@ def index():
                     'ai_analysis': p.ai_analysis or '',
                     'fair_odd': round(100.0 / (p.probability * 100), 2) if p.probability > 0 else 0,
                     'edge': round(((p.match_odd / (1.0 / p.probability)) - 1) * 100, 1) if p.match_odd and p.probability > 0 else 0,
-                    'fixture_id': m.fixture_id
+                    'fixture_id': m.fixture_id,
+                    'power_score': p.power_score
                 })
                 
     for t in config.TARGET_SCORES:
-        # Ordena: Aprovados primeiro, Confiança desc, Prob asc
-        temp_rankings[t].sort(key=lambda x: (
-            0 if x['ai_verdict'] != 'VETADO' else 1, 
-            -x.get('ai_confidence', 0), 
-            x.get('probability', 1.0)
-        ))
+        # Ordena pelo Power Score
+        temp_rankings[t].sort(key=lambda x: -(x.get('power_score') or 0))
+        
+        threshold = 89.4 if t in ["0-3", "1-3"] else 85.0
         
         for idx, item in enumerate(temp_rankings[t]):
             item['rank'] = idx + 1
-            if item['rank'] <= 5 and item['ai_verdict'] != 'VETADO':
+            if (item.get('power_score') or 0) >= threshold:
                 rankings[t]['approved'].append(item)
             else:
                 rankings[t]['rejected'].append(item)

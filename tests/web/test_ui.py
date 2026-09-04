@@ -87,6 +87,7 @@ def test_index_html_renders_match_with_ai_drawer_and_top5(client):
         rank=1,
         ai_verdict="APROVADO",
         ai_confidence=94,
+        power_score=89.0,
         ai_critical_factor="Chelsea muito consistente em casa.",
         ai_analysis="Análise completa detalhada indicando alta segurança para Lay 0x1."
     )
@@ -101,8 +102,8 @@ def test_index_html_renders_match_with_ai_drawer_and_top5(client):
     
     # Validação dos elementos visuais da IA e Top 5
     assert "Chelsea x Arsenal" in html
-    assert "Top 5" in html
-    assert "APROVADO (94% Confiança)" in html
+    assert "Indicações" in html
+    assert "APROVADO (Score:" in html
     assert "Chelsea muito consistente em casa." in html
     assert "Ver Justificativa Completa da IA" in html
     assert "Análise completa detalhada indicando alta segurança para Lay 0x1." in html

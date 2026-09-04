@@ -1,19 +1,16 @@
-import os
+with open("web/templates/index.html", "r") as f:
+    c = f.read()
 
-with open('web/templates/index.html', 'r') as f:
-    idx = f.read()
+c = c.replace(
+    '🤖 APROVADO ({{ m.ai_confidence }}% Confiança)',
+    '🤖 APROVADO (Score: {{ "%.1f"|format(m.power_score) if m.power_score else 0 }})'
+)
+c = c.replace(
+    '⛔ VETADO ({{ m.ai_confidence }}% Confiança)',
+    '⛔ VETADO (Score: {{ "%.1f"|format(m.power_score) if m.power_score else 0 }})'
+)
 
-old_click = "onclick=\"openDeepAnalysis('{{ m.home }}', '{{ m.away }}', '{{ m.league }}')\""
-new_click = "onclick=\"openDeepAnalysis('{{ m.home }}', '{{ m.away }}', '{{ m.league }}', '{{ m.fixture_id }}')\""
-idx = idx.replace(old_click, new_click)
+with open("web/templates/index.html", "w") as f:
+    f.write(c)
 
-old_js_def = "function openDeepAnalysis(h, a, l) {"
-new_js_def = "function openDeepAnalysis(h, a, l, fid) {"
-idx = idx.replace(old_js_def, new_js_def)
-
-old_fetch = "fetch(`/api/analysis?home=${encodeURIComponent(h)}&away=${encodeURIComponent(a)}&league=${encodeURIComponent(l)}`)"
-new_fetch = "fetch(`/api/analysis?home=${encodeURIComponent(h)}&away=${encodeURIComponent(a)}&league=${encodeURIComponent(l)}&fixture_id=${fid}`)"
-idx = idx.replace(old_fetch, new_fetch)
-
-with open('web/templates/index.html', 'w') as f:
-    f.write(idx)
+print("index.html atualizado")
