@@ -74,6 +74,7 @@ def scan_match(fixture, model, targets, source='API-Football'):
     lam_home, lam_away = calculate_lambdas(home_stats, away_stats, league_avg)
     
     probs = model.get_probabilities(lam_home, lam_away, targets)
+    extra_probs = model.get_extra_probabilities(lam_home, lam_away)
 
     real_score = None
     if fixture_info['status']['short'] in ['FT', 'AET', 'PEN']:
@@ -103,6 +104,7 @@ def scan_match(fixture, model, targets, source='API-Football'):
         'lambda_home': lam_home,
         'lambda_away': lam_away,
         'probabilities': probs,
+        'extra_probabilities': extra_probs,
         'match_odd': home_odd,
         'home_streak': home_streak,
         'away_streak': away_streak
@@ -118,6 +120,11 @@ def scan_all(fixtures, model, source='API-Football'):
 
 def rank_by_target(results, model):
     rankings = {target: [] for target in config.TARGET_SCORES}
+    
+    # Adicionamos as novas metodologias
+    extra_markets = ["OVER_2.5", "UNDER_2.5", "UNDER_3.5", "UNDER_4.5", "BTTS_YES", "BACK_HOME", "LAY_DRAW", "UNDER_0.5_HT", "UNDER_1.5_HT"]
+    for mkt in extra_markets:
+        rankings[mkt] = []
     
     for target in config.TARGET_SCORES:
         sorted_res = sorted(results, key=lambda x: x['probabilities'][target])
@@ -139,10 +146,34 @@ def rank_by_target(results, model):
                 'away_streak': res.get('away_streak')
             })
             
+    for mkt in extra_markets:
+        sorted_res = sorted(results, key=lambda x: x['extra_probabilities'][mkt], reverse=True)
+        for idx, res in enumerate(sorted_res):
+            rankings[mkt].append({
+                'rank': idx + 1,
+                'fixture_id': res['fixture_id'],
+                'date': res['date'],
+                'status': res['status'],
+                'real_score': res.get('real_score'),
+                'league': res['league'],
+                'home': res['home'],
+                'away': res['away'],
+                'lambda_home': res['lambda_home'],
+                'lambda_away': res['lambda_away'],
+                'probability': res['extra_probabilities'][mkt],
+                'home_streak': res.get('home_streak'),
+                'away_streak': res.get('away_streak')
+            })
+            
     from analysis.ai_analyst import AIAnalyst
-    rankings = AIAnalyst.analyze_top_rankings(rankings)
+    # AI Analyst takes care of config.TARGET_SCORES mostly. We pass only those for adjustment if needed, but we can pass all.
+    # To be safe with AI Analyst, we'll only pass the original TARGET_SCORES to it.
+    sub_rankings = {t: rankings[t] for t in config.TARGET_SCORES}
+    sub_rankings = AIAnalyst.analyze_top_rankings(sub_rankings)
+    for t in config.TARGET_SCORES:
+        rankings[t] = sub_rankings[t]
     
-    # Re-calcula probabilidades com o fator de ajuste e re-ordena
+    # Re-calcula probabilidades com o fator de ajuste e re-ordena apenas para os placares alvo originais
     for target in config.TARGET_SCORES:
         for item in rankings[target]:
             adj = item.get('ai_adjustment_factor', 1.0)
@@ -214,12 +245,37 @@ def save_to_db(db, rankings):
             pred.ai_analysis = rec.get('ai_analysis')
             
             if match.status in ['FT', 'AET', 'PEN'] and match.real_score:
-                pred.is_hit = (match.real_score != target)
+                try:
+                    h, a = map(int, match.real_score.split('-'))
+                    total_goals = h + a
+                    if target == "OVER_2.5":
+                        pred.is_hit = total_goals > 2.5
+                    elif target == "UNDER_2.5":
+                        pred.is_hit = total_goals < 2.5
+                    elif target == "UNDER_3.5":
+                        pred.is_hit = total_goals < 3.5
+                    elif target == "UNDER_4.5":
+                        pred.is_hit = total_goals < 4.5
+                    elif target == "UNDER_0.5_HT" or target == "UNDER_1.5_HT":
+                        # We don't have HT score here easily, so we skip validation for now or mock it
+                        # Since it's just for display of prediction, setting None
+                        pred.is_hit = None
+                    elif target == "BTTS_YES":
+                        pred.is_hit = (h > 0 and a > 0)
+                    elif target == "BACK_HOME":
+                        pred.is_hit = (h > a)
+                    elif target == "LAY_DRAW":
+                        pred.is_hit = (h != a)
+                    else:
+                        # Original Lay CS
+                        pred.is_hit = (match.real_score != target)
+                except ValueError:
+                        pred.is_hit = (match.real_score != target)
+                        
                 # Cálculo de lucro/perda (Simulação base 1 unidade stake)
-                # Assumindo odds médias de Lay CS para o mercado: ~11.0 (Liability 10 unidades)
                 if pred.is_hit:
-                    pred.profit_loss = 0.935  # Ganho de 1 unidade descontando ~6.5% comissão
+                    pred.profit_loss = 0.935
                 else:
-                    pred.profit_loss = -10.0  # Perda da responsabilidade (liability)
+                    pred.profit_loss = -10.0 if "-" in target and target not in ["UNDER_2.5", "UNDER_3.5", "UNDER_4.5"] else -1.0
                     
     db.commit()

@@ -82,3 +82,34 @@ class PoissonDixonColes:
             else:
                 away += prob
         return {"home": home, "draw": draw, "away": away}
+
+    def get_extra_probabilities(self, lam_home, lam_away):
+        matrix_ft = self.predict(lam_home, lam_away)
+        lam_home_ht = lam_home * 0.45
+        lam_away_ht = lam_away * 0.45
+        matrix_ht = self.predict(lam_home_ht, lam_away_ht)
+        
+        results = {}
+        # Under/Over FT
+        u25 = sum(p for (h,a), p in matrix_ft.items() if h+a < 2.5)
+        results["UNDER_2.5"] = u25
+        results["OVER_2.5"] = 1.0 - u25
+        
+        results["UNDER_3.5"] = sum(p for (h,a), p in matrix_ft.items() if h+a < 3.5)
+        results["UNDER_4.5"] = sum(p for (h,a), p in matrix_ft.items() if h+a < 4.5)
+        
+        # BTTS
+        btts_no = sum(p for (h,a), p in matrix_ft.items() if h == 0 or a == 0)
+        results["BTTS_YES"] = 1.0 - btts_no
+        
+        # Match Odds
+        home = sum(p for (h,a), p in matrix_ft.items() if h > a)
+        draw = sum(p for (h,a), p in matrix_ft.items() if h == a)
+        results["BACK_HOME"] = home
+        results["LAY_DRAW"] = 1.0 - draw
+        
+        # HT Unders
+        results["UNDER_0.5_HT"] = matrix_ht.get((0,0), 0.0)
+        results["UNDER_1.5_HT"] = sum(p for (h,a), p in matrix_ht.items() if h+a < 1.5)
+        
+        return results

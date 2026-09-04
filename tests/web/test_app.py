@@ -40,3 +40,8 @@ def test_history_route(client):
     assert response.status_code == 200
     assert b"Win Rate" in response.data
     assert b"GREEN" in response.data
+
+def test_methodologies_route(client):
+    response = client.get('/methodologies', headers=get_auth_headers())
+    assert response.status_code == 200
+    assert b"Methodologies" in response.data or b"Metodologias" in response.data

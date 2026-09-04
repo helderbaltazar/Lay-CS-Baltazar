@@ -37,35 +37,36 @@ def get_fixtures(date_str):
     except Exception as e:
         if config.RAPID_API_KEY:
             print(f"⚠️ API Direta falhou. Acionando RapidAPI Fallback para fixtures...")
-            url_rapid = f"{config.RAPID_API_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
-            response = requests.get(url_rapid, headers=get_rapid_headers())
-            response.raise_for_status()
-            data = response.json()
+            try:
+                url_rapid = f"{config.RAPID_API_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
+                response = requests.get(url_rapid, headers=get_rapid_headers())
+                response.raise_for_status()
+                data = response.json()
+            except Exception as ex:
+                print(f"Error fetching fixtures from RapidAPI: {ex}")
+                return []
         else:
             print(f"Error fetching fixtures: {e}")
             return []
         
-        # LOG PARA BACKTEST (RAW)
-        try:
-            db = SessionLocal()
-            log = RawDataLog(source='API-Football', endpoint=f'fixtures?date={date_str}', payload=json.dumps(data))
-            db.add(log)
-            db.commit()
-            db.close()
-        except Exception as e:
-            print(f"Erro ao salvar RawDataLog (fixtures): {e}")
-        
-        # Se a API bater limite (429), ela pode retornar 200 com errors
-        if data.get('errors') and len(data.get('errors')) > 0:
-            print("Erro da API:", data.get('errors'))
-            return []
-            
-        result = filter_main_leagues(data.get('response', []))
-        cache.set(cache_key, result)
-        return result
+    # LOG PARA BACKTEST (RAW)
+    try:
+        db = SessionLocal()
+        log = RawDataLog(source='API-Football', endpoint=f'fixtures?date={date_str}', payload=json.dumps(data))
+        db.add(log)
+        db.commit()
+        db.close()
     except Exception as e:
-        print(f"Error fetching fixtures: {e}")
+        print(f"Erro ao salvar RawDataLog (fixtures): {e}")
+    
+    # Se a API bater limite (429), ela pode retornar 200 com errors
+    if data.get('errors') and len(data.get('errors')) > 0:
+        print("Erro da API:", data.get('errors'))
         return []
+        
+    result = filter_main_leagues(data.get('response', []))
+    cache.set(cache_key, result)
+    return result
 
 def filter_main_leagues(fixtures):
     filtered = []

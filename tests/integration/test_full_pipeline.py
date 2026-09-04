@@ -37,7 +37,9 @@ def test_pipeline_fixtures_to_db(mock_get_stats):
     assert len(matches) == 1
     assert matches[0].home_team == 'Cruzeiro'
     
-    preds = db.query(Prediction).all()
-    assert len(preds) == 1
-    assert preds[0].target_score == '0-1'
+    match = matches[0]
+    preds = db.query(Prediction).filter_by(match_id=match.id).all()
+    assert len(preds) >= 1
+    targets = [p.target_score for p in preds]
+    assert '0-1' in targets
     db.close()

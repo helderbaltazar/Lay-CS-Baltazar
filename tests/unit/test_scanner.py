@@ -13,11 +13,20 @@ def test_calculate_lambdas_with_smoothing():
 
 def test_rank_by_target():
     from analysis.scanner import rank_by_target
+    extra_markets_dict = {
+        "OVER_2.5": 0.5, "UNDER_2.5": 0.5, "UNDER_3.5": 0.5, "UNDER_4.5": 0.5, 
+        "BTTS_YES": 0.5, "BACK_HOME": 0.5, "LAY_DRAW": 0.5, "UNDER_0.5_HT": 0.5, "UNDER_1.5_HT": 0.5
+    }
     results = [
-        {'fixture_id': 1, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'A', 'away': 'B', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.10, '0-2': 0.10, '0-3': 0.10, '1-3': 0.10}},
-        {'fixture_id': 2, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'C', 'away': 'D', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.05, '0-2': 0.05, '0-3': 0.05, '1-3': 0.05}}
+        {'fixture_id': 1, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'A', 'away': 'B', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.10, '0-2': 0.10, '0-3': 0.10, '1-3': 0.10}, 'extra_probabilities': extra_markets_dict},
+        {'fixture_id': 2, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'C', 'away': 'D', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.05, '0-2': 0.05, '0-3': 0.05, '1-3': 0.05}, 'extra_probabilities': extra_markets_dict}
     ]
-    rankings = rank_by_target(results, model)
+    
+    class DummyModel:
+        def get_probabilities(self, l_h, l_a, targets):
+            return {t: 0.1 for t in targets}
+            
+    rankings = rank_by_target(results, DummyModel())
     assert rankings['0-1'][0]['fixture_id'] == 2 # menor risco primeiro
     assert rankings['0-1'][0]['rank'] == 1
 
@@ -44,6 +53,8 @@ def test_scan_match_real_score():
     class DummyModel:
         def get_probabilities(self, h, a, t):
             return {'0-1': 0.1}
+        def get_extra_probabilities(self, h, a):
+            return {}
             
     with pytest.MonkeyPatch().context() as m:
         m.setattr(data.api_football, 'get_team_stats', lambda *args, **kwargs: {'goals': {'for': {'total': {'home': 1, 'away': 1}}, 'against': {'total': {'home': 1, 'away': 1}}}, 'fixtures': {'played': {'home': 1, 'away': 1}}})

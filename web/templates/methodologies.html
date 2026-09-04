@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Metodologias - Lay CS Scanner</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Laboratório & Recomendações Diárias</h1>
+        <p>Com base no histórico e no cálculo da nossa matriz estatística, estes são os jogos de hoje indicados para outras metodologias.</p>
+        
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card bg-dark text-white border-success">
+                    <div class="card-header border-success">📈 Over 2.5 Gols</div>
+                    <div class="card-body">
+                        <p class="small text-muted">A nossa matriz prevê mais de 65% de chance de saírem 3 gols ou mais, com backtest positivo.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['OVER_2.5'] %}
+                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card bg-dark text-white border-primary">
+                    <div class="card-header border-primary">🔥 Back Mandante</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Ataque forte contra defesa fraca. A soma de todos os placares de vitória da casa ultrapassa 60%.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['BACK_HOME'] %}
+                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card bg-dark text-white border-warning">
+                    <div class="card-header border-warning">🤝 Ambas Marcam (BTTS)</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Excluindo placares zerados, a chance de gol para os dois lados é alta segundo o modelo.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['BTTS_YES'] %}
+                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h3 class="mt-5">Mercados de Retranca (Unders)</h3>
+        <p class="text-muted">Partidas com forte tendência a placares magros e defesas sólidas.</p>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <div class="card bg-dark text-white border-secondary mb-3">
+                    <div class="card-header border-secondary">🛡️ Under 2.5 Gols</div>
+                    <div class="card-body">
+                        <p class="small text-muted">A soma do modelo aponta menos de 3 gols.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['UNDER_2.5'] %}
+                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white border-secondary mb-3">
+                    <div class="card-header border-secondary">🛡️ Under 3.5 & 4.5</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Margem de altíssima segurança. Recomendado para acumuladas.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['UNDER_4.5'][:3] %}
+                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white border-secondary mb-3">
+                    <div class="card-header border-secondary">⏱️ Under 0.5 HT (1º Tempo)</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Tendência de zero gols nos primeiros 45 min.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['UNDER_0.5_HT'] %}
+                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white border-secondary mb-3">
+                    <div class="card-header border-secondary">⏱️ Under 1.5 HT (1º Tempo)</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Máximo de 1 gol no primeiro tempo.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['UNDER_1.5_HT'] %}
+                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-5 border-secondary">
+        
+        <h2>Análise de Risco & Sequência (Histórico)</h2>
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div class="card bg-dark text-white border-danger">
+                    <div class="card-header border-danger">📉 Max Drawdown (Rebaixamento Máximo)</div>
+                    <div class="card-body">
+                        <h3 class="text-danger">-{{ max_drawdown }} unid.</h3>
+                        <p class="small text-muted">Esta é a pior sequência de perdas que o modelo atual já enfrentou historicamente, medindo do topo histórico até o fundo do poço antes de recuperar. Ajuda a definir sua margem de segurança.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card bg-dark text-white border-info">
+                    <div class="card-header border-info">🎲 Simulação Monte Carlo (Pior Cenário)</div>
+                    <div class="card-body">
+                        <h3 class="text-info">{{ mc_worst_case }} unid.</h3>
+                        <p class="small text-muted">Embaralhamos os resultados diários 100 vezes. Este é o seu Pior Cenário de Retorno (Percentil 5%). Se for positivo, a estratégia é matematicamente muito resiliente à sorte/azar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-5 border-secondary">
+        
+        <h2>Backtest Customizado (Ferramenta)</h2>
+        <p>Aqui você poderá testar novas teses de mercado no futuro contra nossos anos de dados históricos.</p>
+        <!-- Ferramenta de filtro entraria aqui -->
+    </div>
+</body>
+</html>

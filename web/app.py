@@ -386,3 +386,99 @@ def api_deep_analysis():
     from analysis.ai_analyst import AIAnalyst
     data = AIAnalyst.get_deep_match_analysis(home, away, league, fixture_id=fixture_id)
     return jsonify(data)
+
+@app.route("/methodologies")
+@auth.login_required
+def methodologies():
+    db = get_session()
+    try:
+        from sqlalchemy import func
+        # 1. Obter a curva de lucro diário para calcular o Max Drawdown
+        curve_query = db.query(
+            Match.date,
+            func.sum(Prediction.profit_loss).label('daily_profit')
+        ).join(Prediction).filter(
+            Match.status.in_(['FT', 'AET', 'PEN']),
+            Prediction.is_hit != None,
+            Prediction.rank <= 5
+        ).group_by(Match.date).order_by(Match.date).all()
+        
+        acc_profit = 0.0
+        peak = 0.0
+        max_drawdown = 0.0
+        
+        profits = []
+        for row in curve_query:
+            daily = float(row.daily_profit or 0.0)
+            acc_profit += daily
+            profits.append(daily)
+            
+            if acc_profit > peak:
+                peak = acc_profit
+            
+            drawdown = peak - acc_profit
+            if drawdown > max_drawdown:
+                max_drawdown = drawdown
+                
+        # 2. Simulação de Monte Carlo (Caminhos Aleatórios)
+        import random
+        mc_simulations = 100
+        mc_results = []
+        
+        if profits:
+            for _ in range(mc_simulations):
+                # Embaralha os retornos diários para simular uma nova sequência
+                shuffled = profits.copy()
+                random.shuffle(shuffled)
+                
+                sim_acc = 0.0
+                sim_curve = []
+                for p in shuffled:
+                    sim_acc += p
+                    sim_curve.append(sim_acc)
+                mc_results.append(sim_curve)
+                
+        # Calcula o risco de ruína ou Pior Cenário de Monte Carlo (5º percentil)
+        worst_cases = []
+        if mc_results:
+            final_balances = [path[-1] for path in mc_results]
+            final_balances.sort()
+            mc_worst_case = final_balances[int(mc_simulations * 0.05)] # 5% pior cenário
+        else:
+            mc_worst_case = 0.0
+            
+        # 3. Recomendações do Dia
+        import datetime
+        import pytz
+        now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+        today_str = now_br.strftime("%Y-%m-%d")
+        
+        matches_today = db.query(Match).filter(func.date(Match.date) == today_str).all()
+        
+        recs = {
+            "OVER_2.5": [], "BACK_HOME": [], "BTTS_YES": [],
+            "UNDER_2.5": [], "UNDER_3.5": [], "UNDER_4.5": [],
+            "UNDER_0.5_HT": [], "UNDER_1.5_HT": []
+        }
+        
+        for m in matches_today:
+            for p in m.predictions:
+                if p.target_score in recs:
+                    recs[p.target_score].append({
+                        'home': m.home_team,
+                        'away': m.away_team,
+                        'prob': p.probability,
+                        'league': m.league_name
+                    })
+                    
+        for k in recs:
+            recs[k].sort(key=lambda x: x['prob'], reverse=True)
+            recs[k] = recs[k][:5] # Top 5
+            
+    finally:
+        db.close()
+        
+    return render_template('methodologies.html', 
+                           max_drawdown=round(max_drawdown, 2),
+                           mc_worst_case=round(mc_worst_case, 2),
+                           recs=recs)

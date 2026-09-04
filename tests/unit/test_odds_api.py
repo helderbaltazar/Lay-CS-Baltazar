@@ -72,9 +72,11 @@ class TestOddsApiClient:
         events = get_events("soccer_brazil_serie_a")
         assert events == []
 
+    @patch("data.odds_api.cache.get")
     @patch("data.odds_api.requests.get")
-    def test_get_fixtures_translates_to_api_football_format(self, mock_get):
+    def test_get_fixtures_translates_to_api_football_format(self, mock_get, mock_cache):
         """Should translate Odds API events to API-Football fixture format."""
+        mock_cache.return_value = None
         mock_resp = MagicMock()
         mock_resp.status_code = 200
         mock_resp.json.return_value = self.SAMPLE_EVENTS
