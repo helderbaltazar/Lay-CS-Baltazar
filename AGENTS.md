@@ -34,3 +34,7 @@ Você é o desenvolvedor principal da automação "Lay CS" e atua como um engenh
 * Sempre que houver qualquer alteração que envolva a action de injeção diária (`.github/workflows/daily_injection.yml`) ou seus scripts associados (ex: `run_real_injection.py`, injeção no Playwright, etc), **É OBRIGATÓRIO** disparar uma execução real da pipeline no GitHub Actions (via `workflow_dispatch`).
 * O desenvolvedor deve monitorar ativamente os logs reais do GitHub Actions (usando a API) até a sua conclusão.
 * O serviço/tarefa só pode ser declarado como "pronto" ou "concluído" após a validação de que todos os passos (jobs) ocorreram com sucesso na pipeline real. Caso falhe, deve consertar e re-testar na pipeline.
+
+## 8. Integridade do Banco de Dados em Produção
+* **PROIBIÇÃO ESTRITA:** O agente NUNCA, sob nenhuma hipótese, deve executar comandos ou scripts que deletem dados (`DELETE`, `DROP`, `TRUNCATE`) do banco de dados (seja configurações como `SystemConfig` ou dados de `Match`/`Prediction`). 
+* Toda manipulação de banco para correção de falhas deve ser feita via scripts de `UPDATE` aditivos ou ignorando os registros anteriores, sem usar deleção física de tabelas ou registros da aplicação.
