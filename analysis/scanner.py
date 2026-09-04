@@ -293,11 +293,11 @@ def save_to_db(db, rankings):
                 math_conf = pred.probability * 100
                 
             ai_conf = pred.ai_confidence if pred.ai_confidence is not None else math_conf
-            ev_bonus = 0.0
-            if pred.ev and pred.ev > 0:
-                ev_bonus = min(10.0, pred.ev * 100) # Máximo de 10 pontos de EV
-                
-            power_score = (math_conf * 0.45) + (ai_conf * 0.45) + ev_bonus
+            math_weight = 0.5
+            ai_weight = 0.5
+            
+            # Como o EV via SportAPI7 está inoperante no momento, o Power Score usa 50/50
+            power_score = (math_conf * math_weight) + (ai_conf * ai_weight)
             pred.power_score = min(100.0, power_score)
                 
             pred.ai_verdict = rec.get('ai_verdict', 'APROVADO')
