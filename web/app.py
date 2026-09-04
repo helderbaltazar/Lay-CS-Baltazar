@@ -461,10 +461,22 @@ def methodologies():
             "UNDER_0.5_HT": [], "UNDER_1.5_HT": []
         }
         
+        thresholds = {
+            "OVER_2.5": 0.55, 
+            "BACK_HOME": 0.50, 
+            "BTTS_YES": 0.55,
+            "UNDER_2.5": 0.60, 
+            "UNDER_3.5": 0.75, 
+            "UNDER_4.5": 0.85,
+            "UNDER_0.5_HT": 0.45, 
+            "UNDER_1.5_HT": 0.70
+        }
+        
         for m in matches_today:
             for p in m.predictions:
                 if p.target_score in recs:
-                    recs[p.target_score].append({
+                    if p.probability >= thresholds.get(p.target_score, 0.50):
+                        recs[p.target_score].append({
                         'home': m.home_team,
                         'away': m.away_team,
                         'prob': p.probability,
