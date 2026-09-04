@@ -8,7 +8,7 @@ def test_ranking_logic_lowest_prob_is_first():
     # Porque a menor probabilidade de 0-1 significa a MAIOR probabilidade de dar Green (Lay)
     extra_markets_dict = {
         "OVER_2.5": 0.5, "UNDER_2.5": 0.5, "UNDER_3.5": 0.5, "UNDER_4.5": 0.5, 
-        "BTTS_YES": 0.5, "BACK_HOME": 0.5, "LAY_DRAW": 0.5, "UNDER_0.5_HT": 0.5, "UNDER_1.5_HT": 0.5
+        "BTTS_YES": 0.5, "BACK_HOME": 0.5, "LAY_DRAW": 0.5, "UNDER_0.5_HT": 0.5, "UNDER_1.5_HT": 0.5, "UNDER_2.5_HT": 0.5
     }
     results = [
         {
