@@ -139,7 +139,11 @@ def inject_from_db():
     report_lines = ["🤖 *Relatório Diário Layback (Power Score)* 🤖\n"]
     for bot_id, bot_name, target in targets:
         # Define o limiar de Power Score com base no mercado
-        threshold = 89.4 if target in ["0-3", "1-3"] else 85.0
+        if target == "0-1": threshold = 94.0
+        elif target == "0-2": threshold = 94.0
+        elif target == "0-3": threshold = 99.20
+        elif target == "1-3": threshold = 99.31
+        else: threshold = 99.0
         
         preds = db.query(Prediction).join(Match).filter(
             Prediction.target_score == target,

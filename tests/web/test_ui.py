@@ -87,7 +87,7 @@ def test_index_html_renders_match_with_ai_drawer_and_top5(client):
         rank=1,
         ai_verdict="APROVADO",
         ai_confidence=94,
-        power_score=89.0,
+        power_score=95.0,
         ai_critical_factor="Chelsea muito consistente em casa.",
         ai_analysis="Análise completa detalhada indicando alta segurança para Lay 0x1."
     )

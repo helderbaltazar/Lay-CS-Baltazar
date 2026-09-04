@@ -146,7 +146,14 @@ def index():
         # Ordena pelo Power Score
         temp_rankings[t].sort(key=lambda x: -(x.get('power_score') or 0))
         
-        threshold = 89.4 if t in ["0-3", "1-3"] else 85.0
+        # Thresholds baseados no novo Power Score (0 a 100)
+        # 0-1 e 0-2: Zona segura histórica 100% Winrate começa em 94.0
+        # 0-3 e 1-3: Zona segura histórica 100% Winrate começa em 99.2 e 99.31
+        if t == "0-1": threshold = 94.0
+        elif t == "0-2": threshold = 94.0
+        elif t == "0-3": threshold = 99.20
+        elif t == "1-3": threshold = 99.31
+        else: threshold = 99.0
         
         for idx, item in enumerate(temp_rankings[t]):
             item['rank'] = idx + 1
