@@ -157,6 +157,26 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white border-secondary mb-3">
+                    <div class="card-header border-secondary">⏱️ Under 2.5 HT (1º Tempo)</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Aposta extremamente conservadora no HT.</p>
+                        <ul class="list-group list-group-flush text-dark">
+                            {% for m in recs['UNDER_2.5_HT'] %}
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
+                            {% else %}
+                            <li class="list-group-item text-muted">Nenhuma indicação</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <hr class="my-5 border-secondary">

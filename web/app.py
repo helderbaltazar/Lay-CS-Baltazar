@@ -458,18 +458,19 @@ def methodologies():
         recs = {
             "OVER_2.5": [], "BACK_HOME": [], "BTTS_YES": [],
             "UNDER_2.5": [], "UNDER_3.5": [], "UNDER_4.5": [],
-            "UNDER_0.5_HT": [], "UNDER_1.5_HT": []
+            "UNDER_0.5_HT": [], "UNDER_1.5_HT": [], "UNDER_2.5_HT": []
         }
         
         thresholds = {
-            "OVER_2.5": 0.55, 
-            "BACK_HOME": 0.50, 
-            "BTTS_YES": 0.55,
-            "UNDER_2.5": 0.60, 
-            "UNDER_3.5": 0.75, 
-            "UNDER_4.5": 0.85,
-            "UNDER_0.5_HT": 0.45, 
-            "UNDER_1.5_HT": 0.70
+            "OVER_2.5": 0.50, 
+            "BACK_HOME": 0.45, 
+            "BTTS_YES": 0.50,
+            "UNDER_2.5": 0.55, 
+            "UNDER_3.5": 0.70, 
+            "UNDER_4.5": 0.80,
+            "UNDER_0.5_HT": 0.35, 
+            "UNDER_1.5_HT": 0.65,
+            "UNDER_2.5_HT": 0.85
         }
         
         for m in matches_today:

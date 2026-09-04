@@ -111,6 +111,7 @@ class PoissonDixonColes:
         # HT Unders
         results["UNDER_0.5_HT"] = matrix_ht.get((0,0), 0.0)
         results["UNDER_1.5_HT"] = sum(p for (h,a), p in matrix_ht.items() if h+a < 1.5)
+        results["UNDER_2.5_HT"] = sum(p for (h,a), p in matrix_ht.items() if h+a < 2.5)
         
         return results
 

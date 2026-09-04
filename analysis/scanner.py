@@ -122,7 +122,7 @@ def rank_by_target(results, model):
     rankings = {target: [] for target in config.TARGET_SCORES}
     
     # Adicionamos as novas metodologias
-    extra_markets = ["OVER_2.5", "UNDER_2.5", "UNDER_3.5", "UNDER_4.5", "BTTS_YES", "BACK_HOME", "LAY_DRAW", "UNDER_0.5_HT", "UNDER_1.5_HT"]
+    extra_markets = ["OVER_2.5", "UNDER_2.5", "UNDER_3.5", "UNDER_4.5", "BTTS_YES", "BACK_HOME", "LAY_DRAW", "UNDER_0.5_HT", "UNDER_1.5_HT", "UNDER_2.5_HT"]
     for mkt in extra_markets:
         rankings[mkt] = []
     
