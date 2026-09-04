@@ -126,10 +126,23 @@ def rank_by_target(results, model):
     for mkt in extra_markets:
         rankings[mkt] = []
     
+    from data.sportapi7 import SportAPI7
+    smart_money = SportAPI7.extract_smart_money_signals()
+
     for target in config.TARGET_SCORES:
         sorted_res = sorted(results, key=lambda x: x['probabilities'][target])
         
         for idx, res in enumerate(sorted_res):
+            poisson_prob = res['probabilities'][target]
+            market_odd = res.get('match_odd')
+            blended_prob = model.blend_probability(poisson_prob, market_odd)
+            ev = model.calculate_ev(blended_prob, market_odd)
+            
+            # Aplica bônus de Smart Money se houver match
+            ai_boost = 0
+            if res['home'] in smart_money and smart_money[res['home']]['market'] == target:
+                ai_boost = smart_money[res['home']]['confidence_boost']
+            
             rankings[target].append({
                 'rank': idx + 1,
                 'fixture_id': res['fixture_id'],
@@ -141,7 +154,9 @@ def rank_by_target(results, model):
                 'away': res['away'],
                 'lambda_home': res['lambda_home'],
                 'lambda_away': res['lambda_away'],
-                'probability': res['probabilities'][target],
+                'probability': blended_prob,
+                'ev': ev,
+                'ai_confidence_boost': ai_boost,
                 'home_streak': res.get('home_streak'),
                 'away_streak': res.get('away_streak')
             })
@@ -149,6 +164,16 @@ def rank_by_target(results, model):
     for mkt in extra_markets:
         sorted_res = sorted(results, key=lambda x: x['extra_probabilities'][mkt], reverse=True)
         for idx, res in enumerate(sorted_res):
+            poisson_prob = res['extra_probabilities'][mkt]
+            market_odd = res.get('match_odd') # Se tivéssemos a odd do mercado extra
+            blended_prob = model.blend_probability(poisson_prob, market_odd)
+            ev = model.calculate_ev(blended_prob, market_odd)
+            
+            # Aplica bônus de Smart Money se houver match
+            ai_boost = 0
+            if res['home'] in smart_money and smart_money[res['home']]['market'] == mkt:
+                ai_boost = smart_money[res['home']]['confidence_boost']
+                
             rankings[mkt].append({
                 'rank': idx + 1,
                 'fixture_id': res['fixture_id'],
@@ -160,7 +185,9 @@ def rank_by_target(results, model):
                 'away': res['away'],
                 'lambda_home': res['lambda_home'],
                 'lambda_away': res['lambda_away'],
-                'probability': res['extra_probabilities'][mkt],
+                'probability': blended_prob,
+                'ev': ev,
+                'ai_confidence_boost': ai_boost,
                 'home_streak': res.get('home_streak'),
                 'away_streak': res.get('away_streak')
             })
@@ -239,8 +266,17 @@ def save_to_db(db, rankings):
             pred.probability = rec['probability']
             pred.rank = rec['rank']
             pred.match_odd = rec.get('match_odd')
+            pred.ev = rec.get('ev')
+            
+            # Incorpora o bonus de confianca
+            ai_boost = rec.get('ai_confidence_boost', 0)
+            base_ai_confidence = rec.get('ai_confidence')
+            if base_ai_confidence is not None:
+                pred.ai_confidence = min(100, base_ai_confidence + ai_boost)
+            else:
+                pred.ai_confidence = ai_boost if ai_boost > 0 else None
+                
             pred.ai_verdict = rec.get('ai_verdict', 'APROVADO')
-            pred.ai_confidence = rec.get('ai_confidence')
             pred.ai_critical_factor = rec.get('ai_critical_factor')
             pred.ai_analysis = rec.get('ai_analysis')
             

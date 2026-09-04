@@ -3,26 +3,62 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Oud-Heverlee Leuven",
-      "id": "1996065",
+      "name": "Stuttgart",
+      "id": "2000692",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Standard",
-      "id": "1946605",
+      "name": "1. FC Koln (W)",
+      "id": "1319849",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Galatasaray",
-      "id": "1996156",
+      "name": "Sparta Rotterdam",
+      "id": "2116505",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Goztepe",
-      "id": "2117502",
+      "name": "PEC Zwolle",
+      "id": "2003139",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Ipswich Town U21",
+      "id": "2125608",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Liverpool",
+      "id": "2115966",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "New York City",
+      "id": "1996644",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Nashville SC",
+      "id": "1996640",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Real Sireti",
+      "id": "6248537",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Real Madrid",
+      "id": "2117343",
       "checked": true,
       "side": "A"
     }

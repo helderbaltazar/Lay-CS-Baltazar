@@ -3,14 +3,62 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Al-Hilal",
-      "id": "1995258",
+      "name": "Stuttgart",
+      "id": "2000692",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Al-Adalh",
-      "id": "2119112",
+      "name": "1. FC Koln (W)",
+      "id": "1319849",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Genoa",
+      "id": "6247399",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Como",
+      "id": "2116168",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Ipswich Town U21",
+      "id": "2125608",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Liverpool",
+      "id": "2115966",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "New York City",
+      "id": "1996644",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Nashville SC",
+      "id": "1996640",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Lyon",
+      "id": "1995358",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Auxerre",
+      "id": "2117427",
       "checked": true,
       "side": "A"
     }

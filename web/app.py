@@ -468,7 +468,9 @@ def methodologies():
                         'home': m.home_team,
                         'away': m.away_team,
                         'prob': p.probability,
-                        'league': m.league_name
+                        'league': m.league_name,
+                        'ev': p.ev,
+                        'ai_confidence': p.ai_confidence
                     })
                     
         for k in recs:

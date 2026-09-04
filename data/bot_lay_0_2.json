@@ -3,14 +3,62 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Al-Hilal",
-      "id": "1995258",
+      "name": "Genoa",
+      "id": "6247399",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Al-Adalh",
-      "id": "2119112",
+      "name": "Como",
+      "id": "2116168",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Paris St-G",
+      "id": "1946610",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Monaco",
+      "id": "1996166",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Lyon",
+      "id": "1995358",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Auxerre",
+      "id": "2117427",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Toulouse",
+      "id": "2116189",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Lille",
+      "id": "2116410",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Estudiantes Rio Cuarto",
+      "id": "1320116",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Sarmiento de Junin",
+      "id": "1320121",
       "checked": true,
       "side": "A"
     }

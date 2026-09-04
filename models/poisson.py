@@ -113,3 +113,15 @@ class PoissonDixonColes:
         results["UNDER_1.5_HT"] = sum(p for (h,a), p in matrix_ht.items() if h+a < 1.5)
         
         return results
+
+    def blend_probability(self, poisson_prob, market_odd, poisson_weight=0.70):
+        if not market_odd or market_odd <= 1.0:
+            return poisson_prob
+        market_prob = 1.0 / market_odd
+        return (poisson_weight * poisson_prob) + ((1.0 - poisson_weight) * market_prob)
+
+    def calculate_ev(self, blended_prob, market_odd):
+        if not market_odd or market_odd <= 1.0:
+            return 0.0
+        return (blended_prob * market_odd) - 1.0
+

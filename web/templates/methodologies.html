@@ -17,7 +17,12 @@
                         <p class="small text-muted">A nossa matriz prevê mais de 65% de chance de saírem 3 gols ou mais, com backtest positivo.</p>
                         <ul class="list-group list-group-flush text-dark">
                             {% for m in recs['OVER_2.5'] %}
-                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
                             {% endfor %}
@@ -33,7 +38,12 @@
                         <p class="small text-muted">Ataque forte contra defesa fraca. A soma de todos os placares de vitória da casa ultrapassa 60%.</p>
                         <ul class="list-group list-group-flush text-dark">
                             {% for m in recs['BACK_HOME'] %}
-                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
                             {% endfor %}
@@ -49,7 +59,12 @@
                         <p class="small text-muted">Excluindo placares zerados, a chance de gol para os dois lados é alta segundo o modelo.</p>
                         <ul class="list-group list-group-flush text-dark">
                             {% for m in recs['BTTS_YES'] %}
-                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
                             {% endfor %}
@@ -69,7 +84,12 @@
                         <p class="small text-muted">A soma do modelo aponta menos de 3 gols.</p>
                         <ul class="list-group list-group-flush text-dark">
                             {% for m in recs['UNDER_2.5'] %}
-                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação</li>
                             {% endfor %}
@@ -84,7 +104,12 @@
                         <p class="small text-muted">Margem de altíssima segurança. Recomendado para acumuladas.</p>
                         <ul class="list-group list-group-flush text-dark">
                             {% for m in recs['UNDER_4.5'][:3] %}
-                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação</li>
                             {% endfor %}
@@ -99,7 +124,12 @@
                         <p class="small text-muted">Tendência de zero gols nos primeiros 45 min.</p>
                         <ul class="list-group list-group-flush text-dark">
                             {% for m in recs['UNDER_0.5_HT'] %}
-                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação</li>
                             {% endfor %}
@@ -114,7 +144,12 @@
                         <p class="small text-muted">Máximo de 1 gol no primeiro tempo.</p>
                         <ul class="list-group list-group-flush text-dark">
                             {% for m in recs['UNDER_1.5_HT'] %}
-                            <li class="list-group-item"><strong>{{ m.home }} x {{ m.away }}</strong> (Prob: {{ "%.1f"|format(m.prob*100) }}%)</li>
+                            <li class="list-group-item">
+                                <strong>{{ m.home }} x {{ m.away }}</strong><br>
+                                <span class="badge bg-success">Prob: {{ "%.1f"|format(m.prob*100) }}%</span>
+                                {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
+                                {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
+                            </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação</li>
                             {% endfor %}

@@ -25,6 +25,12 @@ def test_rank_by_target():
     class DummyModel:
         def get_probabilities(self, l_h, l_a, targets):
             return {t: 0.1 for t in targets}
+        def get_extra_probabilities(self, h, a):
+            return {}
+        def blend_probability(self, prob, odd):
+            return prob
+        def calculate_ev(self, prob, odd):
+            return 0.0
             
     rankings = rank_by_target(results, DummyModel())
     assert rankings['0-1'][0]['fixture_id'] == 2 # menor risco primeiro

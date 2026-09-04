@@ -33,6 +33,10 @@ def test_ranking_logic_lowest_prob_is_first():
     class DummyModel:
         def get_probabilities(self, l_h, l_a, targets):
             return {t: 0.1 for t in targets}
+        def blend_probability(self, prob, odd):
+            return prob
+        def calculate_ev(self, prob, odd):
+            return 0.0
     
     rankings = rank_by_target(results, DummyModel())
     
