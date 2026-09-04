@@ -199,6 +199,15 @@ def rank_by_target(results, model):
     sub_rankings = AIAnalyst.analyze_top_rankings(sub_rankings)
     for t in config.TARGET_SCORES:
         rankings[t] = sub_rankings[t]
+        
+    # Preenche uma confiança base (matemática pura) para os mercados extras para não ficarem "None"
+    for t, matches in rankings.items():
+        if t not in config.TARGET_SCORES:
+            for match in matches:
+                prob = match.get('probability', 0.0)
+                # Para mercados que são de "Back" (favor a que aconteça), a confiança é a própria probabilidade
+                # No nosso modelo, todos os extras são do tipo "Back" (Over, Under, Back Home, BTTS)
+                match['ai_confidence'] = int(round(prob * 100))
     
     # Re-calcula probabilidades com o fator de ajuste e re-ordena apenas para os placares alvo originais
     for target in config.TARGET_SCORES:
