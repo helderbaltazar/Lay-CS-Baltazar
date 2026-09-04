@@ -450,10 +450,14 @@ def methodologies():
         # 3. Recomendações do Dia
         import datetime
         import pytz
-        now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
-        today_str = now_br.strftime("%Y-%m-%d")
+        from flask import request
         
-        matches_today = db.query(Match).filter(func.date(Match.date) == today_str).all()
+        now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
+        default_today_str = now_br.strftime("%Y-%m-%d")
+        
+        target_date_str = request.args.get('date', default_today_str)
+        
+        matches_today = db.query(Match).filter(func.date(Match.date) == target_date_str).all()
         
         recs = {
             "OVER_2.5": [], "BACK_HOME": [], "BTTS_YES": [],
@@ -496,4 +500,5 @@ def methodologies():
     return render_template('methodologies.html', 
                            max_drawdown=round(max_drawdown, 2),
                            mc_worst_case=round(mc_worst_case, 2),
-                           recs=recs)
+                           recs=recs,
+                           target_date=target_date_str)
