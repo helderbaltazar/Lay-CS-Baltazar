@@ -104,3 +104,19 @@ class DataManager:
         # Regressão à média (15%) para estabilidade em inícios de temporada
         sxg = (xg_bruto * 0.85) + (league_avg_goals * 0.15)
         return sxg
+
+    @staticmethod
+    def calculate_synthetic_xga(goals_conceded, matches_played, clean_sheets, league_avg_goals):
+        if matches_played == 0:
+            return league_avg_goals
+            
+        raw_avg = goals_conceded / matches_played
+        matches_with_goals_conceded = matches_played - clean_sheets
+        consistency = matches_with_goals_conceded / matches_played
+        
+        # Penaliza times que tomam gols em quase todos os jogos (aumenta o xGA)
+        multiplier = (consistency + 1) / 2
+        xga_bruto = raw_avg * multiplier
+        
+        sxga = (xga_bruto * 0.85) + (league_avg_goals * 0.15)
+        return sxga

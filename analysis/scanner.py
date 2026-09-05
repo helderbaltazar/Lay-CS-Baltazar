@@ -11,21 +11,27 @@ def calculate_lambdas(home_stats, away_stats, league_avg):
     h_conceded = float(home_stats['goals']['against']['total']['home'] or 0) + 0.1
     h_games = float(home_stats['fixtures']['played']['home'] or 0) + 0.1
     h_failed = float(home_stats.get('failed_to_score', {}).get('home') or 0)
+    h_cleansheets = float(home_stats.get('clean_sheet', {}).get('home') or 0)
 
     a_scored = float(away_stats['goals']['for']['total']['away'] or 0) + 0.1
     a_conceded = float(away_stats['goals']['against']['total']['away'] or 0) + 0.1
     a_games = float(away_stats['fixtures']['played']['away'] or 0) + 0.1
     a_failed = float(away_stats.get('failed_to_score', {}).get('away') or 0)
+    a_cleansheets = float(away_stats.get('clean_sheet', {}).get('away') or 0)
 
     # Cálculo Híbrido Avançado (xG Sintético) para Força de Ataque
     sxg_home = DataManager.calculate_synthetic_xg(h_scored, h_games, h_failed, avg_home)
     sxg_away = DataManager.calculate_synthetic_xg(a_scored, a_games, a_failed, avg_away)
 
+    # Cálculo Híbrido Avançado (xGA Sintético) para Força de Defesa usando Clean Sheets
+    sxga_home = DataManager.calculate_synthetic_xga(h_conceded, h_games, h_cleansheets, avg_away)
+    sxga_away = DataManager.calculate_synthetic_xga(a_conceded, a_games, a_cleansheets, avg_home)
+
     h_attack = sxg_home / avg_home
-    h_defense = (h_conceded / h_games) / avg_away
+    h_defense = sxga_home / avg_away
     
     a_attack = sxg_away / avg_away
-    a_defense = (a_conceded / a_games) / avg_home
+    a_defense = sxga_away / avg_home
 
     lam_home = h_attack * a_defense * avg_home
     lam_away = a_attack * h_defense * avg_away
