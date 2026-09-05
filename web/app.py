@@ -157,7 +157,9 @@ def index():
         
         for idx, item in enumerate(temp_rankings[t]):
             item['rank'] = idx + 1
-            if (item.get('power_score') or 0) >= threshold:
+            power_score = item.get('power_score') or 0
+            match_odd = item.get('match_odd')
+            if power_score >= threshold and match_odd is not None and match_odd <= 2.0:
                 rankings[t]['approved'].append(item)
             else:
                 rankings[t]['rejected'].append(item)

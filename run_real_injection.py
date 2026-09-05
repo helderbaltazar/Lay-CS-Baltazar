@@ -148,6 +148,8 @@ def inject_from_db():
         preds = db.query(Prediction).join(Match).filter(
             Prediction.target_score == target,
             Prediction.power_score >= threshold,
+            Prediction.match_odd != None,
+            Prediction.match_odd <= 2.0,
             Match.date >= today_start
         ).order_by(
             Prediction.power_score.desc().nullslast(),
