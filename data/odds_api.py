@@ -85,6 +85,11 @@ LEAGUE_NAMES = {
 
 def get_events(sport_key, regions="eu", markets="h2h"):
     """Busca eventos (jogos) de um esporte/liga específico com odds."""
+    cache_key = f"odds_events_{sport_key}_{regions}_{markets}"
+    cached = cache.get(cache_key, ttl_seconds=3600)  # Cache de 1 hora
+    if cached is not None:
+        return cached
+
     url = f"{BASE_URL}/sports/{sport_key}/odds"
     params = {
         "apiKey": ODDS_API_KEY,
@@ -108,7 +113,8 @@ def get_events(sport_key, regions="eu", markets="h2h"):
                 db.close()
             except Exception as e:
                 print(f"Erro ao salvar RawDataLog (Odds API): {e}")
-                
+            
+            cache.set(cache_key, data)
             return data
         return []
     except Exception as e:

@@ -66,9 +66,30 @@ def scan_match(fixture, model, targets, source='API-Football'):
     home_team = fixture['teams']['home']
     away_team = fixture['teams']['away']
 
-    # Removido filtro de odds e a chamada da API conforme solicitado pelo usuário
-    # para economizar a cota de 100 requests/dia do plano Free.
+    # Busca a odd via fallback gratuito da Odds-API
+    # Isso evita consumir a cota premium da API-Football
     home_odd = None
+    try:
+        from data.odds_api import SPORT_KEYS, get_events
+        import difflib
+        
+        # Encontra a liga correspondente
+        sport_key = next((k for k, v in SPORT_KEYS.items() if v == league_info['id']), None)
+        if sport_key:
+            events = get_events(sport_key)
+            for ev in events:
+                if (difflib.get_close_matches(home_team['name'], [ev.get('home_team','')], n=1, cutoff=0.5) and 
+                    difflib.get_close_matches(away_team['name'], [ev.get('away_team','')], n=1, cutoff=0.5)):
+                    bookmakers = ev.get('bookmakers', [])
+                    if bookmakers:
+                        for mkt in bookmakers[0].get('markets', []):
+                            if mkt['key'] == 'h2h':
+                                for out in mkt['outcomes']:
+                                    if out['name'] == ev.get('home_team'):
+                                        home_odd = out['price']
+                    break
+    except Exception as e:
+        print(f"Erro ao buscar odd da Odds-API: {e}")
 
     home_stats = DataManager.get_team_stats(home_team['id'], league_info['id'], source)
     away_stats = DataManager.get_team_stats(away_team['id'], league_info['id'], source)
