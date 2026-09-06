@@ -4,29 +4,28 @@ from models.poisson import PoissonDixonColes
 
 from data.data_manager import DataManager
 
-def calculate_lambdas(home_stats, away_stats, league_avg):
+from data.xg_model import get_team_xg
+
+def calculate_lambdas(home_stats, away_stats, league_avg, league_id=None, home_name=None, away_name=None):
     avg_home, avg_away = league_avg
     
-    h_scored = float(home_stats['goals']['for']['total']['home'] or 0) + 0.1
-    h_conceded = float(home_stats['goals']['against']['total']['home'] or 0) + 0.1
-    h_games = float(home_stats['fixtures']['played']['home'] or 0) + 0.1
-    h_failed = float(home_stats.get('failed_to_score', {}).get('home') or 0)
-    h_cleansheets = float(home_stats.get('clean_sheet', {}).get('home') or 0)
+    home_team_id = home_stats.get('team', {}).get('id', 0)
+    away_team_id = away_stats.get('team', {}).get('id', 0)
 
-    a_scored = float(away_stats['goals']['for']['total']['away'] or 0) + 0.1
-    a_conceded = float(away_stats['goals']['against']['total']['away'] or 0) + 0.1
-    a_games = float(away_stats['fixtures']['played']['away'] or 0) + 0.1
-    a_failed = float(away_stats.get('failed_to_score', {}).get('away') or 0)
-    a_cleansheets = float(away_stats.get('clean_sheet', {}).get('away') or 0)
+    # 1. Puxar as métricas de xG (Real da Europa ou Sintético do Brasil)
+    xg_data_home = get_team_xg(home_team_id, league_id, home_name)
+    xg_data_away = get_team_xg(away_team_id, league_id, away_name)
 
-    # Cálculo Híbrido Avançado (xG Sintético) para Força de Ataque
-    sxg_home = DataManager.calculate_synthetic_xg(h_scored, h_games, h_failed, avg_home)
-    sxg_away = DataManager.calculate_synthetic_xg(a_scored, a_games, a_failed, avg_away)
+    # Força de Ataque (xG gerado vs Média da Liga)
+    sxg_home = xg_data_home["xG_home"]
+    sxg_away = xg_data_away["xG_away"]
 
-    # Cálculo Híbrido Avançado (xGA Sintético) para Força de Defesa usando Clean Sheets
-    sxga_home = DataManager.calculate_synthetic_xga(h_conceded, h_games, h_cleansheets, avg_away)
-    sxga_away = DataManager.calculate_synthetic_xga(a_conceded, a_games, a_cleansheets, avg_home)
+    # Força de Defesa (xGA concedido vs Média da Liga)
+    sxga_home = xg_data_home["xGA_home"]
+    sxga_away = xg_data_away["xGA_away"]
 
+    # 2. Calcular Fatores de Força (Attack/Defense Strength)
+    # Se a liga faz avg_home = 1.5 gols e o time gera 2.0 xG em casa, sua força é 1.33
     h_attack = sxg_home / avg_home
     h_defense = sxga_home / avg_away
     
@@ -98,7 +97,10 @@ def scan_match(fixture, model, targets, source='API-Football'):
         return None
 
     league_avg = get_league_avg(league_info['id'])
-    lam_home, lam_away = calculate_lambdas(home_stats, away_stats, league_avg)
+    
+    home_name = home_team.get('name')
+    away_name = away_team.get('name')
+    lam_home, lam_away = calculate_lambdas(home_stats, away_stats, league_avg, league_info['id'], home_name, away_name)
     
     probs = model.get_probabilities(lam_home, lam_away, targets)
     extra_probs = model.get_extra_probabilities(lam_home, lam_away)

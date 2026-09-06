@@ -1,10 +1,13 @@
+from unittest.mock import patch
 import pytest
 from analysis.scanner import calculate_lambdas
 
-def test_calculate_lambdas_with_smoothing():
+@patch("analysis.scanner.get_team_xg")
+def test_calculate_lambdas_with_smoothing(mock_xg):
     home_stats = {'goals': {'for': {'total': {'home': 0}}, 'against': {'total': {'home': 0}}}, 'fixtures': {'played': {'home': 0}}}
     away_stats = {'goals': {'for': {'total': {'away': 0}}, 'against': {'total': {'away': 0}}}, 'fixtures': {'played': {'away': 0}}}
     
+    mock_xg.return_value = {"xG_home": 1.5, "xGA_home": 1.2, "xG_away": 1.3, "xGA_away": 1.4}
     lam_home, lam_away = calculate_lambdas(home_stats, away_stats, (1.5, 1.2))
     
     # 0 goals + 0.1 smoothing
@@ -38,7 +41,8 @@ def test_rank_by_target():
 
 
 
-def test_scan_match_real_score():
+@patch("analysis.scanner.get_team_xg")
+def test_scan_match_real_score(mock_xg):
     from analysis.scanner import scan_match
     import data.api_football
     import data.league_config
@@ -68,6 +72,7 @@ def test_scan_match_real_score():
         m.setattr(data.league_config, 'get_league_avg', lambda x: (1.5, 1.2))
         m.setattr(analysis.scanner, 'get_league_avg', lambda x: (1.5, 1.2))
         
+        mock_xg.return_value = {"xG_home": 1.5, "xGA_home": 1.2, "xG_away": 1.3, "xGA_away": 1.4}
         res = scan_match(fixture, DummyModel(), ['0-1'])
         assert res is not None
         assert res['real_score'] == '2-1'

@@ -62,6 +62,9 @@ class TestOddsApiClient:
 
     @patch("data.odds_api.requests.get")
     def test_get_events_failure(self, mock_get):
+        from data.cache import invalidate
+        invalidate("odds_events_soccer_brazil_serie_a_eu_h2h")
+        
         """Should return empty list on API error."""
         mock_resp = MagicMock()
         mock_resp.status_code = 401
