@@ -5,6 +5,7 @@ from models.poisson import PoissonDixonColes
 from data.data_manager import DataManager
 
 from data.xg_model import get_team_xg
+from analysis.time_decay_elo import get_league_form_elo
 
 def calculate_lambdas(home_stats, away_stats, league_avg, league_id=None, home_name=None, away_name=None):
     avg_home, avg_away = league_avg

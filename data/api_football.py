@@ -272,3 +272,42 @@ def get_fixture_lineups(fixture_id):
     except Exception as e:
         print(f"Erro ao buscar lineups para fixture {fixture_id}: {e}")
         return []
+
+def get_league_fixtures(league_id, season):
+    cache_key = f"league_fixtures_{league_id}_{season}"
+    cached = cache.get(cache_key, ttl_seconds=86400 * 7) # 7 dias de cache para histórico
+    if cached is not None:
+        return cached
+
+    url = f"{config.BASE_URL}/fixtures?league={league_id}&season={season}"
+    try:
+        response = requests.get(url, headers=get_headers())
+        response.raise_for_status()
+        data = response.json()
+        
+        # Opcional: salvar log raw
+        try:
+            db = SessionLocal()
+            log = RawDataLog(
+                endpoint=url,
+                payload=data
+            )
+            db.add(log)
+            db.commit()
+            db.close()
+        except Exception:
+            pass
+
+        fixtures = data.get('response', [])
+        # Filtrar apenas jogos que já terminaram (Match Finished) para Elo
+        finished_fixtures = [f for f in fixtures if f['fixture']['status']['short'] in ['FT', 'AET', 'PEN']]
+        
+        # Ordenar por data
+        finished_fixtures.sort(key=lambda x: x['fixture']['timestamp'])
+        
+        cache.set(cache_key, finished_fixtures)
+        return finished_fixtures
+    except Exception as e:
+        print(f"Erro ao buscar fixtures da liga {league_id} {season}: {e}")
+        return []
+
