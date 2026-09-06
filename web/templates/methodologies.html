@@ -24,6 +24,21 @@
                                 {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
                                 {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
                                 {% if m.power_score %}<span class="badge" style="background-color: #6f42c1; color: white;">⭐ Score: {{ "%.0f"|format(m.power_score) }}</span>{% endif %}
+                                {% if m.ai_critical_factor %}
+                                <div style="font-size: 12px; color: #576574; margin-top: 4px;">
+                                    <strong>💡 Fator Crítico:</strong> {{ m.ai_critical_factor }}
+                                </div>
+                                {% endif %}
+                                {% if m.ai_analysis %}
+                                <details style="margin-top: 6px; cursor: pointer;">
+                                    <summary style="color: #0984e3; font-size: 11px; font-weight: bold; outline: none;">
+                                        🔍 Ver Justificativa Completa da IA
+                                    </summary>
+                                    <div style="margin-top: 6px; padding: 8px 12px; background: rgba(0,0,0,0.05); border-left: 3px solid #0984e3; border-radius: 4px; font-size: 12px; line-height: 1.4; color: #2d3436;">
+                                        {{ m.ai_analysis }}
+                                    </div>
+                                </details>
+                                {% endif %}
                             </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
@@ -46,6 +61,21 @@
                                 {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
                                 {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
                                 {% if m.power_score %}<span class="badge" style="background-color: #6f42c1; color: white;">⭐ Score: {{ "%.0f"|format(m.power_score) }}</span>{% endif %}
+                                {% if m.ai_critical_factor %}
+                                <div style="font-size: 12px; color: #576574; margin-top: 4px;">
+                                    <strong>💡 Fator Crítico:</strong> {{ m.ai_critical_factor }}
+                                </div>
+                                {% endif %}
+                                {% if m.ai_analysis %}
+                                <details style="margin-top: 6px; cursor: pointer;">
+                                    <summary style="color: #0984e3; font-size: 11px; font-weight: bold; outline: none;">
+                                        🔍 Ver Justificativa Completa da IA
+                                    </summary>
+                                    <div style="margin-top: 6px; padding: 8px 12px; background: rgba(0,0,0,0.05); border-left: 3px solid #0984e3; border-radius: 4px; font-size: 12px; line-height: 1.4; color: #2d3436;">
+                                        {{ m.ai_analysis }}
+                                    </div>
+                                </details>
+                                {% endif %}
                             </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
@@ -68,6 +98,21 @@
                                 {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
                                 {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
                                 {% if m.power_score %}<span class="badge" style="background-color: #6f42c1; color: white;">⭐ Score: {{ "%.0f"|format(m.power_score) }}</span>{% endif %}
+                                {% if m.ai_critical_factor %}
+                                <div style="font-size: 12px; color: #576574; margin-top: 4px;">
+                                    <strong>💡 Fator Crítico:</strong> {{ m.ai_critical_factor }}
+                                </div>
+                                {% endif %}
+                                {% if m.ai_analysis %}
+                                <details style="margin-top: 6px; cursor: pointer;">
+                                    <summary style="color: #0984e3; font-size: 11px; font-weight: bold; outline: none;">
+                                        🔍 Ver Justificativa Completa da IA
+                                    </summary>
+                                    <div style="margin-top: 6px; padding: 8px 12px; background: rgba(0,0,0,0.05); border-left: 3px solid #0984e3; border-radius: 4px; font-size: 12px; line-height: 1.4; color: #2d3436;">
+                                        {{ m.ai_analysis }}
+                                    </div>
+                                </details>
+                                {% endif %}
                             </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação hoje</li>
@@ -94,6 +139,21 @@
                                 {% if m.ev %}<span class="badge bg-info text-dark">EV: {{ "%.2f"|format(m.ev) }}</span>{% endif %}
                                 {% if m.ai_confidence %}<span class="badge bg-warning text-dark">🔥 Conf: {{ m.ai_confidence }}%</span>{% endif %}
                                 {% if m.power_score %}<span class="badge" style="background-color: #6f42c1; color: white;">⭐ Score: {{ "%.0f"|format(m.power_score) }}</span>{% endif %}
+                                {% if m.ai_critical_factor %}
+                                <div style="font-size: 12px; color: #576574; margin-top: 4px;">
+                                    <strong>💡 Fator Crítico:</strong> {{ m.ai_critical_factor }}
+                                </div>
+                                {% endif %}
+                                {% if m.ai_analysis %}
+                                <details style="margin-top: 6px; cursor: pointer;">
+                                    <summary style="color: #0984e3; font-size: 11px; font-weight: bold; outline: none;">
+                                        🔍 Ver Justificativa Completa da IA
+                                    </summary>
+                                    <div style="margin-top: 6px; padding: 8px 12px; background: rgba(0,0,0,0.05); border-left: 3px solid #0984e3; border-radius: 4px; font-size: 12px; line-height: 1.4; color: #2d3436;">
+                                        {{ m.ai_analysis }}
+                                    </div>
+                                </details>
+                                {% endif %}
                             </li>
                             {% else %}
                             <li class="list-group-item text-muted">Nenhuma indicação</li>

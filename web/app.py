@@ -465,7 +465,10 @@ def methodologies():
                         'league': m.league_name,
                         'ev': p.ev,
                         'ai_confidence': p.ai_confidence,
-                        'power_score': p.power_score
+                        'power_score': p.power_score,
+                        'ai_analysis': p.ai_analysis,
+                        'ai_critical_factor': p.ai_critical_factor,
+                        'ai_verdict': p.ai_verdict
                     })
                     
         for k in recs:

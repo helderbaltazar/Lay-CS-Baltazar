@@ -21,29 +21,47 @@ class AIAnalyst:
         league = match_info.get('league', 'Liga')
         lam_home = match_info.get('lambda_home', 1.0)
         lam_away = match_info.get('lambda_away', 1.0)
+        market_odd = match_info.get('match_odd', 'N/A')
+        ai_boost = match_info.get('ai_confidence_boost', 0)
         prob_pct = round(prob_poisson * 100, 2)
-        target_display = target_score.replace('-', 'x')
+        
+        is_lay_cs = target_score in ["0-1", "0-2", "0-3", "1-3"]
+        
+        if is_lay_cs:
+            target_display = "Lay " + target_score.replace('-', 'x')
+            role = "especialista em apostas esportivas de Lay Correct Score (apostar CONTRA um placar exato)"
+            rules = f"""DIRETRIZES DE ESPECIALISTA EM LAY CS:
+1. Lay 0x1 / Lay 0x2: Avalie se o mandante tem capacidade de marcar ao menos 1 gol ou segurar o jogo.
+2. Lay 0x3 / Lay 1x3: Avalie se a partida tem baixa tendência de goleada do visitante.
+3. Grau de Confiança base: ~{100 - prob_pct:.1f}%. Refine para cima ou para baixo de acordo com odd ({market_odd}), mando de campo e momento.
+4. Fatores de Veto: Se o risco do visitante vencer pelo exato placar de {target_score.replace('-', 'x')} for alto, você deve VETAR."""
+        else:
+            target_display = target_score
+            role = "especialista quantitativo em apostas esportivas (Mercados de Over/Under/Match Odds)"
+            rules = f"""DIRETRIZES DE ESPECIALISTA EM {target_score}:
+1. Você deve analisar a viabilidade do mercado {target_score} baseado na força de ataque/defesa de ambos.
+2. Grau de Confiança base: ~{prob_pct:.1f}%. Refine considerando se as Odds (ex: {market_odd}) e as tendências de mercado indicam valor real.
+3. Considere que a matemática indicou {prob_pct}% de chance de ocorrência. Analise friamente as estatísticas (λ={lam_home:.2f} vs λ={lam_away:.2f}).
+4. Veto: Vete a aposta caso os lambdas e a cotação não justifiquem a entrada."""
 
-        return f"""Você é um analista quantitativo e especialista profissional em apostas esportivas de Lay Correct Score (apostar CONTRA um placar exato).
+        return f"""Você é um analista quantitativo e {role}.
 
 PARTIDA PARA AUDITORIA:
 - Jogo: {home_team} vs {away_team}
 - Competição: {league}
-- Alvo Poisson/SxG: Lay {target_display} (Probabilidade estimada do placar ocorrer: {prob_pct}%)
-- Força de Ataque/Gols Esperados: Mandante (λ={lam_home:.2f}), Visitante (λ={lam_away:.2f})
+- Mercado: {target_display} (Probabilidade estimada: {prob_pct}%)
+- Força de Ataque (λ): Mandante (λ={lam_home:.2f}), Visitante (λ={lam_away:.2f})
+- Match Odd Mandante (1x2): {market_odd}
+- Smart Money Boost (Decaimento das Odds): +{ai_boost}%
 
-DIRETRIZES DE ESPECIALISTA EM LAY CS:
-1. Lay 0x1 / Lay 0x2: Apostamos que o visitante NÃO vencerá por 1x0 ou 2x0 sem sofrer gols. Avalie se o mandante tem capacidade de marcar ao menos 1 gol ou segurar o jogo, e se o visitante tem desfalques no ataque.
-2. Lay 0x3 / Lay 1x3: Apostamos que o visitante NÃO marcará 3 gols fora de casa. Avalie se a partida tem baixa tendência de goleada do visitante.
-3. Grau de Confiança: A confiança no Lay deve ser proporcionalmente inversa ao risco do placar (Ex: se a probabilidade calculada for {prob_pct}%, a confiança base de Green no Lay é de ~{100 - prob_pct:.1f}%). Refine esse valor (para cima ou para baixo) de acordo com desfalques, mando de campo e momento.
-4. Fatores de Veto: Se o mandante estiver poupando time titular inteiro, com crise grave, ou se houver risco extremo do visitante vencer com o placar exato de {target_display}, você deve VETAR.
+{rules}
 
 Responda ESTRITAMENTE em formato JSON com esta estrutura:
 {{
   "veredito": "APROVADO" ou "VETADO",
-  "confianca": <inteiro de 10 a 99 representando a segurança no Lay>,
+  "confianca": <inteiro de 10 a 99 representando a segurança final na entrada>,
   "fator_critico": "<frase curta de até 120 caracteres resumindo o principal motivo do veredito>",
-  "analise_detalhada": "<parágrafo explicativo de 2 a 4 frases para exibição no Dashboard>"
+  "analise_detalhada": "<parágrafo explicativo de 2 a 4 frases para exibição no Dashboard justificando a escolha baseada nos dados fornecidos>"
 }}
 """
 
