@@ -1,9 +1,10 @@
 import math
 
 class PoissonDixonColes:
-    def __init__(self, rho=-0.10, max_goals=7):
+    def __init__(self, rho=-0.10, max_goals=7, zip_prob=0.05):
         self.rho = rho
         self.max_goals = max_goals
+        self.zip_prob = zip_prob  # Zero-Inflated Poisson parameter (Inércia Zero)
 
     def poisson_pmf(self, k, lam):
         if lam == 0:
@@ -30,6 +31,17 @@ class PoissonDixonColes:
                 prob = self.poisson_pmf(h, lam_home) * self.poisson_pmf(a, lam_away)
                 tau = self.dixon_coles_tau(h, a, lam_home, lam_away)
                 adjusted_prob = prob * tau
+                
+                # Zero-Inflated Poisson (ZIP) - Camada de inércia zero
+                # Infla as probabilidades dos placares estéreis (0-0, 1-0, 0-1)
+                if (h, a) == (0, 0):
+                    adjusted_prob = self.zip_prob + (1 - self.zip_prob) * adjusted_prob
+                else:
+                    adjusted_prob = (1 - self.zip_prob) * adjusted_prob
+                    # Usuário solicitou inflar também 0-1 e 1-0 levemente
+                    if (h, a) in [(1, 0), (0, 1)]:
+                        # Dá um pequeno boost extra proporcional à inércia
+                        adjusted_prob += self.zip_prob * 0.2 * adjusted_prob
                 
                 # Previne probabilidades negativas em lambdas extremos
                 adjusted_prob = max(0.0, adjusted_prob)
@@ -125,4 +137,3 @@ class PoissonDixonColes:
         if not market_odd or market_odd <= 1.0:
             return 0.0
         return (blended_prob * market_odd) - 1.0
-

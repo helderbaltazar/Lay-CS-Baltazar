@@ -43,3 +43,17 @@ def test_get_probabilities_returns_targets(model):
     assert "0-2" in probs
     assert probs["0-1"] > 0
     assert probs["0-2"] > 0
+
+def test_zip_adjusts_zero_zero():
+    model_standard = PoissonDixonColes(zip_prob=0.0)
+    matrix_std = model_standard.predict(1.5, 1.5)
+    
+    model_zip = PoissonDixonColes(zip_prob=0.1)
+    matrix_zip = model_zip.predict(1.5, 1.5)
+    
+    # 0-0 deve ser inflado em relação ao modelo padrão
+    assert matrix_zip[(0, 0)] > matrix_std[(0, 0)]
+    
+    # 2-2 não deve ser inflado, deve ser reduzido levemente pela normalização/distribuição do ZIP
+    assert matrix_zip[(2, 2)] < matrix_std[(2, 2)]
+
