@@ -108,3 +108,43 @@ def test_index_html_renders_match_with_ai_drawer_and_top5(client):
     assert "Chelsea muito consistente em casa." in html
     assert "Ver Justificativa Completa da IA" in html
     assert "Análise completa detalhada indicando alta segurança para Lay 0x1." in html
+
+def test_methodologies_html_renders_power_score_and_ai_drawer(client):
+    import database.db
+    from database.models_db import Match, Prediction
+    from datetime import datetime
+    
+    db = database.db.SessionLocal()
+    m = Match(
+        fixture_id=888,
+        date=datetime.utcnow(),
+        league_name="Premier League",
+        home_team="Arsenal",
+        away_team="Tottenham",
+        status="NS"
+    )
+    db.add(m)
+    db.commit()
+
+    p = Prediction(
+        match_id=m.id,
+        target_score="OVER_2.5",
+        probability=0.80,
+        rank=1,
+        power_score=92.0,
+        ai_verdict="APROVADO",
+        ai_confidence=88,
+        ai_critical_factor="Derby londrino intenso",
+        ai_analysis="Análise de over 2.5 gols com base no estilo de jogo aberto das equipes."
+    )
+    db.add(p)
+    db.commit()
+
+    response = client.get('/methodologies', headers=get_auth_headers())
+    assert response.status_code == 200
+    html = response.data.decode('utf-8')
+
+    assert "Score: 92" in html
+    assert "Derby londrino intenso" in html
+    assert "Ver Justificativa Completa da IA" in html
+    assert "Análise de over 2.5 gols com base no estilo de jogo aberto" in html
