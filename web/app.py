@@ -483,3 +483,118 @@ def methodologies():
                            mc_worst_case=round(mc_worst_case, 2),
                            recs=recs,
                            target_date=target_date_str)
+
+@app.route("/backtest")
+@auth.login_required
+def backtest_ui():
+    return render_template('backtest.html')
+
+@app.route("/api/backtest/run", methods=["POST"])
+@auth.login_required
+def run_backtest():
+    import sqlite3
+    import pandas as pd
+    from flask import request, jsonify
+    
+    data = request.json
+    market = data.get("market", "0-1")
+    min_power = float(data.get("min_power", 90))
+    max_power = float(data.get("max_power", 100))
+    max_soma = data.get("max_soma")
+    max_efic = data.get("max_efic")
+    stake = float(data.get("stake", 100))
+    odd = float(data.get("odd", 12.0))
+    
+    conn = sqlite3.connect('data_store/database.sqlite3')
+    query = """
+        SELECT 
+            homeGoalCount, awayGoalCount,
+            Media_Gols_Total_Casa, Media_Gols_Total_Visitante,
+            Media_Gols_no_1T_Casa, Media_Gols_no_1T_Visitante,
+            Efic_xG_Casa, Efic_xG_Visitante
+        FROM telegram_dataset
+        WHERE Media_Gols_Total_Casa IS NOT NULL 
+          AND Media_Gols_Total_Visitante IS NOT NULL
+          AND homeGoalCount IS NOT NULL
+    """
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    # Calculate Power Score
+    from models.poisson import PoissonDixonColes
+    model = PoissonDixonColes()
+    probs = []
+    for _, row in df.iterrows():
+        h = row['Media_Gols_Total_Casa']
+        a = row['Media_Gols_Total_Visitante']
+        if h <= 0: h = 0.1
+        if a <= 0: a = 0.1
+        matrix = model.predict(h, a)
+        
+        # Determine probability based on market
+        prob = 0
+        if market == "0-1": prob = matrix.get((0, 1), 0)
+        elif market == "0-2": prob = matrix.get((0, 2), 0)
+        elif market == "0-3": prob = matrix.get((0, 3), 0)
+        elif market == "1-3": prob = matrix.get((1, 3), 0)
+        elif market == "UNDER_0.5_HT":
+            prob = matrix.get((0,0), 0) # Mock simplification for HT via FT matrix just for score distribution testing
+        
+        probs.append(prob)
+        
+    df['Power_Score'] = [(1 - p) * 100 for p in probs]
+    df['Soma_HT'] = df['Media_Gols_no_1T_Casa'] + df['Media_Gols_no_1T_Visitante']
+    
+    # Filter
+    mask = (df['Power_Score'] >= min_power) & (df['Power_Score'] <= max_power)
+    if max_soma:
+        mask = mask & (df['Soma_HT'] <= float(max_soma))
+    if max_efic:
+        mask = mask & (df['Efic_xG_Casa'] <= float(max_efic)) & (df['Efic_xG_Visitante'] <= float(max_efic))
+        
+    sub = df[mask]
+    
+    volume = len(sub)
+    if volume == 0:
+        return jsonify({"volume": 0})
+        
+    # Hits and Misses logic
+    if market == "0-1":
+        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 1)).astype(int)
+    elif market == "0-2":
+        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 2)).astype(int)
+    elif market == "0-3":
+        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 3)).astype(int)
+    elif market == "1-3":
+        losses = ((sub['homeGoalCount'] == 1) & (sub['awayGoalCount'] == 3)).astype(int)
+    else:
+        # Default fallback
+        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 0)).astype(int)
+        
+    total_losses = losses.sum()
+    total_wins = volume - total_losses
+    winrate = total_wins / volume
+    
+    # Lucro calc
+    liability = stake * (odd - 1)
+    lucro = (total_wins * stake) - (total_losses * liability)
+    roi = (lucro / (volume * stake)) * 100
+    
+    # Generate Chart Data
+    curve = []
+    acc = 0
+    for loss in losses:
+        if loss == 1:
+            acc -= liability
+        else:
+            acc += stake
+        curve.append(round(acc, 2))
+        
+    return jsonify({
+        "volume": int(volume),
+        "winrate": round(winrate * 100, 2),
+        "profit": round(lucro, 2),
+        "roi": round(roi, 2),
+        "chart_data": curve
+    })
+

@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .backtest-layout { display: flex; gap: 20px; }
+    .sidebar { width: 300px; flex-shrink: 0; }
+    .main-panel { flex-grow: 1; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+    .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #dcdde1; border-radius: 4px; box-sizing: border-box; }
+    .btn-run { width: 100%; padding: 12px; background: #0097e6; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+    .btn-run:hover { background: #0081c6; }
+    .btn-run:disabled { background: #dcdde1; cursor: not-allowed; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+    .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center; }
+    .stat-title { font-size: 12px; color: #7f8fa6; text-transform: uppercase; margin-bottom: 10px; }
+    .stat-value { font-size: 24px; font-weight: bold; color: #2f3640; }
+    .chart-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    hr { border: 0; border-top: 1px solid #dcdde1; margin: 20px 0; }
+</style>
+
+<div class="card">
+    <h3>Laboratório de Backtest</h3>
+    <p>Simule estratégias cruzando nossa IA de Power Score com toda a base de dados histórica.</p>
+</div>
+
+<div class="backtest-layout">
+    <div class="sidebar">
+        <div class="card">
+            <h4>Filtros</h4>
+            <form id="backtestForm">
+                <div class="form-group">
+                    <label>Mercado Alvo</label>
+                    <select id="market">
+                        <option value="0-1">Lay 0-1</option>
+                        <option value="0-2">Lay 0-2</option>
+                        <option value="0-3">Lay 0-3</option>
+                        <option value="1-3">Lay 1-3</option>
+                        <option value="UNDER_0.5_HT">Under 0.5 HT</option>
+                        <option value="UNDER_1.5_HT">Under 1.5 HT</option>
+                        <option value="UNDER_2.5_HT">Under 2.5 HT</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Odd Fixada (Risco)</label>
+                    <input type="number" step="0.1" id="odd" value="12.0">
+                </div>
+                <div class="form-group">
+                    <label>Stake (R$)</label>
+                    <input type="number" id="stake" value="100">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label>Power Score Mínimo</label>
+                    <input type="number" step="0.1" id="min_power" value="98.0">
+                </div>
+                <div class="form-group">
+                    <label>Power Score Máximo</label>
+                    <input type="number" step="0.1" id="max_power" value="100.0">
+                </div>
+                <hr>
+                <p style="font-size: 12px; color: #7f8fa6;">Filtros Opcionais (Under)</p>
+                <div class="form-group">
+                    <label>Máximo Soma HT</label>
+                    <input type="number" step="0.1" id="max_soma" placeholder="Ex: 1.2">
+                </div>
+                <div class="form-group">
+                    <label>Máximo Eficiência xG</label>
+                    <input type="number" step="0.1" id="max_efic" placeholder="Ex: 1.0">
+                </div>
+                <button type="submit" class="btn-run" id="btnRun">Rodar Simulação</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="main-panel">
+        <div id="loading" style="display: none; text-align: center; padding: 50px;">
+            <h3>Calculando na base de dados...</h3>
+        </div>
+        
+        <div id="resultsPanel" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Volume (Amostra)</div>
+                    <div class="stat-value" id="resVolume" style="color: #0097e6;">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Win Rate</div>
+                    <div class="stat-value" id="resWinRate">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Lucro Absoluto</div>
+                    <div class="stat-value" id="resProfit">R$ 0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">ROI (Retorno)</div>
+                    <div class="stat-value" id="resROI">0%</div>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h4>Evolução da Banca</h4>
+                <canvas id="backtestChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let btChart = null;
+
+document.getElementById('backtestForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    document.getElementById('resultsPanel').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('btnRun').disabled = true;
+    
+    const payload = {
+        market: document.getElementById('market').value,
+        odd: document.getElementById('odd').value,
+        stake: document.getElementById('stake').value,
+        min_power: document.getElementById('min_power').value,
+        max_power: document.getElementById('max_power').value,
+        max_soma: document.getElementById('max_soma').value,
+        max_efic: document.getElementById('max_efic').value
+    };
+    
+    try {
+        const res = await fetch('/api/backtest/run', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
+        
+        const data = await res.json();
+        
+        if (data.volume === 0) {
+            alert("Nenhum jogo encontrado com estes filtros!");
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('btnRun').disabled = false;
+            return;
+        }
+        
+        // Populate Cards
+        document.getElementById('resVolume').innerText = data.volume.toLocaleString();
+        
+        const wrEl = document.getElementById('resWinRate');
+        wrEl.innerText = data.winrate + '%';
+        wrEl.style.color = data.winrate > 90 ? '#44bd32' : '#e84118';
+        
+        const profEl = document.getElementById('resProfit');
+        profEl.innerText = 'R$ ' + data.profit.toLocaleString();
+        profEl.style.color = data.profit > 0 ? '#44bd32' : '#e84118';
+        
+        const roiEl = document.getElementById('resROI');
+        roiEl.innerText = data.roi + '%';
+        roiEl.style.color = data.roi > 0 ? '#44bd32' : '#e84118';
+        
+        // Render Chart
+        if (btChart) btChart.destroy();
+        const ctx = document.getElementById('backtestChart').getContext('2d');
+        
+        const labels = Array.from({length: data.chart_data.length}, (_, i) => i + 1);
+        
+        btChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Lucro Acumulado (R$)',
+                    data: data.chart_data,
+                    borderColor: '#0097e6',
+                    backgroundColor: 'rgba(0, 151, 230, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { 
+                        grid: { color: '#dcdde1' }
+                    }
+                }
+            }
+        });
+        
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('resultsPanel').style.display = 'block';
+        
+    } catch(err) {
+        console.error(err);
+        alert("Erro ao rodar backtest.");
+        document.getElementById('loading').style.display = 'none';
+    } finally {
+        document.getElementById('btnRun').disabled = false;
+    }
+});
+</script>
+{% endblock %}

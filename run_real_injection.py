@@ -225,10 +225,10 @@ def inject_from_db():
     report_lines = ["🤖 *Relatório Diário Layback (Power Score)* 🤖\n"]
     for bot_id, bot_name, target in targets:
         # Define o limiar de Power Score com base no mercado
-        if target == "0-1": threshold = 94.0
-        elif target == "0-2": threshold = 94.0
-        elif target == "0-3": threshold = 99.20
-        elif target == "1-3": threshold = 99.31
+        if target == "0-1": threshold = 99.0
+        elif target == "0-2": threshold = 91.0
+        elif target == "0-3": threshold = 93.0
+        elif target == "1-3": threshold = 98.0
         elif target == "UNDER_0.5_HT": threshold = 30.0 # Aprovado na nossa IA
         elif target == "UNDER_1.5_HT": threshold = 0.0 # Controlado só pelo SomaHT
         elif target == "UNDER_2.5_HT": threshold = 0.0 # Controlado só pelo SomaHT
