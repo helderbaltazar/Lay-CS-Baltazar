@@ -10,7 +10,7 @@ RAPID_API_KEY = os.getenv("RAPID_API_KEY", "")
 BASE_URL = "https://v3.football.api-sports.io"
 RAPID_API_URL = "https://api-football-v1.p.rapidapi.com/v3"
 
-TARGET_SCORES = ["0-1", "0-2", "0-3", "1-3"]
+TARGET_SCORES = ["0-1", "0-2", "0-3", "1-3", "UNDER_0.5_HT", "UNDER_1.5_HT", "UNDER_2.5_HT"]
 DIXON_COLES_RHO = -0.10
 MAX_GOALS = 7
 

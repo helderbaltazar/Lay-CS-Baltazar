@@ -1,5 +1,6 @@
 import datetime
 import pytz
+import sqlite3
 import config
 from database.db import SessionLocal
 from database.models_db import Match, Prediction
@@ -8,7 +9,7 @@ from models.poisson import PoissonDixonColes
 from data.data_manager import DataManager
 import json
 import difflib
-from integration.layback import generate_layback_json, inject_teams_ui, LAY_0_1_BOT_ID, LAY_0_2_BOT_ID, LAY_0_3_BOT_ID, LAY_1_3_BOT_ID
+from integration.layback import generate_layback_json, inject_teams_ui, LAY_0_1_BOT_ID, LAY_0_2_BOT_ID, LAY_0_3_BOT_ID, LAY_1_3_BOT_ID, LAY_U05_HT_BOT_ID, LAY_U15_HT_BOT_ID, LAY_U25_HT_BOT_ID
 
 def get_betfair_id(team_name, layback_teams):
     names = [t["name"] for t in layback_teams]
@@ -33,6 +34,85 @@ def get_betfair_id(team_name, layback_teams):
         return {"name": team["name"], "id": int(team["id"])}
         
     return None
+
+
+
+_historical_names_cache = []
+_historical_stats_cache = {}
+
+def get_historical_stats(team_name):
+    global _historical_names_cache, _historical_stats_cache
+    import sqlite3
+    import difflib
+    
+    conn = sqlite3.connect('data_store/database.sqlite3')
+    
+    if not _historical_names_cache:
+        c = conn.cursor()
+        c.execute("SELECT DISTINCT home_name FROM telegram_dataset WHERE home_name IS NOT NULL")
+        rows = c.fetchall()
+        _historical_names_cache = [r[0] for r in rows]
+        
+    if team_name in _historical_stats_cache:
+        conn.close()
+        return _historical_stats_cache[team_name]
+        
+    # Find closest match
+    matches = difflib.get_close_matches(team_name, _historical_names_cache, n=1, cutoff=0.5)
+    if not matches:
+        conn.close()
+        return None
+        
+    matched_name = matches[0]
+    query = '''
+        SELECT 
+            AVG(Media_Gols_no_1T_Casa),
+            AVG(Efic_xG_Casa)
+        FROM telegram_dataset
+        WHERE home_name = ?
+    '''
+    c = conn.cursor()
+    c.execute(query, (matched_name,))
+    row = c.fetchone()
+    conn.close()
+    
+    if row and row[0] is not None and row[1] is not None:
+        stats = {"media_ht": float(row[0]), "efic_xg": float(row[1])}
+        _historical_stats_cache[team_name] = stats
+        return stats
+    return None
+
+def check_golden_filters(home_team, away_team, target, power_score):
+    if target not in ["UNDER_0.5_HT", "UNDER_1.5_HT", "UNDER_2.5_HT"]:
+        return True # Nao aplica filtros de ouro para outros mercados
+        
+    h_stats = get_historical_stats(home_team)
+    a_stats = get_historical_stats(away_team)
+    
+    if not h_stats or not a_stats:
+        print(f"      [Filtro] Sem dados hist. p/ {home_team} ou {away_team}")
+        return False
+        
+    soma_ht = h_stats["media_ht"] + a_stats["media_ht"]
+    efic_home = h_stats["efic_xg"]
+    efic_away = a_stats["efic_xg"]
+    
+    if target == "UNDER_0.5_HT":
+        if power_score >= 30 and soma_ht <= 1.2 and efic_home <= 1.0 and efic_away <= 1.0:
+            print(f"      [U05 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
+            return True
+            
+    elif target == "UNDER_1.5_HT":
+        if soma_ht <= 1.4:
+            print(f"      [U15 Ouro] SomaHT={soma_ht:.2f}")
+            return True
+            
+    elif target == "UNDER_2.5_HT":
+        if soma_ht <= 1.8 and efic_home <= 1.0 and efic_away <= 1.0:
+            print(f"      [U25 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
+            return True
+            
+    return False
 
 
 def is_injection_completed_today():
@@ -130,7 +210,7 @@ def inject_from_db():
         (LAY_0_1_BOT_ID, "bot_lay_0_1", "0-1"),
         (LAY_0_2_BOT_ID, "bot_lay_0_2", "0-2"),
         (LAY_0_3_BOT_ID, "bot_lay_0_3", "0-3"),
-        (LAY_1_3_BOT_ID, "bot_lay_1_3", "1-3"),
+        (LAY_1_3_BOT_ID, LAY_U05_HT_BOT_ID, LAY_U15_HT_BOT_ID, LAY_U25_HT_BOT_ID, "bot_lay_1_3", "1-3"),
     ]
     
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
@@ -143,17 +223,32 @@ def inject_from_db():
         elif target == "0-2": threshold = 94.0
         elif target == "0-3": threshold = 99.20
         elif target == "1-3": threshold = 99.31
+        elif target == "UNDER_0.5_HT": threshold = 30.0 # Aprovado na nossa IA
+        elif target == "UNDER_1.5_HT": threshold = 0.0 # Controlado só pelo SomaHT
+        elif target == "UNDER_2.5_HT": threshold = 0.0 # Controlado só pelo SomaHT
         else: threshold = 99.0
         
-        preds = db.query(Prediction).join(Match).filter(
-            Prediction.target_score == target,
-            Prediction.power_score >= threshold,
-            Prediction.match_odd != None,
-            Prediction.match_odd <= 2.0,
-            Match.date >= today_start
-        ).order_by(
-            Prediction.power_score.desc().nullslast(),
-        ).all()
+        
+        # Filtro base do banco de dados
+        if "UNDER_" in target:
+            # Para Unders, não restringimos a odd do match winner (porque não é relevante pro Layback aqui)
+            preds = db.query(Prediction).join(Match).filter(
+                Prediction.target_score == target,
+                Prediction.power_score >= threshold,
+                Match.date >= today_start
+            ).order_by(
+                Prediction.power_score.desc().nullslast(),
+            ).all()
+        else:
+            preds = db.query(Prediction).join(Match).filter(
+                Prediction.target_score == target,
+                Prediction.power_score >= threshold,
+                Prediction.match_odd != None,
+                Prediction.match_odd <= 2.0,
+                Match.date >= today_start
+            ).order_by(
+                Prediction.power_score.desc().nullslast(),
+            ).all()
         
         if not preds:
             print(f"[{target}] Nenhum jogo aprovado pelo Power Score (>= {threshold}) para hoje.")
@@ -163,6 +258,12 @@ def inject_from_db():
         teams_data = []
         for p in preds:
             m = p.match
+            
+            # Filtro Histórico Ouro para novos mercados
+            if "UNDER_" in target:
+                if not check_golden_filters(m.home_team, m.away_team, target, p.power_score):
+                    continue
+            
             conf_str = f" [Score: {p.power_score:.1f}]" if p.power_score else ""
             print(f"[{target}] {m.home_team} x {m.away_team} {conf_str}")
             bot_games_str.append(f"⚽ {m.home_team} x {m.away_team} {conf_str}")
