@@ -31,7 +31,7 @@ class AIAnalyst:
         
         opta_str = ""
         if h_opta and a_opta:
-            opta_str = f"\n[Opta Power Rankings Globais]\n- {home_team}: {h_opta['rating']:.1f} (Rank Global: {h_opta['global_rank']})\n- {away_team}: {a_opta['rating']:.1f} (Rank Global: {a_opta['global_rank']})\n-> Dica Opta: Quanto maior o rating, mais dominante é a equipe em termos mundiais.\n"
+            opta_str = f"\n[Opta Power Rankings Globais]\n- {home_team}: Rating {h_opta['rating']:.1f} (Rank Global: {h_opta['global_rank']} | Rank Doméstico: {h_opta.get('domestic_rank', '?')} na {h_opta.get('league', '?')})\n- {away_team}: Rating {a_opta['rating']:.1f} (Rank Global: {a_opta['global_rank']} | Rank Doméstico: {a_opta.get('domestic_rank', '?')} na {a_opta.get('league', '?')})\n-> Dica Opta: Quanto maior o rating (0-100), mais forte e favorita é a equipe. Use o Rating absoluto para comparar a força real entre eles, independente do continente.\n"
         
         is_lay_cs = target_score in ["0-1", "0-2", "0-3", "1-3"]
         
