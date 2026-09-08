@@ -113,11 +113,12 @@ def test_methodologies_html_renders_power_score_and_ai_drawer(client):
     import database.db
     from database.models_db import Match, Prediction
     from datetime import datetime
+    import pytz
     
     db = database.db.SessionLocal()
     m = Match(
         fixture_id=888,
-        date=datetime.utcnow(),
+        date=datetime.now(pytz.timezone("America/Sao_Paulo")),
         league_name="Premier League",
         home_team="Arsenal",
         away_team="Tottenham",

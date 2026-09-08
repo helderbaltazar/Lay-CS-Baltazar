@@ -505,7 +505,7 @@ def run_backtest():
     stake = float(data.get("stake", 100))
     odd = float(data.get("odd", 12.0))
     
-    conn = sqlite3.connect('data_store/database.sqlite3')
+    conn = sqlite3.connect('data/backtest_db.sqlite3')
     query = """
         SELECT 
             homeGoalCount, awayGoalCount,
