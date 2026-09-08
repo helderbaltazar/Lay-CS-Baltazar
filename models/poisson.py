@@ -60,11 +60,14 @@ class PoissonDixonColes:
         matrix = self.predict(lam_home, lam_away)
         results = {}
         for target in targets:
-            h, a = map(int, target.split('-'))
-            if (h, a) in matrix:
-                results[target] = matrix[(h, a)]
+            if '-' in target and target.replace('-', '').isdigit():
+                h, a = map(int, target.split('-'))
+                if (h, a) in matrix:
+                    results[target] = matrix[(h, a)]
+                else:
+                    results[target] = 0.0
             else:
-                results[target] = 0.0
+                results[target] = 0.0 # Non-exact score targets are handled by extra_probabilities
         return results
 
     def get_under_over_probabilities(self, lam_home, lam_away, limit=2.5):
