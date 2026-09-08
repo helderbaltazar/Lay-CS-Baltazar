@@ -506,11 +506,22 @@ def run_backtest():
     odd = float(data.get("odd", 12.0))
     
     conn = sqlite3.connect('data/backtest_db.sqlite3')
-    query = """
+    
+    # Map market to precomputed column
+    col_map = {
+        "0-1": "prob_0_1",
+        "0-2": "prob_0_2",
+        "0-3": "prob_0_3",
+        "1-3": "prob_1_3",
+        "UNDER_0.5_HT": "prob_u05_ht"
+    }
+    prob_col = col_map.get(market, "prob_0_1")
+    
+    query = f"""
         SELECT 
             homeGoalCount, awayGoalCount,
-            Media_Gols_Total_Casa, Media_Gols_Total_Visitante,
-            Media_Gols_no_1T_Casa, Media_Gols_no_1T_Visitante,
+            ((1 - {prob_col}) * 100) as Power_Score,
+            Soma_HT,
             Efic_xG_Casa, Efic_xG_Visitante
         FROM telegram_dataset
         WHERE Media_Gols_Total_Casa IS NOT NULL 
@@ -520,31 +531,6 @@ def run_backtest():
     df = pd.read_sql_query(query, conn)
     conn.close()
     
-    # Calculate Power Score
-    from models.poisson import PoissonDixonColes
-    model = PoissonDixonColes()
-    probs = []
-    for _, row in df.iterrows():
-        h = row['Media_Gols_Total_Casa']
-        a = row['Media_Gols_Total_Visitante']
-        if h <= 0: h = 0.1
-        if a <= 0: a = 0.1
-        matrix = model.predict(h, a)
-        
-        # Determine probability based on market
-        prob = 0
-        if market == "0-1": prob = matrix.get((0, 1), 0)
-        elif market == "0-2": prob = matrix.get((0, 2), 0)
-        elif market == "0-3": prob = matrix.get((0, 3), 0)
-        elif market == "1-3": prob = matrix.get((1, 3), 0)
-        elif market == "UNDER_0.5_HT":
-            prob = matrix.get((0,0), 0) # Mock simplification for HT via FT matrix just for score distribution testing
-        
-        probs.append(prob)
-        
-    df['Power_Score'] = [(1 - p) * 100 for p in probs]
-    df['Soma_HT'] = df['Media_Gols_no_1T_Casa'] + df['Media_Gols_no_1T_Visitante']
-    
     # Filter
     mask = (df['Power_Score'] >= min_power) & (df['Power_Score'] <= max_power)
     if max_soma:
@@ -552,24 +538,24 @@ def run_backtest():
     if max_efic:
         mask = mask & (df['Efic_xG_Casa'] <= float(max_efic)) & (df['Efic_xG_Visitante'] <= float(max_efic))
         
-    sub = df[mask]
+    df = df[mask]
     
-    volume = len(sub)
+    volume = len(df)
     if volume == 0:
         return jsonify({"volume": 0})
         
     # Hits and Misses logic
     if market == "0-1":
-        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 1)).astype(int)
+        losses = ((df['homeGoalCount'] == 0) & (df['awayGoalCount'] == 1)).astype(int)
     elif market == "0-2":
-        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 2)).astype(int)
+        losses = ((df['homeGoalCount'] == 0) & (df['awayGoalCount'] == 2)).astype(int)
     elif market == "0-3":
-        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 3)).astype(int)
+        losses = ((df['homeGoalCount'] == 0) & (df['awayGoalCount'] == 3)).astype(int)
     elif market == "1-3":
-        losses = ((sub['homeGoalCount'] == 1) & (sub['awayGoalCount'] == 3)).astype(int)
+        losses = ((df['homeGoalCount'] == 1) & (df['awayGoalCount'] == 3)).astype(int)
     else:
         # Default fallback
-        losses = ((sub['homeGoalCount'] == 0) & (sub['awayGoalCount'] == 0)).astype(int)
+        losses = ((df['homeGoalCount'] == 0) & (df['awayGoalCount'] == 0)).astype(int)
         
     total_losses = losses.sum()
     total_wins = volume - total_losses
