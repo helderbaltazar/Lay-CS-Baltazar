@@ -322,6 +322,26 @@ def save_to_db(db, rankings):
             else:
                 math_conf = pred.probability * 100
                 
+            # --- INTEGRAÇÃO OPTA POWER RANKINGS ---
+            from analysis.opta import get_team_opta_data
+            h_opta = get_team_opta_data(match.home_team)
+            a_opta = get_team_opta_data(match.away_team)
+            
+            opta_boost = 0.0
+            if h_opta and a_opta:
+                delta = h_opta['rating'] - a_opta['rating']
+                # Se for mercado a favor do mandante (BACK_HOME) e mandante muito superior
+                if target == "BACK_HOME" and delta > 5.0:
+                    opta_boost = min(15.0, delta * 0.5) 
+                # Para mercados de Under FT, se os dois times são "fracos" (rating < 75) e parelhos
+                elif target in ["UNDER_2.5", "UNDER_3.5", "UNDER_4.5"]:
+                    if abs(delta) < 4.0 and h_opta['rating'] < 75.0 and a_opta['rating'] < 75.0:
+                        opta_boost = 10.0 # Jogo truncado
+
+            math_conf += opta_boost
+            math_conf = min(100.0, max(0.0, math_conf))
+            # --------------------------------------
+                
             ai_conf = pred.ai_confidence if pred.ai_confidence is not None else math_conf
             math_weight = 0.5
             ai_weight = 0.5

@@ -25,6 +25,14 @@ class AIAnalyst:
         ai_boost = match_info.get('ai_confidence_boost', 0)
         prob_pct = round(prob_poisson * 100, 2)
         
+        from analysis.opta import get_team_opta_data
+        h_opta = get_team_opta_data(home_team)
+        a_opta = get_team_opta_data(away_team)
+        
+        opta_str = ""
+        if h_opta and a_opta:
+            opta_str = f"\n[Opta Power Rankings Globais]\n- {home_team}: {h_opta['rating']:.1f} (Rank Global: {h_opta['global_rank']})\n- {away_team}: {a_opta['rating']:.1f} (Rank Global: {a_opta['global_rank']})\n-> Dica Opta: Quanto maior o rating, mais dominante é a equipe em termos mundiais.\n"
+        
         is_lay_cs = target_score in ["0-1", "0-2", "0-3", "1-3"]
         
         if is_lay_cs:
@@ -52,7 +60,7 @@ PARTIDA PARA AUDITORIA:
 - Mercado: {target_display} (Probabilidade estimada: {prob_pct}%)
 - Força de Ataque (λ): Mandante (λ={lam_home:.2f}), Visitante (λ={lam_away:.2f})
 - Match Odd Mandante (1x2): {market_odd}
-- Smart Money Boost (Decaimento das Odds): +{ai_boost}%
+- Smart Money Boost (Decaimento das Odds): +{ai_boost}%{opta_str}
 
 {rules}
 

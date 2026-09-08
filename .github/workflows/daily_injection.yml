@@ -56,6 +56,9 @@ jobs:
           # Supondo que você precisa passar pro config.py:
           # O script lerá do environment (os.getenv) se estiver configurado
         run: |
+          echo "Buscando dados globais da Opta (Power Rankings)..."
+          python scripts/update_opta_rankings.py || echo "Falha ao buscar Opta. Continuando sem atualização."
+          
           for i in 1 2 3; do
             echo "Iniciando tentativa $i..."
             python run_real_injection.py && break || {
