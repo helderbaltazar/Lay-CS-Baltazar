@@ -457,6 +457,8 @@ def methodologies():
         for m in matches_today:
             for p in m.predictions:
                 if p.target_score in recs:
+                    if p.ai_verdict == 'REPROVADO':
+                        continue
                     if p.probability >= thresholds.get(p.target_score, 0.50):
                         recs[p.target_score].append({
                         'home': m.home_team,

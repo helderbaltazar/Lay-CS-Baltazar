@@ -86,7 +86,7 @@ def get_historical_stats(team_name):
     return None
 
 def check_golden_filters(home_team, away_team, target, power_score):
-    if target not in ["UNDER_0.5_HT", "UNDER_1.5_HT", "UNDER_2.5_HT"]:
+    if target not in ["UNDER_0.5_HT", "UNDER_1.5_HT", "UNDER_2.5_HT", "UNDER_3.5", "UNDER_4.5"]:
         return True # Nao aplica filtros de ouro para outros mercados
         
     h_stats = get_historical_stats(home_team)
@@ -113,6 +113,16 @@ def check_golden_filters(home_team, away_team, target, power_score):
     elif target == "UNDER_2.5_HT":
         if soma_ht <= 1.8 and efic_home <= 1.0 and efic_away <= 1.0:
             print(f"      [U25 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
+            return True
+
+    elif target == "UNDER_3.5":
+        if power_score >= 50 and soma_ht <= 1.4 and efic_home <= 0.8 and efic_away <= 0.8:
+            print(f"      [U3.5 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
+            return True
+
+    elif target == "UNDER_4.5":
+        if power_score >= 70 and soma_ht <= 1.4 and efic_home <= 0.8 and efic_away <= 0.8:
+            print(f"      [U4.5 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
             return True
             
     return False
