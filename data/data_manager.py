@@ -56,14 +56,9 @@ class DataManager:
             if fbref_stats:
                 return fbref_stats
             
-        # 3. Lógica do Football-Data (simplificada) ou Dummy para não quebrar a pipeline
-        print(f"❌ FBRef falhou. Aplicando Dummy Stats para {team_name} (Forçará a média da liga).")
-        return {
-            "fixtures": {"played": {"home": 1, "away": 1, "total": 2}}, 
-            "goals": {"for": {"total": {"home": 1, "away": 1}}, "against": {"total": {"home": 1, "away": 1}}},
-            "failed_to_score": {"home": 0, "away": 0},
-            "form": "DDDDD"
-        }
+        # 3. Dummy Stats Removidas (Retorna None para evitar falso positivo)
+        print(f"❌ FBRef falhou. Nenhuma estatística real disponível para {team_name}. Ignorando partida.")
+        return None
 
     @staticmethod
     def _translate_fd_fixtures(fd_matches):

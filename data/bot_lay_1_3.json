@@ -3,62 +3,56 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Stuttgart",
-      "id": "2000692",
+      "name": "Cruz Azul",
+      "id": "2117044",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "1. FC Koln (W)",
-      "id": "1319849",
+      "name": "Santos Laguna",
+      "id": "1996728",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Sparta Rotterdam",
-      "id": "2116505",
+      "name": "SC Telstar",
+      "id": "2116731",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "PEC Zwolle",
-      "id": "2003139",
+      "name": "Racing Club",
+      "id": "1281877",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Ipswich Town U21",
-      "id": "2125608",
+      "name": "Atl Tucuman",
+      "id": "1320014",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Liverpool",
-      "id": "2115966",
+      "name": "Rosario Central",
+      "id": "1316641",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "New York City",
-      "id": "1996644",
+      "name": "Newell's Old Boy's (W)",
+      "id": "6248582",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Nashville SC",
-      "id": "1996640",
+      "name": "Santa Clara",
+      "id": "1994969",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Basaksehir",
-      "id": "1996155",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Galatasaray",
-      "id": "1996156",
+      "name": "Rio Ave",
+      "id": "2118125",
       "checked": true,
       "side": "A"
     }

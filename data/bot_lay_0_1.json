@@ -3,14 +3,80 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Al-Hilal",
-      "id": "1995258",
+      "name": "Cruz Azul",
+      "id": "2117044",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Al-Adalh",
-      "id": "2119112",
+      "name": "Santos Laguna",
+      "id": "1996728",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Eintracht Frankfurt",
+      "id": "2116256",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Augsburg",
+      "id": "1993987",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "SC Telstar",
+      "id": "2116731",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Marseille",
+      "id": "1996525",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Paris FC",
+      "id": "2117691",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Racing Club",
+      "id": "1281877",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Atl Tucuman",
+      "id": "1320014",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Corinthians",
+      "id": "1915197",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Chapecoense",
+      "id": "1277295",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "River Plate",
+      "id": "1320120",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Independiente Rivadavia",
+      "id": "1320015",
       "checked": true,
       "side": "A"
     }

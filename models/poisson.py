@@ -103,16 +103,28 @@ class PoissonDixonColes:
         
         results = {}
         # Under/Over FT
+        u15 = sum(p for (h,a), p in matrix_ft.items() if h+a < 1.5)
+        results["OVER_1.5"] = 1.0 - u15
+        
         u25 = sum(p for (h,a), p in matrix_ft.items() if h+a < 2.5)
         results["UNDER_2.5"] = u25
         results["OVER_2.5"] = 1.0 - u25
         
-        results["UNDER_3.5"] = sum(p for (h,a), p in matrix_ft.items() if h+a < 3.5)
+        u35 = sum(p for (h,a), p in matrix_ft.items() if h+a < 3.5)
+        results["UNDER_3.5"] = u35
+        results["OVER_3.5"] = 1.0 - u35
+        
         results["UNDER_4.5"] = sum(p for (h,a), p in matrix_ft.items() if h+a < 4.5)
         
         # BTTS
         btts_no = sum(p for (h,a), p in matrix_ft.items() if h == 0 or a == 0)
+        results["BTTS_NO"] = btts_no
         results["BTTS_YES"] = 1.0 - btts_no
+        
+        # HT Markets
+        results["UNDER_0.5_HT"] = sum(p for (h,a), p in matrix_ht.items() if h+a < 0.5)
+        results["UNDER_1.5_HT"] = sum(p for (h,a), p in matrix_ht.items() if h+a < 1.5)
+        results["UNDER_2.5_HT"] = sum(p for (h,a), p in matrix_ht.items() if h+a < 2.5)
         
         # Match Odds
         home = sum(p for (h,a), p in matrix_ft.items() if h > a)

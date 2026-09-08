@@ -3,62 +3,200 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Genoa",
-      "id": "6247399",
+      "name": "Cruz Azul",
+      "id": "2117044",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Como",
-      "id": "2116168",
+      "name": "Santos Laguna",
+      "id": "1996728",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Paris St-G",
-      "id": "1946610",
+      "name": "SC Telstar",
+      "id": "2116731",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Monaco",
-      "id": "1996166",
+      "name": "Eintracht Frankfurt",
+      "id": "2116256",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Lyon",
-      "id": "1995358",
+      "name": "Augsburg",
+      "id": "1993987",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Auxerre",
-      "id": "2117427",
+      "name": "Racing Club",
+      "id": "1281877",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Estudiantes Rio Cuarto",
-      "id": "1320116",
+      "name": "Atl Tucuman",
+      "id": "1320014",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Sarmiento de Junin",
-      "id": "1320121",
+      "name": "River Plate",
+      "id": "1320120",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "CAR de Cordoba",
-      "id": "6248171",
+      "name": "Independiente Rivadavia",
+      "id": "1320015",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Atletico Huila",
-      "id": "1934391",
+      "name": "Santa Clara",
+      "id": "1994969",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Rio Ave",
+      "id": "2118125",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Cruzeiro MG",
+      "id": "1915199",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Atletico Barinas",
+      "id": "6240276",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Rosario Central",
+      "id": "1316641",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Newell's Old Boy's (W)",
+      "id": "6248582",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Corinthians",
+      "id": "1915197",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Chapecoense",
+      "id": "1277295",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Lanus",
+      "id": "1497112",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Defensa y Justicia",
+      "id": "1277889",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Marseille",
+      "id": "1996525",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Paris FC",
+      "id": "2117691",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Vipers SC",
+      "id": "1915260",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Casa Pia",
+      "id": "2119307",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Trabzonspor",
+      "id": "1994309",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Genclerbirligi",
+      "id": "1994307",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Juventus",
+      "id": "2116385",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "AC Milan",
+      "id": "2116060",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Internacional",
+      "id": "1846912",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Santos",
+      "id": "1915196",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Arsenal",
+      "id": "1990074",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Chelsea",
+      "id": "1992422",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Glostrup FK",
+      "id": "6248200",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Eyupspor",
+      "id": "2117242",
       "checked": true,
       "side": "A"
     }

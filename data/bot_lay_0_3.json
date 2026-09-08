@@ -3,62 +3,104 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Stuttgart",
-      "id": "2000692",
+      "name": "Cruz Azul",
+      "id": "2117044",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "1. FC Koln (W)",
-      "id": "1319849",
+      "name": "Santos Laguna",
+      "id": "1996728",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Genoa",
-      "id": "6247399",
+      "name": "SC Telstar",
+      "id": "2116731",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Como",
-      "id": "2116168",
+      "name": "Racing Club",
+      "id": "1281877",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Ipswich Town U21",
-      "id": "2125608",
+      "name": "Atl Tucuman",
+      "id": "1320014",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Liverpool",
-      "id": "2115966",
+      "name": "Eintracht Frankfurt",
+      "id": "2116256",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "New York City",
-      "id": "1996644",
+      "name": "Augsburg",
+      "id": "1993987",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Nashville SC",
-      "id": "1996640",
+      "name": "Santa Clara",
+      "id": "1994969",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Lyon",
-      "id": "1995358",
+      "name": "Rio Ave",
+      "id": "2118125",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Auxerre",
-      "id": "2117427",
+      "name": "River Plate",
+      "id": "1320120",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Independiente Rivadavia",
+      "id": "1320015",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Rosario Central",
+      "id": "1316641",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Newell's Old Boy's (W)",
+      "id": "6248582",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Cruzeiro MG",
+      "id": "1915199",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Atletico Barinas",
+      "id": "6240276",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Lanus",
+      "id": "1497112",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Defensa y Justicia",
+      "id": "1277889",
       "checked": true,
       "side": "A"
     }
