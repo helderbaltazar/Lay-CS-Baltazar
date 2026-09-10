@@ -206,7 +206,7 @@ def ensure_data_in_db():
                     p.ai_analysis = 'Análise matemática Poisson + Dixon-Coles aprovada.'
 
                 print(f"🤖 Auditando {len(to_audit)} predições Lay CS com IA + {len(to_fallback)} com validação quantitativa...")
-                from analysis.orchestrator import MultiAgentOrchestrator
+                from analysis.ai_analyst import AIAnalyst
                 for i, p in enumerate(to_audit, 1):
                     m = p.match
                     if m:
@@ -215,7 +215,7 @@ def ensure_data_in_db():
                             'away': m.away_team,
                             'league': m.league_name
                         }
-                        res = MultiAgentOrchestrator.orchestrate_match(match_dict, p.target_score, p.probability or 0.05)
+                        res = AIAnalyst.orchestrate_match(match_dict, p.target_score, p.probability or 0.05)
                         p.ai_verdict = res['verdict']
                         p.ai_confidence = res['confidence']
                         p.ai_critical_factor = res['critical_factor']
