@@ -15,6 +15,22 @@ class AIAnalyst:
     """
 
     @classmethod
+    def rescue_rejected_matches(cls, rejected_matches: list) -> list:
+        """
+        Fase 1 - O Conselheiro Silencioso:
+        Resgata partidas que foram rejeitadas pelo modelo de Poisson (lambdas baixos),
+        mas que possuem Odd do favorito entre 1.01 e 2.20, sinalizando valor do mercado.
+        """
+        rescued = []
+        for match in rejected_matches:
+            ctx = match.get('match_context', {})
+            # Em alguns casos o dicionário match não tem match_context, lidamos com isso.
+            match_odd = ctx.get('match_odd') if ctx else match.get('match_odd')
+            if match_odd and 1.01 <= match_odd <= 2.20:
+                rescued.append(match)
+        return rescued
+
+    @classmethod
     def build_prompt(cls, match_info: dict, target_score: str, prob_poisson: float) -> str:
         home_team = match_info.get('home', 'Mandante')
         away_team = match_info.get('away', 'Visitante')
@@ -24,6 +40,17 @@ class AIAnalyst:
         market_odd = match_info.get('match_odd', 'N/A')
         ai_boost = match_info.get('ai_confidence_boost', 0)
         prob_pct = round(prob_poisson * 100, 2)
+        
+        ctx = match_info.get('match_context', {})
+        btts_odd = ctx.get('btts_odd')
+        h2h_home = ctx.get('h2h_home')
+        h2h_away = ctx.get('h2h_away')
+        must_win = ctx.get('must_win')
+        
+        ctx_str = ""
+        if ctx:
+            btts_risk = "Baixo" if not btts_odd or btts_odd >= 1.80 else ("Alto" if btts_odd < 1.60 else "Moderado")
+            ctx_str = f"\n[Análise Contextual de Campo (Fase 1)]\n- Odd BTTS (Ambos Marcam): {btts_odd or 'N/A'} (Risco BTTS: {btts_risk})\n- H2H Histórico Recente: Mandante {h2h_home or 0}% vs Visitante {h2h_away or 0}% de vitórias\n- Fator Must-Win (Necessidade de Vitória): {'Sim' if must_win else 'Não / Desconhecido'}\n"
         
         from analysis.opta import get_team_opta_data
         h_opta = get_team_opta_data(home_team)
@@ -60,7 +87,7 @@ PARTIDA PARA AUDITORIA:
 - Mercado: {target_display} (Probabilidade estimada: {prob_pct}%)
 - Força de Ataque (λ): Mandante (λ={lam_home:.2f}), Visitante (λ={lam_away:.2f})
 - Match Odd Mandante (1x2): {market_odd}
-- Smart Money Boost (Decaimento das Odds): +{ai_boost}%{opta_str}
+- Smart Money Boost (Decaimento das Odds): +{ai_boost}%{opta_str}{ctx_str}
 
 {rules}
 

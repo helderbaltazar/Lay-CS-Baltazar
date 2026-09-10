@@ -9,15 +9,37 @@ def test_build_prompt_contains_match_data():
         'away': 'Atletico-MG',
         'league': 'Brasileirao',
         'lambda_home': 1.85,
-        'lambda_away': 0.75
+        'lambda_away': 0.75,
+        'match_context': {
+            'btts_odd': 1.55,
+            'h2h_home': 60,
+            'h2h_away': 20,
+            'must_win': True
+        }
     }
     prompt = AIAnalyst.build_prompt(match_info, '0-1', 0.045)
     assert 'Cruzeiro' in prompt
     assert 'Atletico-MG' in prompt
     assert 'Lay 0x1' in prompt
     assert '4.5%' in prompt
-    assert '1.85' in prompt
-    assert '0.75' in prompt
+    assert '1.55' in prompt
+    assert 'Alto' in prompt
+    assert 'Necessidade de Vit' in prompt
+
+def test_rescue_rejected_matches():
+    rejected = [
+        {'id': 1, 'match_context': {'match_odd': 1.05}},
+        {'id': 2, 'match_context': {'match_odd': 2.50}},
+        {'id': 3, 'match_context': {'match_odd': 1.99}},
+        {'id': 4, 'match_context': {}},
+        {'id': 5}
+    ]
+    rescued = AIAnalyst.rescue_rejected_matches(rejected)
+    assert len(rescued) == 2
+    ids = [m['id'] for m in rescued]
+    assert 1 in ids
+    assert 3 in ids
+
 
 def test_parse_ai_json_valid():
     raw_text = '{"veredito": "APROVADO", "confianca": 95, "fator_critico": "Mandante muito seguro em casa.", "analise_detalhada": "Cruzeiro tem defesa forte e visitante desfalcado.", "fator_ajuste": 0.8}'
