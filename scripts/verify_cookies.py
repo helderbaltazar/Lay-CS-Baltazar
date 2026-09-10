@@ -2,6 +2,11 @@ import os
 import sys
 import json
 
+# Garante que a raiz do projeto esteja no sys.path
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 def verify():
     from database.db import SessionLocal
     from database.models_db import SystemConfig
