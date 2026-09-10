@@ -7,8 +7,8 @@ def test_consensus_approval():
         {"veredito": "VETADO", "risco_extremo": False, "confianca": 40, "motivo": "Nao gosto"}
     ]
     result = MultiAgentOrchestrator.evaluate_match(opinions)
-    assert result["veredito"] == "APROVADO"
-    assert result["confianca"] == (90 + 80 + 40) // 3
+    assert result["verdict"] == "APROVADO"
+    assert result["confidence"] == (90 + 80 + 40) // 3
 
 def test_consensus_rejection():
     opinions = [
@@ -17,8 +17,8 @@ def test_consensus_rejection():
         {"veredito": "VETADO", "risco_extremo": False, "confianca": 30, "motivo": "Ruim"}
     ]
     result = MultiAgentOrchestrator.evaluate_match(opinions)
-    assert result["veredito"] == "VETADO"
-    assert result["fator_critico"] == "Falta de Consenso"
+    assert result["verdict"] == "VETADO"
+    assert result["critical_factor"] == "Falta de Consenso"
 
 def test_absolute_veto():
     opinions = [
@@ -27,5 +27,5 @@ def test_absolute_veto():
         {"veredito": "VETADO", "risco_extremo": True, "confianca": 0, "motivo": "Lesão do goleiro"}
     ]
     result = MultiAgentOrchestrator.evaluate_match(opinions)
-    assert result["veredito"] == "VETADO"
-    assert "VETO ABSOLUTO: Lesão do goleiro" in result["fator_critico"]
+    assert result["verdict"] == "VETADO"
+    assert "VETO ABSOLUTO: Lesão do goleiro" in result["critical_factor"]

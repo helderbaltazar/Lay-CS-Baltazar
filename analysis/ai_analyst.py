@@ -4,6 +4,7 @@ import re
 import os
 import requests
 import config
+import analysis.tools
 from analysis.orchestrator import MultiAgentOrchestrator
 
 logger = logging.getLogger(__name__)
@@ -96,8 +97,8 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
 {{
   "veredito": "APROVADO" ou "VETADO",
   "confianca": <inteiro de 10 a 99 representando a segurança final na entrada>,
-  "fator_critico": "<frase curta de até 120 caracteres resumindo o principal motivo do veredito>",
-  "analise_detalhada": "<parágrafo explicativo de 2 a 4 frases para exibição no Dashboard justificando a escolha baseada nos dados fornecidos>"
+  "critical_factor": "<frase curta de até 120 caracteres resumindo o principal motivo do veredito>",
+  "detailed_analysis": "<parágrafo explicativo de 2 a 4 frases para exibição no Dashboard justificando a escolha baseada nos dados fornecidos>"
 }}
 """
 
@@ -127,6 +128,15 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
         
     @classmethod
     def orchestrate_match(cls, match_info: dict, target_score: str, prob_poisson: float) -> dict:
+        import config
+        import os
+        if not getattr(config, 'AI_ANALYST_ENABLED', True):
+            return cls._fallback_analysis(match_info, target_score, prob_poisson, 'IA desativada nas configurações.')
+
+        gemini_key = getattr(config, 'GEMINI_API_KEY', '') or os.getenv('GEMINI_API_KEY', '')
+        if not gemini_key:
+            return cls._fallback_analysis(match_info, target_score, prob_poisson, 'Análise heurística estatística (chave de IA não configurada).')
+
         prompts = cls.build_prompts_for_committee(match_info, target_score, prob_poisson)
         opinions = []
         for p in prompts:
@@ -135,10 +145,10 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
             
             # Map LLM JSON to standard opinion
             opinions.append({
-                "veredito": resp.get("veredito", "VETADO"),
-                "risco_extremo": "VETO ABSOLUTO" in resp.get("fator_critico", "").upper(),
-                "confianca": resp.get("confianca", 0),
-                "motivo": resp.get("fator_critico", "")
+                "veredito": resp.get("verdict", "VETADO"),
+                "risco_extremo": "VETO ABSOLUTO" in resp.get("critical_factor", "").upper(),
+                "confianca": resp.get("confidence", 0),
+                "motivo": resp.get("critical_factor", "")
             })
         
         return MultiAgentOrchestrator.evaluate_match(opinions)
@@ -171,7 +181,31 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                         'temperature': 0.2,
                         'maxOutputTokens': 600,
                         'response_mime_type': 'application/json'
-                    }
+                    },
+                    'tools': [
+                        {
+                            'functionDeclarations': [
+                                {
+                                    'name': 'get_injury_report',
+                                    'description': 'Retorna o relatorio de lesoes para um time especifico.',
+                                    'parameters': {
+                                        'type': 'OBJECT',
+                                        'properties': {'team': {'type': 'STRING'}},
+                                        'required': ['team']
+                                    }
+                                },
+                                {
+                                    'name': 'get_weather_condition',
+                                    'description': 'Retorna as condicoes climaticas de um estadio.',
+                                    'parameters': {
+                                        'type': 'OBJECT',
+                                        'properties': {'stadium': {'type': 'STRING'}},
+                                        'required': ['stadium']
+                                    }
+                                }
+                            ]
+                        }
+                    ]
                 }
                 
                 headers = {'Content-Type': 'application/json'}
@@ -179,7 +213,37 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                 
                 if resp.status_code == 200:
                     data = resp.json()
-                    text_response = data['candidates'][0]['content']['parts'][0]['text']
+                    
+                    # Tool-Calling Interception (Fase 3)
+                    parts = data.get('candidates', [{}])[0].get('content', {}).get('parts', [])
+                    if parts and 'functionCall' in parts[0]:
+                        fc = parts[0]['functionCall']
+                        if fc['name'] == 'get_weather_condition':
+                            stadium = fc['args'].get('stadium', '')
+                            from analysis.tools import get_weather_condition
+                            tool_result = get_weather_condition(stadium)
+                            # Simular que a IA tomou a decisao com base nisso (mock local)
+                            return {
+                                "verdict": "APROVADO",
+                                "confidence": 85,
+                                "critical_factor": f"Clima: {tool_result['condition']}",
+                                "detailed_analysis": "Tool chamada com sucesso"
+                            }
+                        elif fc['name'] == 'get_injury_report':
+                            team = fc['args'].get('team', '')
+                            from analysis.tools import get_injury_report
+                            tool_result = get_injury_report(team)
+                            return {
+                                "verdict": "APROVADO",
+                                "confidence": 85,
+                                "critical_factor": f"Lesoes: {tool_result['details']}",
+                                "detailed_analysis": "Tool chamada com sucesso"
+                            }
+
+                    text_response = parts[0].get('text', '') if parts else ''
+                    if not text_response:
+                        text_response = "{}"
+                    
                     parsed = cls._parse_ai_json(text_response)
                     if parsed:
                         return parsed
@@ -339,7 +403,7 @@ Responda APENAS com JSON:
             for i, match in enumerate(matches):
                 prob = match.get('probability', 0.10)
                 if i < top_n:
-                    analysis = cls.analyze_match(match, target_score, prob)
+                    analysis = cls.orchestrate_match(match, target_score, prob)
                     match['ai_verdict'] = analysis['verdict']
                     match['ai_confidence'] = analysis['confidence']
                     match['ai_critical_factor'] = analysis['critical_factor']

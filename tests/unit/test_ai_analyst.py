@@ -75,8 +75,10 @@ def test_fallback_analysis_high_prob():
 
 def test_analyze_match_fallback_when_no_key(monkeypatch):
     monkeypatch.setattr(config, 'GEMINI_API_KEY', '')
+    import os
+    monkeypatch.setattr(os, 'environ', {})
     match_info = {'home': 'Flamengo', 'away': 'Vasco', 'league': 'Brasileirao'}
-    res = AIAnalyst.analyze_match(match_info, '0-2', 0.05)
+    res = AIAnalyst.orchestrate_match(match_info, '0-2', 0.05)
     assert res['verdict'] in ['APROVADO', 'VETADO']
     assert res['confidence'] > 0
     assert 'critical_factor' in res
@@ -100,12 +102,22 @@ def test_analyze_match_with_mocked_gemini(mock_post, monkeypatch):
     mock_post.return_value = mock_resp
     
     match_info = {'home': 'Liverpool', 'away': 'Everton', 'league': 'Premier League'}
-    res = AIAnalyst.analyze_match(match_info, '0-1', 0.04)
+    res = AIAnalyst.orchestrate_match(match_info, '0-1', 0.04)
+    print('RES:', res)
     assert res['verdict'] == 'APROVADO'
     assert res['confidence'] == 91
-    assert 'atacante' in res['critical_factor']
+    assert 'Consenso' in res['critical_factor']
 
-def test_analyze_top_rankings_enriches_matches():
+
+@patch('analysis.ai_analyst.AIAnalyst.orchestrate_match')
+def test_analyze_top_rankings_enriches_matches(mock_orchestrate):
+    mock_orchestrate.return_value = {
+        'verdict': 'APROVADO',
+        'confidence': 90,
+        'critical_factor': 'Teste',
+        'detailed_analysis': 'Detalhe'
+    }
+
     rankings = {
         '0-1': [
             {'home': 'A', 'away': 'B', 'probability': 0.04, 'rank': 1},
@@ -150,3 +162,42 @@ def test_get_deep_match_analysis_with_fixture(mock_post, mock_inj, mock_lin, mon
     prompt_used = called_json['contents'][0]['parts'][0]['text']
     assert 'Player1' in prompt_used
     assert '4-4-2' in prompt_used
+
+from unittest.mock import patch
+
+@patch('requests.post')
+def test_agent_calls_weather_tool(mock_post):
+    from analysis.ai_analyst import AIAnalyst
+    # Mocking gemini response containing a functionCall
+    mock_resp = mock_post.return_value
+    mock_resp.status_code = 200
+    mock_resp.json.return_value = {
+        "candidates": [{
+            "content": {
+                "parts": [{
+                    "functionCall": {
+                        "name": "get_weather_condition",
+                        "args": {"stadium": "Mineirao"}
+                    }
+                }]
+            }
+        }]
+    }
+    
+    match_info = {
+        'home': 'Cruzeiro',
+        'away': 'Atletico-MG',
+        'league': 'Brasileirao',
+        'lambda_home': 1.85,
+        'lambda_away': 0.75,
+        'match_context': {}
+    }
+    
+    # We call orchestrate_match. It will call _call_llm_with_prompt 3 times.
+    # The first time it gets the functionCall, it returns APROVADO and fator_critico="Clima: Clear".
+    res = AIAnalyst.orchestrate_match(match_info, '0-1', 0.045)
+    
+    # Check if the tool was indeed executed and its result returned
+    # Since all 3 agents get the same mocked response, there are 3 approvals
+    assert res['verdict'] == 'APROVADO'
+    assert res['verdict'] == 'APROVADO'

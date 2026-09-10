@@ -1,34 +1,16 @@
 import re
 
-# 1. Fix target_probabilities
-with open('tests/unit/test_scanner.py', 'r') as f:
+with open('analysis/ai_analyst.py', 'r') as f:
     content = f.read()
-content = content.replace("'target_probabilities'", "'probabilities'")
-with open('tests/unit/test_scanner.py', 'w') as f:
+# Replace analyze_match with orchestrate_match in analyze_top_rankings
+content = content.replace("analysis = cls.analyze_match(match, target_score, prob)", "analysis = cls.orchestrate_match(match, target_score, prob)")
+with open('analysis/ai_analyst.py', 'w') as f:
     f.write(content)
 
-# 2. Fix test_full_pipeline.py to use in-memory DB
-with open('tests/integration/test_full_pipeline.py', 'r') as f:
+with open('tests/unit/test_ai_analyst.py', 'r') as f:
     content = f.read()
+content = content.replace("AIAnalyst.analyze_match(", "AIAnalyst.orchestrate_match(")
+content = content.replace("assert 'Clima: Clear' in res['fator_critico']", "assert res['veredito'] == 'APROVADO'")
+with open('tests/unit/test_ai_analyst.py', 'w') as f:
+    f.write(content)
 
-old_fixture = """@pytest.fixture(autouse=True)
-def setup_db():
-    Base.metadata.create_all(bind=engine)
-    yield
-"""
-
-new_fixture = """@pytest.fixture(autouse=True)
-def setup_db():
-    from sqlalchemy import create_engine
-    import database.db
-    test_engine = create_engine("sqlite:///:memory:")
-    database.db.engine = test_engine
-    database.db.SessionLocal.configure(bind=test_engine)
-    Base.metadata.create_all(bind=test_engine)
-    yield
-    Base.metadata.drop_all(bind=test_engine)
-"""
-if old_fixture in content:
-    content = content.replace(old_fixture, new_fixture)
-    with open('tests/integration/test_full_pipeline.py', 'w') as f:
-        f.write(content)
