@@ -172,8 +172,8 @@ def ensure_data_in_db():
                 Prediction.ai_confidence.is_(None)
             ).all()
             if unanalysed:
-                # Limitar para Top 5 por mercado para não estourar cota diária da API Gemini
-                AI_TOP_N_PER_MARKET = 5
+                # Top 10 por mercado — plano pago Gemini, cobre todos os jogos relevantes do dashboard
+                AI_TOP_N_PER_MARKET = 10
                 from collections import defaultdict
                 per_market = defaultdict(list)
                 for p in unanalysed:
