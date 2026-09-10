@@ -44,9 +44,10 @@ Você é o desenvolvedor principal da automação "Lay CS" e atua como um engenh
 * Toda alteração no frontend (`web/**`) DEVE ser acompanhada de testes (`pytest tests/web/`) e publicação no Render (`python deploy_frontend.py` ou via Action).
 * O deploy só é considerado concluído após verificação E2E de Status HTTP 200 e integridade dos componentes visuais em produção (`https://lay-cs-baltazar.onrender.com`).
 
-## 7. Verificação Real da Pipeline de Injeção
-* Qualquer alteração em `.github/workflows/daily_injection.yml` ou scripts associados EXIGE disparo real via `workflow_dispatch` e monitoramento dos logs via API do GitHub.
-* O serviço só é declarado "pronto" após validação de sucesso em todos os jobs da pipeline real.
+## 7. Verificação Real da Pipeline de Injeção (Mundo Real / Nuvem)
+* **OBRIGATÓRIO:** Testes locais na máquina de desenvolvimento NÃO validam o fluxo final de integração contínua.
+* Qualquer alteração em fluxos de agentes, scripts de injeção ou em `.github/workflows/daily_injection.yml` EXIGE que a validação seja executada DIRETAMENTE na infraestrutura do GitHub Actions (via `push` ou `workflow_dispatch`).
+* Você deve monitorar os logs reais da cloud (via painel do GitHub ou API). O serviço só é declarado "pronto" após provar que a esteira roda de ponta a ponta, usando variáveis e infraestrutura do mundo real.
 
 ## 8. Integridade do Banco de Dados em Produção
 * **PROIBIÇÃO ESTRITA:** O agente NUNCA deve executar `DELETE`, `DROP` ou `TRUNCATE` em produção.
