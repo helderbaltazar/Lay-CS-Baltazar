@@ -133,7 +133,8 @@ def find_layback_team_id(team_name, all_teams):
 
 def inject_teams_ui(bot_id, json_path):
     """Injeta times no bot via API REST da Layback. Sem Playwright, sem Cloudflare."""
-    if not os.getenv("GITHUB_ACTIONS"):
+    mock_mode = os.getenv("LAYBACK_MOCK_MODE", "false").lower() in ("true", "1", "yes")
+    if mock_mode:
         logger.info(f"[MOCK] Simulando injecao no bot {bot_id} (Arquivo: {json_path})")
         return True
 

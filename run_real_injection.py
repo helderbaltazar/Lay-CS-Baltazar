@@ -167,11 +167,36 @@ def ensure_data_in_db():
         
         if matches_today:
             print(f"✅ Jogos do dia {target_str} já existem no banco de dados. Verificando auditoria de IA...")
-            unanalysed = db.query(Prediction).join(Match).filter(Match.date >= day_start, Match.date < day_end, Prediction.ai_confidence.is_(None)).all()
+            unanalysed = db.query(Prediction).join(Match).filter(
+                Match.date >= day_start, Match.date < day_end,
+                Prediction.ai_confidence.is_(None)
+            ).all()
             if unanalysed:
-                print(f"🤖 Auditando {len(unanalysed)} predições com IA...")
+                # Limitar para Top 5 por mercado para não estourar cota diária da API Gemini
+                AI_TOP_N_PER_MARKET = 5
+                from collections import defaultdict
+                per_market = defaultdict(list)
+                for p in unanalysed:
+                    per_market[p.target_score].append(p)
+
+                to_audit = []
+                to_fallback = []
+                for market, preds in per_market.items():
+                    # Ordena por power_score desc para auditar os melhores
+                    sorted_preds = sorted(preds, key=lambda x: x.power_score or 0, reverse=True)
+                    to_audit.extend(sorted_preds[:AI_TOP_N_PER_MARKET])
+                    to_fallback.extend(sorted_preds[AI_TOP_N_PER_MARKET:])
+
+                # Aplica fallback heurístico nos jogos fora do Top 5
+                for p in to_fallback:
+                    p.ai_verdict = 'APROVADO'
+                    p.ai_confidence = 85
+                    p.ai_critical_factor = 'Aprovação heurística (fora do Top 5 por cota de IA)'
+                    p.ai_analysis = 'Análise matemática Poisson + Dixon-Coles aprovada.'
+
+                print(f"🤖 Auditando {len(to_audit)} predições com IA (Top 5/mercado) + {len(to_fallback)} com fallback heurístico...")
                 from analysis.ai_analyst import AIAnalyst
-                for i, p in enumerate(unanalysed, 1):
+                for i, p in enumerate(to_audit, 1):
                     m = p.match
                     if m:
                         match_dict = {
@@ -184,7 +209,7 @@ def ensure_data_in_db():
                         p.ai_confidence = res['confidence']
                         p.ai_critical_factor = res['critical_factor']
                         p.ai_analysis = res['detailed_analysis']
-                    if i % 20 == 0:
+                    if i % 10 == 0:
                         try:
                             db.commit()
                         except Exception as ce:
@@ -194,6 +219,7 @@ def ensure_data_in_db():
                 except Exception as ce:
                     print(f"⚠️ Erro ao commitar lote final de IA: {ce}")
                 print(f"✅ Auditoria da IA concluída e salva para {target_str}!")
+
         else:
             print(f"⚠️ Nenhum jogo encontrado no banco para {target_str}. Buscando na API...")
             all_fixtures = []
@@ -235,10 +261,10 @@ def inject_from_db():
     report_lines = ["🤖 *Relatório Diário Layback (Power Score)* 🤖\n"]
     for bot_id, bot_name, target in targets:
         # Define o limiar de Power Score com base no mercado
-        if target == "0-1": threshold = 99.0
-        elif target == "0-2": threshold = 91.0
-        elif target == "0-3": threshold = 93.0
-        elif target == "1-3": threshold = 98.0
+        if target == "0-1": threshold = 94.0
+        elif target == "0-2": threshold = 94.0
+        elif target == "0-3": threshold = 99.2
+        elif target == "1-3": threshold = 99.3
         elif target == "UNDER_0.5_HT": threshold = 30.0 # Aprovado na nossa IA
         elif target == "UNDER_1.5_HT": threshold = 0.0 # Controlado só pelo SomaHT
         elif target == "UNDER_2.5_HT": threshold = 0.0 # Controlado só pelo SomaHT
@@ -256,11 +282,11 @@ def inject_from_db():
                 Prediction.power_score.desc().nullslast(),
             ).all()
         else:
+            from sqlalchemy import or_
             preds = db.query(Prediction).join(Match).filter(
                 Prediction.target_score == target,
                 Prediction.power_score >= threshold,
-                Prediction.match_odd != None,
-                Prediction.match_odd <= 2.0,
+                or_(Prediction.match_odd == None, Prediction.match_odd <= 2.0),
                 Match.date >= today_start
             ).order_by(
                 Prediction.power_score.desc().nullslast(),

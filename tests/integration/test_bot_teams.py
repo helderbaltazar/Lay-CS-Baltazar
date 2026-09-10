@@ -47,11 +47,9 @@ class TestBotTeamsInjection:
         assert result is None
 
     def test_inject_teams_mock_mode(self):
-        """Fora do GitHub Actions, deve retornar True (modo mock)."""
+        """Com LAYBACK_MOCK_MODE=true, deve retornar True (modo mock) sem tocar na API."""
         from integration.layback import inject_teams_ui
-        with patch.dict(os.environ, {}, clear=True):
-            if "GITHUB_ACTIONS" in os.environ:
-                del os.environ["GITHUB_ACTIONS"]
+        with patch.dict(os.environ, {"LAYBACK_MOCK_MODE": "true"}, clear=False):
             result = inject_teams_ui(4626, "data/test.json")
             assert result is True
 

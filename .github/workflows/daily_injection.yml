@@ -40,6 +40,27 @@ jobs:
           playwright install chromium
           playwright install-deps
 
+      - name: Diagnóstico — Verificar Cookies Layback no Banco
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python -c "
+import os, sys
+os.environ['DATABASE_URL'] = os.getenv('DATABASE_URL', '')
+from database.db import SessionLocal
+from database.models_db import SystemConfig
+db = SessionLocal()
+conf = db.query(SystemConfig).filter(SystemConfig.key == 'layback_cookies').first()
+if not conf or not conf.value or conf.value == '[]':
+    print('❌ ERRO CRÍTICO: Nenhum cookie Layback encontrado no banco! Injeção vai falhar.')
+    sys.exit(1)
+else:
+    import json
+    cookies = json.loads(conf.value)
+    print(f'✅ Cookies Layback OK — {len(cookies)} cookies encontrados no banco.')
+db.close()
+"
+
       - name: Run Injection Script
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
