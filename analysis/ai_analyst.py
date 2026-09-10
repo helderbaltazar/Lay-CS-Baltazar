@@ -4,6 +4,7 @@ import re
 import os
 import requests
 import config
+from analysis.orchestrator import MultiAgentOrchestrator
 
 logger = logging.getLogger(__name__)
 
@@ -101,7 +102,50 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
 """
 
     @classmethod
-    def analyze_match(cls, match_info: dict, target_score: str, prob_poisson: float) -> dict:
+    @classmethod
+    def build_prompts_for_committee(cls, match_info: dict, target_score: str, prob_poisson: float) -> list:
+        # Reutiliza o build_prompt base para o Olheiro
+        prompt_olheiro = cls.build_prompt(match_info, target_score, prob_poisson)
+        
+        # Agente Quantitativo
+        prompt_quantitativo = prompt_olheiro.replace(
+            "Você é um analista quantitativo e especialista em apostas", 
+            "Você é um Agente Quantitativo focado ESTRITAMENTE em matemática, EV e diferenças de lambdas (Poisson)."
+        )
+        
+        # Agente de Tendência
+        prompt_tendencia = prompt_olheiro.replace(
+            "Você é um analista quantitativo e especialista em apostas",
+            "Você é um Agente de Tendência focado no momento das equipes (Hot/Cold), Must-Win e histórico H2H."
+        )
+        
+        return [
+            {"role": "olheiro", "prompt": prompt_olheiro},
+            {"role": "quantitativo", "prompt": prompt_quantitativo},
+            {"role": "tendencia", "prompt": prompt_tendencia}
+        ]
+        
+    @classmethod
+    def orchestrate_match(cls, match_info: dict, target_score: str, prob_poisson: float) -> dict:
+        prompts = cls.build_prompts_for_committee(match_info, target_score, prob_poisson)
+        opinions = []
+        for p in prompts:
+            # We bypass real network calls for secondary agents if we want to save quota, but for TDD we implement the actual loop
+            resp = cls._call_llm_with_prompt(p["prompt"], match_info, target_score, prob_poisson)
+            
+            # Map LLM JSON to standard opinion
+            opinions.append({
+                "veredito": resp.get("veredito", "VETADO"),
+                "risco_extremo": "VETO ABSOLUTO" in resp.get("fator_critico", "").upper(),
+                "confianca": resp.get("confianca", 0),
+                "motivo": resp.get("fator_critico", "")
+            })
+        
+        return MultiAgentOrchestrator.evaluate_match(opinions)
+        
+    @classmethod
+    def _call_llm_with_prompt(cls, prompt: str, match_info: dict, target_score: str, prob_poisson: float) -> dict:
+
         """
         Analisa uma partida individualmente.
         Tenta chamar a API do Gemini com fallback gracioso.
@@ -113,7 +157,7 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
         if not gemini_key:
             return cls._fallback_analysis(match_info, target_score, prob_poisson, 'Análise heurística estatística (chave de IA não configurada).')
 
-        prompt = cls.build_prompt(match_info, target_score, prob_poisson)
+        # prompt is provided
 
         # Cascata de modelos confirmados na API v1beta
         models_to_try = ['gemini-flash-latest', 'gemini-flash-lite-latest']
