@@ -88,16 +88,14 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
 
         prompt = cls.build_prompt(match_info, target_score, prob_poisson)
 
-        # Cascata de modelos — ordem: melhor qualidade → mais estável
-        # gemini-flash-lite-latest: confirmado funcionando no plano pago
-        # gemini-1.5-flash: fallback estável free/paid
-        models_to_try = ['gemini-flash-lite-latest', 'gemini-1.5-flash']
+        # Cascata de modelos confirmados na API v1beta
+        models_to_try = ['gemini-flash-latest', 'gemini-flash-lite-latest']
         
         for model_name in models_to_try:
             try:
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_key}'
                 payload = {
-                    'contents': [{'parts': [{'text': prompt}]}],
+                    'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
                     'generationConfig': {
                         'temperature': 0.2,
                         'maxOutputTokens': 600,
@@ -106,7 +104,7 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                 }
                 
                 headers = {'Content-Type': 'application/json'}
-                resp = requests.post(url, headers=headers, json=payload, timeout=8)
+                resp = requests.post(url, headers=headers, json=payload, timeout=12)
                 
                 if resp.status_code == 200:
                     data = resp.json()
@@ -243,11 +241,11 @@ Responda APENAS com JSON:
   "lesoes": "lesoes...",
   "analise_geral": "resumo..."
 }}'''
-        for model in ['gemini-flash-lite-latest', 'gemini-1.5-flash']:
+        for model in ['gemini-flash-latest', 'gemini-flash-lite-latest']:
             try:
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}'
-                payload = {'contents': [{'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}
-                resp = requests.post(url, headers={'Content-Type': 'application/json'}, json=payload, timeout=8)
+                payload = {'contents': [{'role': 'user', 'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}
+                resp = requests.post(url, headers={'Content-Type': 'application/json'}, json=payload, timeout=12)
                 if resp.status_code == 200:
                     text_response = resp.json()['candidates'][0]['content']['parts'][0]['text']
                     match = re.search(r'\{.*\}', text_response, re.DOTALL)

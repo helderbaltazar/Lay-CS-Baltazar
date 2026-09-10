@@ -1,0 +1,4078 @@
+{
+  "2 de Mayo": {
+    "media_ht": 0.84,
+    "efic_xg": 0.99
+  },
+  "ABC": {
+    "media_ht": 0.87,
+    "efic_xg": 0.45
+  },
+  "AC Milan": {
+    "media_ht": 1.39,
+    "efic_xg": 1.17
+  },
+  "AD Alcorcón": {
+    "media_ht": 0.61,
+    "efic_xg": 0.49
+  },
+  "ADO Den Haag": {
+    "media_ht": 1.74,
+    "efic_xg": 1.08
+  },
+  "ADT": {
+    "media_ht": 1.22,
+    "efic_xg": 1.1
+  },
+  "AEK Athens": {
+    "media_ht": 1.17,
+    "efic_xg": 1.04
+  },
+  "AEK Larnaca": {
+    "media_ht": 0.48,
+    "efic_xg": 0.93
+  },
+  "AFC Bournemouth": {
+    "media_ht": 0.89,
+    "efic_xg": 0.81
+  },
+  "AFC Wimbledon": {
+    "media_ht": 0.7,
+    "efic_xg": 0.91
+  },
+  "AGF": {
+    "media_ht": 1.35,
+    "efic_xg": 0.98
+  },
+  "AIK": {
+    "media_ht": 1.14,
+    "efic_xg": 1.01
+  },
+  "APOEL": {
+    "media_ht": 0.69,
+    "efic_xg": 0.81
+  },
+  "AS Eupen": {
+    "media_ht": 1.46,
+    "efic_xg": 1.12
+  },
+  "AVS": {
+    "media_ht": 1.02,
+    "efic_xg": 0.57
+  },
+  "AZ": {
+    "media_ht": 1.7,
+    "efic_xg": 1.49
+  },
+  "AZ II": {
+    "media_ht": 1.59,
+    "efic_xg": 1.04
+  },
+  "AaB": {
+    "media_ht": 1.23,
+    "efic_xg": 0.91
+  },
+  "Aalesund": {
+    "media_ht": 1.18,
+    "efic_xg": 0.72
+  },
+  "Aberdeen": {
+    "media_ht": 1.14,
+    "efic_xg": 1.14
+  },
+  "Abha": {
+    "media_ht": 1.21,
+    "efic_xg": 1.24
+  },
+  "Abu Qair Semad": {
+    "media_ht": 0.0,
+    "efic_xg": 1.35
+  },
+  "Academia Cantolao": {
+    "media_ht": 0.82,
+    "efic_xg": 0.91
+  },
+  "Academia Puerto Cabello": {
+    "media_ht": 3.0,
+    "efic_xg": 2.75
+  },
+  "Academico Viseu": {
+    "media_ht": 1.0,
+    "efic_xg": 0.0
+  },
+  "Adana Demirspor": {
+    "media_ht": 1.46,
+    "efic_xg": 1.15
+  },
+  "Ajax": {
+    "media_ht": 1.43,
+    "efic_xg": 1.08
+  },
+  "Ajax II": {
+    "media_ht": 1.31,
+    "efic_xg": 0.94
+  },
+  "Aktobe": {
+    "media_ht": 1.0,
+    "efic_xg": 0.52
+  },
+  "Al Ahli": {
+    "media_ht": 1.25,
+    "efic_xg": 1.25
+  },
+  "Al Ahly": {
+    "media_ht": 1.34,
+    "efic_xg": 1.54
+  },
+  "Al Akhdoud": {
+    "media_ht": 1.52,
+    "efic_xg": 0.83
+  },
+  "Al Draih": {
+    "media_ht": 0.75,
+    "efic_xg": 0.21
+  },
+  "Al Faisaly": {
+    "media_ht": 0.5,
+    "efic_xg": 0.19
+  },
+  "Al Fateh": {
+    "media_ht": 1.36,
+    "efic_xg": 1.05
+  },
+  "Al Feiha": {
+    "media_ht": 1.04,
+    "efic_xg": 0.85
+  },
+  "Al Hazm": {
+    "media_ht": 1.2,
+    "efic_xg": 0.68
+  },
+  "Al Hilal": {
+    "media_ht": 1.65,
+    "efic_xg": 1.31
+  },
+  "Al Ittifaq": {
+    "media_ht": 1.31,
+    "efic_xg": 1.1
+  },
+  "Al Ittihad": {
+    "media_ht": 1.33,
+    "efic_xg": 1.05
+  },
+  "Al Khaleej": {
+    "media_ht": 1.12,
+    "efic_xg": 0.97
+  },
+  "Al Kholood": {
+    "media_ht": 1.85,
+    "efic_xg": 1.22
+  },
+  "Al Masry": {
+    "media_ht": 0.72,
+    "efic_xg": 1.07
+  },
+  "Al Mokawloon": {
+    "media_ht": 0.88,
+    "efic_xg": 0.6
+  },
+  "Al Najma": {
+    "media_ht": 0.87,
+    "efic_xg": 0.79
+  },
+  "Al Nassr": {
+    "media_ht": 1.53,
+    "efic_xg": 1.18
+  },
+  "Al Orubah": {
+    "media_ht": 0.83,
+    "efic_xg": 0.75
+  },
+  "Al Quadisiya": {
+    "media_ht": 1.19,
+    "efic_xg": 1.3
+  },
+  "Al Raed": {
+    "media_ht": 0.83,
+    "efic_xg": 0.82
+  },
+  "Al Riyadh": {
+    "media_ht": 1.1,
+    "efic_xg": 0.84
+  },
+  "Al Shabab": {
+    "media_ht": 1.08,
+    "efic_xg": 0.9
+  },
+  "Al Ta'ee": {
+    "media_ht": 1.45,
+    "efic_xg": 1.21
+  },
+  "Al Taawon": {
+    "media_ht": 1.16,
+    "efic_xg": 1.2
+  },
+  "Al Wahda": {
+    "media_ht": 1.42,
+    "efic_xg": 1.56
+  },
+  "Alanyaspor": {
+    "media_ht": 0.92,
+    "efic_xg": 0.93
+  },
+  "Alashkert": {
+    "media_ht": 0.5,
+    "efic_xg": 0.64
+  },
+  "Albacete Balompié": {
+    "media_ht": 1.0,
+    "efic_xg": 0.96
+  },
+  "Albion": {
+    "media_ht": 1.68,
+    "efic_xg": 1.17
+  },
+  "Albirex Niigata": {
+    "media_ht": 1.2,
+    "efic_xg": 1.01
+  },
+  "Aldosivi": {
+    "media_ht": 1.13,
+    "efic_xg": 0.34
+  },
+  "Alianza Atlético": {
+    "media_ht": 1.04,
+    "efic_xg": 1.27
+  },
+  "Alianza Lima": {
+    "media_ht": 1.24,
+    "efic_xg": 1.13
+  },
+  "Alianza Petrolera": {
+    "media_ht": 1.26,
+    "efic_xg": 0.99
+  },
+  "Alianza Universidad": {
+    "media_ht": 1.94,
+    "efic_xg": 0.7
+  },
+  "Almere City": {
+    "media_ht": 1.1,
+    "efic_xg": 0.85
+  },
+  "Almería": {
+    "media_ht": 1.31,
+    "efic_xg": 1.08
+  },
+  "Alverca": {
+    "media_ht": 1.31,
+    "efic_xg": 0.71
+  },
+  "Amazonas": {
+    "media_ht": 0.87,
+    "efic_xg": 0.93
+  },
+  "Amed": {
+    "media_ht": 0.0,
+    "efic_xg": 2.16
+  },
+  "América": {
+    "media_ht": 1.14,
+    "efic_xg": 1.15
+  },
+  "América Mineiro": {
+    "media_ht": 1.14,
+    "efic_xg": 0.83
+  },
+  "América de Cali": {
+    "media_ht": 1.14,
+    "efic_xg": 1.13
+  },
+  "Angers SCO": {
+    "media_ht": 1.37,
+    "efic_xg": 0.95
+  },
+  "Ankaragücü": {
+    "media_ht": 1.06,
+    "efic_xg": 0.85
+  },
+  "Antalyaspor": {
+    "media_ht": 1.28,
+    "efic_xg": 1.08
+  },
+  "Apollon": {
+    "media_ht": 1.0,
+    "efic_xg": 1.38
+  },
+  "Araz": {
+    "media_ht": 0.0,
+    "efic_xg": 1.43
+  },
+  "Arda": {
+    "media_ht": 0.5,
+    "efic_xg": 0.35
+  },
+  "Argentinos Juniors": {
+    "media_ht": 0.84,
+    "efic_xg": 0.87
+  },
+  "Aris": {
+    "media_ht": 1.05,
+    "efic_xg": 1.17
+  },
+  "Arminia Bielefeld": {
+    "media_ht": 1.39,
+    "efic_xg": 1.35
+  },
+  "Arsenal": {
+    "media_ht": 1.36,
+    "efic_xg": 1.38
+  },
+  "Arsenal de Sarandí": {
+    "media_ht": 1.29,
+    "efic_xg": 0.85
+  },
+  "Artsakh": {
+    "media_ht": 1.26,
+    "efic_xg": 2.04
+  },
+  "Ascoli": {
+    "media_ht": 1.13,
+    "efic_xg": 0.87
+  },
+  "Astana": {
+    "media_ht": 0.58,
+    "efic_xg": 1.27
+  },
+  "Asteras Tripolis": {
+    "media_ht": 1.62,
+    "efic_xg": 1.17
+  },
+  "Aston Villa": {
+    "media_ht": 1.12,
+    "efic_xg": 1.34
+  },
+  "Asyut Petroleum": {
+    "media_ht": 0.0,
+    "efic_xg": 1.0
+  },
+  "Atalanta": {
+    "media_ht": 1.29,
+    "efic_xg": 1.08
+  },
+  "Athletic Club": {
+    "media_ht": 1.0,
+    "efic_xg": 0.75
+  },
+  "Athletic Club Bilbao": {
+    "media_ht": 1.19,
+    "efic_xg": 1.15
+  },
+  "Atlanta United FC": {
+    "media_ht": 1.17,
+    "efic_xg": 1.25
+  },
+  "Atlante": {
+    "media_ht": 0.75,
+    "efic_xg": 0.79
+  },
+  "Atlas": {
+    "media_ht": 1.47,
+    "efic_xg": 1.09
+  },
+  "Atlètic Club d'Escaldes": {
+    "media_ht": 1.5,
+    "efic_xg": 1.54
+  },
+  "Atlético Bucaramanga": {
+    "media_ht": 0.96,
+    "efic_xg": 0.95
+  },
+  "Atlético GO": {
+    "media_ht": 0.93,
+    "efic_xg": 0.9
+  },
+  "Atlético Grau": {
+    "media_ht": 0.9,
+    "efic_xg": 0.86
+  },
+  "Atlético Huila": {
+    "media_ht": 1.67,
+    "efic_xg": 0.97
+  },
+  "Atlético Madrid": {
+    "media_ht": 1.51,
+    "efic_xg": 1.57
+  },
+  "Atlético Mineiro": {
+    "media_ht": 1.21,
+    "efic_xg": 1.02
+  },
+  "Atlético Nacional": {
+    "media_ht": 1.15,
+    "efic_xg": 1.23
+  },
+  "Atlético PR": {
+    "media_ht": 1.31,
+    "efic_xg": 1.16
+  },
+  "Atlético San Luis": {
+    "media_ht": 1.31,
+    "efic_xg": 1.41
+  },
+  "Atlético Tembetary": {
+    "media_ht": 0.77,
+    "efic_xg": 0.97
+  },
+  "Atlético Tucumán": {
+    "media_ht": 1.05,
+    "efic_xg": 0.78
+  },
+  "Atromitos": {
+    "media_ht": 1.07,
+    "efic_xg": 0.97
+  },
+  "Auda": {
+    "media_ht": 0.83,
+    "efic_xg": 1.53
+  },
+  "Audax Italiano": {
+    "media_ht": 1.43,
+    "efic_xg": 1.22
+  },
+  "Augsburg": {
+    "media_ht": 1.88,
+    "efic_xg": 1.28
+  },
+  "Aurora": {
+    "media_ht": 1.0,
+    "efic_xg": 0.89
+  },
+  "Austin": {
+    "media_ht": 0.98,
+    "efic_xg": 1.1
+  },
+  "Austria Klagenfurt": {
+    "media_ht": 1.3,
+    "efic_xg": 1.15
+  },
+  "Austria Lustenau": {
+    "media_ht": 1.57,
+    "efic_xg": 0.41
+  },
+  "Austria Wien": {
+    "media_ht": 1.18,
+    "efic_xg": 0.89
+  },
+  "Auxerre": {
+    "media_ht": 1.08,
+    "efic_xg": 1.04
+  },
+  "Avaí": {
+    "media_ht": 0.88,
+    "efic_xg": 0.8
+  },
+  "Avellino": {
+    "media_ht": 1.01,
+    "efic_xg": 1.23
+  },
+  "Avispa Fukuoka": {
+    "media_ht": 0.78,
+    "efic_xg": 0.79
+  },
+  "Ayacucho": {
+    "media_ht": 1.96,
+    "efic_xg": 1.18
+  },
+  "B36": {
+    "media_ht": 0.0,
+    "efic_xg": 0.25
+  },
+  "BATE": {
+    "media_ht": 0.0,
+    "efic_xg": 1.92
+  },
+  "BB Bodrumspor": {
+    "media_ht": 0.69,
+    "efic_xg": 0.72
+  },
+  "BB Erzurumspor": {
+    "media_ht": 3.0,
+    "efic_xg": 0.0
+  },
+  "Bahia": {
+    "media_ht": 1.27,
+    "efic_xg": 1.05
+  },
+  "Baladiyyat Al Mehalla": {
+    "media_ht": 1.64,
+    "efic_xg": 1.03
+  },
+  "Ballkani": {
+    "media_ht": 1.65,
+    "efic_xg": 1.5
+  },
+  "Balzan": {
+    "media_ht": 1.0,
+    "efic_xg": 0.4
+  },
+  "Banants": {
+    "media_ht": 1.0,
+    "efic_xg": 2.0
+  },
+  "Banfield": {
+    "media_ht": 0.81,
+    "efic_xg": 0.68
+  },
+  "Baník Ostrava": {
+    "media_ht": 3.0,
+    "efic_xg": 1.87
+  },
+  "Barcelona": {
+    "media_ht": 0.92,
+    "efic_xg": 0.78
+  },
+  "Bari 1908": {
+    "media_ht": 1.05,
+    "efic_xg": 0.9
+  },
+  "Barnsley": {
+    "media_ht": 1.39,
+    "efic_xg": 1.4
+  },
+  "Barracas Central": {
+    "media_ht": 1.09,
+    "efic_xg": 0.95
+  },
+  "Basel": {
+    "media_ht": 1.11,
+    "efic_xg": 1.37
+  },
+  "Bayer Leverkusen": {
+    "media_ht": 1.9,
+    "efic_xg": 1.33
+  },
+  "Bayern München": {
+    "media_ht": 1.88,
+    "efic_xg": 1.6
+  },
+  "Bačka Topola": {
+    "media_ht": 1.13,
+    "efic_xg": 1.15
+  },
+  "Beerschot-Wilrijk": {
+    "media_ht": 1.35,
+    "efic_xg": 1.15
+  },
+  "Beijing Guoan": {
+    "media_ht": 1.37,
+    "efic_xg": 1.24
+  },
+  "Beitar Jerusalem": {
+    "media_ht": 3.0,
+    "efic_xg": 1.25
+  },
+  "Belgrano": {
+    "media_ht": 0.99,
+    "efic_xg": 1.12
+  },
+  "Benevento": {
+    "media_ht": 1.0,
+    "efic_xg": 0.69
+  },
+  "Benfica": {
+    "media_ht": 1.4,
+    "efic_xg": 1.22
+  },
+  "Beşiktaş": {
+    "media_ht": 1.34,
+    "efic_xg": 1.19
+  },
+  "Birmingham City": {
+    "media_ht": 1.19,
+    "efic_xg": 1.17
+  },
+  "Blackburn Rovers": {
+    "media_ht": 1.04,
+    "efic_xg": 1.09
+  },
+  "Blackpool": {
+    "media_ht": 1.34,
+    "efic_xg": 1.19
+  },
+  "Blau-Weiß Linz": {
+    "media_ht": 1.33,
+    "efic_xg": 1.12
+  },
+  "Boavista FC": {
+    "media_ht": 1.29,
+    "efic_xg": 0.99
+  },
+  "Boca Juniors": {
+    "media_ht": 0.68,
+    "efic_xg": 0.95
+  },
+  "Bochum": {
+    "media_ht": 1.26,
+    "efic_xg": 0.86
+  },
+  "Bohemians": {
+    "media_ht": 0.25,
+    "efic_xg": 1.04
+  },
+  "Bologna": {
+    "media_ht": 0.82,
+    "efic_xg": 0.87
+  },
+  "Bolton Wanderers": {
+    "media_ht": 1.39,
+    "efic_xg": 1.19
+  },
+  "Bolívar": {
+    "media_ht": 2.08,
+    "efic_xg": 1.26
+  },
+  "Borac Banja Luka": {
+    "media_ht": 0.64,
+    "efic_xg": 0.85
+  },
+  "Borussia Dortmund": {
+    "media_ht": 1.46,
+    "efic_xg": 1.38
+  },
+  "Borussia M'gladbach": {
+    "media_ht": 1.48,
+    "efic_xg": 1.03
+  },
+  "Boston River": {
+    "media_ht": 0.93,
+    "efic_xg": 0.69
+  },
+  "Botafogo": {
+    "media_ht": 1.32,
+    "efic_xg": 1.38
+  },
+  "Botafogo SP": {
+    "media_ht": 0.86,
+    "efic_xg": 0.8
+  },
+  "Botev Plovdiv": {
+    "media_ht": 2.0,
+    "efic_xg": 1.12
+  },
+  "Boyacá Chicó": {
+    "media_ht": 1.03,
+    "efic_xg": 1.05
+  },
+  "Bradford City": {
+    "media_ht": 1.28,
+    "efic_xg": 1.05
+  },
+  "Bragantino": {
+    "media_ht": 1.37,
+    "efic_xg": 0.94
+  },
+  "Brann": {
+    "media_ht": 1.37,
+    "efic_xg": 1.03
+  },
+  "Bravo": {
+    "media_ht": 0.0,
+    "efic_xg": 0.0
+  },
+  "Breidablik": {
+    "media_ht": 1.67,
+    "efic_xg": 1.22
+  },
+  "Brentford": {
+    "media_ht": 1.77,
+    "efic_xg": 1.38
+  },
+  "Brescia": {
+    "media_ht": 1.01,
+    "efic_xg": 0.94
+  },
+  "Brest": {
+    "media_ht": 1.74,
+    "efic_xg": 1.16
+  },
+  "Brighton & Hove Albion": {
+    "media_ht": 1.32,
+    "efic_xg": 1.21
+  },
+  "Bristol City": {
+    "media_ht": 1.14,
+    "efic_xg": 1.0
+  },
+  "Bristol Rovers": {
+    "media_ht": 1.06,
+    "efic_xg": 1.2
+  },
+  "Bromley": {
+    "media_ht": 0.0,
+    "efic_xg": 0.92
+  },
+  "Brommapojkarna": {
+    "media_ht": 1.07,
+    "efic_xg": 0.85
+  },
+  "Brusque": {
+    "media_ht": 0.51,
+    "efic_xg": 0.92
+  },
+  "Bryne": {
+    "media_ht": 1.69,
+    "efic_xg": 0.84
+  },
+  "Brøndby": {
+    "media_ht": 1.18,
+    "efic_xg": 1.17
+  },
+  "Budućnost": {
+    "media_ht": 1.0,
+    "efic_xg": 2.27
+  },
+  "Burgos CF": {
+    "media_ht": 1.01,
+    "efic_xg": 1.1
+  },
+  "Burnley": {
+    "media_ht": 1.25,
+    "efic_xg": 1.12
+  },
+  "Burton Albion": {
+    "media_ht": 1.19,
+    "efic_xg": 0.87
+  },
+  "CA Osasuna": {
+    "media_ht": 1.28,
+    "efic_xg": 1.02
+  },
+  "CD Castellón": {
+    "media_ht": 1.1,
+    "efic_xg": 0.83
+  },
+  "CD El Nacional": {
+    "media_ht": 1.5,
+    "efic_xg": 1.07
+  },
+  "CD Eldense": {
+    "media_ht": 1.27,
+    "efic_xg": 1.22
+  },
+  "CD Nacional": {
+    "media_ht": 1.26,
+    "efic_xg": 1.05
+  },
+  "CD Tenerife": {
+    "media_ht": 0.66,
+    "efic_xg": 0.83
+  },
+  "CD Tondela": {
+    "media_ht": 0.49,
+    "efic_xg": 0.53
+  },
+  "CFR Cluj": {
+    "media_ht": 0.7,
+    "efic_xg": 0.88
+  },
+  "CRB": {
+    "media_ht": 1.03,
+    "efic_xg": 0.8
+  },
+  "CS Marítimo": {
+    "media_ht": 0.5,
+    "efic_xg": 0.88
+  },
+  "CS U Craiova": {
+    "media_ht": 0.69,
+    "efic_xg": 1.53
+  },
+  "CSD Independiente del Valle": {
+    "media_ht": 1.77,
+    "efic_xg": 1.04
+  },
+  "CSKA 1948 Sofia": {
+    "media_ht": 0.5,
+    "efic_xg": 0.35
+  },
+  "CSKA Sofia": {
+    "media_ht": 1.94,
+    "efic_xg": 0.97
+  },
+  "Caernarfon Town": {
+    "media_ht": 2.0,
+    "efic_xg": 2.25
+  },
+  "Cagliari": {
+    "media_ht": 1.02,
+    "efic_xg": 0.77
+  },
+  "Calcio Padova": {
+    "media_ht": 1.42,
+    "efic_xg": 0.97
+  },
+  "Cambridge United": {
+    "media_ht": 1.1,
+    "efic_xg": 1.03
+  },
+  "Cambuur": {
+    "media_ht": 1.69,
+    "efic_xg": 1.04
+  },
+  "Carabobo": {
+    "media_ht": 1.17,
+    "efic_xg": 0.5
+  },
+  "Caracas": {
+    "media_ht": 2.5,
+    "efic_xg": 1.05
+  },
+  "Cardiff City": {
+    "media_ht": 1.0,
+    "efic_xg": 1.02
+  },
+  "Carlisle United": {
+    "media_ht": 0.88,
+    "efic_xg": 0.75
+  },
+  "Carlos Manucci": {
+    "media_ht": 0.93,
+    "efic_xg": 0.66
+  },
+  "Carrarese": {
+    "media_ht": 0.83,
+    "efic_xg": 0.95
+  },
+  "Casa Pia": {
+    "media_ht": 0.94,
+    "efic_xg": 0.82
+  },
+  "Catanzaro": {
+    "media_ht": 1.37,
+    "efic_xg": 1.3
+  },
+  "Ceará": {
+    "media_ht": 1.21,
+    "efic_xg": 0.91
+  },
+  "Celje": {
+    "media_ht": 1.92,
+    "efic_xg": 1.36
+  },
+  "Celta de Vigo": {
+    "media_ht": 1.13,
+    "efic_xg": 1.05
+  },
+  "Celta de Vigo II": {
+    "media_ht": 0.0,
+    "efic_xg": 3.05
+  },
+  "Celtic": {
+    "media_ht": 1.34,
+    "efic_xg": 1.18
+  },
+  "Central Córdoba SdE": {
+    "media_ht": 0.85,
+    "efic_xg": 0.76
+  },
+  "Central Español": {
+    "media_ht": 0.75,
+    "efic_xg": 1.27
+  },
+  "Ceramica Cleopatra": {
+    "media_ht": 1.08,
+    "efic_xg": 1.22
+  },
+  "Cercle Brugge": {
+    "media_ht": 1.64,
+    "efic_xg": 0.97
+  },
+  "Cerezo Osaka": {
+    "media_ht": 1.25,
+    "efic_xg": 1.2
+  },
+  "Cerro": {
+    "media_ht": 0.91,
+    "efic_xg": 0.76
+  },
+  "Cerro Largo": {
+    "media_ht": 0.82,
+    "efic_xg": 0.77
+  },
+  "Cerro Porteño": {
+    "media_ht": 0.91,
+    "efic_xg": 1.09
+  },
+  "Cesena": {
+    "media_ht": 1.43,
+    "efic_xg": 1.15
+  },
+  "Ceuta": {
+    "media_ht": 1.12,
+    "efic_xg": 0.91
+  },
+  "Changchun Yatai": {
+    "media_ht": 1.31,
+    "efic_xg": 1.06
+  },
+  "Chapecoense": {
+    "media_ht": 0.99,
+    "efic_xg": 1.11
+  },
+  "Charlotte": {
+    "media_ht": 0.99,
+    "efic_xg": 1.22
+  },
+  "Charlton Athletic": {
+    "media_ht": 0.91,
+    "efic_xg": 1.0
+  },
+  "Chelsea": {
+    "media_ht": 1.38,
+    "efic_xg": 1.05
+  },
+  "Cheltenham Town": {
+    "media_ht": 1.27,
+    "efic_xg": 0.48
+  },
+  "Chengdu Better City FC": {
+    "media_ht": 1.47,
+    "efic_xg": 1.21
+  },
+  "Chicago Fire": {
+    "media_ht": 1.32,
+    "efic_xg": 1.12
+  },
+  "Chongqing Tongliang Long": {
+    "media_ht": 0.91,
+    "efic_xg": 1.31
+  },
+  "Cienciano": {
+    "media_ht": 1.51,
+    "efic_xg": 1.54
+  },
+  "Cittadella": {
+    "media_ht": 1.07,
+    "efic_xg": 0.75
+  },
+  "Clermont": {
+    "media_ht": 0.87,
+    "efic_xg": 0.48
+  },
+  "Club Always Ready": {
+    "media_ht": 1.0,
+    "efic_xg": 1.26
+  },
+  "Club Brugge": {
+    "media_ht": 1.35,
+    "efic_xg": 1.14
+  },
+  "Cobreloa": {
+    "media_ht": 1.17,
+    "efic_xg": 0.7
+  },
+  "Cobresal": {
+    "media_ht": 1.53,
+    "efic_xg": 1.15
+  },
+  "Coca-Cola": {
+    "media_ht": 0.7,
+    "efic_xg": 0.74
+  },
+  "Colo-Colo": {
+    "media_ht": 0.94,
+    "efic_xg": 0.83
+  },
+  "Colorado Rapids": {
+    "media_ht": 1.16,
+    "efic_xg": 0.97
+  },
+  "Columbus Crew": {
+    "media_ht": 1.35,
+    "efic_xg": 1.26
+  },
+  "Colón": {
+    "media_ht": 1.28,
+    "efic_xg": 0.73
+  },
+  "Comerciantes Unidos": {
+    "media_ht": 0.95,
+    "efic_xg": 1.09
+  },
+  "Como": {
+    "media_ht": 0.94,
+    "efic_xg": 1.14
+  },
+  "Concepción": {
+    "media_ht": 0.85,
+    "efic_xg": 0.7
+  },
+  "Consadole Sapporo": {
+    "media_ht": 1.31,
+    "efic_xg": 0.91
+  },
+  "Copiapó": {
+    "media_ht": 1.58,
+    "efic_xg": 0.98
+  },
+  "Coquimbo Unido": {
+    "media_ht": 1.01,
+    "efic_xg": 1.06
+  },
+  "Corinthians": {
+    "media_ht": 1.07,
+    "efic_xg": 0.97
+  },
+  "Coritiba": {
+    "media_ht": 0.88,
+    "efic_xg": 0.82
+  },
+  "Corvinul Hunedoara": {
+    "media_ht": 0.0,
+    "efic_xg": 0.0
+  },
+  "Cosenza": {
+    "media_ht": 1.01,
+    "efic_xg": 0.9
+  },
+  "Coventry City": {
+    "media_ht": 1.4,
+    "efic_xg": 1.11
+  },
+  "Crawley Town": {
+    "media_ht": 1.43,
+    "efic_xg": 1.1
+  },
+  "Cremonese": {
+    "media_ht": 0.93,
+    "efic_xg": 0.77
+  },
+  "Criciúma": {
+    "media_ht": 1.07,
+    "efic_xg": 0.92
+  },
+  "Crusaders": {
+    "media_ht": 0.0,
+    "efic_xg": 0.83
+  },
+  "Cruz Azul": {
+    "media_ht": 1.46,
+    "efic_xg": 1.05
+  },
+  "Cruzeiro": {
+    "media_ht": 1.14,
+    "efic_xg": 1.08
+  },
+  "Crystal Palace": {
+    "media_ht": 0.75,
+    "efic_xg": 0.7
+  },
+  "Cuiabá": {
+    "media_ht": 0.81,
+    "efic_xg": 0.7
+  },
+  "Cultural y Deportiva Leonesa": {
+    "media_ht": 0.72,
+    "efic_xg": 0.4
+  },
+  "Curicó Unido": {
+    "media_ht": 0.73,
+    "efic_xg": 0.72
+  },
+  "Cádiz": {
+    "media_ht": 1.03,
+    "efic_xg": 0.85
+  },
+  "César Vallejo": {
+    "media_ht": 1.21,
+    "efic_xg": 1.3
+  },
+  "Córdoba": {
+    "media_ht": 0.92,
+    "efic_xg": 1.01
+  },
+  "Cúcuta Deportivo": {
+    "media_ht": 1.4,
+    "efic_xg": 1.53
+  },
+  "DAC": {
+    "media_ht": 0.0,
+    "efic_xg": 0.64
+  },
+  "DC United": {
+    "media_ht": 1.3,
+    "efic_xg": 1.12
+  },
+  "Dalian Yifang": {
+    "media_ht": 1.15,
+    "efic_xg": 1.03
+  },
+  "Dalian Zhixing": {
+    "media_ht": 1.03,
+    "efic_xg": 0.94
+  },
+  "Danubio": {
+    "media_ht": 0.9,
+    "efic_xg": 0.68
+  },
+  "Darmstadt 98": {
+    "media_ht": 1.64,
+    "efic_xg": 1.2
+  },
+  "De Graafschap": {
+    "media_ht": 1.52,
+    "efic_xg": 1.02
+  },
+  "Debrecen": {
+    "media_ht": 0.5,
+    "efic_xg": 0.54
+  },
+  "Defensa y Justicia": {
+    "media_ht": 0.91,
+    "efic_xg": 0.8
+  },
+  "Defensor Sporting": {
+    "media_ht": 1.1,
+    "efic_xg": 0.96
+  },
+  "Degerfors": {
+    "media_ht": 1.28,
+    "efic_xg": 0.76
+  },
+  "Den Bosch": {
+    "media_ht": 1.42,
+    "efic_xg": 1.16
+  },
+  "Deportes Iquique": {
+    "media_ht": 1.46,
+    "efic_xg": 0.92
+  },
+  "Deportes Limache": {
+    "media_ht": 1.39,
+    "efic_xg": 1.32
+  },
+  "Deportes Tolima": {
+    "media_ht": 1.04,
+    "efic_xg": 1.07
+  },
+  "Deportivo Alavés": {
+    "media_ht": 1.13,
+    "efic_xg": 0.98
+  },
+  "Deportivo Binacional": {
+    "media_ht": 1.39,
+    "efic_xg": 1.1
+  },
+  "Deportivo Cali": {
+    "media_ht": 1.02,
+    "efic_xg": 1.06
+  },
+  "Deportivo Garcilaso": {
+    "media_ht": 0.82,
+    "efic_xg": 1.0
+  },
+  "Deportivo La Coruña": {
+    "media_ht": 0.94,
+    "efic_xg": 0.79
+  },
+  "Deportivo La Guaira": {
+    "media_ht": 0.25,
+    "efic_xg": 0.17
+  },
+  "Deportivo Maldonado": {
+    "media_ht": 1.01,
+    "efic_xg": 0.81
+  },
+  "Deportivo Municipal": {
+    "media_ht": 0.94,
+    "efic_xg": 0.7
+  },
+  "Deportivo Pasto": {
+    "media_ht": 1.04,
+    "efic_xg": 1.0
+  },
+  "Deportivo Pereira": {
+    "media_ht": 0.96,
+    "efic_xg": 1.02
+  },
+  "Deportivo Recoleta": {
+    "media_ht": 0.71,
+    "efic_xg": 0.94
+  },
+  "Deportivo Riestra": {
+    "media_ht": 0.48,
+    "efic_xg": 0.72
+  },
+  "Deportivo Táchira": {
+    "media_ht": 0.5,
+    "efic_xg": 0.25
+  },
+  "Derby County": {
+    "media_ht": 1.17,
+    "efic_xg": 1.17
+  },
+  "Derry City": {
+    "media_ht": 1.0,
+    "efic_xg": 0.63
+  },
+  "Dečić": {
+    "media_ht": 0.5,
+    "efic_xg": 0.75
+  },
+  "Dhamk": {
+    "media_ht": 1.24,
+    "efic_xg": 1.17
+  },
+  "Differdange 03": {
+    "media_ht": 0.75,
+    "efic_xg": 0.68
+  },
+  "Dila": {
+    "media_ht": 1.25,
+    "efic_xg": 1.41
+  },
+  "Dinamo Minsk": {
+    "media_ht": 1.17,
+    "efic_xg": 0.47
+  },
+  "Dinamo Tbilisi": {
+    "media_ht": 0.0,
+    "efic_xg": 0.4
+  },
+  "Dinamo Tirana": {
+    "media_ht": 0.87,
+    "efic_xg": 1.01
+  },
+  "Dinamo Zagreb": {
+    "media_ht": 1.34,
+    "efic_xg": 1.28
+  },
+  "Djurgården": {
+    "media_ht": 1.28,
+    "efic_xg": 1.02
+  },
+  "Doncaster Rovers": {
+    "media_ht": 0.99,
+    "efic_xg": 0.82
+  },
+  "Dordrecht": {
+    "media_ht": 1.29,
+    "efic_xg": 1.14
+  },
+  "Drita": {
+    "media_ht": 0.9,
+    "efic_xg": 1.27
+  },
+  "Dukagjini": {
+    "media_ht": 2.0,
+    "efic_xg": 1.17
+  },
+  "Dundalk": {
+    "media_ht": 2.0,
+    "efic_xg": 2.83
+  },
+  "Dundee": {
+    "media_ht": 1.62,
+    "efic_xg": 1.39
+  },
+  "Dundee United": {
+    "media_ht": 1.34,
+    "efic_xg": 1.23
+  },
+  "Dynamo Dresden": {
+    "media_ht": 2.0,
+    "efic_xg": 1.0
+  },
+  "Dynamo Kyiv": {
+    "media_ht": 1.8,
+    "efic_xg": 0.87
+  },
+  "EIF": {
+    "media_ht": 0.91,
+    "efic_xg": 0.83
+  },
+  "ENPPI": {
+    "media_ht": 0.79,
+    "efic_xg": 0.9
+  },
+  "ETO": {
+    "media_ht": 1.0,
+    "efic_xg": 0.71
+  },
+  "Egnatia Rrogozhinë": {
+    "media_ht": 2.33,
+    "efic_xg": 1.88
+  },
+  "Eindhoven": {
+    "media_ht": 1.22,
+    "efic_xg": 0.9
+  },
+  "Eintracht Braunschweig": {
+    "media_ht": 1.26,
+    "efic_xg": 0.92
+  },
+  "Eintracht Frankfurt": {
+    "media_ht": 1.65,
+    "efic_xg": 1.5
+  },
+  "El Daklyeh FC": {
+    "media_ht": 0.68,
+    "efic_xg": 0.82
+  },
+  "El Geish": {
+    "media_ht": 0.71,
+    "efic_xg": 0.53
+  },
+  "El Gounah": {
+    "media_ht": 0.6,
+    "efic_xg": 0.56
+  },
+  "Elche CF": {
+    "media_ht": 0.69,
+    "efic_xg": 0.92
+  },
+  "Elfsborg": {
+    "media_ht": 1.37,
+    "efic_xg": 1.34
+  },
+  "Elversberg": {
+    "media_ht": 1.28,
+    "efic_xg": 1.25
+  },
+  "Emmen": {
+    "media_ht": 1.78,
+    "efic_xg": 1.0
+  },
+  "Empoli": {
+    "media_ht": 0.85,
+    "efic_xg": 0.63
+  },
+  "Energie Cottbus": {
+    "media_ht": 2.0,
+    "efic_xg": 2.54
+  },
+  "Envigado": {
+    "media_ht": 0.88,
+    "efic_xg": 0.71
+  },
+  "Estrela Amadora": {
+    "media_ht": 1.11,
+    "efic_xg": 0.98
+  },
+  "Estudiantes": {
+    "media_ht": 1.03,
+    "efic_xg": 0.81
+  },
+  "Estudiantes Río Cuarto": {
+    "media_ht": 0.44,
+    "efic_xg": 0.25
+  },
+  "Everton": {
+    "media_ht": 1.09,
+    "efic_xg": 0.73
+  },
+  "Excelsior": {
+    "media_ht": 1.3,
+    "efic_xg": 1.19
+  },
+  "Exeter City": {
+    "media_ht": 1.06,
+    "efic_xg": 0.88
+  },
+  "Eyüpspor": {
+    "media_ht": 0.98,
+    "efic_xg": 1.17
+  },
+  "F91 Dudelange": {
+    "media_ht": 0.5,
+    "efic_xg": 1.35
+  },
+  "FC Andorra": {
+    "media_ht": 0.68,
+    "efic_xg": 0.91
+  },
+  "FC Arouca": {
+    "media_ht": 1.11,
+    "efic_xg": 1.12
+  },
+  "FC Avan Academy": {
+    "media_ht": 0.4,
+    "efic_xg": 1.55
+  },
+  "FC Barcelona": {
+    "media_ht": 1.71,
+    "efic_xg": 1.51
+  },
+  "FC Cajamarca": {
+    "media_ht": 0.89,
+    "efic_xg": 1.55
+  },
+  "FC Cartagena": {
+    "media_ht": 1.08,
+    "efic_xg": 0.53
+  },
+  "FC Cincinnati": {
+    "media_ht": 0.98,
+    "efic_xg": 1.18
+  },
+  "FC Dallas": {
+    "media_ht": 1.29,
+    "efic_xg": 1.2
+  },
+  "FC Santa Coloma": {
+    "media_ht": 0.38,
+    "efic_xg": 1.13
+  },
+  "FC Vizela": {
+    "media_ht": 1.31,
+    "efic_xg": 0.82
+  },
+  "FCSB": {
+    "media_ht": 1.31,
+    "efic_xg": 1.51
+  },
+  "FCV Dender EH": {
+    "media_ht": 0.89,
+    "efic_xg": 0.67
+  },
+  "FK Bodo - Glimt": {
+    "media_ht": 1.62,
+    "efic_xg": 1.36
+  },
+  "Fagiano Okayama": {
+    "media_ht": 0.68,
+    "efic_xg": 0.9
+  },
+  "Falkirk": {
+    "media_ht": 1.22,
+    "efic_xg": 1.01
+  },
+  "Famalicão": {
+    "media_ht": 1.0,
+    "efic_xg": 0.99
+  },
+  "Farense": {
+    "media_ht": 1.34,
+    "efic_xg": 0.89
+  },
+  "Fatih Karagümrük": {
+    "media_ht": 1.04,
+    "efic_xg": 0.78
+  },
+  "Fenerbahçe": {
+    "media_ht": 1.65,
+    "efic_xg": 1.36
+  },
+  "FeralpiSalò": {
+    "media_ht": 1.28,
+    "efic_xg": 0.88
+  },
+  "Ferencváros": {
+    "media_ht": 1.6,
+    "efic_xg": 1.44
+  },
+  "Ferroviária": {
+    "media_ht": 1.19,
+    "efic_xg": 0.92
+  },
+  "Feyenoord": {
+    "media_ht": 1.55,
+    "efic_xg": 0.96
+  },
+  "Fiorentina": {
+    "media_ht": 1.47,
+    "efic_xg": 1.16
+  },
+  "Flamengo": {
+    "media_ht": 1.18,
+    "efic_xg": 1.14
+  },
+  "Fleetwood Town": {
+    "media_ht": 1.37,
+    "efic_xg": 0.51
+  },
+  "Floriana": {
+    "media_ht": 1.0,
+    "efic_xg": 1.92
+  },
+  "Fluminense": {
+    "media_ht": 1.08,
+    "efic_xg": 1.06
+  },
+  "Fortaleza": {
+    "media_ht": 1.14,
+    "efic_xg": 1.06
+  },
+  "Fortaleza CEIF": {
+    "media_ht": 1.08,
+    "efic_xg": 0.91
+  },
+  "Fortuna Düsseldorf": {
+    "media_ht": 0.93,
+    "efic_xg": 0.84
+  },
+  "Fortuna Sittard": {
+    "media_ht": 1.49,
+    "efic_xg": 1.04
+  },
+  "Fredericia": {
+    "media_ht": 1.58,
+    "efic_xg": 0.87
+  },
+  "Fredrikstad": {
+    "media_ht": 1.46,
+    "efic_xg": 1.11
+  },
+  "Freiburg": {
+    "media_ht": 1.63,
+    "efic_xg": 1.31
+  },
+  "Frosinone": {
+    "media_ht": 1.28,
+    "efic_xg": 1.14
+  },
+  "Fulham": {
+    "media_ht": 1.16,
+    "efic_xg": 1.09
+  },
+  "Fénix": {
+    "media_ht": 0.78,
+    "efic_xg": 0.45
+  },
+  "GAIS": {
+    "media_ht": 0.91,
+    "efic_xg": 0.7
+  },
+  "GD Chaves": {
+    "media_ht": 1.56,
+    "efic_xg": 1.07
+  },
+  "GD Estoril Praia": {
+    "media_ht": 1.29,
+    "efic_xg": 1.21
+  },
+  "GKS Katowice": {
+    "media_ht": 0.0,
+    "efic_xg": 1.35
+  },
+  "Galatasaray": {
+    "media_ht": 1.36,
+    "efic_xg": 1.35
+  },
+  "Gamba Osaka": {
+    "media_ht": 1.21,
+    "efic_xg": 1.04
+  },
+  "Gaziantep FK": {
+    "media_ht": 1.24,
+    "efic_xg": 0.83
+  },
+  "General Caballero JLM": {
+    "media_ht": 1.29,
+    "efic_xg": 1.11
+  },
+  "Genoa": {
+    "media_ht": 1.09,
+    "efic_xg": 0.92
+  },
+  "Gençlerbirliği": {
+    "media_ht": 1.31,
+    "efic_xg": 0.95
+  },
+  "Getafe CF": {
+    "media_ht": 0.67,
+    "efic_xg": 0.77
+  },
+  "Ghazl El Mehalla": {
+    "media_ht": 0.52,
+    "efic_xg": 0.33
+  },
+  "Gil Vicente": {
+    "media_ht": 1.2,
+    "efic_xg": 1.55
+  },
+  "Gimnasia La Plata": {
+    "media_ht": 0.71,
+    "efic_xg": 0.86
+  },
+  "Gimnasia Mendoza": {
+    "media_ht": 0.75,
+    "efic_xg": 0.54
+  },
+  "Girona FC": {
+    "media_ht": 1.55,
+    "efic_xg": 1.27
+  },
+  "Gnistan": {
+    "media_ht": 1.47,
+    "efic_xg": 1.2
+  },
+  "Go Ahead Eagles": {
+    "media_ht": 1.63,
+    "efic_xg": 1.26
+  },
+  "Godoy Cruz": {
+    "media_ht": 1.26,
+    "efic_xg": 0.83
+  },
+  "Goiás": {
+    "media_ht": 1.15,
+    "efic_xg": 1.16
+  },
+  "Gorica": {
+    "media_ht": 1.04,
+    "efic_xg": 1.03
+  },
+  "Granada CF": {
+    "media_ht": 1.42,
+    "efic_xg": 1.03
+  },
+  "Grazer AK": {
+    "media_ht": 1.72,
+    "efic_xg": 1.24
+  },
+  "Greuther Fürth": {
+    "media_ht": 1.79,
+    "efic_xg": 1.17
+  },
+  "Groningen": {
+    "media_ht": 1.26,
+    "efic_xg": 0.98
+  },
+  "Grêmio": {
+    "media_ht": 1.18,
+    "efic_xg": 1.08
+  },
+  "Guadalajara": {
+    "media_ht": 1.33,
+    "efic_xg": 1.08
+  },
+  "Guaireña": {
+    "media_ht": 1.04,
+    "efic_xg": 0.91
+  },
+  "Guarani": {
+    "media_ht": 1.23,
+    "efic_xg": 1.19
+  },
+  "Guaraní": {
+    "media_ht": 1.3,
+    "efic_xg": 1.18
+  },
+  "Győri ETO": {
+    "media_ht": 1.0,
+    "efic_xg": 1.1
+  },
+  "Gzira United": {
+    "media_ht": 2.25,
+    "efic_xg": 2.04
+  },
+  "Göztepe": {
+    "media_ht": 1.08,
+    "efic_xg": 1.1
+  },
+  "HJK": {
+    "media_ht": 1.15,
+    "efic_xg": 1.19
+  },
+  "HNK Vukovar 1991": {
+    "media_ht": 1.47,
+    "efic_xg": 0.99
+  },
+  "Hajduk Split": {
+    "media_ht": 0.95,
+    "efic_xg": 1.13
+  },
+  "Haka": {
+    "media_ht": 1.38,
+    "efic_xg": 1.29
+  },
+  "Halmstad": {
+    "media_ht": 1.13,
+    "efic_xg": 1.04
+  },
+  "HamKam": {
+    "media_ht": 1.33,
+    "efic_xg": 1.03
+  },
+  "Hamburger SV": {
+    "media_ht": 1.59,
+    "efic_xg": 1.26
+  },
+  "Hammarby": {
+    "media_ht": 1.37,
+    "efic_xg": 1.3
+  },
+  "Hamrun Spartans": {
+    "media_ht": 0.57,
+    "efic_xg": 0.82
+  },
+  "Hannover 96": {
+    "media_ht": 1.13,
+    "efic_xg": 1.04
+  },
+  "Hansa Rostock": {
+    "media_ht": 1.34,
+    "efic_xg": 0.99
+  },
+  "Hapoel Be'er Sheva": {
+    "media_ht": 0.38,
+    "efic_xg": 0.95
+  },
+  "Hapoel Tel Aviv": {
+    "media_ht": 1.25,
+    "efic_xg": 1.35
+  },
+  "Haras El Hodood": {
+    "media_ht": 1.3,
+    "efic_xg": 0.95
+  },
+  "Hartberg": {
+    "media_ht": 1.07,
+    "efic_xg": 1.01
+  },
+  "Hatayspor": {
+    "media_ht": 1.08,
+    "efic_xg": 1.29
+  },
+  "Haugesund": {
+    "media_ht": 1.02,
+    "efic_xg": 0.7
+  },
+  "Haverfordwest County": {
+    "media_ht": 0.0,
+    "efic_xg": 1.16
+  },
+  "Hearts": {
+    "media_ht": 0.94,
+    "efic_xg": 0.99
+  },
+  "Heerenveen": {
+    "media_ht": 1.41,
+    "efic_xg": 1.07
+  },
+  "Heidenheim": {
+    "media_ht": 1.28,
+    "efic_xg": 1.06
+  },
+  "Hellas Verona": {
+    "media_ht": 1.31,
+    "efic_xg": 1.03
+  },
+  "Helmond Sport": {
+    "media_ht": 1.22,
+    "efic_xg": 1.16
+  },
+  "Henan Jianye": {
+    "media_ht": 1.06,
+    "efic_xg": 0.99
+  },
+  "Heracles": {
+    "media_ht": 1.57,
+    "efic_xg": 1.11
+  },
+  "Hertha BSC": {
+    "media_ht": 1.1,
+    "efic_xg": 1.01
+  },
+  "Hibernian": {
+    "media_ht": 1.41,
+    "efic_xg": 1.23
+  },
+  "Hoffenheim": {
+    "media_ht": 1.97,
+    "efic_xg": 1.18
+  },
+  "Holstein Kiel": {
+    "media_ht": 1.6,
+    "efic_xg": 1.06
+  },
+  "Honka": {
+    "media_ht": 0.98,
+    "efic_xg": 0.57
+  },
+  "Horsens": {
+    "media_ht": 1.61,
+    "efic_xg": 0.88
+  },
+  "Houston Dynamo": {
+    "media_ht": 0.94,
+    "efic_xg": 1.03
+  },
+  "Hradec Králové": {
+    "media_ht": 2.0,
+    "efic_xg": 3.57
+  },
+  "Huachipato": {
+    "media_ht": 1.42,
+    "efic_xg": 1.14
+  },
+  "Huddersfield Town": {
+    "media_ht": 1.03,
+    "efic_xg": 1.1
+  },
+  "Hull City": {
+    "media_ht": 1.38,
+    "efic_xg": 1.01
+  },
+  "Huracán": {
+    "media_ht": 1.0,
+    "efic_xg": 0.86
+  },
+  "Hvidovre": {
+    "media_ht": 1.11,
+    "efic_xg": 0.52
+  },
+  "Häcken": {
+    "media_ht": 1.75,
+    "efic_xg": 1.41
+  },
+  "IFK Göteborg": {
+    "media_ht": 1.15,
+    "efic_xg": 0.71
+  },
+  "Ilves": {
+    "media_ht": 1.5,
+    "efic_xg": 1.45
+  },
+  "Independiente": {
+    "media_ht": 1.19,
+    "efic_xg": 0.95
+  },
+  "Independiente Medellín": {
+    "media_ht": 1.03,
+    "efic_xg": 0.95
+  },
+  "Independiente Rivadavia": {
+    "media_ht": 1.0,
+    "efic_xg": 0.81
+  },
+  "Instituto": {
+    "media_ht": 1.03,
+    "efic_xg": 0.94
+  },
+  "Inter Club d'Escaldes": {
+    "media_ht": 1.67,
+    "efic_xg": 2.26
+  },
+  "Inter Miami": {
+    "media_ht": 1.64,
+    "efic_xg": 1.58
+  },
+  "Inter Milan": {
+    "media_ht": 1.49,
+    "efic_xg": 1.5
+  },
+  "Inter Turku": {
+    "media_ht": 1.0,
+    "efic_xg": 1.13
+  },
+  "Internacional": {
+    "media_ht": 0.91,
+    "efic_xg": 0.87
+  },
+  "Ipswich Town": {
+    "media_ht": 1.74,
+    "efic_xg": 1.14
+  },
+  "Ismaily SC": {
+    "media_ht": 0.89,
+    "efic_xg": 0.86
+  },
+  "Istra 1961": {
+    "media_ht": 1.08,
+    "efic_xg": 0.9
+  },
+  "Ituano": {
+    "media_ht": 1.21,
+    "efic_xg": 1.16
+  },
+  "JEF United": {
+    "media_ht": 2.0,
+    "efic_xg": 0.31
+  },
+  "Jablonec": {
+    "media_ht": 1.0,
+    "efic_xg": 1.24
+  },
+  "Jagiellonia Białystok": {
+    "media_ht": 0.87,
+    "efic_xg": 1.55
+  },
+  "Jaguares de Córdoba": {
+    "media_ht": 1.04,
+    "efic_xg": 1.0
+  },
+  "Jahn Regensburg": {
+    "media_ht": 0.85,
+    "efic_xg": 0.6
+  },
+  "Jaro": {
+    "media_ht": 1.18,
+    "efic_xg": 0.8
+  },
+  "Juan Pablo II College": {
+    "media_ht": 1.21,
+    "efic_xg": 1.24
+  },
+  "Jubilo Iwata": {
+    "media_ht": 0.77,
+    "efic_xg": 0.71
+  },
+  "Junior": {
+    "media_ht": 1.02,
+    "efic_xg": 1.02
+  },
+  "Juve Stabia": {
+    "media_ht": 1.08,
+    "efic_xg": 0.98
+  },
+  "Juventud": {
+    "media_ht": 1.05,
+    "efic_xg": 0.86
+  },
+  "Juventude": {
+    "media_ht": 1.0,
+    "efic_xg": 0.99
+  },
+  "Juventus": {
+    "media_ht": 0.95,
+    "efic_xg": 1.11
+  },
+  "Juárez": {
+    "media_ht": 1.33,
+    "efic_xg": 1.14
+  },
+  "KA": {
+    "media_ht": 1.0,
+    "efic_xg": 2.07
+  },
+  "KAA Gent": {
+    "media_ht": 1.58,
+    "efic_xg": 1.21
+  },
+  "KFUM": {
+    "media_ht": 1.2,
+    "efic_xg": 0.98
+  },
+  "KRC Genk": {
+    "media_ht": 1.3,
+    "efic_xg": 0.9
+  },
+  "KTP": {
+    "media_ht": 0.95,
+    "efic_xg": 0.65
+  },
+  "KV Kortrijk": {
+    "media_ht": 0.8,
+    "efic_xg": 0.67
+  },
+  "KV Mechelen": {
+    "media_ht": 1.17,
+    "efic_xg": 1.27
+  },
+  "KVC Westerlo": {
+    "media_ht": 1.63,
+    "efic_xg": 1.05
+  },
+  "Kahraba Ismailia": {
+    "media_ht": 0.78,
+    "efic_xg": 0.8
+  },
+  "Kairat": {
+    "media_ht": 1.22,
+    "efic_xg": 1.06
+  },
+  "Kaiserslautern": {
+    "media_ht": 1.6,
+    "efic_xg": 1.35
+  },
+  "Kallithea": {
+    "media_ht": 1.21,
+    "efic_xg": 0.84
+  },
+  "Kalmar": {
+    "media_ht": 1.1,
+    "efic_xg": 1.03
+  },
+  "Karlsruher SC": {
+    "media_ht": 1.66,
+    "efic_xg": 1.39
+  },
+  "Kashima Antlers": {
+    "media_ht": 0.98,
+    "efic_xg": 1.29
+  },
+  "Kashiwa Reysol": {
+    "media_ht": 1.01,
+    "efic_xg": 0.9
+  },
+  "Kasımpaşa": {
+    "media_ht": 1.26,
+    "efic_xg": 0.94
+  },
+  "Kauno Žalgiris": {
+    "media_ht": 1.12,
+    "efic_xg": 1.11
+  },
+  "Kawasaki Frontale": {
+    "media_ht": 1.21,
+    "efic_xg": 1.09
+  },
+  "Kayserispor": {
+    "media_ht": 1.25,
+    "efic_xg": 0.76
+  },
+  "Kifisia": {
+    "media_ht": 1.3,
+    "efic_xg": 1.15
+  },
+  "Kilmarnock": {
+    "media_ht": 1.03,
+    "efic_xg": 0.96
+  },
+  "Kocaelispor": {
+    "media_ht": 0.63,
+    "efic_xg": 0.74
+  },
+  "Konyaspor": {
+    "media_ht": 0.89,
+    "efic_xg": 0.87
+  },
+  "Koper": {
+    "media_ht": 4.0,
+    "efic_xg": 1.74
+  },
+  "Kristiansund": {
+    "media_ht": 1.33,
+    "efic_xg": 0.82
+  },
+  "KuPS": {
+    "media_ht": 1.13,
+    "efic_xg": 1.27
+  },
+  "Kyoto Sanga": {
+    "media_ht": 1.22,
+    "efic_xg": 0.79
+  },
+  "KÍ": {
+    "media_ht": 0.56,
+    "efic_xg": 0.89
+  },
+  "Köln": {
+    "media_ht": 1.2,
+    "efic_xg": 1.0
+  },
+  "København": {
+    "media_ht": 1.42,
+    "efic_xg": 1.38
+  },
+  "LA Galaxy": {
+    "media_ht": 1.33,
+    "efic_xg": 1.03
+  },
+  "LASK Linz": {
+    "media_ht": 1.28,
+    "efic_xg": 1.04
+  },
+  "LDU Quito": {
+    "media_ht": 0.89,
+    "efic_xg": 0.88
+  },
+  "La Equidad": {
+    "media_ht": 1.01,
+    "efic_xg": 0.77
+  },
+  "La Fiorita": {
+    "media_ht": 1.0,
+    "efic_xg": 0.0
+  },
+  "La Luz": {
+    "media_ht": 1.85,
+    "efic_xg": 0.26
+  },
+  "La Serena": {
+    "media_ht": 1.24,
+    "efic_xg": 1.06
+  },
+  "Lahti": {
+    "media_ht": 1.22,
+    "efic_xg": 0.84
+  },
+  "Lamia": {
+    "media_ht": 1.15,
+    "efic_xg": 0.94
+  },
+  "Lanús": {
+    "media_ht": 0.88,
+    "efic_xg": 0.9
+  },
+  "Larissa": {
+    "media_ht": 1.17,
+    "efic_xg": 0.68
+  },
+  "Larne": {
+    "media_ht": 1.37,
+    "efic_xg": 0.68
+  },
+  "Lausanne Sport": {
+    "media_ht": 2.3,
+    "efic_xg": 1.57
+  },
+  "Lazio": {
+    "media_ht": 1.45,
+    "efic_xg": 1.48
+  },
+  "Le Havre": {
+    "media_ht": 1.24,
+    "efic_xg": 0.87
+  },
+  "Lecce": {
+    "media_ht": 0.99,
+    "efic_xg": 0.65
+  },
+  "Lecco": {
+    "media_ht": 0.91,
+    "efic_xg": 0.87
+  },
+  "Lech Poznań": {
+    "media_ht": 2.35,
+    "efic_xg": 1.76
+  },
+  "Leeds United": {
+    "media_ht": 1.31,
+    "efic_xg": 1.09
+  },
+  "Leganés": {
+    "media_ht": 0.92,
+    "efic_xg": 0.96
+  },
+  "Legia Warszawa": {
+    "media_ht": 1.11,
+    "efic_xg": 1.54
+  },
+  "Leicester City": {
+    "media_ht": 1.09,
+    "efic_xg": 1.15
+  },
+  "Lens": {
+    "media_ht": 1.1,
+    "efic_xg": 0.99
+  },
+  "Levadiakos": {
+    "media_ht": 1.3,
+    "efic_xg": 1.02
+  },
+  "Levante UD": {
+    "media_ht": 1.51,
+    "efic_xg": 1.19
+  },
+  "Levski Sofia": {
+    "media_ht": 0.19,
+    "efic_xg": 1.25
+  },
+  "Leyton Orient": {
+    "media_ht": 1.34,
+    "efic_xg": 0.97
+  },
+  "León": {
+    "media_ht": 1.19,
+    "efic_xg": 0.93
+  },
+  "Libertad": {
+    "media_ht": 1.2,
+    "efic_xg": 1.25
+  },
+  "Liepāja": {
+    "media_ht": 0.0,
+    "efic_xg": 1.04
+  },
+  "Lille": {
+    "media_ht": 1.14,
+    "efic_xg": 1.09
+  },
+  "Lillestrøm": {
+    "media_ht": 1.6,
+    "efic_xg": 1.19
+  },
+  "Lincoln City": {
+    "media_ht": 1.13,
+    "efic_xg": 1.3
+  },
+  "Lincoln Red Imps": {
+    "media_ht": 1.17,
+    "efic_xg": 1.05
+  },
+  "Linfield": {
+    "media_ht": 1.33,
+    "efic_xg": 1.32
+  },
+  "Liverpool": {
+    "media_ht": 1.39,
+    "efic_xg": 1.23
+  },
+  "Liverpool FC Montevideo": {
+    "media_ht": 1.29,
+    "efic_xg": 0.86
+  },
+  "Livingston": {
+    "media_ht": 0.94,
+    "efic_xg": 0.89
+  },
+  "Llaneros": {
+    "media_ht": 1.36,
+    "efic_xg": 0.99
+  },
+  "Lokomotiva Zagreb": {
+    "media_ht": 1.11,
+    "efic_xg": 0.9
+  },
+  "Lommel United": {
+    "media_ht": 0.5,
+    "efic_xg": 0.65
+  },
+  "Londrina": {
+    "media_ht": 1.11,
+    "efic_xg": 1.08
+  },
+  "Lorient": {
+    "media_ht": 1.28,
+    "efic_xg": 1.55
+  },
+  "Los Angeles FC": {
+    "media_ht": 1.14,
+    "efic_xg": 1.17
+  },
+  "Los Chankas": {
+    "media_ht": 1.12,
+    "efic_xg": 1.3
+  },
+  "Ludogorets": {
+    "media_ht": 1.18,
+    "efic_xg": 1.47
+  },
+  "Lugano": {
+    "media_ht": 0.9,
+    "efic_xg": 1.2
+  },
+  "Luton Town": {
+    "media_ht": 1.02,
+    "efic_xg": 1.0
+  },
+  "Luzern": {
+    "media_ht": 2.0,
+    "efic_xg": 1.08
+  },
+  "Lyngby": {
+    "media_ht": 1.01,
+    "efic_xg": 0.87
+  },
+  "ML Vitebsk": {
+    "media_ht": 2.0,
+    "efic_xg": 2.46
+  },
+  "MVV": {
+    "media_ht": 1.39,
+    "efic_xg": 1.07
+  },
+  "Maccabi Haifa": {
+    "media_ht": 0.95,
+    "efic_xg": 1.12
+  },
+  "Maccabi Tel Aviv": {
+    "media_ht": 1.55,
+    "efic_xg": 1.25
+  },
+  "Machida Zelvia": {
+    "media_ht": 1.27,
+    "efic_xg": 1.09
+  },
+  "Magallanes": {
+    "media_ht": 1.07,
+    "efic_xg": 0.78
+  },
+  "Magdeburg": {
+    "media_ht": 1.58,
+    "efic_xg": 0.88
+  },
+  "Magpies": {
+    "media_ht": 0.0,
+    "efic_xg": 1.47
+  },
+  "Mainz 05": {
+    "media_ht": 1.17,
+    "efic_xg": 0.73
+  },
+  "Malisheva": {
+    "media_ht": 2.0,
+    "efic_xg": 2.27
+  },
+  "Malmö FF": {
+    "media_ht": 1.39,
+    "efic_xg": 1.19
+  },
+  "Manchester City": {
+    "media_ht": 1.8,
+    "efic_xg": 1.37
+  },
+  "Manchester United": {
+    "media_ht": 1.22,
+    "efic_xg": 0.91
+  },
+  "Mansfield Town": {
+    "media_ht": 1.24,
+    "efic_xg": 1.12
+  },
+  "Mantova": {
+    "media_ht": 1.22,
+    "efic_xg": 1.0
+  },
+  "Maribor": {
+    "media_ht": 0.75,
+    "efic_xg": 0.81
+  },
+  "Mariehamn": {
+    "media_ht": 1.31,
+    "efic_xg": 1.04
+  },
+  "Masr": {
+    "media_ht": 1.03,
+    "efic_xg": 0.68
+  },
+  "Mazatlán": {
+    "media_ht": 1.34,
+    "efic_xg": 1.05
+  },
+  "Meizhou Hakka": {
+    "media_ht": 1.19,
+    "efic_xg": 0.95
+  },
+  "Melgar": {
+    "media_ht": 1.3,
+    "efic_xg": 1.16
+  },
+  "Metropolitanos": {
+    "media_ht": 1.25,
+    "efic_xg": 0.9
+  },
+  "Metz": {
+    "media_ht": 0.97,
+    "efic_xg": 0.77
+  },
+  "Middlesbrough": {
+    "media_ht": 1.03,
+    "efic_xg": 0.85
+  },
+  "Midtjylland": {
+    "media_ht": 1.52,
+    "efic_xg": 1.26
+  },
+  "Millonarios": {
+    "media_ht": 1.11,
+    "efic_xg": 1.08
+  },
+  "Millwall": {
+    "media_ht": 0.85,
+    "efic_xg": 0.79
+  },
+  "Milsami": {
+    "media_ht": 0.0,
+    "efic_xg": 0.52
+  },
+  "Milton Keynes Dons": {
+    "media_ht": 1.0,
+    "efic_xg": 0.66
+  },
+  "Minnesota United": {
+    "media_ht": 0.92,
+    "efic_xg": 0.95
+  },
+  "Miramar Misiones": {
+    "media_ht": 1.16,
+    "efic_xg": 0.93
+  },
+  "Mirandés": {
+    "media_ht": 1.11,
+    "efic_xg": 1.08
+  },
+  "Mirassol": {
+    "media_ht": 1.0,
+    "efic_xg": 1.11
+  },
+  "Mito Hollyhock": {
+    "media_ht": 1.25,
+    "efic_xg": 0.66
+  },
+  "Mjällby": {
+    "media_ht": 1.38,
+    "efic_xg": 1.15
+  },
+  "Mladá Boleslav": {
+    "media_ht": 1.3,
+    "efic_xg": 0.76
+  },
+  "Modena": {
+    "media_ht": 0.9,
+    "efic_xg": 1.05
+  },
+  "Molde": {
+    "media_ht": 1.54,
+    "efic_xg": 1.19
+  },
+  "Monaco": {
+    "media_ht": 1.43,
+    "efic_xg": 1.38
+  },
+  "Monagas": {
+    "media_ht": 0.0,
+    "efic_xg": 0.45
+  },
+  "Monterrey": {
+    "media_ht": 1.73,
+    "efic_xg": 1.23
+  },
+  "Montpellier": {
+    "media_ht": 1.36,
+    "efic_xg": 0.86
+  },
+  "Montreal Impact": {
+    "media_ht": 1.27,
+    "efic_xg": 1.17
+  },
+  "Monza": {
+    "media_ht": 1.04,
+    "efic_xg": 0.95
+  },
+  "Moreirense FC": {
+    "media_ht": 1.16,
+    "efic_xg": 1.32
+  },
+  "Mornar": {
+    "media_ht": 1.75,
+    "efic_xg": 2.58
+  },
+  "Motherwell": {
+    "media_ht": 1.07,
+    "efic_xg": 1.18
+  },
+  "Málaga CF": {
+    "media_ht": 1.05,
+    "efic_xg": 0.95
+  },
+  "NAC Breda": {
+    "media_ht": 1.25,
+    "efic_xg": 1.08
+  },
+  "NEC": {
+    "media_ht": 1.58,
+    "efic_xg": 1.55
+  },
+  "NSÍ": {
+    "media_ht": 0.75,
+    "efic_xg": 0.55
+  },
+  "Nacional": {
+    "media_ht": 1.11,
+    "efic_xg": 0.88
+  },
+  "Nacional Asunción": {
+    "media_ht": 1.35,
+    "efic_xg": 0.94
+  },
+  "Nagoya Grampus": {
+    "media_ht": 0.74,
+    "efic_xg": 0.97
+  },
+  "Nantes": {
+    "media_ht": 1.18,
+    "efic_xg": 1.16
+  },
+  "Nantong Zhiyun": {
+    "media_ht": 0.82,
+    "efic_xg": 0.6
+  },
+  "Napoli": {
+    "media_ht": 1.11,
+    "efic_xg": 1.15
+  },
+  "Nashville SC": {
+    "media_ht": 1.29,
+    "efic_xg": 1.28
+  },
+  "National Bank of Egypt": {
+    "media_ht": 0.59,
+    "efic_xg": 0.68
+  },
+  "Necaxa": {
+    "media_ht": 1.18,
+    "efic_xg": 0.83
+  },
+  "Neftçi": {
+    "media_ht": 1.0,
+    "efic_xg": 1.14
+  },
+  "Neman Grodno": {
+    "media_ht": 0.67,
+    "efic_xg": 1.94
+  },
+  "Neom SC": {
+    "media_ht": 1.22,
+    "efic_xg": 0.8
+  },
+  "New England Revolution": {
+    "media_ht": 1.24,
+    "efic_xg": 1.14
+  },
+  "New York City": {
+    "media_ht": 1.3,
+    "efic_xg": 1.24
+  },
+  "New York RB": {
+    "media_ht": 1.28,
+    "efic_xg": 1.18
+  },
+  "Newcastle United": {
+    "media_ht": 1.21,
+    "efic_xg": 1.41
+  },
+  "Newell's Old Boys": {
+    "media_ht": 0.61,
+    "efic_xg": 0.74
+  },
+  "Nice": {
+    "media_ht": 1.19,
+    "efic_xg": 1.09
+  },
+  "Nordsjælland": {
+    "media_ht": 1.58,
+    "efic_xg": 1.3
+  },
+  "Norrköping": {
+    "media_ht": 1.26,
+    "efic_xg": 1.16
+  },
+  "Northampton Town": {
+    "media_ht": 0.85,
+    "efic_xg": 0.94
+  },
+  "Norwich City": {
+    "media_ht": 1.23,
+    "efic_xg": 1.15
+  },
+  "Nottingham Forest": {
+    "media_ht": 1.06,
+    "efic_xg": 0.99
+  },
+  "Notts County": {
+    "media_ht": 0.0,
+    "efic_xg": 0.65
+  },
+  "Novorizontino": {
+    "media_ht": 0.88,
+    "efic_xg": 0.81
+  },
+  "Náutico": {
+    "media_ht": 0.67,
+    "efic_xg": 0.39
+  },
+  "Nõmme Kalju": {
+    "media_ht": 0.0,
+    "efic_xg": 0.81
+  },
+  "Nürnberg": {
+    "media_ht": 1.16,
+    "efic_xg": 1.18
+  },
+  "O'Higgins": {
+    "media_ht": 0.91,
+    "efic_xg": 0.81
+  },
+  "OB": {
+    "media_ht": 1.83,
+    "efic_xg": 1.12
+  },
+  "OFI": {
+    "media_ht": 1.34,
+    "efic_xg": 1.25
+  },
+  "OH Leuven": {
+    "media_ht": 1.26,
+    "efic_xg": 1.16
+  },
+  "Odd": {
+    "media_ht": 1.04,
+    "efic_xg": 1.08
+  },
+  "Olimpia": {
+    "media_ht": 1.34,
+    "efic_xg": 1.15
+  },
+  "Olimpija": {
+    "media_ht": 0.86,
+    "efic_xg": 1.28
+  },
+  "Olympiakos Piraeus": {
+    "media_ht": 1.1,
+    "efic_xg": 1.15
+  },
+  "Olympique Lyonnais": {
+    "media_ht": 1.23,
+    "efic_xg": 1.05
+  },
+  "Olympique Marseille": {
+    "media_ht": 1.54,
+    "efic_xg": 1.54
+  },
+  "Omonia Nicosia": {
+    "media_ht": 1.37,
+    "efic_xg": 1.35
+  },
+  "Once Caldas": {
+    "media_ht": 1.22,
+    "efic_xg": 0.95
+  },
+  "Operário PR": {
+    "media_ht": 0.73,
+    "efic_xg": 0.76
+  },
+  "Ordabasy": {
+    "media_ht": 2.0,
+    "efic_xg": 1.18
+  },
+  "Orlando City": {
+    "media_ht": 1.34,
+    "efic_xg": 1.1
+  },
+  "Osijek": {
+    "media_ht": 1.25,
+    "efic_xg": 0.87
+  },
+  "Osnabrück": {
+    "media_ht": 1.52,
+    "efic_xg": 0.87
+  },
+  "Oss": {
+    "media_ht": 1.28,
+    "efic_xg": 1.13
+  },
+  "Oulu": {
+    "media_ht": 1.0,
+    "efic_xg": 1.05
+  },
+  "Oxford United": {
+    "media_ht": 1.12,
+    "efic_xg": 1.16
+  },
+  "PAOK": {
+    "media_ht": 1.02,
+    "efic_xg": 1.16
+  },
+  "PAS Giannina": {
+    "media_ht": 1.24,
+    "efic_xg": 0.85
+  },
+  "PEC Zwolle": {
+    "media_ht": 0.98,
+    "efic_xg": 0.94
+  },
+  "PSG": {
+    "media_ht": 1.29,
+    "efic_xg": 1.27
+  },
+  "PSV": {
+    "media_ht": 2.02,
+    "efic_xg": 1.34
+  },
+  "PSV II": {
+    "media_ht": 1.3,
+    "efic_xg": 1.02
+  },
+  "Pachuca": {
+    "media_ht": 1.22,
+    "efic_xg": 0.9
+  },
+  "Paderborn": {
+    "media_ht": 1.11,
+    "efic_xg": 1.14
+  },
+  "Paide": {
+    "media_ht": 1.2,
+    "efic_xg": 1.44
+  },
+  "Paksi SE": {
+    "media_ht": 0.5,
+    "efic_xg": 2.22
+  },
+  "Palermo": {
+    "media_ht": 0.98,
+    "efic_xg": 0.87
+  },
+  "Palestino": {
+    "media_ht": 1.06,
+    "efic_xg": 1.12
+  },
+  "Palmeiras": {
+    "media_ht": 1.24,
+    "efic_xg": 0.96
+  },
+  "Panaitolikos": {
+    "media_ht": 1.09,
+    "efic_xg": 0.92
+  },
+  "Panathinaikos": {
+    "media_ht": 1.08,
+    "efic_xg": 1.11
+  },
+  "Panevėžys": {
+    "media_ht": 1.0,
+    "efic_xg": 1.59
+  },
+  "Panserraikos": {
+    "media_ht": 1.31,
+    "efic_xg": 0.92
+  },
+  "Paphos": {
+    "media_ht": 0.84,
+    "efic_xg": 1.03
+  },
+  "Paris": {
+    "media_ht": 1.61,
+    "efic_xg": 1.07
+  },
+  "Parma": {
+    "media_ht": 0.96,
+    "efic_xg": 1.11
+  },
+  "Partizan": {
+    "media_ht": 1.88,
+    "efic_xg": 1.87
+  },
+  "Partizani Tirana": {
+    "media_ht": 1.83,
+    "efic_xg": 1.34
+  },
+  "Patriotas Boyacá": {
+    "media_ht": 0.7,
+    "efic_xg": 0.46
+  },
+  "Patronato": {
+    "media_ht": 1.0,
+    "efic_xg": 1.46
+  },
+  "Paysandu": {
+    "media_ht": 0.93,
+    "efic_xg": 0.66
+  },
+  "Pendikspor": {
+    "media_ht": 1.11,
+    "efic_xg": 0.93
+  },
+  "Pescara": {
+    "media_ht": 1.15,
+    "efic_xg": 0.93
+  },
+  "Peterborough United": {
+    "media_ht": 1.6,
+    "efic_xg": 1.15
+  },
+  "Petrocub": {
+    "media_ht": 1.6,
+    "efic_xg": 1.43
+  },
+  "Petrojet": {
+    "media_ht": 0.79,
+    "efic_xg": 0.73
+  },
+  "Peñarol": {
+    "media_ht": 1.21,
+    "efic_xg": 1.04
+  },
+  "Pharco": {
+    "media_ht": 1.0,
+    "efic_xg": 0.59
+  },
+  "Philadelphia Union": {
+    "media_ht": 1.31,
+    "efic_xg": 1.16
+  },
+  "Pisa": {
+    "media_ht": 0.92,
+    "efic_xg": 0.89
+  },
+  "Platense": {
+    "media_ht": 0.75,
+    "efic_xg": 0.69
+  },
+  "Plaza Colonia": {
+    "media_ht": 0.99,
+    "efic_xg": 0.51
+  },
+  "Plymouth Argyle": {
+    "media_ht": 1.25,
+    "efic_xg": 1.25
+  },
+  "Pogoń Szczecin": {
+    "media_ht": 1.0,
+    "efic_xg": 1.47
+  },
+  "Polessya": {
+    "media_ht": 2.75,
+    "efic_xg": 0.97
+  },
+  "Ponte Preta": {
+    "media_ht": 1.04,
+    "efic_xg": 0.82
+  },
+  "Port Vale": {
+    "media_ht": 0.79,
+    "efic_xg": 0.57
+  },
+  "Portimonense": {
+    "media_ht": 1.64,
+    "efic_xg": 0.85
+  },
+  "Portland Timbers": {
+    "media_ht": 1.71,
+    "efic_xg": 1.48
+  },
+  "Porto": {
+    "media_ht": 1.31,
+    "efic_xg": 1.34
+  },
+  "Portsmouth": {
+    "media_ht": 1.07,
+    "efic_xg": 0.82
+  },
+  "Preston North End": {
+    "media_ht": 1.04,
+    "efic_xg": 1.34
+  },
+  "Preußen Münster": {
+    "media_ht": 0.9,
+    "efic_xg": 0.98
+  },
+  "Progreso": {
+    "media_ht": 1.41,
+    "efic_xg": 0.95
+  },
+  "Progrès Niederkorn": {
+    "media_ht": 1.0,
+    "efic_xg": 1.06
+  },
+  "Puebla": {
+    "media_ht": 1.52,
+    "efic_xg": 1.02
+  },
+  "Pumas UNAM": {
+    "media_ht": 1.23,
+    "efic_xg": 1.01
+  },
+  "Puskás": {
+    "media_ht": 0.75,
+    "efic_xg": 0.57
+  },
+  "Pyramids FC": {
+    "media_ht": 0.97,
+    "efic_xg": 0.98
+  },
+  "Pyunik": {
+    "media_ht": 1.25,
+    "efic_xg": 1.21
+  },
+  "Qarabağ": {
+    "media_ht": 1.67,
+    "efic_xg": 1.15
+  },
+  "Qingdao Jonoon": {
+    "media_ht": 1.08,
+    "efic_xg": 1.04
+  },
+  "Qingdao Youth Island": {
+    "media_ht": 1.21,
+    "efic_xg": 1.09
+  },
+  "Queens Park Rangers": {
+    "media_ht": 1.2,
+    "efic_xg": 0.89
+  },
+  "Querétaro": {
+    "media_ht": 1.04,
+    "efic_xg": 0.9
+  },
+  "RAAL La Louvière": {
+    "media_ht": 0.93,
+    "efic_xg": 0.45
+  },
+  "RB Leipzig": {
+    "media_ht": 1.39,
+    "efic_xg": 1.43
+  },
+  "RCD Espanyol": {
+    "media_ht": 1.21,
+    "efic_xg": 1.38
+  },
+  "RCD Mallorca": {
+    "media_ht": 0.97,
+    "efic_xg": 0.78
+  },
+  "RKC Waalwijk": {
+    "media_ht": 1.27,
+    "efic_xg": 0.97
+  },
+  "RSC Anderlecht": {
+    "media_ht": 1.07,
+    "efic_xg": 1.11
+  },
+  "RWDM": {
+    "media_ht": 1.83,
+    "efic_xg": 0.84
+  },
+  "Racing": {
+    "media_ht": 0.89,
+    "efic_xg": 0.73
+  },
+  "Racing Club": {
+    "media_ht": 1.09,
+    "efic_xg": 1.01
+  },
+  "Racing Club de Ferrol": {
+    "media_ht": 0.58,
+    "efic_xg": 0.92
+  },
+  "Racing Santander": {
+    "media_ht": 1.56,
+    "efic_xg": 1.43
+  },
+  "Raków Częstochowa": {
+    "media_ht": 0.44,
+    "efic_xg": 0.86
+  },
+  "Rampla Juniors": {
+    "media_ht": 0.91,
+    "efic_xg": 0.92
+  },
+  "Randers": {
+    "media_ht": 1.58,
+    "efic_xg": 1.08
+  },
+  "Rangers": {
+    "media_ht": 1.32,
+    "efic_xg": 1.01
+  },
+  "Rapid Wien": {
+    "media_ht": 1.47,
+    "efic_xg": 1.04
+  },
+  "Rayo Vallecano": {
+    "media_ht": 1.08,
+    "efic_xg": 0.83
+  },
+  "Reading": {
+    "media_ht": 1.14,
+    "efic_xg": 1.19
+  },
+  "Real Betis": {
+    "media_ht": 1.17,
+    "efic_xg": 0.96
+  },
+  "Real Garcilaso": {
+    "media_ht": 0.86,
+    "efic_xg": 1.14
+  },
+  "Real Madrid": {
+    "media_ht": 1.17,
+    "efic_xg": 1.22
+  },
+  "Real Oviedo": {
+    "media_ht": 0.94,
+    "efic_xg": 0.85
+  },
+  "Real Salt Lake": {
+    "media_ht": 1.5,
+    "efic_xg": 1.07
+  },
+  "Real Sociedad": {
+    "media_ht": 1.25,
+    "efic_xg": 1.16
+  },
+  "Real Sociedad II": {
+    "media_ht": 1.32,
+    "efic_xg": 1.45
+  },
+  "Real Valladolid": {
+    "media_ht": 0.85,
+    "efic_xg": 0.85
+  },
+  "Real Zaragoza": {
+    "media_ht": 0.91,
+    "efic_xg": 0.86
+  },
+  "Red Star Belgrade": {
+    "media_ht": 1.33,
+    "efic_xg": 1.33
+  },
+  "Reggiana": {
+    "media_ht": 1.18,
+    "efic_xg": 1.04
+  },
+  "Reims": {
+    "media_ht": 1.3,
+    "efic_xg": 1.05
+  },
+  "Remo": {
+    "media_ht": 1.24,
+    "efic_xg": 1.02
+  },
+  "Rennes": {
+    "media_ht": 1.45,
+    "efic_xg": 1.26
+  },
+  "Resistencia": {
+    "media_ht": 1.12,
+    "efic_xg": 0.45
+  },
+  "Rheindorf Altach": {
+    "media_ht": 0.88,
+    "efic_xg": 0.84
+  },
+  "Ried": {
+    "media_ht": 1.45,
+    "efic_xg": 0.86
+  },
+  "Riga": {
+    "media_ht": 0.92,
+    "efic_xg": 0.96
+  },
+  "Rijeka": {
+    "media_ht": 1.26,
+    "efic_xg": 1.17
+  },
+  "Rio Ave FC": {
+    "media_ht": 1.27,
+    "efic_xg": 1.19
+  },
+  "Rionegro Águilas": {
+    "media_ht": 1.06,
+    "efic_xg": 0.93
+  },
+  "River Plate": {
+    "media_ht": 1.18,
+    "efic_xg": 0.91
+  },
+  "Rizespor": {
+    "media_ht": 0.98,
+    "efic_xg": 0.83
+  },
+  "Roda JC": {
+    "media_ht": 1.18,
+    "efic_xg": 0.97
+  },
+  "Roma": {
+    "media_ht": 1.06,
+    "efic_xg": 1.28
+  },
+  "Rosario Central": {
+    "media_ht": 1.05,
+    "efic_xg": 1.01
+  },
+  "Rosenborg": {
+    "media_ht": 0.98,
+    "efic_xg": 0.96
+  },
+  "Ross County": {
+    "media_ht": 0.85,
+    "efic_xg": 0.77
+  },
+  "Rotherham United": {
+    "media_ht": 0.99,
+    "efic_xg": 1.07
+  },
+  "Royal Antwerp FC": {
+    "media_ht": 1.44,
+    "efic_xg": 1.28
+  },
+  "Rubio Ñú": {
+    "media_ht": 0.87,
+    "efic_xg": 0.72
+  },
+  "Rudeš": {
+    "media_ht": 2.05,
+    "efic_xg": 0.85
+  },
+  "Ružomberok": {
+    "media_ht": 2.5,
+    "efic_xg": 1.6
+  },
+  "Rīgas FS": {
+    "media_ht": 2.15,
+    "efic_xg": 2.62
+  },
+  "SD Amorebieta": {
+    "media_ht": 1.03,
+    "efic_xg": 1.26
+  },
+  "SD Aucas": {
+    "media_ht": 1.0,
+    "efic_xg": 1.24
+  },
+  "SD Eibar": {
+    "media_ht": 1.03,
+    "efic_xg": 1.04
+  },
+  "SD Huesca": {
+    "media_ht": 1.01,
+    "efic_xg": 1.04
+  },
+  "SJ Earthquakes": {
+    "media_ht": 1.42,
+    "efic_xg": 1.12
+  },
+  "SJK": {
+    "media_ht": 1.18,
+    "efic_xg": 1.08
+  },
+  "SSC Farul": {
+    "media_ht": 3.0,
+    "efic_xg": 1.21
+  },
+  "Sabah": {
+    "media_ht": 1.14,
+    "efic_xg": 1.21
+  },
+  "Saburtalo": {
+    "media_ht": 1.0,
+    "efic_xg": 1.27
+  },
+  "Sagan Tosu": {
+    "media_ht": 1.43,
+    "efic_xg": 1.02
+  },
+  "Saint-Étienne": {
+    "media_ht": 0.79,
+    "efic_xg": 0.89
+  },
+  "Salernitana": {
+    "media_ht": 1.19,
+    "efic_xg": 0.82
+  },
+  "Salzburg": {
+    "media_ht": 1.17,
+    "efic_xg": 1.04
+  },
+  "Sampaio Corrêa": {
+    "media_ht": 1.33,
+    "efic_xg": 0.91
+  },
+  "Sampdoria": {
+    "media_ht": 0.75,
+    "efic_xg": 0.61
+  },
+  "Samsunspor": {
+    "media_ht": 1.09,
+    "efic_xg": 0.98
+  },
+  "San Antonio Bulo Bulo": {
+    "media_ht": 1.0,
+    "efic_xg": 1.92
+  },
+  "San Diego": {
+    "media_ht": 1.64,
+    "efic_xg": 1.34
+  },
+  "San Lorenzo": {
+    "media_ht": 0.68,
+    "efic_xg": 0.77
+  },
+  "San Martín San Juan": {
+    "media_ht": 0.53,
+    "efic_xg": 0.32
+  },
+  "Sandefjord": {
+    "media_ht": 1.26,
+    "efic_xg": 1.13
+  },
+  "Sanfrecce Hiroshima": {
+    "media_ht": 0.78,
+    "efic_xg": 0.81
+  },
+  "Santa Clara": {
+    "media_ht": 1.13,
+    "efic_xg": 0.68
+  },
+  "Santa Fe": {
+    "media_ht": 1.15,
+    "efic_xg": 1.04
+  },
+  "Santos": {
+    "media_ht": 1.17,
+    "efic_xg": 1.13
+  },
+  "Santos Laguna": {
+    "media_ht": 0.96,
+    "efic_xg": 1.03
+  },
+  "Sarajevo": {
+    "media_ht": 1.0,
+    "efic_xg": 0.86
+  },
+  "Sarmiento": {
+    "media_ht": 0.87,
+    "efic_xg": 0.71
+  },
+  "Sarpsborg 08": {
+    "media_ht": 1.52,
+    "efic_xg": 0.77
+  },
+  "Sassuolo": {
+    "media_ht": 1.32,
+    "efic_xg": 1.12
+  },
+  "Schalke 04": {
+    "media_ht": 1.61,
+    "efic_xg": 1.31
+  },
+  "Seattle Sounders": {
+    "media_ht": 1.09,
+    "efic_xg": 1.07
+  },
+  "Sepsi": {
+    "media_ht": 0.75,
+    "efic_xg": 2.05
+  },
+  "Servette": {
+    "media_ht": 0.75,
+    "efic_xg": 0.22
+  },
+  "Sevilla FC": {
+    "media_ht": 1.14,
+    "efic_xg": 0.87
+  },
+  "Shakhtar Donetsk": {
+    "media_ht": 1.79,
+    "efic_xg": 1.09
+  },
+  "Shamrock Rovers": {
+    "media_ht": 1.11,
+    "efic_xg": 1.21
+  },
+  "Shandong Luneng": {
+    "media_ht": 1.45,
+    "efic_xg": 1.15
+  },
+  "Shanghai SIPG": {
+    "media_ht": 1.45,
+    "efic_xg": 1.27
+  },
+  "Shanghai Shenhua": {
+    "media_ht": 1.72,
+    "efic_xg": 1.16
+  },
+  "Sheffield United": {
+    "media_ht": 1.19,
+    "efic_xg": 0.87
+  },
+  "Sheffield Wednesday": {
+    "media_ht": 1.09,
+    "efic_xg": 0.66
+  },
+  "Shelbourne": {
+    "media_ht": 1.31,
+    "efic_xg": 1.19
+  },
+  "Shenyang Urban": {
+    "media_ht": 1.03,
+    "efic_xg": 1.17
+  },
+  "Shenzhen": {
+    "media_ht": 1.46,
+    "efic_xg": 1.4
+  },
+  "Sheriff": {
+    "media_ht": 1.27,
+    "efic_xg": 1.44
+  },
+  "Shijiazhuang Ever Bright": {
+    "media_ht": 0.98,
+    "efic_xg": 0.96
+  },
+  "Shimizu S-Pulse": {
+    "media_ht": 1.12,
+    "efic_xg": 1.09
+  },
+  "Shkendija": {
+    "media_ht": 0.67,
+    "efic_xg": 0.95
+  },
+  "Shkupi": {
+    "media_ht": 0.0,
+    "efic_xg": 0.0
+  },
+  "Shonan Bellmare": {
+    "media_ht": 1.37,
+    "efic_xg": 0.94
+  },
+  "Shrewsbury Town": {
+    "media_ht": 0.88,
+    "efic_xg": 1.01
+  },
+  "Sichuan Jiuniu": {
+    "media_ht": 1.62,
+    "efic_xg": 1.11
+  },
+  "Sigma Olomouc": {
+    "media_ht": 1.17,
+    "efic_xg": 0.92
+  },
+  "Silkeborg": {
+    "media_ht": 1.46,
+    "efic_xg": 1.25
+  },
+  "Sint-Truiden": {
+    "media_ht": 1.15,
+    "efic_xg": 1.0
+  },
+  "Sion": {
+    "media_ht": 1.75,
+    "efic_xg": 1.8
+  },
+  "Sirius": {
+    "media_ht": 1.37,
+    "efic_xg": 1.03
+  },
+  "Sivasspor": {
+    "media_ht": 1.2,
+    "efic_xg": 0.95
+  },
+  "Slaven Koprivnica": {
+    "media_ht": 1.58,
+    "efic_xg": 1.03
+  },
+  "Slavia Praha": {
+    "media_ht": 1.38,
+    "efic_xg": 1.12
+  },
+  "Slovan Bratislava": {
+    "media_ht": 1.37,
+    "efic_xg": 1.83
+  },
+  "Smouha SC": {
+    "media_ht": 1.08,
+    "efic_xg": 0.74
+  },
+  "Sol de América": {
+    "media_ht": 1.58,
+    "efic_xg": 0.99
+  },
+  "Southampton": {
+    "media_ht": 1.59,
+    "efic_xg": 0.99
+  },
+  "Sparta Praha": {
+    "media_ht": 1.47,
+    "efic_xg": 1.27
+  },
+  "Sparta Rotterdam": {
+    "media_ht": 0.97,
+    "efic_xg": 0.78
+  },
+  "Spartak Trnava": {
+    "media_ht": 1.9,
+    "efic_xg": 2.13
+  },
+  "Spezia": {
+    "media_ht": 1.02,
+    "efic_xg": 0.73
+  },
+  "Sport Boys": {
+    "media_ht": 1.09,
+    "efic_xg": 0.9
+  },
+  "Sport Huancayo": {
+    "media_ht": 1.18,
+    "efic_xg": 0.96
+  },
+  "Sport Recife": {
+    "media_ht": 1.19,
+    "efic_xg": 1.15
+  },
+  "Sporting Braga": {
+    "media_ht": 1.24,
+    "efic_xg": 1.26
+  },
+  "Sporting CP": {
+    "media_ht": 1.48,
+    "efic_xg": 1.49
+  },
+  "Sporting Charleroi": {
+    "media_ht": 1.06,
+    "efic_xg": 0.97
+  },
+  "Sporting Cristal": {
+    "media_ht": 1.19,
+    "efic_xg": 1.31
+  },
+  "Sporting Gijón": {
+    "media_ht": 1.25,
+    "efic_xg": 1.17
+  },
+  "Sporting KC": {
+    "media_ht": 1.65,
+    "efic_xg": 1.25
+  },
+  "Sportivo Ameliano": {
+    "media_ht": 0.95,
+    "efic_xg": 0.94
+  },
+  "Sportivo Luqueño": {
+    "media_ht": 0.91,
+    "efic_xg": 0.82
+  },
+  "Sportivo San Lorenzo": {
+    "media_ht": 1.04,
+    "efic_xg": 0.53
+  },
+  "Sportivo Trinidense": {
+    "media_ht": 0.91,
+    "efic_xg": 1.06
+  },
+  "St Joseph's": {
+    "media_ht": 1.0,
+    "efic_xg": 1.01
+  },
+  "St Patrick's Athl.": {
+    "media_ht": 0.88,
+    "efic_xg": 1.14
+  },
+  "St. Gallen": {
+    "media_ht": 1.07,
+    "efic_xg": 1.37
+  },
+  "St. Johnstone": {
+    "media_ht": 1.03,
+    "efic_xg": 0.92
+  },
+  "St. Louis City": {
+    "media_ht": 1.11,
+    "efic_xg": 1.04
+  },
+  "St. Mirren": {
+    "media_ht": 1.0,
+    "efic_xg": 1.0
+  },
+  "St. Pauli": {
+    "media_ht": 0.9,
+    "efic_xg": 0.77
+  },
+  "Stabæk": {
+    "media_ht": 0.69,
+    "efic_xg": 0.78
+  },
+  "Standard Liège": {
+    "media_ht": 0.79,
+    "efic_xg": 0.79
+  },
+  "Start": {
+    "media_ht": 1.37,
+    "efic_xg": 0.67
+  },
+  "Stevenage": {
+    "media_ht": 0.75,
+    "efic_xg": 0.99
+  },
+  "Stjarnan": {
+    "media_ht": 1.5,
+    "efic_xg": 1.34
+  },
+  "Stockport County": {
+    "media_ht": 1.22,
+    "efic_xg": 1.04
+  },
+  "Stoke City": {
+    "media_ht": 1.12,
+    "efic_xg": 1.02
+  },
+  "Strasbourg": {
+    "media_ht": 0.77,
+    "efic_xg": 1.31
+  },
+  "Struga": {
+    "media_ht": 1.25,
+    "efic_xg": 0.86
+  },
+  "Strømsgodset": {
+    "media_ht": 1.14,
+    "efic_xg": 0.72
+  },
+  "Sturm Graz": {
+    "media_ht": 1.09,
+    "efic_xg": 1.03
+  },
+  "Stuttgart": {
+    "media_ht": 1.45,
+    "efic_xg": 1.31
+  },
+  "Sunderland": {
+    "media_ht": 1.16,
+    "efic_xg": 1.4
+  },
+  "Sutjeska": {
+    "media_ht": 0.5,
+    "efic_xg": 0.53
+  },
+  "Swansea City": {
+    "media_ht": 1.17,
+    "efic_xg": 1.01
+  },
+  "Swift Hesperange": {
+    "media_ht": 2.0,
+    "efic_xg": 1.48
+  },
+  "São Bernardo": {
+    "media_ht": 1.01,
+    "efic_xg": 0.71
+  },
+  "São Paulo": {
+    "media_ht": 0.91,
+    "efic_xg": 1.08
+  },
+  "SønderjyskE": {
+    "media_ht": 1.61,
+    "efic_xg": 1.18
+  },
+  "Südtirol": {
+    "media_ht": 1.34,
+    "efic_xg": 1.2
+  },
+  "TPS": {
+    "media_ht": 0.88,
+    "efic_xg": 1.24
+  },
+  "Tacuary": {
+    "media_ht": 1.19,
+    "efic_xg": 0.96
+  },
+  "Talleres Córdoba": {
+    "media_ht": 0.93,
+    "efic_xg": 0.88
+  },
+  "Tallinna FC Flora": {
+    "media_ht": 1.0,
+    "efic_xg": 1.21
+  },
+  "Tallinna FC Levadia": {
+    "media_ht": 1.0,
+    "efic_xg": 0.75
+  },
+  "Telstar": {
+    "media_ht": 1.37,
+    "efic_xg": 0.87
+  },
+  "Ternana": {
+    "media_ht": 0.69,
+    "efic_xg": 0.71
+  },
+  "The New Saints": {
+    "media_ht": 1.04,
+    "efic_xg": 0.26
+  },
+  "The Strongest": {
+    "media_ht": 1.3,
+    "efic_xg": 1.33
+  },
+  "Thun": {
+    "media_ht": 2.0,
+    "efic_xg": 1.18
+  },
+  "Tianjin Teda": {
+    "media_ht": 0.99,
+    "efic_xg": 0.98
+  },
+  "Tigre": {
+    "media_ht": 1.04,
+    "efic_xg": 0.81
+  },
+  "Tigres UANL": {
+    "media_ht": 0.98,
+    "efic_xg": 1.15
+  },
+  "Tijuana": {
+    "media_ht": 1.39,
+    "efic_xg": 1.43
+  },
+  "Tirana": {
+    "media_ht": 0.0,
+    "efic_xg": 0.6
+  },
+  "Tobol": {
+    "media_ht": 1.58,
+    "efic_xg": 0.68
+  },
+  "Tokyo": {
+    "media_ht": 1.0,
+    "efic_xg": 1.12
+  },
+  "Tokyo Verdy": {
+    "media_ht": 1.02,
+    "efic_xg": 0.88
+  },
+  "Toluca": {
+    "media_ht": 1.73,
+    "efic_xg": 1.5
+  },
+  "Tombense": {
+    "media_ht": 0.75,
+    "efic_xg": 0.82
+  },
+  "Torino": {
+    "media_ht": 0.86,
+    "efic_xg": 0.71
+  },
+  "Toronto": {
+    "media_ht": 0.86,
+    "efic_xg": 1.13
+  },
+  "Torpedo BelAZ": {
+    "media_ht": 1.0,
+    "efic_xg": 1.56
+  },
+  "Torpedo Kutaisi": {
+    "media_ht": 2.0,
+    "efic_xg": 1.28
+  },
+  "Torque": {
+    "media_ht": 1.31,
+    "efic_xg": 0.74
+  },
+  "Tottenham Hotspur": {
+    "media_ht": 1.26,
+    "efic_xg": 1.18
+  },
+  "Toulouse": {
+    "media_ht": 1.03,
+    "efic_xg": 1.15
+  },
+  "Trabzonspor": {
+    "media_ht": 1.25,
+    "efic_xg": 1.28
+  },
+  "Tromsø": {
+    "media_ht": 0.99,
+    "efic_xg": 1.13
+  },
+  "Troyes": {
+    "media_ht": 0.0,
+    "efic_xg": 0.0
+  },
+  "Twente": {
+    "media_ht": 1.19,
+    "efic_xg": 0.98
+  },
+  "UCV": {
+    "media_ht": 1.0,
+    "efic_xg": 1.57
+  },
+  "UCV Moquegua": {
+    "media_ht": 1.0,
+    "efic_xg": 1.74
+  },
+  "UD Las Palmas": {
+    "media_ht": 0.99,
+    "efic_xg": 1.09
+  },
+  "UE Santa Coloma": {
+    "media_ht": 2.0,
+    "efic_xg": 0.78
+  },
+  "UNA Strassen": {
+    "media_ht": 0.0,
+    "efic_xg": 0.39
+  },
+  "UTC Cajamarca": {
+    "media_ht": 0.84,
+    "efic_xg": 0.84
+  },
+  "Udinese": {
+    "media_ht": 1.13,
+    "efic_xg": 0.96
+  },
+  "Ulm": {
+    "media_ht": 0.66,
+    "efic_xg": 0.85
+  },
+  "Union Berlin": {
+    "media_ht": 1.4,
+    "efic_xg": 1.11
+  },
+  "Union Saint-Gilloise": {
+    "media_ht": 1.34,
+    "efic_xg": 1.21
+  },
+  "Univ. Concepción": {
+    "media_ht": 0.68,
+    "efic_xg": 0.7
+  },
+  "Universidad Católica": {
+    "media_ht": 1.6,
+    "efic_xg": 1.3
+  },
+  "Universidad Chile": {
+    "media_ht": 0.99,
+    "efic_xg": 1.08
+  },
+  "Universitario": {
+    "media_ht": 0.99,
+    "efic_xg": 1.32
+  },
+  "Unión Comercio": {
+    "media_ht": 1.2,
+    "efic_xg": 1.22
+  },
+  "Unión Española": {
+    "media_ht": 1.27,
+    "efic_xg": 0.96
+  },
+  "Unión La Calera": {
+    "media_ht": 1.14,
+    "efic_xg": 1.11
+  },
+  "Unión Magdalena": {
+    "media_ht": 0.59,
+    "efic_xg": 0.79
+  },
+  "Unión Santa Fe": {
+    "media_ht": 0.76,
+    "efic_xg": 0.62
+  },
+  "Urawa Reds": {
+    "media_ht": 0.99,
+    "efic_xg": 1.19
+  },
+  "Utrecht": {
+    "media_ht": 1.14,
+    "efic_xg": 1.16
+  },
+  "Utrecht II": {
+    "media_ht": 1.26,
+    "efic_xg": 0.96
+  },
+  "V-Varen Nagasaki": {
+    "media_ht": 2.0,
+    "efic_xg": 0.89
+  },
+  "VPS": {
+    "media_ht": 0.96,
+    "efic_xg": 0.82
+  },
+  "VVV": {
+    "media_ht": 1.03,
+    "efic_xg": 0.87
+  },
+  "Vaduz": {
+    "media_ht": 0.5,
+    "efic_xg": 0.77
+  },
+  "Valencia CF": {
+    "media_ht": 0.86,
+    "efic_xg": 1.09
+  },
+  "Valmiera / BSS": {
+    "media_ht": 4.0,
+    "efic_xg": 3.11
+  },
+  "Valur": {
+    "media_ht": 1.67,
+    "efic_xg": 1.48
+  },
+  "Vancouver Whitecaps": {
+    "media_ht": 1.57,
+    "efic_xg": 1.18
+  },
+  "Varaždin": {
+    "media_ht": 0.94,
+    "efic_xg": 0.91
+  },
+  "Varberg": {
+    "media_ht": 0.89,
+    "efic_xg": 0.32
+  },
+  "Vardar": {
+    "media_ht": 0.0,
+    "efic_xg": 1.13
+  },
+  "Vasco da Gama": {
+    "media_ht": 1.19,
+    "efic_xg": 0.97
+  },
+  "Vejle": {
+    "media_ht": 0.98,
+    "efic_xg": 1.09
+  },
+  "Velež": {
+    "media_ht": 0.0,
+    "efic_xg": 0.66
+  },
+  "Venezia": {
+    "media_ht": 1.31,
+    "efic_xg": 1.17
+  },
+  "Viborg": {
+    "media_ht": 1.86,
+    "efic_xg": 1.52
+  },
+  "Videoton": {
+    "media_ht": 0.0,
+    "efic_xg": 0.0
+  },
+  "Viking": {
+    "media_ht": 1.51,
+    "efic_xg": 1.47
+  },
+  "Viktoria Plzeň": {
+    "media_ht": 0.67,
+    "efic_xg": 0.83
+  },
+  "Vila Nova": {
+    "media_ht": 0.95,
+    "efic_xg": 1.07
+  },
+  "Villarreal": {
+    "media_ht": 1.77,
+    "efic_xg": 1.24
+  },
+  "Villarreal II": {
+    "media_ht": 1.56,
+    "efic_xg": 1.09
+  },
+  "Virtus": {
+    "media_ht": 0.0,
+    "efic_xg": 1.89
+  },
+  "Virtus Entella": {
+    "media_ht": 0.78,
+    "efic_xg": 0.86
+  },
+  "Vissel Kobe": {
+    "media_ht": 0.86,
+    "efic_xg": 0.84
+  },
+  "Vitesse": {
+    "media_ht": 1.31,
+    "efic_xg": 0.92
+  },
+  "Vitória": {
+    "media_ht": 1.02,
+    "efic_xg": 1.09
+  },
+  "Vitória Guimarães": {
+    "media_ht": 1.23,
+    "efic_xg": 1.28
+  },
+  "Vllaznia Shkodër": {
+    "media_ht": 0.0,
+    "efic_xg": 0.0
+  },
+  "Volendam": {
+    "media_ht": 1.34,
+    "efic_xg": 1.13
+  },
+  "Volos NFC": {
+    "media_ht": 0.98,
+    "efic_xg": 0.83
+  },
+  "Volta Redonda": {
+    "media_ht": 0.55,
+    "efic_xg": 0.43
+  },
+  "Värnamo": {
+    "media_ht": 1.28,
+    "efic_xg": 0.68
+  },
+  "Västerås SK": {
+    "media_ht": 1.24,
+    "efic_xg": 0.78
+  },
+  "Vålerenga": {
+    "media_ht": 1.47,
+    "efic_xg": 0.92
+  },
+  "Vélez Sarsfield": {
+    "media_ht": 0.74,
+    "efic_xg": 0.92
+  },
+  "Víkingur": {
+    "media_ht": 2.0,
+    "efic_xg": 1.59
+  },
+  "Víkingur Reykjavík": {
+    "media_ht": 1.86,
+    "efic_xg": 1.38
+  },
+  "Waasland-Beveren": {
+    "media_ht": 1.0,
+    "efic_xg": 0.92
+  },
+  "Wadi Degla": {
+    "media_ht": 0.79,
+    "efic_xg": 0.64
+  },
+  "Wanderers": {
+    "media_ht": 0.87,
+    "efic_xg": 0.51
+  },
+  "Watford": {
+    "media_ht": 1.39,
+    "efic_xg": 1.1
+  },
+  "Wattens": {
+    "media_ht": 1.34,
+    "efic_xg": 0.99
+  },
+  "Wehen Wiesbaden": {
+    "media_ht": 0.75,
+    "efic_xg": 1.15
+  },
+  "Werder Bremen": {
+    "media_ht": 1.38,
+    "efic_xg": 0.94
+  },
+  "West Bromwich Albion": {
+    "media_ht": 0.94,
+    "efic_xg": 1.01
+  },
+  "West Ham United": {
+    "media_ht": 1.62,
+    "efic_xg": 1.15
+  },
+  "Wigan Athletic": {
+    "media_ht": 1.03,
+    "efic_xg": 0.99
+  },
+  "Willem II": {
+    "media_ht": 1.08,
+    "efic_xg": 1.33
+  },
+  "Wisła Kraków": {
+    "media_ht": 1.0,
+    "efic_xg": 1.14
+  },
+  "Wolfsberger AC": {
+    "media_ht": 1.1,
+    "efic_xg": 1.09
+  },
+  "Wolfsburg": {
+    "media_ht": 1.51,
+    "efic_xg": 1.34
+  },
+  "Wolverhampton Wanderers": {
+    "media_ht": 1.62,
+    "efic_xg": 1.28
+  },
+  "Wrexham": {
+    "media_ht": 1.5,
+    "efic_xg": 1.37
+  },
+  "Wuhan Three Towns": {
+    "media_ht": 1.33,
+    "efic_xg": 0.76
+  },
+  "Wycombe Wanderers": {
+    "media_ht": 1.19,
+    "efic_xg": 1.1
+  },
+  "Yokohama": {
+    "media_ht": 0.87,
+    "efic_xg": 0.75
+  },
+  "Yokohama F. Marinos": {
+    "media_ht": 1.05,
+    "efic_xg": 1.11
+  },
+  "Young Boys": {
+    "media_ht": 2.24,
+    "efic_xg": 1.8
+  },
+  "Yunnan Yukun": {
+    "media_ht": 1.45,
+    "efic_xg": 1.13
+  },
+  "Zamalek": {
+    "media_ht": 1.02,
+    "efic_xg": 1.12
+  },
+  "Zhejiang FC": {
+    "media_ht": 1.22,
+    "efic_xg": 1.11
+  },
+  "Zimbru": {
+    "media_ht": 1.0,
+    "efic_xg": 0.94
+  },
+  "Zira": {
+    "media_ht": 1.5,
+    "efic_xg": 2.14
+  },
+  "Zorya": {
+    "media_ht": 0.75,
+    "efic_xg": 1.66
+  },
+  "Zrinjski": {
+    "media_ht": 2.02,
+    "efic_xg": 1.56
+  },
+  "Zulte-Waregem": {
+    "media_ht": 0.96,
+    "efic_xg": 0.78
+  },
+  "Zürich": {
+    "media_ht": 2.0,
+    "efic_xg": 1.11
+  },
+  "Çorum Belediyespor": {
+    "media_ht": 1.0,
+    "efic_xg": 0.0
+  },
+  "Ñublense": {
+    "media_ht": 0.91,
+    "efic_xg": 0.85
+  },
+  "Örgryte": {
+    "media_ht": 0.9,
+    "efic_xg": 1.03
+  },
+  "Öster": {
+    "media_ht": 0.84,
+    "efic_xg": 0.69
+  },
+  "Čukarički": {
+    "media_ht": 1.75,
+    "efic_xg": 0.0
+  },
+  "İstanbul Başakşehir": {
+    "media_ht": 1.53,
+    "efic_xg": 1.37
+  },
+  "İstanbulspor": {
+    "media_ht": 0.99,
+    "efic_xg": 0.88
+  },
+  "Śląsk Wrocław": {
+    "media_ht": 2.0,
+    "efic_xg": 2.22
+  },
+  "Šibenik": {
+    "media_ht": 0.98,
+    "efic_xg": 0.65
+  },
+  "Žalgiris": {
+    "media_ht": 0.5,
+    "efic_xg": 0.95
+  },
+  "Željezničar": {
+    "media_ht": 1.0,
+    "efic_xg": 0.0
+  },
+  "Žilina": {
+    "media_ht": 1.0,
+    "efic_xg": 1.18
+  }
+}
