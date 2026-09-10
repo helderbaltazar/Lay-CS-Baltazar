@@ -144,8 +144,14 @@ def mark_injection_completed():
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     today_str = now_br.strftime("%Y-%m-%d")
     key = f"injection_completed_{today_str}"
-    db.add(SystemConfig(key=key, value="true"))
-    db.commit()
+    flag = db.query(SystemConfig).filter(SystemConfig.key == key).first()
+    if not flag:
+        db.add(SystemConfig(key=key, value="true"))
+        try:
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            print(f"Erro ao marcar injeção como completada: {e}")
     db.close()
 
 def ensure_data_in_db():
@@ -172,8 +178,8 @@ def ensure_data_in_db():
                 Prediction.ai_confidence.is_(None)
             ).all()
             if unanalysed:
-                # Top 10 por mercado — plano pago Gemini, cobre todos os jogos relevantes do dashboard
-                AI_TOP_N_PER_MARKET = 10
+                # Top 15 por mercado — plano pago Gemini, cobre todos os jogos relevantes do dashboard
+                AI_TOP_N_PER_MARKET = 15
                 from collections import defaultdict
                 per_market = defaultdict(list)
                 for p in unanalysed:
@@ -284,6 +290,7 @@ def inject_from_db():
             preds = db.query(Prediction).join(Match).filter(
                 Prediction.target_score == target,
                 Prediction.power_score >= threshold,
+                Prediction.ai_verdict != 'REPROVADO',
                 Match.date >= today_start
             ).order_by(
                 Prediction.power_score.desc().nullslast(),
@@ -293,6 +300,7 @@ def inject_from_db():
             preds = db.query(Prediction).join(Match).filter(
                 Prediction.target_score == target,
                 Prediction.power_score >= threshold,
+                Prediction.ai_verdict != 'REPROVADO',
                 or_(Prediction.match_odd == None, Prediction.match_odd <= 2.0),
                 Match.date >= today_start
             ).order_by(
