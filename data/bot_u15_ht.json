@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "betOnNewTeam": true,
+  "teams": [
+    {
+      "name": "Newell's Old Boy's (W)",
+      "id": "6248582",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Velez Sarsfield",
+      "id": "1316640",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Newell's Old Boy's (W)",
+      "id": "6248582",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Velez Sarsfield",
+      "id": "1316640",
+      "checked": true,
+      "side": "A"
+    }
+  ]
+}

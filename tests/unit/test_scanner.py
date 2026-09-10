@@ -26,15 +26,18 @@ def test_calculate_lambdas_with_smoothing(mock_xg, mock_elo):
     assert lam_home > 0
     assert lam_away > 0
 
-def test_rank_by_target():
+@patch('analysis.ai_analyst.AIAnalyst.analyze_top_rankings', side_effect=lambda x, top_n=None: x)
+def test_rank_by_target(mock_ai):
+    from data.sportapi7 import SportAPI7
+    SportAPI7.extract_smart_money_signals = lambda: {}
     from analysis.scanner import rank_by_target
     extra_markets_dict = {
         "OVER_2.5": 0.5, "UNDER_2.5": 0.5, "UNDER_3.5": 0.5, "UNDER_4.5": 0.5, 
         "BTTS_YES": 0.5, "BACK_HOME": 0.5, "LAY_DRAW": 0.5, "UNDER_0.5_HT": 0.5, "UNDER_1.5_HT": 0.5, "UNDER_2.5_HT": 0.5
     }
     results = [
-        {'fixture_id': 1, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'A', 'away': 'B', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.10, '0-2': 0.10, '0-3': 0.10, '1-3': 0.10}, 'extra_probabilities': extra_markets_dict},
-        {'fixture_id': 2, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'C', 'away': 'D', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.05, '0-2': 0.05, '0-3': 0.05, '1-3': 0.05}, 'extra_probabilities': extra_markets_dict}
+        {'fixture_id': 1, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'A', 'away': 'B', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.10, '0-2': 0.10, '0-3': 0.10, '1-3': 0.10, 'UNDER_0.5_HT': 0.10, 'UNDER_1.5_HT': 0.10, 'UNDER_2.5_HT': 0.10}, 'extra_probabilities': extra_markets_dict},
+        {'fixture_id': 2, 'date': '2026-08-25', 'status': 'NS', 'league': 'L', 'home': 'C', 'away': 'D', 'lambda_home': 1, 'lambda_away': 1, 'probabilities': {'0-1': 0.05, '0-2': 0.05, '0-3': 0.05, '1-3': 0.05, 'UNDER_0.5_HT': 0.05, 'UNDER_1.5_HT': 0.05, 'UNDER_2.5_HT': 0.05}, 'extra_probabilities': extra_markets_dict}
     ]
     
     class DummyModel:
@@ -55,7 +58,10 @@ def test_rank_by_target():
 
 @patch("analysis.scanner.get_league_form_elo")
 @patch("analysis.scanner.get_team_xg")
-def test_scan_match_real_score(mock_xg, mock_elo):
+@patch('analysis.odds_fetcher.fetch_odds_cascade', return_value=(2.10, 1.85, 'Odds-API'))
+@patch('analysis.odds_fetcher.fetch_h2h', return_value=(0.5, 0.5))
+@patch('analysis.odds_fetcher.fetch_must_win', return_value=True)
+def test_scan_match_real_score(mock_must_win, mock_h2h, mock_cascade, mock_xg, mock_elo):
     from analysis.scanner import scan_match
     import data.api_football
     import data.league_config

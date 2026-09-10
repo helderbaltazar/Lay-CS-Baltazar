@@ -1,0 +1,340 @@
+
+=== METODOLOGIAS ALTERNATIVAS DO FIM DE SEMANA ===
+
+Mercado: UNDER_2.5 (Min: 70.0)
+[05/09] Fluminense FC vs CR Vasco da Gama | Score: 76.13
+[05/09] Bayer Leverkusen vs Union Berlin | Score: 81.00
+[05/09] TSG Hoffenheim vs Borussia Dortmund | Score: 81.00
+[05/09] Borussia Monchengladbach vs Elversberg | Score: 81.00
+[05/09] Werder Bremen vs RB Leipzig | Score: 81.00
+[05/09] SC Paderborn vs SC Freiburg | Score: 81.00
+[05/09] FC Schalke 04 vs Bayern Munich | Score: 81.00
+[05/09] NEC Nijmegen vs Feyenoord | Score: 79.94
+[05/09] FC Utrecht vs Go Ahead Eagles | Score: 79.94
+[05/09] Ajax vs PSV Eindhoven | Score: 79.94
+[05/09] Willem II vs Excelsior | Score: 79.94
+[05/09] Newcastle United vs Bournemouth | Score: 79.22
+[05/09] Brentford vs Sunderland | Score: 79.22
+[05/09] Brighton and Hove Albion vs Leeds United | Score: 79.22
+[05/09] Manchester City vs Coventry City | Score: 79.22
+[05/09] Fulham vs Crystal Palace | Score: 79.22
+[05/09] Nottingham Forest vs Tottenham Hotspur | Score: 79.22
+[05/09] Hull City vs Aston Villa | Score: 79.22
+[05/09] Athletic Bilbao vs Atlético Madrid | Score: 78.09
+[05/09] Rayo Vallecano vs Real Racing Club de Santander | Score: 78.09
+[05/09] Villarreal vs Deportivo La Coruña | Score: 78.09
+[05/09] Erzurum BB vs Torku Konyaspor | Score: 78.09
+[05/09] Fenerbahce vs Besiktas JK | Score: 78.09
+[05/09] Charleroi vs Union Saint-Gilloise | Score: 77.84
+[05/09] KV Mechelen vs Westerlo | Score: 77.84
+[05/09] Sint Truiden vs RAAL La Louvière | Score: 77.84
+[05/09] Standard Liege vs Royal Antwerp | Score: 77.84
+[05/09] FC Juárez vs Pachuca | Score: 77.84
+[05/09] CF Estrela vs Famalicão | Score: 77.16
+[05/09] Alverca vs Braga | Score: 77.16
+[05/09] CS Maritimo vs Benfica | Score: 77.16
+[05/09] Sporting Lisbon vs Nacional | Score: 77.16
+[05/09] RC Lens vs Lorient | Score: 77.07
+[05/09] Le Havre vs Brest | Score: 77.07
+[05/09] Nice vs Le Mans FC | Score: 77.07
+[05/09] Al-Faisaly KSA FC vs Al-Hazem | Score: 76.90
+[05/09] Al-Taawoun vs Al-Fateh | Score: 76.90
+[05/09] Al-Ittihad vs Al-Nassr | Score: 76.90
+[05/09] Fiorentina vs Torino | Score: 76.77
+[05/09] Inter Milan vs Napoli | Score: 76.77
+[05/09] AS Roma vs Atalanta BC | Score: 76.77
+[05/09] Peterborough United vs Sheffield Wednesday | Score: 76.13
+[05/09] Wigan Athletic vs Stockport County FC | Score: 76.13
+[05/09] Barnsley vs Stevenage | Score: 76.13
+[05/09] Reading vs Blackpool | Score: 76.13
+[05/09] Bradford City vs Mansfield Town | Score: 76.13
+[05/09] Burton Albion vs Cambridge United | Score: 76.13
+[05/09] Doncaster Rovers vs Plymouth Argyle | Score: 76.13
+[05/09] Huddersfield Town vs Notts County | Score: 76.13
+[05/09] Leicester City vs Oxford United | Score: 76.13
+[05/09] Luton vs Leyton Orient | Score: 76.13
+[05/09] Wycombe Wanderers vs Milton Keynes Dons | Score: 76.13
+[05/09] Fleetwood Town vs Shrewsbury Town | Score: 76.13
+[05/09] Salford City vs Port Vale | Score: 76.13
+[05/09] Accrington Stanley vs Crawley Town | Score: 76.13
+[05/09] Chesterfield FC vs Barnet | Score: 76.13
+[05/09] Bristol Rovers vs Rotherham United | Score: 76.13
+[05/09] Cheltenham Town vs Grimsby Town | Score: 76.13
+[05/09] Swindon Town vs Colchester United | Score: 76.13
+[05/09] Crewe Alexandra vs York City | Score: 76.13
+[05/09] Exeter City vs Walsall | Score: 76.13
+[05/09] Rochdale vs Gillingham | Score: 76.13
+[05/09] Northampton Town vs Newport County | Score: 76.13
+[05/09] Tranmere Rovers vs Oldham Athletic | Score: 76.13
+[05/09] Preston North End vs Blackburn Rovers | Score: 76.13
+[05/09] Stoke City vs Charlton Athletic | Score: 76.13
+[05/09] Lincoln City vs Southampton | Score: 76.13
+[05/09] Millwall vs Bolton Wanderers | Score: 76.13
+[05/09] Burnley vs Bristol City | Score: 76.13
+[05/09] Portsmouth vs Cardiff City | Score: 76.13
+[05/09] West Ham United vs Derby County | Score: 76.13
+[05/09] Queens Park Rangers vs Middlesbrough | Score: 76.13
+[05/09] Sheffield United vs Norwich City | Score: 76.13
+[05/09] West Bromwich Albion vs Watford | Score: 76.13
+[05/09] Swansea City vs Wrexham AFC | Score: 76.13
+[05/09] Real Sociedad B vs Tenerife | Score: 76.13
+[05/09] Sporting Gijón vs Girona FC | Score: 76.13
+[05/09] AD Ceuta FC vs Celta Fortuna | Score: 76.13
+[05/09] Real Valladolid CF vs Andorra CF | Score: 76.13
+[05/09] CD Eldense vs Mallorca | Score: 76.13
+[05/09] Südtirol vs US Catanzaro 1929 | Score: 76.13
+[05/09] Ascoli vs Benevento | Score: 76.13
+[05/09] Carrarese vs Empoli | Score: 76.13
+[05/09] 1. FC Kaiserslautern vs SV Darmstadt 98 | Score: 76.13
+[05/09] Holstein Kiel vs 1. FC Nürnberg | Score: 76.13
+[05/09] VfL Wolfsburg vs FC Energie Cottbus | Score: 76.13
+[05/09] Dynamo Dresden vs VfL Bochum | Score: 76.13
+[05/09] SV Meppen vs 1. FC Saarbrücken | Score: 76.13
+[05/09] Hansa Rostock vs Wehen Wiesbaden | Score: 76.13
+[05/09] Jahn Regensburg vs MSV Duisburg | Score: 76.13
+[05/09] SC Preußen Münster vs TSV Havelse | Score: 76.13
+[05/09] Waldhof Mannheim vs SC Verl | Score: 76.13
+[05/09] Rot-Weiss Essen vs FC Viktoria Köln 1904 | Score: 76.13
+[05/09] Stade de Reims vs Guingamp | Score: 76.13
+[05/09] Metz vs Rodez AF | Score: 76.13
+[05/09] Saint Etienne vs Montpellier | Score: 76.13
+[05/09] Volos FC vs Olympiakos Piraeus | Score: 76.13
+[05/09] AEK Athens vs Aris Thessaloniki | Score: 76.13
+[05/09] Avispa Fukuoka vs Mito HollyHock | Score: 76.13
+[05/09] Bucheon FC 1995 vs Daejeon Citizen | Score: 76.13
+[05/09] FC Seoul vs Incheon United | Score: 76.13
+[05/09] Jeju United FC vs Ulsan Hyundai FC | Score: 76.13
+[05/09] Jeonbuk Hyundai Motors vs Pohang Steelers | Score: 76.13
+[05/09] Wuhan Three Towns vs Qingdao West Coast FC | Score: 76.13
+[05/09] Shanghai SIPG FC vs Beijing FC | Score: 76.13
+[05/09] Dalian Yingbo vs Qingdao Hainiu FC | Score: 76.13
+[05/09] Shandong Luneng Taishan FC vs Shenzhen Peng City FC | Score: 76.13
+[05/09] AGF Aarhus vs Silkeborg IF | Score: 76.13
+[05/09] Rosenborg vs HamKam | Score: 76.13
+[05/09] SK Brann vs Lillestrom | Score: 76.13
+[05/09] GAIS vs BK Hacken | Score: 76.13
+[05/09] Degerfors IF vs Halmstads BK | Score: 76.13
+[05/09] Västerås SK vs IK Sirius | Score: 76.13
+[05/09] IFK Värnamo vs Varbergs BoIS | Score: 76.13
+[05/09] IK Oddevold vs Falkenbergs FF | Score: 76.13
+[05/09] Norrby IF vs Landskrona BoIS | Score: 76.13
+[05/09] IK Brage vs GIF Sundsvall | Score: 76.13
+[05/09] Helsingborgs IF vs Sandvikens IF | Score: 76.13
+[05/09] Bragantino-SP vs Bahia | Score: 75.83
+[05/09] Aldosivi Mar del Plata vs Banfield | Score: 73.17
+[05/09] Gimnasia La Plata vs CA Tigre BA | Score: 73.17
+[05/09] Gimnasia Mendoza vs Boca Juniors | Score: 73.17
+[04/09] Clube de Regatas Brasil vs América Mineiro | Score: 72.13
+[05/09] Grêmio Novorizontino vs Avai | Score: 72.13
+[05/09] Goiás vs Fortaleza | Score: 72.13
+[05/09] Inter Miami CF vs Atlanta United FC | Score: 79.22
+[05/09] Philadelphia Union vs CF Montreal | Score: 79.22
+[05/09] Charlotte FC vs Houston Dynamo | Score: 79.22
+[05/09] Toronto FC vs Chicago Fire | Score: 79.22
+[05/09] Columbus Crew SC vs Colorado Rapids | Score: 79.22
+[05/09] FC Cincinnati vs D.C. United | Score: 79.22
+[05/09] Orlando City SC vs San Diego FC | Score: 79.22
+[04/09] Puebla vs Toluca | Score: 77.84
+[05/09] Atlético San Luis vs Guadalajara | Score: 77.84
+[05/09] Querétaro vs Monterrey | Score: 77.84
+[05/09] Sao Paulo vs Atletico Mineiro | Score: 75.83
+[05/09] San Lorenzo vs Talleres | Score: 73.17
+[05/09] Juventude vs Atletico Goianiense | Score: 72.13
+[05/09] Ceará vs Sport Recife | Score: 72.13
+[06/09] Central Cordoba de Santiago vs Independiente | Score: 88.82
+[06/09] ADO Den Haag vs Fortuna Sittard | Score: 88.05
+[06/09] Alaves vs Osasuna | Score: 87.88
+[06/09] Londrina vs Operario-PR | Score: 85.11
+[06/09] Rosario Central vs Newells Old Boys | Score: 82.19
+[06/09] SK Beveren vs OH Leuven | Score: 79.11
+[06/09] Çorum FK vs Eyüpspor | Score: 77.96
+[06/09] Cercle Brugge vs Gent | Score: 77.92
+[06/09] GIL Vicente vs Academico Viseu | Score: 77.23
+[06/09] Cruzeiro vs Atletico Paranaense | Score: 76.81
+[06/09] Botafogo vs Palmeiras | Score: 76.14
+[06/09] Malaga vs Levante | Score: 76.13
+[06/09] Telstar vs Cambuur | Score: 75.89
+[06/09] Santa Clara vs Rio Ave | Score: 74.83
+[06/09] Internacional vs Santos | Score: 74.21
+[06/09] Coritiba vs Mirassol | Score: 74.10
+[06/09] Everton vs Manchester United | Score: 73.24
+[06/09] Espanyol vs Sevilla | Score: 72.23
+[06/09] Bologna vs Sassuolo | Score: 72.22
+[06/09] Ponte Preta vs São Bernardo | Score: 72.04
+[06/09] Kocaelispor vs Samsunspor | Score: 72.02
+[06/09] Frosinone vs Venezia | Score: 71.97
+[06/09] Lanus vs Defensa Y Justicia | Score: 70.82
+
+Mercado: UNDER_3.5 (Min: 80.0)
+[05/09] Fluminense FC vs CR Vasco da Gama | Score: 90.99
+[05/09] Bayer Leverkusen vs Union Berlin | Score: 93.25
+[05/09] TSG Hoffenheim vs Borussia Dortmund | Score: 93.25
+[05/09] Borussia Monchengladbach vs Elversberg | Score: 93.25
+[05/09] Werder Bremen vs RB Leipzig | Score: 93.25
+[05/09] SC Paderborn vs SC Freiburg | Score: 93.25
+[05/09] FC Schalke 04 vs Bayern Munich | Score: 93.25
+[05/09] NEC Nijmegen vs Feyenoord | Score: 92.96
+[05/09] FC Utrecht vs Go Ahead Eagles | Score: 92.96
+[05/09] Ajax vs PSV Eindhoven | Score: 92.96
+[05/09] Willem II vs Excelsior | Score: 92.96
+[05/09] Newcastle United vs Bournemouth | Score: 92.85
+[05/09] Brentford vs Sunderland | Score: 92.85
+[05/09] Brighton and Hove Albion vs Leeds United | Score: 92.85
+[05/09] Manchester City vs Coventry City | Score: 92.85
+[05/09] Fulham vs Crystal Palace | Score: 92.85
+[05/09] Nottingham Forest vs Tottenham Hotspur | Score: 92.85
+[05/09] Hull City vs Aston Villa | Score: 92.85
+[05/09] Athletic Bilbao vs Atlético Madrid | Score: 92.02
+[05/09] Rayo Vallecano vs Real Racing Club de Santander | Score: 92.02
+[05/09] Villarreal vs Deportivo La Coruña | Score: 92.02
+[05/09] Erzurum BB vs Torku Konyaspor | Score: 92.02
+[05/09] Fenerbahce vs Besiktas JK | Score: 92.02
+[05/09] Charleroi vs Union Saint-Gilloise | Score: 91.88
+[05/09] KV Mechelen vs Westerlo | Score: 91.88
+[05/09] Sint Truiden vs RAAL La Louvière | Score: 91.88
+[05/09] Standard Liege vs Royal Antwerp | Score: 91.88
+[05/09] FC Juárez vs Pachuca | Score: 91.88
+[05/09] CF Estrela vs Famalicão | Score: 91.78
+[05/09] Alverca vs Braga | Score: 91.78
+[05/09] CS Maritimo vs Benfica | Score: 91.78
+[05/09] Sporting Lisbon vs Nacional | Score: 91.78
+[05/09] RC Lens vs Lorient | Score: 91.23
+[05/09] Le Havre vs Brest | Score: 91.23
+[05/09] Nice vs Le Mans FC | Score: 91.23
+[05/09] Al-Faisaly KSA FC vs Al-Hazem | Score: 91.14
+[05/09] Al-Taawoun vs Al-Fateh | Score: 91.14
+[05/09] Al-Ittihad vs Al-Nassr | Score: 91.14
+[05/09] Fiorentina vs Torino | Score: 91.07
+[05/09] Inter Milan vs Napoli | Score: 91.07
+[05/09] AS Roma vs Atalanta BC | Score: 91.07
+[05/09] Peterborough United vs Sheffield Wednesday | Score: 90.99
+[05/09] Wigan Athletic vs Stockport County FC | Score: 90.99
+[05/09] Barnsley vs Stevenage | Score: 90.99
+[05/09] Reading vs Blackpool | Score: 90.99
+[05/09] Bradford City vs Mansfield Town | Score: 90.99
+[05/09] Burton Albion vs Cambridge United | Score: 90.99
+[05/09] Doncaster Rovers vs Plymouth Argyle | Score: 90.99
+[05/09] Huddersfield Town vs Notts County | Score: 90.99
+[05/09] Leicester City vs Oxford United | Score: 90.99
+[05/09] Luton vs Leyton Orient | Score: 90.99
+[05/09] Wycombe Wanderers vs Milton Keynes Dons | Score: 90.99
+[05/09] Fleetwood Town vs Shrewsbury Town | Score: 90.99
+[05/09] Salford City vs Port Vale | Score: 90.99
+[05/09] Accrington Stanley vs Crawley Town | Score: 90.99
+[05/09] Chesterfield FC vs Barnet | Score: 90.99
+[05/09] Bristol Rovers vs Rotherham United | Score: 90.99
+[05/09] Cheltenham Town vs Grimsby Town | Score: 90.99
+[05/09] Swindon Town vs Colchester United | Score: 90.99
+[05/09] Crewe Alexandra vs York City | Score: 90.99
+[05/09] Exeter City vs Walsall | Score: 90.99
+[05/09] Rochdale vs Gillingham | Score: 90.99
+[05/09] Northampton Town vs Newport County | Score: 90.99
+[05/09] Tranmere Rovers vs Oldham Athletic | Score: 90.99
+[05/09] Preston North End vs Blackburn Rovers | Score: 90.99
+[05/09] Stoke City vs Charlton Athletic | Score: 90.99
+[05/09] Lincoln City vs Southampton | Score: 90.99
+[05/09] Millwall vs Bolton Wanderers | Score: 90.99
+[05/09] Burnley vs Bristol City | Score: 90.99
+[05/09] Portsmouth vs Cardiff City | Score: 90.99
+[05/09] West Ham United vs Derby County | Score: 90.99
+[05/09] Queens Park Rangers vs Middlesbrough | Score: 90.99
+[05/09] Sheffield United vs Norwich City | Score: 90.99
+[05/09] West Bromwich Albion vs Watford | Score: 90.99
+[05/09] Swansea City vs Wrexham AFC | Score: 90.99
+[05/09] Real Sociedad B vs Tenerife | Score: 90.99
+[05/09] Sporting Gijón vs Girona FC | Score: 90.99
+[05/09] AD Ceuta FC vs Celta Fortuna | Score: 90.99
+[05/09] Real Valladolid CF vs Andorra CF | Score: 90.99
+[05/09] CD Eldense vs Mallorca | Score: 90.99
+[05/09] Südtirol vs US Catanzaro 1929 | Score: 90.99
+[05/09] Ascoli vs Benevento | Score: 90.99
+[05/09] Carrarese vs Empoli | Score: 90.99
+[05/09] 1. FC Kaiserslautern vs SV Darmstadt 98 | Score: 90.99
+[05/09] Holstein Kiel vs 1. FC Nürnberg | Score: 90.99
+[05/09] VfL Wolfsburg vs FC Energie Cottbus | Score: 90.99
+[05/09] Dynamo Dresden vs VfL Bochum | Score: 90.99
+[05/09] SV Meppen vs 1. FC Saarbrücken | Score: 90.99
+[05/09] Hansa Rostock vs Wehen Wiesbaden | Score: 90.99
+[05/09] Jahn Regensburg vs MSV Duisburg | Score: 90.99
+[05/09] SC Preußen Münster vs TSV Havelse | Score: 90.99
+[05/09] Waldhof Mannheim vs SC Verl | Score: 90.99
+[05/09] Rot-Weiss Essen vs FC Viktoria Köln 1904 | Score: 90.99
+[05/09] Stade de Reims vs Guingamp | Score: 90.99
+[05/09] Metz vs Rodez AF | Score: 90.99
+[05/09] Saint Etienne vs Montpellier | Score: 90.99
+[05/09] Volos FC vs Olympiakos Piraeus | Score: 90.99
+[05/09] AEK Athens vs Aris Thessaloniki | Score: 90.99
+[05/09] Avispa Fukuoka vs Mito HollyHock | Score: 90.99
+[05/09] Bucheon FC 1995 vs Daejeon Citizen | Score: 90.99
+[05/09] FC Seoul vs Incheon United | Score: 90.99
+[05/09] Jeju United FC vs Ulsan Hyundai FC | Score: 90.99
+[05/09] Jeonbuk Hyundai Motors vs Pohang Steelers | Score: 90.99
+[05/09] Wuhan Three Towns vs Qingdao West Coast FC | Score: 90.99
+[05/09] Shanghai SIPG FC vs Beijing FC | Score: 90.99
+[05/09] Dalian Yingbo vs Qingdao Hainiu FC | Score: 90.99
+[05/09] Shandong Luneng Taishan FC vs Shenzhen Peng City FC | Score: 90.99
+[05/09] AGF Aarhus vs Silkeborg IF | Score: 90.99
+[05/09] Rosenborg vs HamKam | Score: 90.99
+[05/09] SK Brann vs Lillestrom | Score: 90.99
+[05/09] GAIS vs BK Hacken | Score: 90.99
+[05/09] Degerfors IF vs Halmstads BK | Score: 90.99
+[05/09] Västerås SK vs IK Sirius | Score: 90.99
+[05/09] IFK Värnamo vs Varbergs BoIS | Score: 90.99
+[05/09] IK Oddevold vs Falkenbergs FF | Score: 90.99
+[05/09] Norrby IF vs Landskrona BoIS | Score: 90.99
+[05/09] IK Brage vs GIF Sundsvall | Score: 90.99
+[05/09] Helsingborgs IF vs Sandvikens IF | Score: 90.99
+[05/09] Bragantino-SP vs Bahia | Score: 90.82
+[05/09] Aldosivi Mar del Plata vs Banfield | Score: 89.15
+[05/09] Gimnasia La Plata vs CA Tigre BA | Score: 89.15
+[05/09] Gimnasia Mendoza vs Boca Juniors | Score: 89.15
+[04/09] Clube de Regatas Brasil vs América Mineiro | Score: 88.82
+[05/09] Grêmio Novorizontino vs Avai | Score: 88.82
+[05/09] Goiás vs Fortaleza | Score: 88.82
+[06/09] Groningen vs Twente | Score: 81.92
+[05/09] Inter Miami CF vs Atlanta United FC | Score: 92.85
+[05/09] Philadelphia Union vs CF Montreal | Score: 92.85
+[05/09] Charlotte FC vs Houston Dynamo | Score: 92.85
+[05/09] Toronto FC vs Chicago Fire | Score: 92.85
+[05/09] Columbus Crew SC vs Colorado Rapids | Score: 92.85
+[05/09] FC Cincinnati vs D.C. United | Score: 92.85
+[05/09] Orlando City SC vs San Diego FC | Score: 92.85
+[04/09] Puebla vs Toluca | Score: 91.88
+[05/09] Atlético San Luis vs Guadalajara | Score: 91.88
+[05/09] Querétaro vs Monterrey | Score: 91.88
+[05/09] Sao Paulo vs Atletico Mineiro | Score: 90.82
+[05/09] San Lorenzo vs Talleres | Score: 89.15
+[05/09] Juventude vs Atletico Goianiense | Score: 88.82
+[05/09] Ceará vs Sport Recife | Score: 88.82
+[06/09] Central Cordoba de Santiago vs Independiente | Score: 96.95
+[06/09] ADO Den Haag vs Fortuna Sittard | Score: 96.84
+[06/09] Alaves vs Osasuna | Score: 96.77
+[06/09] Londrina vs Operario-PR | Score: 95.24
+[06/09] Rosario Central vs Newells Old Boys | Score: 94.09
+[06/09] SK Beveren vs OH Leuven | Score: 92.79
+[06/09] Çorum FK vs Eyüpspor | Score: 91.95
+[06/09] Cercle Brugge vs Gent | Score: 91.93
+[06/09] GIL Vicente vs Academico Viseu | Score: 91.82
+[06/09] Cruzeiro vs Atletico Paranaense | Score: 91.09
+[06/09] Botafogo vs Palmeiras | Score: 91.00
+[06/09] Malaga vs Levante | Score: 90.99
+[06/09] Telstar vs Cambuur | Score: 90.86
+[06/09] Santa Clara vs Rio Ave | Score: 90.03
+[06/09] Internacional vs Santos | Score: 89.97
+[06/09] Coritiba vs Mirassol | Score: 89.90
+[06/09] Everton vs Manchester United | Score: 89.19
+[06/09] Espanyol vs Sevilla | Score: 88.88
+[06/09] Bologna vs Sassuolo | Score: 88.88
+[06/09] Ponte Preta vs São Bernardo | Score: 88.77
+[06/09] Kocaelispor vs Samsunspor | Score: 88.76
+[06/09] Frosinone vs Venezia | Score: 88.22
+[06/09] Lanus vs Defensa Y Justicia | Score: 87.82
+[06/09] Vitória SC vs Casa Pia | Score: 86.85
+[06/09] Estac Troyes vs Strasbourg | Score: 85.93
+[06/09] Atlas vs Atlante FC | Score: 85.91
+[06/09] River Plate vs Independ. Rivadavia | Score: 85.22
+[06/09] Racing Club vs Atletico Tucuman | Score: 85.22
+[06/09] Kortrijk vs Zulte Waregem | Score: 85.17
+[06/09] Hamburger SV vs FSV Mainz 05 | Score: 82.97
+[06/09] Heerenveen vs AZ Alkmaar | Score: 81.99
+[06/09] Parma vs Monza | Score: 81.95

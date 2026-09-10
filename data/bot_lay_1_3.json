@@ -3,56 +3,110 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Cruz Azul",
-      "id": "2117044",
+      "name": "Cienciano",
+      "id": "1497238",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Santos Laguna",
-      "id": "1996728",
+      "name": "Atletico Grau",
+      "id": "2122579",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "SC Telstar",
-      "id": "2116731",
+      "name": "Besiktas",
+      "id": "1994306",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Racing Club",
-      "id": "1281877",
+      "name": "Erzurum BB",
+      "id": "1992172",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Atl Tucuman",
-      "id": "1320014",
+      "name": "Union Berlin",
+      "id": "1946557",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Rosario Central",
-      "id": "1316641",
+      "name": "Schalke 04",
+      "id": "1946213",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Newell's Old Boy's (W)",
-      "id": "6248582",
+      "name": "Defensa y Justicia",
+      "id": "1277889",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Santa Clara",
-      "id": "1994969",
+      "name": "Gimnasia Mendoza",
+      "id": "1596056",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Rio Ave",
-      "id": "2118125",
+      "name": "Coritiba",
+      "id": "1277302",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Atletico Barinas",
+      "id": "6240276",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Al-Adalh",
+      "id": "2119112",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Al-Hazm (KSA)",
+      "id": "1995766",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Boca Juniors",
+      "id": "1281529",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Central Cordoba",
+      "id": "6246478",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Necaxa",
+      "id": "1991665",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Puebla",
+      "id": "1991619",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Az Alkmaar",
+      "id": "1996501",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Willem II",
+      "id": "1946209",
       "checked": true,
       "side": "A"
     }

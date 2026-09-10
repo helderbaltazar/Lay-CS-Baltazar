@@ -66,30 +66,31 @@ def scan_match(fixture, model, targets, source='API-Football'):
     home_team = fixture['teams']['home']
     away_team = fixture['teams']['away']
 
-    # Busca a odd via fallback gratuito da Odds-API
-    # Isso evita consumir a cota premium da API-Football
-    home_odd = None
-    try:
-        from data.odds_api import SPORT_KEYS, get_events
-        import difflib
-        
-        # Encontra a liga correspondente
-        sport_key = next((k for k, v in SPORT_KEYS.items() if v == league_info['id']), None)
-        if sport_key:
-            events = get_events(sport_key)
-            for ev in events:
-                if (difflib.get_close_matches(home_team['name'], [ev.get('home_team','')], n=1, cutoff=0.5) and 
-                    difflib.get_close_matches(away_team['name'], [ev.get('away_team','')], n=1, cutoff=0.5)):
-                    bookmakers = ev.get('bookmakers', [])
-                    if bookmakers:
-                        for mkt in bookmakers[0].get('markets', []):
-                            if mkt['key'] == 'h2h':
-                                for out in mkt['outcomes']:
-                                    if out['name'] == ev.get('home_team'):
-                                        home_odd = out['price']
-                    break
-    except Exception as e:
-        print(f"Erro ao buscar odd da Odds-API: {e}")
+    # Coleta de dados Agênticos (Fase 0 - Saneamento)
+    from models.match_context import MatchContext
+    from analysis.odds_fetcher import fetch_odds_cascade, fetch_h2h, fetch_must_win
+    
+    match_odd, btts_odd, odds_source = fetch_odds_cascade(fixture)
+    h2h_home, h2h_away = fetch_h2h(fixture_info['id'])
+    
+    must_win_home = fetch_must_win(home_team['id'], league_info['id'])
+    must_win_away = fetch_must_win(away_team['id'], league_info['id'])
+    must_win = must_win_home or must_win_away
+    
+    match_context = MatchContext(
+        fixture_id=fixture_info['id'],
+        home_team=home_team['name'],
+        away_team=away_team['name'],
+        match_odd=match_odd,
+        btts_odd=btts_odd,
+        h2h_home=h2h_home,
+        h2h_away=h2h_away,
+        must_win=must_win,
+        odds_source=odds_source
+    )
+    
+    # Manter retrocompatibilidade
+    home_odd = match_odd
 
     home_stats = DataManager.get_team_stats(home_team['id'], league_info['id'], source)
     away_stats = DataManager.get_team_stats(away_team['id'], league_info['id'], source)
@@ -137,7 +138,8 @@ def scan_match(fixture, model, targets, source='API-Football'):
         'extra_probabilities': extra_probs,
         'match_odd': home_odd,
         'home_streak': home_streak,
-        'away_streak': away_streak
+        'away_streak': away_streak,
+        'match_context': match_context
     }
 
 def scan_all(fixtures, model, source='API-Football'):

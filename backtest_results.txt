@@ -1,0 +1,92 @@
+Iniciando Simulador de Mercados Alternativos (Backtest Histórico)...
+Total de jogos válidos para backtest (com dados de HT): 46015
+Processado 10000 jogos...
+Processado 20000 jogos...
+Processado 30000 jogos...
+Processado 40000 jogos...
+
+--- RESULTADOS DO BACKTEST (WIN RATE) ---
+
+📊 Mercado: UNDER_0.5_HT
+  Nota >= 70: Win Rate: 95.83% (Acertos: 23/24) | Odd Justa: 1.04
+  Nota >= 75: Win Rate: 95.83% (Acertos: 23/24) | Odd Justa: 1.04
+  Nota >= 80: Win Rate: 95.83% (Acertos: 23/24) | Odd Justa: 1.04
+  Nota >= 85: Win Rate: 95.83% (Acertos: 23/24) | Odd Justa: 1.04
+  Nota >= 90: Win Rate: 95.83% (Acertos: 23/24) | Odd Justa: 1.04
+  Nota >= 95: Win Rate: 95.83% (Acertos: 23/24) | Odd Justa: 1.04
+
+📊 Mercado: UNDER_1.5_HT
+  Nota >= 70: Win Rate: 98.12% (Acertos: 678/691) | Odd Justa: 1.02
+  Nota >= 75: Win Rate: 98.12% (Acertos: 678/691) | Odd Justa: 1.02
+  Nota >= 80: Win Rate: 98.80% (Acertos: 165/167) | Odd Justa: 1.01
+  Nota >= 85: Win Rate: 98.80% (Acertos: 165/167) | Odd Justa: 1.01
+  Nota >= 90: Win Rate: 98.80% (Acertos: 165/167) | Odd Justa: 1.01
+  Nota >= 95: Win Rate: 100.00% (Acertos: 24/24) | Odd Justa: 1.00
+
+📊 Mercado: UNDER_2.5_HT
+  Nota >= 70: Win Rate: 98.96% (Acertos: 4357/4403) | Odd Justa: 1.01
+  Nota >= 75: Win Rate: 99.55% (Acertos: 1977/1986) | Odd Justa: 1.00
+  Nota >= 80: Win Rate: 99.55% (Acertos: 1977/1986) | Odd Justa: 1.00
+  Nota >= 85: Win Rate: 99.55% (Acertos: 1977/1986) | Odd Justa: 1.00
+  Nota >= 90: Win Rate: 100.00% (Acertos: 691/691) | Odd Justa: 1.00
+  Nota >= 95: Win Rate: 100.00% (Acertos: 167/167) | Odd Justa: 1.00
+
+📊 Mercado: OVER_1.5
+  Nota >= 70: Win Rate: 75.20% (Acertos: 33421/44444) | Odd Justa: 1.33
+  Nota >= 75: Win Rate: 74.87% (Acertos: 32733/43719) | Odd Justa: 1.34
+  Nota >= 80: Win Rate: 75.99% (Acertos: 31771/41810) | Odd Justa: 1.32
+  Nota >= 85: Win Rate: 75.39% (Acertos: 30540/40510) | Odd Justa: 1.33
+  Nota >= 90: Win Rate: 75.47% (Acertos: 24192/32055) | Odd Justa: 1.33
+
+📊 Mercado: OVER_2.5
+  Nota >= 70: Win Rate: 51.61% (Acertos: 22268/43149) | Odd Justa: 1.94
+  Nota >= 75: Win Rate: 53.37% (Acertos: 21350/40007) | Odd Justa: 1.87
+  Nota >= 80: Win Rate: 52.82% (Acertos: 20769/39322) | Odd Justa: 1.89
+  Nota >= 85: Win Rate: 55.23% (Acertos: 18897/34214) | Odd Justa: 1.81
+  Nota >= 90: Win Rate: 56.31% (Acertos: 12353/21936) | Odd Justa: 1.78
+
+📊 Mercado: UNDER_2.5
+  Nota >= 70: Win Rate: 66.41% (Acertos: 174/262) | Odd Justa: 1.51
+  Nota >= 75: Win Rate: 76.55% (Acertos: 173/226) | Odd Justa: 1.31
+  Nota >= 80: Win Rate: 79.72% (Acertos: 173/217) | Odd Justa: 1.25
+  Nota >= 85: Win Rate: 86.29% (Acertos: 170/197) | Odd Justa: 1.16
+  Nota >= 90: Win Rate: 89.36% (Acertos: 168/188) | Odd Justa: 1.12
+  Nota >= 95: Win Rate: 76.47% (Acertos: 26/34) | Odd Justa: 1.31
+
+📊 Mercado: OVER_3.5
+  Nota >= 70: Win Rate: 32.60% (Acertos: 12049/36955) | Odd Justa: 3.07
+  Nota >= 75: Win Rate: 32.08% (Acertos: 11523/35924) | Odd Justa: 3.12
+  Nota >= 80: Win Rate: 33.53% (Acertos: 10489/31284) | Odd Justa: 2.98
+  Nota >= 85: Win Rate: 33.97% (Acertos: 9273/27301) | Odd Justa: 2.94
+  Nota >= 90: Win Rate: 37.53% (Acertos: 4683/12478) | Odd Justa: 2.66
+
+📊 Mercado: UNDER_3.5
+  Nota >= 70: Win Rate: 90.46% (Acertos: 711/786) | Odd Justa: 1.11
+  Nota >= 75: Win Rate: 94.27% (Acertos: 707/750) | Odd Justa: 1.06
+  Nota >= 80: Win Rate: 95.28% (Acertos: 706/741) | Odd Justa: 1.05
+  Nota >= 85: Win Rate: 97.09% (Acertos: 700/721) | Odd Justa: 1.03
+  Nota >= 90: Win Rate: 92.02% (Acertos: 173/188) | Odd Justa: 1.09
+  Nota >= 95: Win Rate: 96.61% (Acertos: 171/177) | Odd Justa: 1.04
+
+📊 Mercado: UNDER_4.5
+  Nota >= 70: Win Rate: 97.31% (Acertos: 2025/2081) | Odd Justa: 1.03
+  Nota >= 75: Win Rate: 98.05% (Acertos: 2013/2053) | Odd Justa: 1.02
+  Nota >= 80: Win Rate: 98.62% (Acertos: 2008/2036) | Odd Justa: 1.01
+  Nota >= 85: Win Rate: 97.78% (Acertos: 705/721) | Odd Justa: 1.02
+  Nota >= 90: Win Rate: 98.46% (Acertos: 701/712) | Odd Justa: 1.02
+  Nota >= 95: Win Rate: 99.29% (Acertos: 696/701) | Odd Justa: 1.01
+
+📊 Mercado: BTTS_YES
+  Nota >= 70: Win Rate: 60.61% (Acertos: 21134/34870) | Odd Justa: 1.65
+  Nota >= 75: Win Rate: 61.18% (Acertos: 20472/33461) | Odd Justa: 1.63
+  Nota >= 80: Win Rate: 62.90% (Acertos: 18094/28767) | Odd Justa: 1.59
+  Nota >= 85: Win Rate: 66.23% (Acertos: 13930/21032) | Odd Justa: 1.51
+  Nota >= 90: Win Rate: 69.85% (Acertos: 5397/7727) | Odd Justa: 1.43
+
+📊 Mercado: BTTS_NO
+  Nota >= 70: Win Rate: 95.06% (Acertos: 2462/2590) | Odd Justa: 1.05
+  Nota >= 75: Win Rate: 95.20% (Acertos: 2462/2586) | Odd Justa: 1.05
+  Nota >= 80: Win Rate: 96.25% (Acertos: 2441/2536) | Odd Justa: 1.04
+  Nota >= 85: Win Rate: 96.44% (Acertos: 2438/2528) | Odd Justa: 1.04
+  Nota >= 90: Win Rate: 96.89% (Acertos: 2428/2506) | Odd Justa: 1.03
+  Nota >= 95: Win Rate: 97.04% (Acertos: 2424/2498) | Odd Justa: 1.03

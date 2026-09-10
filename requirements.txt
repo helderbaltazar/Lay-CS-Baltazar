@@ -14,7 +14,7 @@ gunicorn==21.2.0
 playwright-stealth==1.0.6
 python-dateutil
 
-setuptools<70.0.0
+setuptools
 pandas
 lxml
 beautifulsoup4

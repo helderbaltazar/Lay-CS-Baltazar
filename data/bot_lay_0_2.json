@@ -3,110 +3,74 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Cruz Azul",
-      "id": "2117044",
+      "name": "Boca Juniors",
+      "id": "1281529",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Santos Laguna",
-      "id": "1996728",
+      "name": "Central Cordoba",
+      "id": "6246478",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "SC Telstar",
-      "id": "2116731",
+      "name": "Az Alkmaar",
+      "id": "1996501",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Eintracht Frankfurt",
-      "id": "2116256",
+      "name": "Willem II",
+      "id": "1946209",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Augsburg",
-      "id": "1993987",
+      "name": "Necaxa",
+      "id": "1991665",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Racing Club",
-      "id": "1281877",
+      "name": "Puebla",
+      "id": "1991619",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Atl Tucuman",
-      "id": "1320014",
+      "name": "Cienciano",
+      "id": "1497238",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "River Plate",
-      "id": "1320120",
+      "name": "Atletico Grau",
+      "id": "2122579",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Independiente Rivadavia",
-      "id": "1320015",
+      "name": "Besiktas",
+      "id": "1994306",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Santa Clara",
-      "id": "1994969",
+      "name": "Erzurum BB",
+      "id": "1992172",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Rio Ave",
-      "id": "2118125",
+      "name": "Union Berlin",
+      "id": "1946557",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Cruzeiro MG",
-      "id": "1915199",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Atletico Barinas",
-      "id": "6240276",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Rosario Central",
-      "id": "1316641",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Newell's Old Boy's (W)",
-      "id": "6248582",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Corinthians",
-      "id": "1915197",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Chapecoense",
-      "id": "1277295",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Lanus",
-      "id": "1497112",
+      "name": "Schalke 04",
+      "id": "1946213",
       "checked": true,
       "side": "A"
     },
@@ -117,86 +81,86 @@
       "side": "A"
     },
     {
-      "name": "Marseille",
-      "id": "1996525",
+      "name": "Gimnasia Mendoza",
+      "id": "1596056",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Paris FC",
-      "id": "2117691",
+      "name": "Coritiba",
+      "id": "1277302",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Vipers SC",
-      "id": "1915260",
+      "name": "Atletico Barinas",
+      "id": "6240276",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Casa Pia",
-      "id": "2119307",
+      "name": "Al-Adalh",
+      "id": "2119112",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Trabzonspor",
-      "id": "1994309",
+      "name": "Al-Hazm (KSA)",
+      "id": "1995766",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Genclerbirligi",
-      "id": "1994307",
+      "name": "Al Faisaly SC",
+      "id": "1277228",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Juventus",
-      "id": "2116385",
+      "name": "Al-Ittihad",
+      "id": "1946125",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "AC Milan",
-      "id": "2116060",
+      "name": "Leon",
+      "id": "1996729",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Internacional",
-      "id": "1846912",
+      "name": "Al-Diriyah FC",
+      "id": "6248850",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Santos",
-      "id": "1915196",
+      "name": "Al-Ettifaq",
+      "id": "1277102",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Arsenal",
-      "id": "1990074",
+      "name": "Sevilla",
+      "id": "1992580",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Chelsea",
-      "id": "1992422",
+      "name": "Valencia",
+      "id": "2116121",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Glostrup FK",
-      "id": "6248200",
+      "name": "Yellow-Red Mechelen",
+      "id": "2117160",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Eyupspor",
-      "id": "2117242",
+      "name": "Anderlecht",
+      "id": "2117015",
       "checked": true,
       "side": "A"
     }

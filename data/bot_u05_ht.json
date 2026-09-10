@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "betOnNewTeam": true,
+  "teams": [
+    {
+      "name": "Bromley",
+      "id": "1280005",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "AFC Wimbledon",
+      "id": "1276930",
+      "checked": true,
+      "side": "A"
+    }
+  ]
+}
