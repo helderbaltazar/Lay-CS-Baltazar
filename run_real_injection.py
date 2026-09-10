@@ -206,7 +206,7 @@ def ensure_data_in_db():
                     p.ai_analysis = 'Análise matemática Poisson + Dixon-Coles aprovada.'
 
                 print(f"🤖 Auditando {len(to_audit)} predições Lay CS com IA + {len(to_fallback)} com validação quantitativa...")
-                from analysis.ai_analyst import AIAnalyst
+                from analysis.orchestrator import MultiAgentOrchestrator
                 for i, p in enumerate(to_audit, 1):
                     m = p.match
                     if m:
@@ -215,7 +215,7 @@ def ensure_data_in_db():
                             'away': m.away_team,
                             'league': m.league_name
                         }
-                        res = AIAnalyst.analyze_match(match_dict, p.target_score, p.probability or 0.05)
+                        res = MultiAgentOrchestrator.orchestrate_match(match_dict, p.target_score, p.probability or 0.05)
                         p.ai_verdict = res['verdict']
                         p.ai_confidence = res['confidence']
                         p.ai_critical_factor = res['critical_factor']
@@ -335,7 +335,8 @@ def inject_from_db():
             
         json_file = generate_layback_json(teams_data, bot_name)
         print(f"[{target}] Injetando no bot {bot_id} via Playwright...")
-        success = inject_teams_ui(bot_id, json_file)
+        from integration.layback import OperatorAgent
+        success = OperatorAgent.inject_teams(bot_id, json_file)
         if success:
             report_lines.append(f"✅ *{target}* (Bot {bot_id}):")
             report_lines.extend(bot_games_str)
