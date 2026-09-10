@@ -170,7 +170,7 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
         # prompt is provided
 
         # Cascata de modelos confirmados na API v1beta
-        models_to_try = ['gemini-flash-latest', 'gemini-flash-lite-latest']
+        models_to_try = ['gemini-2.0-flash', 'gemini-1.5-pro-latest', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b-latest']
         
         for model_name in models_to_try:
             try:
@@ -376,7 +376,7 @@ Responda APENAS com JSON:
   "lesoes": "lesoes...",
   "analise_geral": "resumo..."
 }}'''
-        for model in ['gemini-flash-latest', 'gemini-flash-lite-latest']:
+        for model in ['gemini-2.0-flash', 'gemini-1.5-pro-latest', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b-latest']:
             try:
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}'
                 payload = {'contents': [{'role': 'user', 'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}
