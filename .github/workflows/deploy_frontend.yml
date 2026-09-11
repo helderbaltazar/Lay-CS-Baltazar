@@ -34,11 +34,11 @@ jobs:
 
       - name: Deploy to Render and Verify Live UI
         env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY || 'rnd_S8cQDmEMslEPkYDWfsZ6hEWMWXYM' }}
-          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID || 'srv-da87ptijnfac73d2o9p0' }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DASHBOARD_USERNAME: ${{ secrets.DASHBOARD_USERNAME || 'helderbaltazar' }}
-          DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD || 'Bonde74812005' }}
+          DASHBOARD_USERNAME: ${{ secrets.DASHBOARD_USERNAME }}
+          DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

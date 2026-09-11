@@ -1,5 +1,4 @@
 import os
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,8 +18,19 @@ SCHEDULER_TIMEZONE = "America/Sao_Paulo"
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '')
-BANKROLL = float(os.getenv('BANKROLL', '1000.0'))
-MAX_LIABILITY = float(os.getenv('MAX_LIABILITY', '2.0')) # Em %
+
+# Validação segura de valores numéricos de ambiente
+try:
+    BANKROLL = float(os.getenv('BANKROLL', '1000.0'))
+except ValueError:
+    print("⚠️ BANKROLL inválido, usando default 1000.0")
+    BANKROLL = 1000.0
+
+try:
+    MAX_LIABILITY = float(os.getenv('MAX_LIABILITY', '2.0'))  # Em %
+except ValueError:
+    print("⚠️ MAX_LIABILITY inválido, usando default 2.0")
+    MAX_LIABILITY = 2.0
 
 LAYBACK_EMAIL = os.getenv('LAYBACK_EMAIL', '')
 LAYBACK_PASSWORD = os.getenv('LAYBACK_PASSWORD', '')
@@ -28,7 +38,7 @@ LAYBACK_PASSWORD = os.getenv('LAYBACK_PASSWORD', '')
 DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///data_store/database.sqlite3')
 
 DASHBOARD_USERNAME = os.getenv("DASHBOARD_USERNAME", "admin")
-DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD", "laycs2026")
+DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD", "")
 
 # GitHub API Token (para acionar workflow)
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")

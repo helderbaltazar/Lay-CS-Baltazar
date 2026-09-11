@@ -28,7 +28,7 @@ def get_fixtures(date_str):
     url = f"{config.BASE_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
     try:
         print(f"Buscando jogos de {date_str} na API...")
-        response = requests.get(url, headers=get_headers())
+        response = requests.get(url, headers=get_headers(), timeout=30)
         response.raise_for_status()
         data = response.json()
         if data.get('errors'):
@@ -39,7 +39,7 @@ def get_fixtures(date_str):
             print(f"⚠️ API Direta falhou. Acionando RapidAPI Fallback para fixtures...")
             try:
                 url_rapid = f"{config.RAPID_API_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
-                response = requests.get(url_rapid, headers=get_rapid_headers())
+                response = requests.get(url_rapid, headers=get_rapid_headers(), timeout=30)
                 response.raise_for_status()
                 data = response.json()
             except Exception as ex:
@@ -85,7 +85,7 @@ def fetch_team_stats(team_id, league_id, season):
     # 1. Tentar API-Football Direta
     url = f"{config.BASE_URL}/teams/statistics?league={league_id}&season={season}&team={team_id}"
     try:
-        response = requests.get(url, headers=get_headers())
+        response = requests.get(url, headers=get_headers(), timeout=30)
         response.raise_for_status()
         data = response.json()
         
@@ -98,7 +98,7 @@ def fetch_team_stats(team_id, league_id, season):
         if config.RAPID_API_KEY:
             print(f"⚠️ API Direta falhou. Acionando RapidAPI Fallback para time {team_id}...")
             url_rapid = f"{config.RAPID_API_URL}/teams/statistics?league={league_id}&season={season}&team={team_id}"
-            response = requests.get(url_rapid, headers=get_rapid_headers())
+            response = requests.get(url_rapid, headers=get_rapid_headers(), timeout=30)
             response.raise_for_status()
             data = response.json()
         else:
@@ -178,7 +178,7 @@ def get_raw_odds(fixture_id):
 
     url = f"{config.BASE_URL}/odds?fixture={fixture_id}&bookmaker=8"
     try:
-        response = requests.get(url, headers=get_headers())
+        response = requests.get(url, headers=get_headers(), timeout=30)
         data = response.json()
         if not data.get('response'):
             cache.set(cache_key, [])
@@ -219,7 +219,7 @@ def get_odds(fixture_id, target_score):
 
     url = f"{config.BASE_URL}/odds?fixture={fixture_id}&bookmaker=8" # 8 = Bet365
     try:
-        response = requests.get(url, headers=get_headers())
+        response = requests.get(url, headers=get_headers(), timeout=30)
         data = response.json()
         if not data.get('response'):
             return None
@@ -247,7 +247,7 @@ def get_fixture_injuries(fixture_id):
 
     url = f"{config.BASE_URL}/injuries?fixture={fixture_id}"
     try:
-        response = requests.get(url, headers=get_headers())
+        response = requests.get(url, headers=get_headers(), timeout=30)
         data = response.json()
         result = data.get('response', [])
         cache.set(cache_key, result)
@@ -264,7 +264,7 @@ def get_fixture_lineups(fixture_id):
 
     url = f"{config.BASE_URL}/fixtures/lineups?fixture={fixture_id}"
     try:
-        response = requests.get(url, headers=get_headers())
+        response = requests.get(url, headers=get_headers(), timeout=30)
         data = response.json()
         result = data.get('response', [])
         cache.set(cache_key, result)
@@ -281,7 +281,7 @@ def get_league_fixtures(league_id, season):
 
     url = f"{config.BASE_URL}/fixtures?league={league_id}&season={season}"
     try:
-        response = requests.get(url, headers=get_headers())
+        response = requests.get(url, headers=get_headers(), timeout=30)
         response.raise_for_status()
         data = response.json()
         

@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -12,7 +13,7 @@ from sqlalchemy import desc, func
 
 
 app = Flask(__name__)
-app.secret_key = 'laycs-secret-key-2026'
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', os.urandom(32).hex())
 
 auth = HTTPBasicAuth()
 

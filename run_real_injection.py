@@ -1,3 +1,4 @@
+import os
 import datetime
 import pytz
 import sqlite3
@@ -227,10 +228,22 @@ def ensure_data_in_db():
                             db.commit()
                         except Exception as ce:
                             print(f"⚠️ Erro ao commitar lote de IA: {ce}")
+                            db.rollback()
+                            try:
+                                db.commit()
+                            except Exception as ce2:
+                                print(f"❌ Falha definitiva ao commitar lote de IA (dados perdidos): {ce2}")
+                                db.rollback()
                 try:
                     db.commit()
                 except Exception as ce:
                     print(f"⚠️ Erro ao commitar lote final de IA: {ce}")
+                    db.rollback()
+                    try:
+                        db.commit()
+                    except Exception as ce2:
+                        print(f"❌ Falha definitiva ao commitar lote final de IA (dados perdidos): {ce2}")
+                        db.rollback()
                 print(f"✅ Auditoria da IA concluída e salva para {target_str}!")
 
         else:
@@ -255,7 +268,14 @@ def inject_from_db():
     print("\n--- INICIANDO INJEÇÃO NO LAYBACK VIA BANCO DE DADOS ---")
     db = SessionLocal()
     
-    with open("data/teams_api.json", "r") as f:
+    teams_file = "data/teams_api.json"
+    if not os.path.exists(teams_file):
+        print(f"❌ Arquivo {teams_file} não encontrado. Impossível mapear times para o LayBack.")
+        print("   Execute o script de captura de times ou crie o arquivo manualmente.")
+        db.close()
+        return
+    
+    with open(teams_file, "r") as f:
         layback_teams = json.load(f)["data"]["teams"]
 
     targets = [

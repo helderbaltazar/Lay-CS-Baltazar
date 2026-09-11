@@ -39,6 +39,18 @@
       "side": "A"
     },
     {
+      "name": "Boca Juniors",
+      "id": "1281529",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Central Cordoba",
+      "id": "6246478",
+      "checked": true,
+      "side": "A"
+    },
+    {
       "name": "Defensa y Justicia",
       "id": "1277889",
       "checked": true,
@@ -59,18 +71,6 @@
     {
       "name": "Velez Sarsfield",
       "id": "1316640",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Boca Juniors",
-      "id": "1281529",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Central Cordoba",
-      "id": "6246478",
       "checked": true,
       "side": "A"
     }

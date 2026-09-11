@@ -25,6 +25,11 @@ def calculate_lambdas(home_stats, away_stats, league_avg, league_id=None, home_n
     sxga_home = xg_data_home["xGA_home"]
     sxga_away = xg_data_away["xGA_away"]
 
+    # Guarda contra divisão por zero (início de temporada ou liga sem dados)
+    if avg_home == 0 or avg_away == 0:
+        print(f"  ⚠️ Média da liga é zero (avg_home={avg_home}, avg_away={avg_away}). Pulando cálculo de lambda.")
+        return None, None
+
     # 2. Calcular Fatores de Força (Attack/Defense Strength)
     # Se a liga faz avg_home = 1.5 gols e o time gera 2.0 xG em casa, sua força é 1.33
     h_attack = sxg_home / avg_home
@@ -71,6 +76,11 @@ def scan_match(fixture, model, targets, source='API-Football'):
     from analysis.odds_fetcher import fetch_odds_cascade, fetch_h2h, fetch_must_win
     
     match_odd, btts_odd, odds_source = fetch_odds_cascade(fixture)
+    
+    if btts_odd is not None and float(btts_odd) < 1.80:
+        print(f"  ⚠️ Jogo {home_team['name']} x {away_team['name']} rejeitado: Odd BTTS muito baixa ({btts_odd}). Mínimo exigido: 1.80.")
+        return None
+        
     h2h_home, h2h_away = fetch_h2h(fixture_info['id'])
     
     must_win_home = fetch_must_win(home_team['id'], league_info['id'])

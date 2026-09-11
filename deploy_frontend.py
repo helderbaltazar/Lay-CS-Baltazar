@@ -17,8 +17,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-RENDER_API_KEY = os.getenv("RENDER_API_KEY", "rnd_S8cQDmEMslEPkYDWfsZ6hEWMWXYM")
-RENDER_SERVICE_ID = os.getenv("RENDER_SERVICE_ID", "srv-da87ptijnfac73d2o9p0")
+RENDER_API_KEY = os.getenv("RENDER_API_KEY")
+RENDER_SERVICE_ID = os.getenv("RENDER_SERVICE_ID")
+
+if not RENDER_API_KEY or not RENDER_SERVICE_ID:
+    print("❌ RENDER_API_KEY e RENDER_SERVICE_ID devem estar definidos como variáveis de ambiente.")
+    sys.exit(1)
+
 BASE_URL = "https://api.render.com/v1"
 HEADERS = {
     "Authorization": f"Bearer {RENDER_API_KEY}",
@@ -27,8 +32,12 @@ HEADERS = {
 }
 
 LIVE_URL = "https://lay-cs-baltazar.onrender.com"
-DASHBOARD_USERNAME = os.getenv("DASHBOARD_USERNAME", "helderbaltazar")
-DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD", "Bonde74812005")
+DASHBOARD_USERNAME = os.getenv("DASHBOARD_USERNAME")
+DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD")
+
+if not DASHBOARD_USERNAME or not DASHBOARD_PASSWORD:
+    print("❌ DASHBOARD_USERNAME e DASHBOARD_PASSWORD devem estar definidos como variáveis de ambiente.")
+    sys.exit(1)
 
 
 def run_local_ui_tests():
@@ -44,11 +53,14 @@ def run_local_ui_tests():
 
 def sync_environment_variables():
     print("\n--- 2. SINCRONIZANDO VARIÁVEIS DE AMBIENTE NO RENDER ---")
-    db_url = os.getenv("DATABASE_URL", "postgresql://postgres.dewniwkvwicalcvmoccc:B%40nde74812005@aws-0-us-east-1.pooler.supabase.com:5432/postgres")
+    db_url = os.getenv("DATABASE_URL")
+    if not db_url:
+        print("❌ DATABASE_URL deve estar definida como variável de ambiente para deploy.")
+        sys.exit(1)
     
     # Garante pooler IPv4 se contiver porta direta
     if "db.dewniwkvwicalcvmoccc.supabase.co" in db_url:
-        db_url = "postgresql://postgres.dewniwkvwicalcvmoccc:B%40nde74812005@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+        db_url = db_url.replace("db.dewniwkvwicalcvmoccc.supabase.co", "aws-0-us-east-1.pooler.supabase.com")
 
     env_vars = [
         {"key": "PYTHON_VERSION", "value": "3.12.3"},

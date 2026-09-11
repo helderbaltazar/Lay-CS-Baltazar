@@ -6,6 +6,52 @@ from data.api_football import get_headers
 import datetime
 import pytz
 
+
+def resolve_prediction(pred, real_score, fixture_data=None):
+    """Resolve uma predição com base no tipo de mercado e placar real.
+    
+    Para Lay CS clássico (0-1, 0-2, etc.): Green se o placar NÃO aconteceu.
+    Para UNDER_X.5_HT: Green se total de gols no HT < X.
+    """
+    target = pred.target_score
+    
+    # Mercados UNDER do Half-Time
+    if target.startswith("UNDER_") and target.endswith("_HT"):
+        # Precisamos dos gols do HT para resolver
+        ht_goals = None
+        if fixture_data:
+            score = fixture_data.get('score', {})
+            halftime = score.get('halftime', {})
+            ht_home = halftime.get('home')
+            ht_away = halftime.get('away')
+            if ht_home is not None and ht_away is not None:
+                ht_goals = ht_home + ht_away
+        
+        if ht_goals is None:
+            # Sem dados de HT, não podemos resolver
+            return None, None
+        
+        # Extrair o threshold do nome do mercado (ex: UNDER_0.5_HT -> 0.5)
+        try:
+            threshold = float(target.replace("UNDER_", "").replace("_HT", ""))
+        except ValueError:
+            return None, None
+        
+        # Lay UNDER = apostamos CONTRA dar under. Green se DEU under (gols < threshold)
+        # Na verdade, para Lay CS a lógica é: estamos fazendo LAY no mercado.
+        # Lay Under 0.5 HT = apostamos que haverá 1+ gols no HT.
+        # Green = Under 0.5 HT NÃO aconteceu (ou seja, houve gols)
+        is_hit = ht_goals >= threshold  # Green se Under NÃO bateu
+        profit = 0.935 if is_hit else -10.0
+        return is_hit, profit
+    
+    # Mercados Lay Correct Score clássicos (0-1, 0-2, 0-3, 1-3)
+    # Green se o placar exato NÃO aconteceu
+    is_hit = (real_score != target)
+    profit = 0.935 if is_hit else -10.0
+    return is_hit, profit
+
+
 def update_pending_matches():
     print("\\n--- ATUALIZANDO RESULTADOS PENDENTES ---")
     db = SessionLocal()
@@ -25,7 +71,7 @@ def update_pending_matches():
         print(f"Buscando placares da data {date_str} na API (1 Request)...")
         url = f"{config.BASE_URL}/fixtures?date={date_str}&timezone={config.SCHEDULER_TIMEZONE}"
         try:
-            resp = requests.get(url, headers=get_headers())
+            resp = requests.get(url, headers=get_headers(), timeout=30)
             data = resp.json()
             if data['response']:
                 fixtures_dict = {f['fixture']['id']: f for f in data['response']}
@@ -46,11 +92,12 @@ def update_pending_matches():
                                 print(f"Atualizado: {match.home_team} {real_score} {match.away_team}")
                                 
                                 for pred in match.predictions:
-                                    pred.is_hit = (real_score != pred.target_score)
-                                    if pred.is_hit:
-                                        pred.profit_loss = 0.935
+                                    is_hit, profit = resolve_prediction(pred, real_score, fix)
+                                    if is_hit is not None:
+                                        pred.is_hit = is_hit
+                                        pred.profit_loss = profit
                                     else:
-                                        pred.profit_loss = -10.0
+                                        print(f"  ⚠️ Não foi possível resolver {pred.target_score} (dados insuficientes)")
                         else:
                             print(f"Jogo {match.home_team} x {match.away_team} ainda com status {status}")
         except Exception as e:
@@ -62,3 +109,4 @@ def update_pending_matches():
 
 if __name__ == "__main__":
     update_pending_matches()
+
