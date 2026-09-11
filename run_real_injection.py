@@ -188,15 +188,15 @@ def ensure_data_in_db():
 
                 to_audit = []
                 to_fallback = []
-                # A IA foi treinada/promptada especificamente para Lay Correct Score
-                lay_cs_markets = {"0-1", "0-2", "0-3", "1-3"}
+                # Mercados sujeitos à auditoria de IA (todos os targets configurados: Lay CS e UNDER_X_HT)
+                auditable_markets = set(config.TARGET_SCORES)
                 for market, preds in per_market.items():
                     sorted_preds = sorted(preds, key=lambda x: x.power_score or 0, reverse=True)
-                    if market in lay_cs_markets:
+                    if market in auditable_markets:
                         to_audit.extend(sorted_preds[:AI_TOP_N_PER_MARKET])
                         to_fallback.extend(sorted_preds[AI_TOP_N_PER_MARKET:])
                     else:
-                        # Mercados de Under/Over são governados pelas regras matemáticas estatísticas
+                        # Outros mercados (extras ou não-alvo) caem no fallback heurístico matemático
                         to_fallback.extend(sorted_preds)
 
                 # Aplica fallback heurístico nos jogos fora do Top ou de outros mercados
