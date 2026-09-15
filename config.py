@@ -5,7 +5,7 @@ load_dotenv()
 
 API_KEY = os.getenv("API_FOOTBALL_KEY", "")
 ODDS_API_KEY = os.getenv("ODDS_API_KEY", "")
-RAPID_API_KEY = os.getenv("RAPID_API_KEY", "")
+RAPID_API_KEY = os.getenv("RAPIDAPI_KEY", os.getenv("RAPID_API_KEY", ""))
 BASE_URL = "https://v3.football.api-sports.io"
 RAPID_API_URL = "https://api-football-v1.p.rapidapi.com/v3"
 
