@@ -179,8 +179,8 @@ def ensure_data_in_db():
                 Prediction.ai_confidence.is_(None)
             ).all()
             if unanalysed:
-                # Top 15 por mercado — plano pago Gemini, cobre todos os jogos relevantes do dashboard
-                AI_TOP_N_PER_MARKET = 15
+                # Sem limites matemáticos. Todos os jogos que passaram pelo filtro BTTS vão pro agente!
+                AI_TOP_N_PER_MARKET = 500
                 from collections import defaultdict
                 per_market = defaultdict(list)
                 for p in unanalysed:
@@ -191,13 +191,10 @@ def ensure_data_in_db():
                 # Mercados sujeitos à auditoria de IA (todos os targets configurados: Lay CS e UNDER_X_HT)
                 auditable_markets = set(config.TARGET_SCORES)
                 for market, preds in per_market.items():
-                    sorted_preds = sorted(preds, key=lambda x: x.power_score or 0, reverse=True)
                     if market in auditable_markets:
-                        to_audit.extend(sorted_preds[:AI_TOP_N_PER_MARKET])
-                        to_fallback.extend(sorted_preds[AI_TOP_N_PER_MARKET:])
+                        to_audit.extend(preds)
                     else:
-                        # Outros mercados (extras ou não-alvo) caem no fallback heurístico matemático
-                        to_fallback.extend(sorted_preds)
+                        to_fallback.extend(preds)
 
                 # Aplica fallback heurístico nos jogos fora do Top ou de outros mercados
                 for p in to_fallback:
@@ -304,27 +301,23 @@ def inject_from_db():
         else: threshold = 85.0
         
         
-        # Filtro base do banco de dados
+        # Filtro base do banco de dados (ignorando Poisson/power_score, dependendo apenas do veredito da IA)
         if "UNDER_" in target:
-            # Para Unders, não restringimos a odd do match winner (porque não é relevante pro Layback aqui)
             preds = db.query(Prediction).join(Match).filter(
                 Prediction.target_score == target,
-                Prediction.power_score >= threshold,
-                Prediction.ai_verdict != 'REPROVADO',
+                Prediction.ai_verdict == 'APROVADO',
                 Match.date >= today_start
-            ).order_by(
-                Prediction.power_score.desc().nullslast(),
             ).all()
         else:
             from sqlalchemy import or_
             preds = db.query(Prediction).join(Match).filter(
                 Prediction.target_score == target,
-                Prediction.power_score >= threshold,
-                Prediction.ai_verdict != 'REPROVADO',
-                or_(Prediction.match_odd == None, Prediction.match_odd <= 2.0),
-                Match.date >= today_start
-            ).order_by(
-                Prediction.power_score.desc().nullslast(),
+                Prediction.ai_verdict == 'APROVADO',
+                Match.date >= today_start,
+                or_(
+                    Prediction.match_odd == None,
+                    Prediction.match_odd <= 3.50
+                )
             ).all()
         
         if not preds:
