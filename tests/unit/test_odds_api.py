@@ -132,28 +132,30 @@ class TestOddsApiClient:
 class TestDataManagerFallbackChain:
     """Tests for the 3-level fallback in DataManager."""
 
-    @patch("data.data_manager.api_get_fixtures", return_value=[{"fixture": {"id": 1}}])
-    def test_primary_source_used_first(self, mock_api):
-        """When API-Football works, should use it."""
+    @patch("data.datafootball_api.get_fixtures", return_value=[{"fixture": {"id": 9}}])
+    def test_primary_source_used_first(self, mock_df):
+        """When DataFootball works, should use it."""
         from data.data_manager import DataManager
         fixtures, source = DataManager.get_fixtures("2026-09-03")
-        assert source == "API-Football"
+        assert source == "DataFootball"
         assert len(fixtures) == 1
 
+    @patch("data.datafootball_api.get_fixtures", return_value=[])
     @patch("data.data_manager.odds_get_fixtures", return_value=[{"fixture": {"id": 3}}])
     @patch("data.data_manager.fd_get_fixtures", return_value=[])
     @patch("data.data_manager.api_get_fixtures", return_value=[])
-    def test_falls_through_to_odds_api(self, mock_api, mock_fd, mock_odds):
-        """When both API-Football and Football-Data fail, should use Odds API."""
+    def test_falls_through_to_odds_api(self, mock_api, mock_fd, mock_odds, mock_df):
+        """When DataFootball, API-Football and Football-Data fail, should use Odds API."""
         from data.data_manager import DataManager
         fixtures, source = DataManager.get_fixtures("2026-09-03")
         assert source == "Odds-API"
         assert len(fixtures) == 1
 
+    @patch("data.datafootball_api.get_fixtures", return_value=[])
     @patch("data.data_manager.odds_get_fixtures", return_value=[])
     @patch("data.data_manager.fd_get_fixtures", return_value=[])
     @patch("data.data_manager.api_get_fixtures", return_value=[])
-    def test_all_sources_fail_returns_empty(self, mock_api, mock_fd, mock_odds):
+    def test_all_sources_fail_returns_empty(self, mock_api, mock_fd, mock_odds, mock_df):
         """When all sources fail, should return empty list."""
         from data.data_manager import DataManager
         fixtures, source = DataManager.get_fixtures("2026-09-03")
