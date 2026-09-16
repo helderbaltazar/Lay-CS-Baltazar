@@ -66,6 +66,90 @@ def calculate_lambdas(home_stats, away_stats, league_avg, league_id=None, home_n
     return lam_home, lam_away
 
 def scan_match(fixture, model, targets, source='API-Football'):
+    if source == 'DataFootball':
+        return _scan_match_datafootball(fixture, model, targets)
+    return _scan_match_apifootball(fixture, model, targets, source)
+
+def _scan_match_datafootball(fixture, model, targets):
+    from models.match_context import MatchContext
+    
+    # 1. Dados Básicos
+    fixture_id = fixture.get('id')
+    date_str = fixture.get('date')
+    status = fixture.get('status')
+    league_name = fixture.get('league')
+    home_name = fixture.get('home_name')
+    away_name = fixture.get('away_name')
+    
+    # 2. Odds e Validação BTTS
+    btts_odd = fixture.get('odds_btts_yes')
+    if btts_odd is not None and float(btts_odd) < 1.80:
+        print(f"  ⚠️ Jogo {home_name} x {away_name} rejeitado: Odd BTTS muito baixa ({btts_odd}). Mínimo exigido: 1.80.")
+        return None
+        
+    match_odd = fixture.get('odds_ft_1')
+    
+    # 3. Contexto (MatchContext)
+    match_context = MatchContext(
+        fixture_id=fixture_id,
+        home_team=home_name,
+        away_team=away_name,
+        match_odd=match_odd,
+        btts_odd=btts_odd,
+        h2h_home=0,
+        h2h_away=0,
+        must_win=False,
+        odds_source="DataFootball"
+    )
+    # Adicionando atributos novos dinamicamente para uso na IA
+    match_context.avg_potential = fixture.get('avg_potential')
+    match_context.o05HT_potential = fixture.get('o05HT_potential')
+    match_context.btts_potential = fixture.get('btts_potential')
+    match_context.u25_potential = fixture.get('u25_potential')
+    match_context.pre_match_home_ppg = fixture.get('pre_match_home_ppg')
+    match_context.pre_match_away_ppg = fixture.get('pre_match_away_ppg')
+    
+    # 4. Lambdas via xG (Expected Goals pre-match)
+    lam_home = fixture.get('team_a_xg_prematch')
+    lam_away = fixture.get('team_b_xg_prematch')
+    
+    if lam_home is None or lam_away is None or (lam_home == 0 and lam_away == 0):
+        h_ppg = fixture.get('pre_match_home_ppg', 1.0)
+        a_ppg = fixture.get('pre_match_away_ppg', 1.0)
+        lam_home = max(0.5, h_ppg * 1.1)
+        lam_away = max(0.5, a_ppg * 0.9)
+
+    lam_home = max(0.2, min(lam_home, 5.0))
+    lam_away = max(0.2, min(lam_away, 5.0))
+
+    # 5. Probabilidades Poisson
+    probs = model.get_probabilities(lam_home, lam_away, targets)
+    extra_probs = model.get_extra_probabilities(lam_home, lam_away)
+    
+    real_score = None
+    if status in ['complete']:
+        if fixture.get('homeGoalCount') is not None and fixture.get('awayGoalCount') is not None:
+            real_score = f"{fixture['homeGoalCount']}-{fixture['awayGoalCount']}"
+
+    return {
+        'fixture_id': fixture_id,
+        'date': f"{date_str}T{fixture.get('time', '00:00:00')}+00:00",
+        'status': status,
+        'real_score': real_score,
+        'league': league_name,
+        'home': home_name,
+        'away': away_name,
+        'lambda_home': lam_home,
+        'lambda_away': lam_away,
+        'probabilities': probs,
+        'extra_probabilities': extra_probs,
+        'match_odd': match_odd,
+        'home_streak': None,
+        'away_streak': None,
+        'match_context': match_context
+    }
+
+def _scan_match_apifootball(fixture, model, targets, source='API-Football'):
     fixture_info = fixture['fixture']
     league_info = fixture['league']
     home_team = fixture['teams']['home']

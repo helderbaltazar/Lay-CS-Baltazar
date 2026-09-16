@@ -12,21 +12,28 @@ class DataManager:
     """
     @staticmethod
     def get_fixtures(date_str):
-        # 1. Tentar API-Football (Principal)
+        # 1. Tentar DataFootball (Nova API Principal)
+        from data.datafootball_api import get_fixtures as df_get_fixtures
+        df_fixtures = df_get_fixtures(date_str)
+        if df_fixtures:
+            # Não precisamos traduzir, o scanner será refatorado para aceitar o formato DataFootball
+            return df_fixtures, "DataFootball"
+            
+        # 2. Se falhar, tentar API-Football (Fallback 1)
+        print("⚠️ DataFootball falhou ou retornou vazio. Tentando Fallback (API-Football)...")
         fixtures = api_get_fixtures(date_str)
         if fixtures:
             return fixtures, "API-Football"
             
-        # 2. Se falhar, tentar Football-Data.org (Fallback #1)
-        print("⚠️ API-Football falhou ou retornou vazio. Tentando Fallback (Football-Data.org)...")
+        # 3. Se falhar, tentar Football-Data.org (Fallback 2)
+        print("⚠️ API-Football falhou. Tentando Fallback (Football-Data.org)...")
         fd_fixtures = fd_get_fixtures(date_str)
         if fd_fixtures:
-            # Precisa traduzir o formato do Football-Data para o formato esperado pelo scanner
             translated = DataManager._translate_fd_fixtures(fd_fixtures)
             return translated, "Football-Data"
 
-        # 3. Se falhar, tentar Odds API (Fallback #2)
-        print("⚠️ Football-Data.org também falhou. Tentando Fallback (Odds API)...")
+        # 4. Se falhar, tentar Odds API (Fallback 3)
+        print("⚠️ Football-Data.org falhou. Tentando Fallback (Odds API)...")
         odds_fixtures = odds_get_fixtures(date_str)
         if odds_fixtures:
             return odds_fixtures, "Odds-API"

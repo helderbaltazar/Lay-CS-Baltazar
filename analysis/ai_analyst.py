@@ -44,10 +44,29 @@ class AIAnalyst:
         prob_pct = round(prob_poisson * 100, 2)
         
         ctx = match_info.get('match_context', {})
-        btts_odd = ctx.get('btts_odd')
-        h2h_home = ctx.get('h2h_home')
-        h2h_away = ctx.get('h2h_away')
-        must_win = ctx.get('must_win')
+        btts_odd = ctx.get('btts_odd') if isinstance(ctx, dict) else getattr(ctx, 'btts_odd', None)
+        h2h_home = ctx.get('h2h_home') if isinstance(ctx, dict) else getattr(ctx, 'h2h_home', None)
+        h2h_away = ctx.get('h2h_away') if isinstance(ctx, dict) else getattr(ctx, 'h2h_away', None)
+        must_win = ctx.get('must_win') if isinstance(ctx, dict) else getattr(ctx, 'must_win', None)
+        
+        match_context = ctx
+        datafootball_stats = ""
+        avg_pot = None
+        if isinstance(match_context, dict):
+            avg_pot = match_context.get('avg_potential')
+        elif match_context is not None and hasattr(match_context, 'avg_potential'):
+            avg_pot = match_context.avg_potential
+            
+        if avg_pot is not None:
+            get_val = lambda k, d='N/A': match_context.get(k, d) if isinstance(match_context, dict) else getattr(match_context, k, d)
+            datafootball_stats = f"""
+[Estatísticas Consolidadas (DataFootball)]
+- PPG (Pontos por Jogo) Casa: {get_val('pre_match_home_ppg')}
+- PPG Visitante: {get_val('pre_match_away_ppg')}
+- Gols Esperados (Média Potencial): {avg_pot}
+- Probabilidade Histórica de BTTS: {get_val('btts_potential')}%
+- Probabilidade Histórica de Under 2.5: {get_val('u25_potential')}%
+"""
         
         ctx_str = ""
         if ctx:
@@ -90,6 +109,7 @@ PARTIDA PARA AUDITORIA:
 - Força de Ataque (λ): Mandante (λ={lam_home:.2f}), Visitante (λ={lam_away:.2f})
 - Match Odd Mandante (1x2): {market_odd}
 - Smart Money Boost (Decaimento das Odds): +{ai_boost}%{opta_str}{ctx_str}
+{datafootball_stats}
 
 {rules}
 
