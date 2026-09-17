@@ -35,13 +35,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Restore API-Football Cache
+      - name: Restore Orchestrator Cache (API + Dados Pendentes)
         uses: actions/cache@v4
         with:
           path: cache/
-          key: api-cache-${{ runner.os }}-${{ github.run_id }}
+          key: orchestrator-cache-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
-            api-cache-${{ runner.os }}-
+            orchestrator-cache-${{ runner.os }}-
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -58,7 +58,7 @@ jobs:
           playwright install chromium
           playwright install-deps
 
-      - name: Smoke Test (Fase 0)
+      - name: Smoke Test (Fase 0) — Bloqueia se falhar
         run: pytest tests/unit/ -v --tb=short -x
 
       - name: Diagnóstico — Verificar Cookies Layback no Banco
@@ -66,7 +66,14 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python scripts/verify_cookies.py
 
-      - name: Run Injection Script
+      - name: Atualizar Power Rankings (Opta)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python scripts/update_opta_rankings.py || echo "⚠️ Falha ao buscar Opta. Continuando sem atualização."
+
+      - name: 🤖 Executar Agente Orquestrador (Auto-Healing)
+        timeout-minutes: 35
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
@@ -79,28 +86,15 @@ jobs:
           PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
           PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
           PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
-          # Supondo que você precisa passar pro config.py:
-          # O script lerá do environment (os.getenv) se estiver configurado
-        run: |
-          echo "Buscando dados globais da Opta (Power Rankings)..."
-          python scripts/update_opta_rankings.py || echo "Falha ao buscar Opta. Continuando sem atualização."
-          
-          for i in 1 2 3; do
-            echo "Iniciando tentativa $i..."
-            python run_real_injection.py && break || {
-              echo "Tentativa $i falhou. Aguardando 15s para tentar de novo..."
-              sleep 15
-            }
-            if [ $i -eq 3 ]; then
-              echo "Todas as 3 tentativas falharam."
-              exit 1
-            fi
-          done
+        run: python agents/orchestrator.py
 
-      - name: Upload Debug Screenshots
-        if: failure()
+      - name: Upload Logs de Incidentes e Screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: debug-screenshots
-          path: logs/
+          name: orchestrator-logs-${{ github.run_id }}
+          path: |
+            logs/
+            cache/orchestrator_incidents.jsonl
           if-no-files-found: warn
+
