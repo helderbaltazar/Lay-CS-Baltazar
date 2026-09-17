@@ -136,55 +136,39 @@ class OrchestratorAgent:
             return None
         return result
 
-    # ── Handlers de falha por passo ──────────────────────────────
-    def _handle_scanner_failure(self, exc: Exception):
-        """Quando o scanner falha após 10 min: salva estado e alerta."""
-        write_incident_report({"step": "scanner", "error": str(exc), "resolved": False})
-        save_pending_to_cache({"step": "scanner", "saved_at": _now(), "matches": None})
+    # ── Handlers de falha por passo (AGORA COM LLM) ──────────────
+    def _handle_failure_with_ai(self, step_name: str, exc: Exception, data=None):
+        """Envia para o Gemini SRE tentar resolver e retorna True se devemos tentar de novo agora."""
+        import traceback
+        from agents.react_agent import diagnose_and_heal
+        
+        tb_str = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+        print(f"[Orchestrator] 🚨 Erro crítico em '{step_name}'. Acionando Agente SRE...")
+        
+        will_retry = diagnose_and_heal(step=step_name, error_msg=str(exc), traceback_str=tb_str)
+        
+        if will_retry:
+            print(f"[Orchestrator] ♻️ Agente aplicou correção. O Orquestrador vai tentar o passo '{step_name}' novamente na próxima iteração.")
+            return True
+            
+        # Agente não conseguiu resolver na hora -> salvar cache e abortar
+        write_incident_report({"step": step_name, "error": str(exc), "resolved": False})
+        save_pending_to_cache({"step": step_name, "saved_at": _now(), "matches": data})
         send_telegram_alert(
-            f"🚨 Scanner falhou após 10 min: {exc}\n"
-            "Dados pendentes salvos em cache para próxima execução.",
+            f"🚨 SRE Agent não conseguiu curar a falha em '{step_name}': {str(exc)[:100]}\nDados salvos em cache.",
             level="critical",
         )
+        return False
+
+    def _handle_scanner_failure(self, exc: Exception):
+        self._handle_failure_with_ai("scanner", exc)
 
     def _handle_ai_failure(self, exc: Exception, matches: list):
-        """Quando a IA falha após 10 min: ativa fallback e re-tenta."""
-        print("[Orchestrator] 🔄 IA falhou — ativando modo fallback estatístico...")
-        trigger_fallback_mode()
-        write_incident_report({"step": "ai_analysis", "error": str(exc), "action": "fallback_activated"})
-        save_pending_to_cache({"step": "ai_analysis", "saved_at": _now(), "matches": matches})
-        send_telegram_alert(
-            f"⚠️ IA indisponível ({exc}). Fallback ativado para próxima execução.",
-            level="warning",
-        )
+        self._handle_failure_with_ai("ai_analysis", exc, matches)
 
     def _handle_injection_failure(self, exc: Exception, analyzed: list):
-        """
-        Quando a injeção no LayBack falha após 10 min:
-        1. Tenta re-login automático (aprovado pelo usuário)
-        2. Se persistir, salva análises em cache para reprocessar depois
-        """
-        error_msg = str(exc).lower()
-        if "cookie" in error_msg or "login" in error_msg or "auth" in error_msg or "401" in error_msg:
-            print("[Orchestrator] 🔑 Detectada falha de autenticação — tentando re-login...")
-            refresh_result = refresh_layback_cookies()
-            if refresh_result.get("success"):
-                # Re-login funcionou — salva análises para próxima tentativa
-                save_pending_to_cache({"step": "injection", "saved_at": _now(), "matches": analyzed})
-                send_telegram_alert(
-                    "🔑 Re-login automático bem-sucedido. Análises salvas em cache para próxima execução.",
-                    level="info",
-                )
-                return
+        self._handle_failure_with_ai("layback_injection", exc, analyzed)
 
-        # Falha genérica de injeção
-        save_pending_to_cache({"step": "injection", "saved_at": _now(), "matches": analyzed})
-        send_telegram_alert(
-            f"🚨 Injeção LayBack falhou após 10 min: {exc}\n"
-            "Análises salvas em cache — serão injetadas na próxima execução.",
-            level="critical",
-        )
-        write_incident_report({"step": "layback_injection", "error": str(exc), "resolved": False})
 
     # ── Sub-rotinas de execução dos passos reais ─────────────────
     def _run_scanner(self) -> list:
