@@ -86,7 +86,8 @@ jobs:
           PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
           PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
           PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
-        run: python agents/orchestrator.py
+          PYTHONPATH: ${{ github.workspace }}
+        run: python -m agents.orchestrator
 
       - name: Upload Logs de Incidentes e Screenshots
         if: always()
@@ -97,4 +98,5 @@ jobs:
             logs/
             cache/orchestrator_incidents.jsonl
           if-no-files-found: warn
+
 
