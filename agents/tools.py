@@ -29,9 +29,22 @@ def check_api_status(timeout: int = 5) -> dict:
     Returns: {"status": "healthy"|"degraded", "errors": [...]}
     """
     errors = []
+    
+    # Configurar proxy se existir no ambiente
+    proxies = None
+    proxy_server = os.getenv("PROXY_SERVER")
+    if proxy_server:
+        proxy_user = os.getenv("PROXY_USERNAME")
+        proxy_pass = os.getenv("PROXY_PASSWORD")
+        if proxy_user and proxy_pass:
+            auth_url = f"http://{proxy_user}:{proxy_pass}@{proxy_server}"
+            proxies = {"http": auth_url, "https": auth_url}
+        else:
+            proxies = {"http": f"http://{proxy_server}", "https": f"http://{proxy_server}"}
+
     for name, url in ENDPOINTS.items():
         try:
-            resp = requests.get(url, timeout=timeout)
+            resp = requests.get(url, timeout=timeout, proxies=proxies)
             if resp.status_code >= 500:
                 errors.append(f"{name}: HTTP {resp.status_code}")
         except Exception as e:
