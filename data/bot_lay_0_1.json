@@ -3,38 +3,14 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Az Alkmaar",
-      "id": "1996501",
+      "name": "Sloga Doboj",
+      "id": "1995287",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Willem II",
-      "id": "1946209",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Necaxa",
-      "id": "1991665",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Puebla",
-      "id": "1991619",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Boca Juniors",
-      "id": "1281529",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Central Cordoba",
-      "id": "6246478",
+      "name": "Borac Banja Luka",
+      "id": "1919037",
       "checked": true,
       "side": "A"
     }

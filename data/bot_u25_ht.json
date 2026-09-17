@@ -3,74 +3,26 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Defensa y Justicia",
-      "id": "1277889",
+      "name": "El Gounah",
+      "id": "1994764",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Gimnasia Mendoza",
-      "id": "1596056",
+      "name": "Petrojet",
+      "id": "2118251",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Boca Juniors",
-      "id": "1281529",
+      "name": "El Gounah",
+      "id": "1994764",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Central Cordoba",
-      "id": "6246478",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Newell's Old Boy's (W)",
-      "id": "6248582",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Velez Sarsfield",
-      "id": "1316640",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Boca Juniors",
-      "id": "1281529",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Central Cordoba",
-      "id": "6246478",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Defensa y Justicia",
-      "id": "1277889",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Gimnasia Mendoza",
-      "id": "1596056",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Newell's Old Boy's (W)",
-      "id": "6248582",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Velez Sarsfield",
-      "id": "1316640",
+      "name": "Petrojet",
+      "id": "2118251",
       "checked": true,
       "side": "A"
     }

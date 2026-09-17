@@ -3,122 +3,62 @@
   "betOnNewTeam": true,
   "teams": [
     {
-      "name": "Boca Juniors",
-      "id": "1281529",
+      "name": "Sloga Doboj",
+      "id": "1995287",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Central Cordoba",
-      "id": "6246478",
+      "name": "Borac Banja Luka",
+      "id": "1919037",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Besiktas",
-      "id": "1994306",
+      "name": "Ghazl El Mahallah",
+      "id": "1946342",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Erzurum BB",
-      "id": "1992172",
+      "name": "Zamalek",
+      "id": "1995744",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Al-Adalh",
-      "id": "2119112",
+      "name": "Bastia",
+      "id": "1946490",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Al-Hazm (KSA)",
-      "id": "1995766",
+      "name": "Gent",
+      "id": "2116962",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Union Berlin",
-      "id": "1946557",
+      "name": "Ostia Mare Lido",
+      "id": "6248866",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Schalke 04",
-      "id": "1946213",
+      "name": "Ravenna",
+      "id": "1319964",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Defensa y Justicia",
-      "id": "1277889",
+      "name": "Ben Guerdane",
+      "id": "1994737",
       "checked": true,
       "side": "A"
     },
     {
-      "name": "Gimnasia Mendoza",
-      "id": "1596056",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Coritiba",
-      "id": "1277302",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Atletico Barinas",
-      "id": "6240276",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Cienciano",
-      "id": "1497238",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Atletico Grau",
-      "id": "2122579",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Al Faisaly SC",
-      "id": "1277228",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Al-Ittihad",
-      "id": "1946125",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Necaxa",
-      "id": "1991665",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Puebla",
-      "id": "1991619",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Az Alkmaar",
-      "id": "1996501",
-      "checked": true,
-      "side": "A"
-    },
-    {
-      "name": "Willem II",
-      "id": "1946209",
+      "name": "Club Sportif Sfaxien",
+      "id": "1994743",
       "checked": true,
       "side": "A"
     }

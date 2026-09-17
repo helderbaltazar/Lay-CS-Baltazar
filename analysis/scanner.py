@@ -102,12 +102,20 @@ def _scan_match_datafootball(fixture, model, targets):
         odds_source="DataFootball"
     )
     # Adicionando atributos novos dinamicamente para uso na IA
-    match_context.avg_potential = fixture.get('avg_potential')
-    match_context.o05HT_potential = fixture.get('o05HT_potential')
-    match_context.btts_potential = fixture.get('btts_potential')
-    match_context.u25_potential = fixture.get('u25_potential')
-    match_context.pre_match_home_ppg = fixture.get('pre_match_home_ppg')
-    match_context.pre_match_away_ppg = fixture.get('pre_match_away_ppg')
+    if isinstance(match_context, dict):
+        match_context['avg_potential'] = fixture.get('avg_potential')
+        match_context['o05HT_potential'] = fixture.get('o05HT_potential')
+        match_context['btts_potential'] = fixture.get('btts_potential')
+        match_context['u25_potential'] = fixture.get('u25_potential')
+        match_context['pre_match_home_ppg'] = fixture.get('pre_match_home_ppg')
+        match_context['pre_match_away_ppg'] = fixture.get('pre_match_away_ppg')
+    else:
+        match_context.avg_potential = fixture.get('avg_potential')
+        match_context.o05HT_potential = fixture.get('o05HT_potential')
+        match_context.btts_potential = fixture.get('btts_potential')
+        match_context.u25_potential = fixture.get('u25_potential')
+        match_context.pre_match_home_ppg = fixture.get('pre_match_home_ppg')
+        match_context.pre_match_away_ppg = fixture.get('pre_match_away_ppg')
     
     # 4. Lambdas via xG (Expected Goals pre-match)
     lam_home = fixture.get('team_a_xg_prematch')

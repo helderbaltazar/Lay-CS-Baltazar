@@ -11,15 +11,9 @@ import database.models_db
 from database.db import Base
 
 @pytest.fixture(autouse=True)
-def setup_test_environment(monkeypatch):
-    test_engine = create_engine('sqlite:///:memory:')
-    test_session = sessionmaker(autocommit=False, autoflush=False, bind=test_engine)
-    
-    monkeypatch.setattr(database.db, 'engine', test_engine)
-    monkeypatch.setattr(database.db, 'SessionLocal', test_session)
-    
-    Base.metadata.create_all(bind=test_engine)
+def setup_test_environment():
+    Base.metadata.create_all(bind=database.db.engine)
     
     yield
     
-    Base.metadata.drop_all(bind=test_engine)
+    Base.metadata.drop_all(bind=database.db.engine)
