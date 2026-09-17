@@ -99,20 +99,23 @@ class TestTriggerFallbackMode:
 class TestSendTelegramAlert:
     def test_sends_message_successfully(self):
         from agents.tools import send_telegram_alert
-        with patch("agents.tools.requests.post") as mock_post:
+        with patch("agents.tools.requests.post") as mock_post, \
+             patch.dict("os.environ", {"TELEGRAM_BOT_TOKEN": "fake-token", "TELEGRAM_CHAT_ID": "123"}):
             mock_post.return_value.status_code = 200
             result = send_telegram_alert("Test alert", level="warning")
         assert result["sent"] is True
 
     def test_does_not_raise_if_telegram_fails(self):
         from agents.tools import send_telegram_alert
-        with patch("agents.tools.requests.post", side_effect=Exception("network error")):
+        with patch("agents.tools.requests.post", side_effect=Exception("network error")), \
+             patch.dict("os.environ", {"TELEGRAM_BOT_TOKEN": "fake-token", "TELEGRAM_CHAT_ID": "123"}):
             result = send_telegram_alert("Test alert", level="critical")
         assert result["sent"] is False
 
     def test_message_includes_level(self):
         from agents.tools import send_telegram_alert
-        with patch("agents.tools.requests.post") as mock_post:
+        with patch("agents.tools.requests.post") as mock_post, \
+             patch.dict("os.environ", {"TELEGRAM_BOT_TOKEN": "fake-token", "TELEGRAM_CHAT_ID": "123"}):
             mock_post.return_value.status_code = 200
             send_telegram_alert("Something broke", level="critical")
         payload = mock_post.call_args[1].get("json") or mock_post.call_args[0][1]
