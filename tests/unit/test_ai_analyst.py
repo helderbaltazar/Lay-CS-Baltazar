@@ -59,19 +59,46 @@ def test_parse_ai_json_with_markdown_ticks():
     assert parsed['confidence'] == 40
     assert 'poupado' in parsed['critical_factor']
 
-def test_fallback_analysis_low_prob():
-    match_info = {'home': 'Real Madrid', 'away': 'Getafe'}
-    analysis = AIAnalyst._fallback_analysis(match_info, '0-1', 0.03)
+@patch('data.cache.get')
+@patch('data.data_manager.DataManager.get_team_stats')
+def test_fallback_analysis_approved(mock_get_stats, mock_cache_get):
+    """Fallback aprova se todos os 5 critérios passarem."""
+    # Mock datafootball cache
+    mock_cache_get.return_value = [{
+        'home_name': 'Cruzeiro', 'away_name': 'Atletico',
+        'homeID': 1, 'awayID': 2, 'league': 3,
+        'odds_ft_1': 1.70, 'odds_btts_yes': 2.0, 'odds_ft_over25': 1.75
+    }]
+    # Mock team stats form
+    mock_get_stats.side_effect = [
+        {'form': 'WWWWW'}, # Home: 0 defeats
+        {'form': 'LDLLL'}  # Away: 0 wins
+    ]
+    
+    match_info = {'home': 'Cruzeiro', 'away': 'Atletico', 'league': 'Brasileirao'}
+    analysis = AIAnalyst._fallback_analysis(match_info, '0-1', 0.10)
+    
     assert analysis['verdict'] == 'APROVADO'
-    assert analysis['confidence'] >= 90
-    assert '0x1' in analysis['critical_factor']
-    assert analysis['adjustment_factor'] == 1.0
+    assert analysis['confidence'] == 90
+    assert 'Aprovado pelos 5 critérios' in analysis['critical_factor']
 
-def test_fallback_analysis_high_prob():
-    match_info = {'home': 'Time Fraco', 'away': 'Bayern'}
-    analysis = AIAnalyst._fallback_analysis(match_info, '0-1', 0.18)
+@patch('data.cache.get')
+@patch('data.data_manager.DataManager.get_team_stats')
+def test_fallback_analysis_vetoed(mock_get_stats, mock_cache_get):
+    """Fallback veta se algum critério falhar."""
+    # Veta porque odd_home >= 1.80
+    mock_cache_get.return_value = [{
+        'home_name': 'Cruzeiro', 'away_name': 'Atletico',
+        'homeID': 1, 'awayID': 2, 'league': 3,
+        'odds_ft_1': 1.90, 'odds_btts_yes': 2.0, 'odds_ft_over25': 1.75
+    }]
+    mock_get_stats.side_effect = [{'form': 'WWWWW'}, {'form': 'LDLLL'}]
+    
+    match_info = {'home': 'Cruzeiro', 'away': 'Atletico'}
+    analysis = AIAnalyst._fallback_analysis(match_info, '0-1', 0.20)
+    
     assert analysis['verdict'] == 'VETADO'
-    assert analysis['confidence'] == 82
+    assert 'Odd do Mandante' in analysis['critical_factor']
 
 def test_analyze_match_fallback_when_no_key(monkeypatch):
     monkeypatch.setattr(config, 'GEMINI_API_KEY', '')

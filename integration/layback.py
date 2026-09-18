@@ -64,6 +64,39 @@ def save_cookies_to_db(cookies):
     finally:
         db.close()
 
+def do_login_and_save_cookies():
+    from playwright.sync_api import sync_playwright
+    import config
+    
+    email = config.LAYBACK_EMAIL
+    password = config.LAYBACK_PASSWORD
+    
+    if not email or not password:
+        raise ValueError("Credenciais LAYBACK_EMAIL ou LAYBACK_PASSWORD nao configuradas no .env")
+        
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        )
+        page = context.new_page()
+        
+        logger.info("Navegando para pagina de login LayBack...")
+        page.goto(f"{BASE_URL}/auth/login", wait_until="networkidle")
+        
+        # Preenche as credenciais
+        page.fill("input[name='email']", email)
+        page.fill("input[name='password']", password)
+        
+        # Clica no botao e aguarda a navegacao para o dashboard
+        page.click("button[type='submit']")
+        page.wait_for_url(f"{BASE_URL}/", timeout=15000)
+        
+        logger.info("Login concluido. Extraindo cookies...")
+        cookies = context.cookies()
+        save_cookies_to_db(cookies)
+        browser.close()
+
 
 def get_layback_session():
     cookies_list = get_cookies_from_db()

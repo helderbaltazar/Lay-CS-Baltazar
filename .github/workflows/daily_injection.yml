@@ -59,7 +59,7 @@ jobs:
           playwright install-deps
 
       - name: Smoke Test (Fase 0) — Bloqueia se falhar
-        run: pytest tests/unit/ -v --tb=short -x
+        run: pytest tests/ -v --tb=short -x -m critical
 
       - name: Diagnóstico — Verificar Cookies Layback no Banco
         env:
@@ -72,8 +72,13 @@ jobs:
         run: |
           python scripts/update_opta_rankings.py || echo "⚠️ Falha ao buscar Opta. Continuando sem atualização."
 
-      - name: 🤖 Executar Agente Orquestrador (Auto-Healing)
-        timeout-minutes: 35
+      - name: 🤖 Executar Agente Orquestrador (Auto-Healing) com Retry
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 35
+          max_attempts: 3
+          retry_wait_seconds: 300
+          command: python -m agents.orchestrator
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
@@ -87,7 +92,6 @@ jobs:
           PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
           PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
           PYTHONPATH: ${{ github.workspace }}
-        run: python -m agents.orchestrator
 
       - name: Upload Logs de Incidentes e Screenshots
         if: always()

@@ -1,0 +1,15 @@
+{"ts": "2026-09-17T16:07:06.694358+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-17T16:07:06.699913+00:00", "event": "abort", "reason": "critical failure"}
+{"ts": "2026-09-17T16:08:58.338356+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-17T16:08:58.344938+00:00", "event": "abort", "reason": "critical failure"}
+{"ts": "2026-09-17T16:09:58.240697+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-17T16:09:58.246905+00:00", "event": "abort", "reason": "critical failure"}
+{"ts": "2026-09-17T16:32:46.282372+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-17T16:32:46.289176+00:00", "event": "abort", "reason": "critical failure"}
+{"ts": "2026-09-18 07:10:33", "step": "api_check", "error": "datafootball: HTTP 500", "action": "warning_logged"}
+{"ts": "2026-09-18T10:10:40.174482+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-18T10:10:40.182145+00:00", "event": "abort", "reason": "critical failure"}
+{"ts": "2026-09-18T10:11:26.225870+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-18T10:11:26.234079+00:00", "event": "abort", "reason": "critical failure"}
+{"ts": "2026-09-18T10:17:32.429217+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-18T10:17:32.437312+00:00", "event": "abort", "reason": "critical failure"}

@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
+import agents.react_agent
 
 @patch('agents.react_agent.genai')
 @patch('agents.react_agent.AVAILABLE_TOOLS')

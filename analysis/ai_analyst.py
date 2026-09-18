@@ -314,40 +314,106 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
     @classmethod
     def _fallback_analysis(cls, match_info: dict, target_score: str, prob_poisson: float, custom_reason: str = None) -> dict:
         """
-        Gera análise estatística contínua e precisa quando a IA estiver offline ou em limite de cota.
-        O grau de confiança no Lay varia proporcionalmente à segurança estatística de cada jogo.
+        Gera análise heurística de fallback sem IA.
+        Filtro aprovado pelo usuário com 5 critérios rigorosos:
+        - Odd Casa < 1.80
+        - Odd BTTS > 1.90
+        - Odd Over 2.5 < 1.80
+        - Casa: max_defeats_last5 == 0
+        - Visitante: max_wins_last5 <= 1
         """
         home_team = match_info.get('home', 'Mandante')
         away_team = match_info.get('away', 'Visitante')
+        league = match_info.get('league', '')
         target_display = target_score.replace('-', 'x')
-        prob_pct = prob_poisson * 100
         
-        # Confiança matemática exata no Lay = probabilidade de NÃO ocorrer o placar
-        calculated_conf = round(100.0 - prob_pct, 1)
-        calculated_conf_int = int(round(calculated_conf))
-        confidence = max(10, min(99, calculated_conf_int))
-
-        # Crivo de segurança: Se a probabilidade do placar for <= 12% (Confiança >= 88%), é Aprovado
-        if prob_pct <= 12.0:
-            verdict = 'APROVADO'
-            critical = custom_reason or f'Risco de apenas {prob_pct:.1f}% para {target_display} (Segurança de {calculated_conf:.1f}% no Lay).'
-            detailed = (
-                f'O modelo estatístico Poisson + Dixon-Coles indica {calculated_conf:.1f}% de probabilidade do placar {target_display} NÃO ocorrer. '
-                f'Mandante ({home_team}) com métricas favoráveis para anular o placar {target_display} contra {away_team}.'
-            )
-        else:
-            verdict = 'VETADO'
-            critical = f'Probabilidade de {target_display} ({prob_pct:.1f}%) acima do limite seguro para Lay.'
-            detailed = (
-                f'Partida vetada pelo crivo de segurança: o placar exato {target_display} possui {prob_pct:.1f}% de chance calculada, '
-                f'resultando em confiança de {calculated_conf:.1f}%, abaixo do patamar mínimo de 88% para Lay CS.'
-            )
+        # 1. Recuperar dados do cache do DataFootball
+        import datetime
+        from data import cache
+        from data.data_manager import DataManager
+        
+        date_str = datetime.date.today().strftime('%Y-%m-%d')
+        cached_fixtures = cache.get(f"df_fixtures_{date_str}")
+        
+        match_data = None
+        if cached_fixtures:
+            for f in cached_fixtures:
+                if f.get('home_name') == home_team and f.get('away_name') == away_team:
+                    match_data = f
+                    break
+                    
+        if not match_data:
+            return {
+                'verdict': 'VETADO',
+                'confidence': 10,
+                'critical_factor': 'Fallback falhou: Partida não encontrada no cache do DataFootball.',
+                'detailed_analysis': 'Não foi possível recuperar os dados de odds e estatísticas para aplicar os critérios do fallback.',
+                'adjustment_factor': 1.0
+            }
+            
+        # 2. Avaliar critérios de odds
+        odd_home = float(match_data.get('odds_ft_1') or 99)
+        odd_btts = float(match_data.get('odds_btts_yes') or 0)
+        odd_over25 = float(match_data.get('odds_ft_over25') or 99)
+        
+        if odd_home >= 1.80:
+            return cls._veto_fallback(target_display, f'Odd do Mandante ({odd_home}) >= 1.80')
+        if odd_btts <= 1.90:
+            return cls._veto_fallback(target_display, f'Odd BTTS ({odd_btts}) <= 1.90')
+        if odd_over25 >= 1.80:
+            return cls._veto_fallback(target_display, f'Odd Over 2.5 ({odd_over25}) >= 1.80')
+            
+        # 3. Avaliar forma (últimos 5)
+        # O scanner já usou o DataManager.get_team_stats e os guardou no cache do fbref/datafootball
+        home_id = match_data.get('homeID')
+        away_id = match_data.get('awayID')
+        league_id = match_data.get('league')
+        
+        home_stats = DataManager.get_team_stats(home_id, league_id, 'DataFootball')
+        away_stats = DataManager.get_team_stats(away_id, league_id, 'DataFootball')
+        
+        if not home_stats or not away_stats:
+            return cls._veto_fallback(target_display, 'Estatísticas de formulário indisponíveis no cache.')
+            
+        # Vamos assumir que as stats têm um campo 'last_5_results' ou podemos deduzir
+        # O FootballData/DataFootball costuma ter form como W,D,L... (por ex: "WWDLD")
+        home_form = home_stats.get('form', '')[:5]
+        away_form = away_stats.get('form', '')[:5]
+        
+        home_defeats = home_form.count('L')
+        away_wins = away_form.count('W')
+        
+        if home_defeats > 0:
+            return cls._veto_fallback(target_display, f'Casa com derrota nos últimos 5 ({home_form})')
+            
+        if away_wins > 1:
+            return cls._veto_fallback(target_display, f'Visitante com >1 vitória fora nos últimos 5 ({away_form})')
+            
+        # Tudo passou no crivo
+        verdict = 'APROVADO'
+        confidence = 90
+        critical = f'Aprovado pelos 5 critérios estritos de Odds e Histórico (Sem IA).'
+        detailed = (
+            f'Jogo aprovado pelo filtro de Fallback Sem IA: Odd Home ({odd_home}) < 1.80, '
+            f'Odd BTTS ({odd_btts}) > 1.90, Odd Over2.5 ({odd_over25}) < 1.80. '
+            f'Histórico OK: Casa sem derrotas ({home_form}), Visitante com máx 1 vitória ({away_form}).'
+        )
 
         return {
             'verdict': verdict,
             'confidence': confidence,
             'critical_factor': critical[:250],
             'detailed_analysis': detailed,
+            'adjustment_factor': 1.0
+        }
+
+    @classmethod
+    def _veto_fallback(cls, target_display, reason):
+        return {
+            'verdict': 'VETADO',
+            'confidence': 20,
+            'critical_factor': reason,
+            'detailed_analysis': f'Veto pelo Fallback de Odds: {reason}',
             'adjustment_factor': 1.0
         }
 
