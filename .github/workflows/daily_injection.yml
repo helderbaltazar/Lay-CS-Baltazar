@@ -59,7 +59,7 @@ jobs:
           playwright install-deps
 
       - name: Smoke Test (Fase 0) — Bloqueia se falhar
-        run: pytest tests/ -v --tb=short -x -m critical --junitxml=pytest-results.xml
+        run: python -m pytest tests/ -v --tb=short -x -m critical || (echo 'PYTEST FAILED, DUMPING LOGS:' && cat pytest-results.xml && exit 1)
         
       - name: Upload Pytest Results
         if: failure()
