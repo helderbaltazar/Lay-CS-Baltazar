@@ -67,6 +67,8 @@ jobs:
         with:
           name: pytest-results-${{ github.run_id }}
           path: pytest-results.xml
+
+      - name: Diagnóstico — Verificar Cookies Layback no Banco
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python scripts/verify_cookies.py
