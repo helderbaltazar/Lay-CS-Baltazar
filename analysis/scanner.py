@@ -410,6 +410,13 @@ def save_to_db(db, rankings):
             pred.rank = rec['rank']
             pred.match_odd = rec.get('match_odd')
             pred.ev = rec.get('ev')
+
+            # Salvar dados para os filtros de ouro
+            try: pred.xg_home_prematch = float(rec.get('team_a_xg_prematch')) if rec.get('team_a_xg_prematch') else None
+            except: pass
+            pred.btts_potential = rec.get('btts_potential')
+            try: pred.lay_odd = float(rec.get('lay_odd')) if rec.get('lay_odd') else None
+            except: pass
             
             # Incorpora o bonus de confianca
             ai_boost = rec.get('ai_confidence_boost', 0)

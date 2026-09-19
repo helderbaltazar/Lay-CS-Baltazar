@@ -35,6 +35,11 @@ class Prediction(Base):
     ai_critical_factor = Column(String, nullable=True)
     ai_analysis = Column(String, nullable=True)
 
+    # Colunas adicionais para os Filtros de Ouro
+    xg_home_prematch = Column(Float, nullable=True)
+    btts_potential = Column(String, nullable=True)
+    lay_odd = Column(Float, nullable=True)
+
     match = relationship("Match", back_populates="predictions")
 
 class SystemConfig(Base):

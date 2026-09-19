@@ -1,0 +1,2 @@
+/Users/macgeint/Downloads/Automação Lay CS/fix_db_all.py:22: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  df[date_col] = pd.to_datetime(df[date_col], format=format, dayfirst=dayfirst, errors='coerce').dt.date

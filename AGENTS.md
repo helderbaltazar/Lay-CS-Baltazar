@@ -159,3 +159,8 @@ A implementação deve ser sequencial. Nunca pular fases.
 5. Revisar a alocação de quota de APIs (Odds, BTTS) antes de iniciar a coleta em produção.
 
 *Esta atualização reflete as informações solicitadas e inclui a análise crítica e a recomendação de modelo.*
+
+### Uso da API da IA (Atualização de Token)
+* A partir de agora, a automação está configurada para utilizar um token **PAGO** do Gemini, armazenado nos Secrets do GitHub (como `GEMINI_API_KEY`). 
+* Com isso, o limite restrito de 15 RPM da cota gratuita foi abolido e o `sleep` anti-rate limit foi removido do `ai_analyst.py`.
+* A instrução absoluta para o Analista de Jogos é priorizar EXCLUSIVAMENTE os modelos ultra-rápidos e eficientes (`gemini-flash-latest` / `gemini-1.5-flash`), descartando modelos avançados e lentos como `Sonnet`, `Opus` ou `Gemini Pro`, para otimizar velocidade de inferência e custos na análise de jogos em lote.

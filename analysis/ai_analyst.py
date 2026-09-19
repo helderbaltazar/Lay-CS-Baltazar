@@ -187,13 +187,20 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
         if not gemini_key:
             return cls._fallback_analysis(match_info, target_score, prob_poisson, 'Análise heurística estatística (chave de IA não configurada).')
 
+        # Circuit breaker: se quota já foi detectada como esgotada, usa fallback imediatamente
+        if getattr(cls, '_quota_exhausted', False):
+            return cls._fallback_analysis(match_info, target_score, prob_poisson, 'Quota Gemini esgotada — fallback determinístico Poisson.')
+
         # prompt is provided
 
-        # Cascata de modelos confirmados na API v1beta
-        models_to_try = ['gemini-3.5-flash', 'gemini-flash-latest', 'gemini-3.6-flash', 'gemini-pro-latest']
-        
+        # Cascata de modelos confirmados na API v1beta (apenas modelos Flash rápidos)
+        models_to_try = ['gemini-flash-latest']
+        all_quota_exceeded = True
+
         for model_name in models_to_try:
             try:
+                # Token pago configurado nos secrets do GitHub e no ambiente. 
+                # Sem necessidade de rate-limit manual.
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_key}'
                 payload = {
                     'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
@@ -227,13 +234,14 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                         }
                     ]
                 }
-                
+
                 headers = {'Content-Type': 'application/json'}
                 resp = requests.post(url, headers=headers, json=payload, timeout=12)
-                
+
                 if resp.status_code == 200:
+                    all_quota_exceeded = False
                     data = resp.json()
-                    
+
                     # Tool-Calling Interception (Fase 3)
                     parts = data.get('candidates', [{}])[0].get('content', {}).get('parts', [])
                     if parts and 'functionCall' in parts[0]:
@@ -263,14 +271,23 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                     text_response = parts[0].get('text', '') if parts else ''
                     if not text_response:
                         text_response = "{}"
-                    
+
                     parsed = cls._parse_ai_json(text_response)
                     if parsed:
                         return parsed
+                elif resp.status_code == 429:
+                    logger.warning(f'[AI Analyst] API Gemini modelo {model_name} ({resp.status_code}): {resp.text[:120]}')
                 else:
+                    all_quota_exceeded = False
                     logger.warning(f'[AI Analyst] API Gemini modelo {model_name} ({resp.status_code}): {resp.text[:120]}')
             except Exception as e:
+                all_quota_exceeded = False
                 logger.warning(f'[AI Analyst] Exceção ao consultar Gemini ({model_name}): {e}')
+
+        # Se TODOS os modelos retornaram 429, ativa circuit breaker global
+        if all_quota_exceeded:
+            cls._quota_exhausted = True
+            logger.warning('[AI Analyst] ⚡ QUOTA ESGOTADA em todos os modelos. Ativando fallback determinístico para todos os jogos restantes.')
 
         return cls._fallback_analysis(match_info, target_score, prob_poisson)
 
@@ -462,7 +479,7 @@ Responda APENAS com JSON:
   "lesoes": "lesoes...",
   "analise_geral": "resumo..."
 }}'''
-        for model in ['gemini-3.5-flash', 'gemini-flash-latest', 'gemini-3.6-flash', 'gemini-pro-latest']:
+        for model in ['gemini-flash-latest']:
             try:
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}'
                 payload = {'contents': [{'role': 'user', 'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}

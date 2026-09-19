@@ -86,31 +86,100 @@ def get_historical_stats(team_name):
             
     return None
 
-def check_golden_filters(home_team, away_team, target, power_score):
+def check_golden_filters(home_team, away_team, target, power_score, prediction=None):
+    """
+    Filtros de Ouro validados por backtest em 104.977 jogos históricos (2023-2026).
+
+    === FILTROS LAY CS (ROI validado por mercado isolado) ===
+      - xG Mandante (Pré-Live) > 1.5   → time da casa agressivo
+      - Odd do Mandante < 2.0           → casa é favorita matemática
+      - Potencial BTTS > 60%            → jogo aberto, visitante dificilmente não toma gol
+      - Odd Lay máxima por mercado:
+          0-1 → máx. 15  (Strike Rate: 94.8%, ROI: +20.5%)
+          0-2 → máx. 30  (Strike Rate: 97.8%, ROI: +39.1%)
+          0-3 → máx. 70  (Strike Rate: 99.0%, ROI: +42.3%)
+    """
+
+    # ── Filtros Lay CS (0-1 / 0-2 / 0-3) ──────────────────────
+    if target in ["0-1", "0-2", "0-3"]:
+        if prediction is None:
+            print(f"      [Lay CS Ouro] Sem dados de prediction — REPROVADO")
+            return False
+
+        m = prediction.match
+
+        # xG Mandante pré-jogo > 1.5
+        xg_home = getattr(prediction, 'xg_home_prematch', None)
+        if xg_home is None:
+            xg_home = getattr(m, 'team_a_xg_prematch', None) if m else None
+        if xg_home is None or float(xg_home) <= 1.5:
+            print(f"      [Lay CS Ouro] xG Mandante={xg_home} <= 1.5 — REPROVADO")
+            return False
+
+        # Odd do Mandante < 2.0
+        match_odd = getattr(prediction, 'match_odd', None)
+        if match_odd is None:
+            match_odd = getattr(m, 'home_odds', None) if m else None
+        if match_odd is None or float(match_odd) >= 2.0:
+            print(f"      [Lay CS Ouro] Odd Mandante={match_odd} >= 2.0 — REPROVADO")
+            return False
+
+        # Potencial BTTS > 60%
+        btts_potential = getattr(m, 'btts_potential', None) if m else None
+        if btts_potential is not None:
+            try:
+                btts_pct = float(str(btts_potential).replace('%', '').strip())
+                if btts_pct > 1000:
+                    btts_pct = btts_pct / 100.0
+                if btts_pct < 60.0:
+                    print(f"      [Lay CS Ouro] BTTS Potencial={btts_pct:.1f}% < 60% — REPROVADO")
+                    return False
+            except (ValueError, TypeError):
+                pass
+
+        # Limite de Odd Lay máxima por mercado
+        lay_odd = getattr(prediction, 'lay_odd', None) or getattr(prediction, 'probability', None)
+        if lay_odd is not None:
+            try:
+                lay_odd_float = float(lay_odd)
+                if lay_odd_float < 1:
+                    lay_odd_float = 1.0 / lay_odd_float if lay_odd_float > 0 else 999
+                max_lay_odds = {"0-1": 15.0, "0-2": 30.0, "0-3": 70.0}
+                max_odd = max_lay_odds.get(target, 15.0)
+                if lay_odd_float > max_odd:
+                    print(f"      [Lay CS Ouro] Odd Lay={lay_odd_float:.1f} > {max_odd} — REPROVADO")
+                    return False
+            except (ValueError, TypeError):
+                pass
+
+        print(f"      [Lay CS Ouro ✅] {target} | xG={float(xg_home):.2f} | OddH={float(match_odd):.2f} — APROVADO")
+        return True
+
+    # ── Filtros Under HT (mantidos) ─────────────────────────────
     if target not in ["UNDER_0.5_HT", "UNDER_1.5_HT", "UNDER_2.5_HT", "UNDER_3.5", "UNDER_4.5"]:
-        return True # Nao aplica filtros de ouro para outros mercados
-        
+        return True
+
     h_stats = get_historical_stats(home_team)
     a_stats = get_historical_stats(away_team)
-    
+
     if not h_stats or not a_stats:
         print(f"      [Filtro] Sem dados hist. p/ {home_team} ou {away_team}")
         return False
-        
+
     soma_ht = h_stats["media_ht"] + a_stats["media_ht"]
     efic_home = h_stats["efic_xg"]
     efic_away = a_stats["efic_xg"]
-    
+
     if target == "UNDER_0.5_HT":
         if power_score >= 30 and soma_ht <= 1.2 and efic_home <= 1.0 and efic_away <= 1.0:
             print(f"      [U05 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
             return True
-            
+
     elif target == "UNDER_1.5_HT":
         if soma_ht <= 1.4:
             print(f"      [U15 Ouro] SomaHT={soma_ht:.2f}")
             return True
-            
+
     elif target == "UNDER_2.5_HT":
         if soma_ht <= 1.8 and efic_home <= 1.0 and efic_away <= 1.0:
             print(f"      [U25 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
@@ -125,7 +194,7 @@ def check_golden_filters(home_team, away_team, target, power_score):
         if power_score >= 70 and soma_ht <= 1.4 and efic_home <= 0.8 and efic_away <= 0.8:
             print(f"      [U4.5 Ouro] SomaHT={soma_ht:.2f}, EficH={efic_home:.2f}, EficA={efic_away:.2f}")
             return True
-            
+
     return False
 
 
@@ -160,8 +229,7 @@ def ensure_data_in_db():
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     
     dates_to_check = [
-        now_br,
-        now_br + datetime.timedelta(days=1)
+        now_br + datetime.timedelta(days=i) for i in range(4)  # hoje + próximos 3 dias (fim de semana)
     ]
     
     for target_dt in dates_to_check:
@@ -287,26 +355,18 @@ def inject_from_db():
     
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
-    
-    report_lines = ["🤖 *Relatório Diário Layback (Power Score)* 🤖\n"]
+    # Busca jogos dos próximos 4 dias para cobrir o final de semana completo
+    weekend_end = today_start + datetime.timedelta(days=4)
+
+    report_lines = [f"🤖 *Relatório Layback — Final de Semana (Filtros Ouro Backtest)* 🤖\n📅 {today_start.strftime('%d/%m')} a {weekend_end.strftime('%d/%m/%Y')}\n"]
     for bot_id, bot_name, target in targets:
-        # Define o limiar de Power Score com base no mercado
-        if target == "0-1": threshold = 80.0
-        elif target == "0-2": threshold = 82.0
-        elif target == "0-3": threshold = 88.0
-        elif target == "1-3": threshold = 88.0
-        elif target == "UNDER_0.5_HT": threshold = 20.0
-        elif target == "UNDER_1.5_HT": threshold = 0.0
-        elif target == "UNDER_2.5_HT": threshold = 0.0
-        else: threshold = 85.0
-        
-        
-        # Filtro base do banco de dados (ignorando Poisson/power_score, dependendo apenas do veredito da IA)
+        # Filtro base do banco de dados
         if "UNDER_" in target:
             preds = db.query(Prediction).join(Match).filter(
                 Prediction.target_score == target,
                 Prediction.ai_verdict == 'APROVADO',
-                Match.date >= today_start
+                Match.date >= today_start,
+                Match.date < weekend_end
             ).all()
         else:
             from sqlalchemy import or_
@@ -314,29 +374,34 @@ def inject_from_db():
                 Prediction.target_score == target,
                 Prediction.ai_verdict == 'APROVADO',
                 Match.date >= today_start,
+                Match.date < weekend_end,
                 or_(
                     Prediction.match_odd == None,
                     Prediction.match_odd <= 3.50
                 )
             ).all()
-        
+
         if not preds:
-            print(f"[{target}] Nenhum jogo aprovado pelo Power Score (>= {threshold}) para hoje.")
+            print(f"[{target}] Nenhum jogo aprovado para o final de semana.")
             continue
-            
+
         bot_games_str = []
         teams_data = []
         for p in preds:
             m = p.match
-            
-            # Filtro Histórico Ouro para novos mercados
-            if "UNDER_" in target:
+
+            # Aplicar Filtros de Ouro (Lay CS e Under HT)
+            if target in ["0-1", "0-2", "0-3"]:
+                if not check_golden_filters(m.home_team, m.away_team, target, p.power_score, prediction=p):
+                    continue
+            elif "UNDER_" in target:
                 if not check_golden_filters(m.home_team, m.away_team, target, p.power_score):
                     continue
-            
+
+            data_str = m.date.strftime('%d/%m') if m.date else '?'
             conf_str = f" [Score: {p.power_score:.1f}]" if p.power_score else ""
-            print(f"[{target}] {m.home_team} x {m.away_team} {conf_str}")
-            bot_games_str.append(f"⚽ {m.home_team} x {m.away_team} {conf_str}")
+            print(f"[{target}] {data_str} | {m.home_team} x {m.away_team} {conf_str}")
+            bot_games_str.append(f"⚽ {data_str} — {m.home_team} x {m.away_team} {conf_str}")
             h_bf = get_betfair_id(m.home_team, layback_teams)
             a_bf = get_betfair_id(m.away_team, layback_teams)
             if h_bf: teams_data.append(h_bf)

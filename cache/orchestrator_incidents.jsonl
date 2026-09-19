@@ -18,3 +18,5 @@
 {"ts": "2026-09-18 08:03:39", "step": "api_check", "error": "layback: HTTPSConnectionPool(host='api.layback.com.br', port=443): Max retries exceeded w", "action": "warning_logged"}
 {"ts": "2026-09-18 08:10:53", "step": "api_check", "error": "datafootball: HTTP 500", "action": "warning_logged"}
 {"ts": "2026-09-18 08:11:06", "step": "api_check", "error": "datafootball: HTTP 500", "action": "warning_logged"}
+{"ts": "2026-09-19T04:06:09.503514+00:00", "event": "abort", "reason": "Supabase offline"}
+{"ts": "2026-09-19T04:06:09.509987+00:00", "event": "abort", "reason": "critical failure"}

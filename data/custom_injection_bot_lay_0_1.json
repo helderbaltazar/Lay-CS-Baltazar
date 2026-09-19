@@ -1,0 +1,96 @@
+{
+  "version": "1.0",
+  "betOnNewTeam": true,
+  "teams": [
+    {
+      "name": "Ajax",
+      "id": "1996500",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Beitar Jerusalem",
+      "id": "2116367",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Polonia Warszawa",
+      "id": "1996221",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Cardiff",
+      "id": "1279981",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Young Boys",
+      "id": "2116393",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Tampa Bay Rowdies",
+      "id": "1281963",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Maccabi Haifa",
+      "id": "1996167",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Vitesse Arnhem",
+      "id": "1277832",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Sion",
+      "id": "2116310",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Charleston Battery",
+      "id": "6247273",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Linfield",
+      "id": "1318963",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Barnet",
+      "id": "1280015",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Molde",
+      "id": "2116190",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Zrinjski",
+      "id": "1318850",
+      "checked": true,
+      "side": "A"
+    },
+    {
+      "name": "Olot",
+      "id": "6243375",
+      "checked": true,
+      "side": "A"
+    }
+  ]
+}
