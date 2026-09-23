@@ -76,12 +76,9 @@ A implementação deve ser sequencial. Nunca pular fases.
 5. **Proibição de `DELETE/DROP` via Agente:** Credenciais de agentes possuem apenas `SELECT/INSERT/UPDATE` (RLS no Supabase).
 6. **BTTS obrigatório:** Todo agente que analisa um jogo para Lay CS deve receber a odd de BTTS SIM. Sem ela, o jogo não pode ser resgatado.
 
-### Cascata de Captura de Odds (Match Odds + BTTS — mesma ordem para ambos)
-1. **The Odds API** → `GET /v4/odds/?markets=h2h,btts`
-2. **API-Football** → `GET /v3/odds?fixture={id}`
-3. **Sofascore API** → `GET api.sofascore.com/api/v1/event/{id}/odds/1/all`
-4. **OddsPortal (Playwright)** → Navegar até a partida e extrair DOM
-5. Falha total → `odds_source: "unavailable"` → jogo excluído da análise agêntica
+### Fonte Única de Verdade: DataFootball (Exclusividade)
+* **Regra Absoluta:** O sistema deve buscar os jogos, estatísticas (xG) e odds **EXCLUSIVAMENTE** a partir da base do DataFootball (`datafootball_api`).
+* A cascata de fallback antiga (The Odds API, API-Football, Sofascore, OddsPortal) está **estritamente proibida e desativada**. Se o jogo ou a odd não estiver no DataFootball, ele será simplesmente ignorado (excluído da análise).
 
 # Análise Crítica e Recomendações
 
