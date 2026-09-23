@@ -108,51 +108,58 @@ def check_golden_filters(home_team, away_team, target, power_score, prediction=N
 
         m = prediction.match
 
-        # xG Mandante pré-jogo > 1.5
-        xg_home = getattr(prediction, 'xg_home_prematch', None)
-        if xg_home is None:
-            xg_home = getattr(m, 'team_a_xg_prematch', None) if m else None
-        if xg_home is None or float(xg_home) <= 1.5:
-            print(f"      [Lay CS Ouro] xG Mandante={xg_home} <= 1.5 — REPROVADO")
-            return False
-
-        # Odd do Mandante < 2.0
+        # --- REGRA DE OURO SNIPER APLICADA A 0-1, 0-2 e 0-3 ---
+        # 1. Odd do Mandante < 1.80 (Super Favorito)
         match_odd = getattr(prediction, 'match_odd', None)
         if match_odd is None:
             match_odd = getattr(m, 'home_odds', None) if m else None
-        if match_odd is None or float(match_odd) >= 2.0:
-            print(f"      [Lay CS Ouro] Odd Mandante={match_odd} >= 2.0 — REPROVADO")
+        if match_odd is None or float(match_odd) >= 1.80:
+            print(f"      [Lay CS Sniper] Odd Mandante={match_odd} >= 1.80 — REPROVADO")
             return False
 
-        # Potencial BTTS > 60%
-        btts_potential = getattr(m, 'btts_potential', None) if m else None
+        # 2. xG Mandante pré-jogo >= 1.5
+        xg_home = getattr(prediction, 'xg_home_prematch', None)
+        if xg_home is None:
+            xg_home = getattr(m, 'team_a_xg_prematch', None) if m else None
+        if xg_home is None or float(xg_home) < 1.5:
+            print(f"      [Lay CS Sniper] xG Mandante={xg_home} < 1.5 — REPROVADO")
+            return False
+
+        # 3. xG Visitante < 1.1 (Zebra inofensiva)
+        xg_away = getattr(prediction, 'xg_away_prematch', None)
+        if xg_away is None:
+            xg_away = getattr(m, 'team_b_xg_prematch', None) if m else None
+        if xg_away is not None and float(xg_away) >= 1.1:
+            print(f"      [Lay CS Sniper] xG Visitante={xg_away} >= 1.1 — REPROVADO")
+            return False
+
+        # 4. Proxy de Jogo Aberto (Over 2.5 / BTTS)
+        btts_potential = getattr(m, 'btts_potential', getattr(prediction, 'btts_potential', None))
         if btts_potential is not None:
             try:
                 btts_pct = float(str(btts_potential).replace('%', '').strip())
-                if btts_pct > 1000:
-                    btts_pct = btts_pct / 100.0
+                if btts_pct > 1000: btts_pct /= 100.0
                 if btts_pct < 60.0:
-                    print(f"      [Lay CS Ouro] BTTS Potencial={btts_pct:.1f}% < 60% — REPROVADO")
+                    print(f"      [Lay CS Sniper] Jogo Fechado (BTTS={btts_pct}%) — REPROVADO")
                     return False
-            except (ValueError, TypeError):
-                pass
+            except: pass
 
-        # Limite de Odd Lay máxima por mercado
+        # 5. Limite de Odd Lay máxima (Controle de Drawdown de Cisne Negro)
         lay_odd = getattr(prediction, 'lay_odd', None) or getattr(prediction, 'probability', None)
         if lay_odd is not None:
             try:
                 lay_odd_float = float(lay_odd)
                 if lay_odd_float < 1:
                     lay_odd_float = 1.0 / lay_odd_float if lay_odd_float > 0 else 999
-                max_lay_odds = {"0-1": 15.0, "0-2": 30.0, "0-3": 70.0}
+                max_lay_odds = {"0-1": 20.0, "0-2": 45.0, "0-3": 100.0}
                 max_odd = max_lay_odds.get(target, 15.0)
                 if lay_odd_float > max_odd:
-                    print(f"      [Lay CS Ouro] Odd Lay={lay_odd_float:.1f} > {max_odd} — REPROVADO")
+                    print(f"      [Lay CS Sniper] Odd Lay={lay_odd_float:.1f} > {max_odd} — REPROVADO")
                     return False
             except (ValueError, TypeError):
                 pass
 
-        print(f"      [Lay CS Ouro ✅] {target} | xG={float(xg_home):.2f} | OddH={float(match_odd):.2f} — APROVADO")
+        print(f"      [Lay CS Sniper ✅] {target} | xG_H={float(xg_home):.2f} | OddH={float(match_odd):.2f} — APROVADO")
         return True
 
     # ── Filtros Under HT (mantidos) ─────────────────────────────
