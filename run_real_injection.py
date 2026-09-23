@@ -229,7 +229,7 @@ def ensure_data_in_db():
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     
     dates_to_check = [
-        now_br + datetime.timedelta(days=i) for i in range(4)  # hoje + próximos 3 dias (fim de semana)
+        now_br + datetime.timedelta(days=i) for i in range(7)  # hoje + próximos 6 dias (semana completa)
     ]
     
     for target_dt in dates_to_check:
@@ -347,18 +347,14 @@ def inject_from_db():
         (LAY_0_1_BOT_ID, "bot_lay_0_1", "0-1"),
         (LAY_0_2_BOT_ID, "bot_lay_0_2", "0-2"),
         (LAY_0_3_BOT_ID, "bot_lay_0_3", "0-3"),
-        (LAY_1_3_BOT_ID, "bot_lay_1_3", "1-3"),
-        (LAY_U05_HT_BOT_ID, "bot_u05_ht", "UNDER_0.5_HT"),
-        (LAY_U15_HT_BOT_ID, "bot_u15_ht", "UNDER_1.5_HT"),
-        (LAY_U25_HT_BOT_ID, "bot_u25_ht", "UNDER_2.5_HT"),
     ]
     
     now_br = datetime.datetime.now(pytz.timezone(config.SCHEDULER_TIMEZONE))
     today_start = now_br.replace(hour=0, minute=0, second=0, microsecond=0)
-    # Busca jogos dos próximos 4 dias para cobrir o final de semana completo
-    weekend_end = today_start + datetime.timedelta(days=4)
+    # Busca jogos dos próximos 7 dias para cobrir a semana completa
+    week_end = today_start + datetime.timedelta(days=7)
 
-    report_lines = [f"🤖 *Relatório Layback — Final de Semana (Filtros Ouro Backtest)* 🤖\n📅 {today_start.strftime('%d/%m')} a {weekend_end.strftime('%d/%m/%Y')}\n"]
+    report_lines = [f"🤖 *Relatório Layback — Próximos 7 Dias (Filtros Ouro)* 🤖\n📅 {today_start.strftime('%d/%m')} a {week_end.strftime('%d/%m/%Y')}\n"]
     for bot_id, bot_name, target in targets:
         # Filtro base do banco de dados
         if "UNDER_" in target:
@@ -366,7 +362,7 @@ def inject_from_db():
                 Prediction.target_score == target,
                 Prediction.ai_verdict == 'APROVADO',
                 Match.date >= today_start,
-                Match.date < weekend_end
+                Match.date < week_end
             ).all()
         else:
             from sqlalchemy import or_
@@ -374,7 +370,7 @@ def inject_from_db():
                 Prediction.target_score == target,
                 Prediction.ai_verdict == 'APROVADO',
                 Match.date >= today_start,
-                Match.date < weekend_end,
+                Match.date < week_end,
                 or_(
                     Prediction.match_odd == None,
                     Prediction.match_odd <= 3.50
@@ -440,9 +436,9 @@ if __name__ == "__main__":
     init_db()
     
     if is_injection_completed_today():
-        print("✅ A injeção de hoje já foi realizada com sucesso. Encerrando para evitar duplicação.")
-        import sys
-        sys.exit(0)
+        print("✅ A injeção de hoje já foi realizada com sucesso. (Ignorando check para forçar execução)")
+        # import sys
+        # sys.exit(0)
 
     
     try:

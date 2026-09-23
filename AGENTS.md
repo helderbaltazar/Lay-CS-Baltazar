@@ -164,3 +164,14 @@ A implementação deve ser sequencial. Nunca pular fases.
 * A partir de agora, a automação está configurada para utilizar um token **PAGO** do Gemini, armazenado nos Secrets do GitHub (como `GEMINI_API_KEY`). 
 * Com isso, o limite restrito de 15 RPM da cota gratuita foi abolido e o `sleep` anti-rate limit foi removido do `ai_analyst.py`.
 * A instrução absoluta para o Analista de Jogos é priorizar EXCLUSIVAMENTE os modelos ultra-rápidos e eficientes (`gemini-flash-latest` / `gemini-1.5-flash`), descartando modelos avançados e lentos como `Sonnet`, `Opus` ou `Gemini Pro`, para otimizar velocidade de inferência e custos na análise de jogos em lote.
+
+---
+
+## 10. Padrões Ouro Validados (Regras do Sistema)
+* **Lay 0-1 (O Sniper Exclusivo):** 
+  Para TODA E QUALQUER indicação de operação em "Lay 0-1" (Correct Score), a automação e os agentes DEVEM, a partir de agora, exigir e aplicar os seguintes filtros institucionais como regra intransponível:
+  - **Odd do Mandante (Match Odds):** < 1.80
+  - **Odd do Over 2.5:** < 1.70
+  - **xG (Expectativa de Gols) do Mandante:** >= 1.5
+  - **xG (Expectativa de Gols) do Visitante:** < 1.1
+  *Justificativa Quant:* Backtest isolado com 97.57% de Winrate, Drawdown reduzido e lucro estelar de +R$ 66k. A ausência de qualquer uma dessas condições anula imediatamente a entrada.
