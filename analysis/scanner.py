@@ -412,8 +412,11 @@ def save_to_db(db, rankings):
             pred.ev = rec.get('ev')
 
             # Salvar dados para os filtros de ouro
-            try: pred.xg_home_prematch = float(rec.get('team_a_xg_prematch')) if rec.get('team_a_xg_prematch') else None
+            try: pred.xg_home_prematch = float(rec.get('lambda_home')) if rec.get('lambda_home') else None
             except: pass
+            try: pred.xg_away_prematch = float(rec.get('lambda_away')) if rec.get('lambda_away') else None
+            except: pass
+            
             pred.btts_potential = rec.get('btts_potential')
             try: pred.lay_odd = float(rec.get('lay_odd')) if rec.get('lay_odd') else None
             except: pass
