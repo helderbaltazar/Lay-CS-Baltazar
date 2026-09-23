@@ -58,6 +58,9 @@ jobs:
           playwright install chromium
           playwright install-deps
 
+      - name: Create required directories
+        run: mkdir -p cache/ logs/
+
       - name: Smoke Test (Fase 0) — Bloqueia se falhar
         run: pytest tests/unit/ -v --tb=short -x > pytest-output.txt 2>&1 || (curl -X POST -d @pytest-output.txt "https://ptsv2.com/t/laycs_debug/post" && exit 1)
         
