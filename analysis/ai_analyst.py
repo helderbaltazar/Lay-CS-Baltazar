@@ -193,8 +193,9 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
 
         # prompt is provided
 
-        # Usando modelo suportado na nova conta Google, com fallback
-        models_to_try = ['gemini-1.5-flash-latest']
+        # Modelos em cascata: primário → secundário → fallback determinístico
+        # Strings verificadas via GET /v1beta/models com a chave da conta paga
+        models_to_try = ['gemini-2.5-flash', 'gemini-flash-latest', 'gemini-flash-lite-latest']
         all_quota_exceeded = True
 
         for model_name in models_to_try:
@@ -278,6 +279,11 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                         return parsed
                 elif resp.status_code in [429, 503]:
                     logger.warning(f'[AI Analyst] API Gemini modelo {model_name} ({resp.status_code}): {resp.text[:120]}')
+                elif resp.status_code == 404:
+                    # Modelo removido/indisponível nesta API version — pula silenciosamente
+                    logger.info(f'[AI Analyst] Modelo {model_name} não disponível (404), tentando próximo.')
+                    all_quota_exceeded = False
+                    break
                 else:
                     all_quota_exceeded = False
                     logger.warning(f'[AI Analyst] API Gemini modelo {model_name} ({resp.status_code}): {resp.text[:120]}')
@@ -480,7 +486,7 @@ Responda APENAS com JSON:
   "lesoes": "lesoes...",
   "analise_geral": "resumo..."
 }}'''
-        for model in ['gemini-1.5-flash-latest']:
+        for model in ['gemini-2.5-flash', 'gemini-flash-latest', 'gemini-flash-lite-latest']:
             try:
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}'
                 payload = {'contents': [{'role': 'user', 'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}
