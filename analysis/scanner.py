@@ -292,7 +292,7 @@ def rank_by_target(results, model):
                 'ev': ev,
                 'ai_confidence_boost': ai_boost,
                 'home_streak': res.get('home_streak'),
-                'away_streak': res.get('away_streak')
+                'away_streak': res.get('away_streak'), 'match_odd': res.get('match_odd'), 'btts_potential': res.get('btts_potential'), 'lay_odd': res.get('lay_odd')
             })
             
     for mkt in extra_markets:
@@ -323,7 +323,7 @@ def rank_by_target(results, model):
                 'ev': ev,
                 'ai_confidence_boost': ai_boost,
                 'home_streak': res.get('home_streak'),
-                'away_streak': res.get('away_streak')
+                'away_streak': res.get('away_streak'), 'match_odd': res.get('match_odd'), 'btts_potential': res.get('btts_potential'), 'lay_odd': res.get('lay_odd')
             })
             
     from analysis.ai_analyst import AIAnalyst
