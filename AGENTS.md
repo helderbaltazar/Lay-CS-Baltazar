@@ -176,3 +176,7 @@ A implementação deve ser sequencial. Nunca pular fases.
 ### Política de Armazenamento de Dados (Data Lake)
 * **Regra Absoluta:** TODOS os jogos retornados pela base do DataFootball DEVEM ser obrigatoriamente gravados no banco de dados, independentemente de quão baixas ou desajustadas sejam suas odds.
 * **Proibição de Early-Exit (Hard Filters pré-banco):** É estritamente proibido criar regras no `scanner.py` que deem `return None` ou ignorem jogos baseados em filtros como "Odd BTTS < 1.30". O banco de dados deve refletir integralmente o que a fonte fornece. As regras de ouro (Filtro Sniper, etc) devem ser aplicadas *depois*, diretamente pelas consultas ao banco de dados ou pelo Agente Analista.
+
+### Gerenciamento de Bots (Integração MCP)
+* **Regra Absoluta (Betfair via MCP):** Toda edição, atualização, criação ou configuração dos robôs (bots) no ecossistema LayBack (Betfair) DEVE ser executada estritamente utilizando as ferramentas disponibilizadas pelo servidor MCP `layback-betfair`. 
+* **Proibição de chamadas diretas:** Fica proibido tentar fazer engenharia reversa na API da LayBack ou disparar requests HTTP diretos (via `requests` ou `curl`) para gerenciar a infraestrutura de bots quando houver uma ferramenta MCP oficial disponível para a tarefa (ex: `update_bot`, `create_bot`, `get_bot_config`, etc).
