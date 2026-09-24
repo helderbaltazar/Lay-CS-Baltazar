@@ -193,14 +193,15 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
 
         # prompt is provided
 
-        # Cascata de modelos confirmados na API v1beta (apenas modelos Flash rápidos)
-        models_to_try = ['gemini-flash-latest']
+        # Usando modelo suportado na nova conta Google, com fallback
+        models_to_try = ['gemini-1.5-flash-latest']
         all_quota_exceeded = True
 
         for model_name in models_to_try:
             try:
-                # Token pago configurado nos secrets do GitHub e no ambiente. 
-                # Sem necessidade de rate-limit manual.
+                import time
+                time.sleep(4.1)
+                # Token configurado nos secrets.
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_key}'
                 payload = {
                     'contents': [{'role': 'user', 'parts': [{'text': prompt}]}],
@@ -275,7 +276,7 @@ Responda ESTRITAMENTE em formato JSON com esta estrutura:
                     parsed = cls._parse_ai_json(text_response)
                     if parsed:
                         return parsed
-                elif resp.status_code == 429:
+                elif resp.status_code in [429, 503]:
                     logger.warning(f'[AI Analyst] API Gemini modelo {model_name} ({resp.status_code}): {resp.text[:120]}')
                 else:
                     all_quota_exceeded = False
@@ -479,7 +480,7 @@ Responda APENAS com JSON:
   "lesoes": "lesoes...",
   "analise_geral": "resumo..."
 }}'''
-        for model in ['gemini-flash-latest']:
+        for model in ['gemini-1.5-flash-latest']:
             try:
                 url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}'
                 payload = {'contents': [{'role': 'user', 'parts': [{'text': prompt}]}], 'generationConfig': {'temperature': 0.3}}
