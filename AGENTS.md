@@ -172,3 +172,7 @@ A implementação deve ser sequencial. Nunca pular fases.
   - **xG (Expectativa de Gols) do Mandante:** >= 1.5
   - **xG (Expectativa de Gols) do Visitante:** < 1.1
   *Justificativa Quant:* Backtest isolado com 97.57% de Winrate, Drawdown reduzido e lucro estelar de +R$ 66k. A ausência de qualquer uma dessas condições anula imediatamente a entrada.
+
+### Política de Armazenamento de Dados (Data Lake)
+* **Regra Absoluta:** TODOS os jogos retornados pela base do DataFootball DEVEM ser obrigatoriamente gravados no banco de dados, independentemente de quão baixas ou desajustadas sejam suas odds.
+* **Proibição de Early-Exit (Hard Filters pré-banco):** É estritamente proibido criar regras no `scanner.py` que deem `return None` ou ignorem jogos baseados em filtros como "Odd BTTS < 1.30". O banco de dados deve refletir integralmente o que a fonte fornece. As regras de ouro (Filtro Sniper, etc) devem ser aplicadas *depois*, diretamente pelas consultas ao banco de dados ou pelo Agente Analista.

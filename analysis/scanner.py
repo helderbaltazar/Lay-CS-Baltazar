@@ -84,8 +84,8 @@ def _scan_match_datafootball(fixture, model, targets):
     # 2. Odds e Validação BTTS
     btts_odd = fixture.get('odds_btts_yes')
     if btts_odd is not None and float(btts_odd) < 1.30:
-        print(f"  ⚠️ Jogo {home_name} x {away_name} rejeitado: Odd BTTS muito baixa ({btts_odd}). Mínimo exigido: 1.30.")
-        return None
+        print(f"  ⚠️ [AVISO] Jogo {home_name} x {away_name} tem Odd BTTS baixa ({btts_odd}). Será salvo no banco e filtrado posteriormente.")
+        # return None  # Removido conforme regra de salvar tudo no banco primeiro
         
     match_odd = fixture.get('odds_ft_1')
     
@@ -170,8 +170,8 @@ def _scan_match_apifootball(fixture, model, targets, source='API-Football'):
     match_odd, btts_odd, odds_source = fetch_odds_cascade(fixture)
     
     if btts_odd is not None and float(btts_odd) < 1.30:
-        print(f"  ⚠️ Jogo {home_team['name']} x {away_team['name']} rejeitado: Odd BTTS muito baixa ({btts_odd}). Mínimo exigido: 1.30.")
-        return None
+        print(f"  ⚠️ [AVISO] Jogo {home_team['name']} x {away_team['name']} tem Odd BTTS baixa ({btts_odd}). Será salvo e filtrado depois.")
+        # return None
         
     h2h_home, h2h_away = fetch_h2h(fixture_info['id'])
     
